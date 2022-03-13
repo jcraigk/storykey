@@ -1,13 +1,36 @@
+require:
+  - rubocop-performance
+  - rubocop-rspec
+
 AllCops:
-  TargetRubyVersion: 2.6
-
-Style/StringLiterals:
-  Enabled: true
-  EnforcedStyle: double_quotes
-
-Style/StringLiteralsInInterpolation:
-  Enabled: true
-  EnforcedStyle: double_quotes
-
+  Exclude:
+    - bin/*
+  NewCops: enable
+  TargetRubyVersion: 3.1.1
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
+Layout/EmptyLineAfterMagicComment:
+  Enabled: false
 Layout/LineLength:
-  Max: 120
+  Max: 100
+Metrics/ClassLength:
+  Max: 250
+Metrics/ModuleLength:
+  Max: 250
+RSpec/EmptyExampleGroup:
+  Enabled: false
+RSpec/ExampleLength:
+  Exclude:
+    - spec/features/**/*
+RSpec/MultipleExpectations:
+  Max: 4
+  Exclude:
+    - spec/features/**/*
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+RSpec/NestedGroups:
+  Max: 4
+Style/ClassAndModuleChildren:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
