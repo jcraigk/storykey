@@ -29,6 +29,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'activesupport'
   spec.add_dependency 'dry-initializer'
+  spec.add_dependency 'indefinite_article'
 
   spec.add_development_dependency 'faker'
   spec.add_development_dependency 'pry'
