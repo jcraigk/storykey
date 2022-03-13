@@ -1,29 +1,7 @@
 # frozen_string_literal: true
-
 class Mnemonica::Encoder
   extend Dry::Initializer
   extend ::ActiveSupport::Concern
-
-  HEX_TO_BIN = {
-    '0' => '0',
-    '1' => '1',
-    '2' => '10',
-    '3' => '11',
-    '4' => '100',
-    '5' => '101',
-    '6' => '110',
-    '7' => '111',
-    '8' => '1000',
-    '9' => '1001',
-    'a' => '1010',
-    'b' => '1011',
-    'c' => '1100',
-    'd' => '1101',
-    'e' => '1110',
-    'f' => '1111'
-  }.freeze
-  LENGTH = 10
-  WORD_TYPES = %w[adjective noun verb adverb].freeze
 
   param :str
 
@@ -38,7 +16,7 @@ class Mnemonica::Encoder
     num = 0
     str = ''
     words.each_with_index.with_object([]) do |(word, idx), sentences|
-      if (idx % WORD_TYPES.size).zero?
+      if (idx % LEXICONS.size).zero?
         num += 1
         sentences << str.strip unless num == 1
         str = ''
@@ -48,18 +26,17 @@ class Mnemonica::Encoder
   end
 
   def words
-    word_idx = 0
+    idx = -1
     decimals.map do |dec|
-      word_type = WORD_TYPES[word_idx]
-      word_idx += 1
-      word_idx = word_idx % WORD_TYPES.size # TODO: shorten this
-      lexicon_words[word_type][dec]
+      idx += 1
+      idx = idx % LEXICONS.size
+      lexicon_words[LEXICONS[idx]][dec]
     end
   end
 
   def lexicon_words
-    @lexicon_words ||= WORD_TYPES.index_with do |type|
-      File.readlines("lexicons/#{type}s.txt").map(&:strip)
+    @lexicon_words ||= LEXICONS.index_with do |lexicon|
+      File.readlines("lexicons/#{lexicon}s.txt").map(&:strip)
     end
   end
 
@@ -77,8 +54,8 @@ class Mnemonica::Encoder
     idx = 0
     parts = []
     while idx < bin_str.size
-      parts << bin_str[idx..(idx + LENGTH - 1)]
-      idx += LENGTH
+      parts << bin_str[idx..(idx + BITS_PER_WORD - 1)]
+      idx += BITS_PER_WORD
     end
     parts
   end

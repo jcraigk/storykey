@@ -13,10 +13,17 @@ RSpec.describe Mnemonica::Encoder do
 
   context 'when str is in hexidecimal format' do
     let(:str) { 'da46b559f21b3e955bb1925c964ac5c3b3d72fe1bf37476a104b0e7396027b65' }
-    let(:phrase) { '...' }
+    let(:phrases) do
+      [
+        'Previous hand sting upward',
+        'Scratchy historian lecture fast',
+        'Remote girl direct seemingly',
+        'Silky youth snow blindly'
+      ]
+    end
 
     it 'returns a phrase' do
-      expect(call).to eq(phrase)
+      expect(call).to eq(phrases)
     end
   end
 end
