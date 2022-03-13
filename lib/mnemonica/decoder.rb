@@ -4,15 +4,21 @@ class Mnemonica::Decoder
   extend ::ActiveSupport::Concern
 
   param :str
-  option :format, default: proc { :hex }
+  option :format
 
   def call
+    @format ||= :hex
+
     ensure_version!
     ensure_format!
-    hexidecimal
+    decoded
   end
 
   private
+
+  def ensure_format!
+    # @format ||= :hex
+  end
 
   def ensure_version!
     return if version_word.casecmp(Mnemonica::VERSION_SLUG).zero?
@@ -25,11 +31,16 @@ class Mnemonica::Decoder
     TEXT
   end
 
-  def hexidecimal
-    binary_string.to_i(2).to_s(16)
+  def decoded
+    case format.to_sym
+    when :bin then bin_str
+    when :dec then bin_str.to_i(2).to_s(10)
+    when :hex then bin_str.to_i(2).to_s(16)
+    else raise Mnemonica::InvalidFormat, 'Invalid format specified, valid options are bin, dec, and hex' # TODO: DRY
+    end
   end
 
-  def binary_string
+  def bin_str
     decimals.map { |d| d.to_s(2).rjust(BITS_PER_WORD, '0') }.join
   end
 

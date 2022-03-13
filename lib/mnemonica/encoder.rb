@@ -7,7 +7,7 @@ class Mnemonica::Encoder
 
   def call
     @str = str.strip
-    # binding.pry
+    @format ||= :hex
     validate_format!
     paragraph
   end
@@ -34,7 +34,7 @@ class Mnemonica::Encoder
       lex_idx = idx % LEXICONS.size
       phrase += 'and ' if lex_idx == LEXICONS.size - 1
       phrase += "#{word} "
-      if lex_idx == LEXICONS.size - 1
+      if (lex_idx == LEXICONS.size - 1) || (idx == words.size - 1)
         phrases << phrase.strip
         phrase = ''
       end
@@ -75,8 +75,7 @@ class Mnemonica::Encoder
   end
 
   def validate_format!
-    @format ||= :hex
-    case format&.to_sym
+    case format.to_sym
     when :bin then validate_bin!
     when :dec then validate_dec!
     when :hex then validate_hex!

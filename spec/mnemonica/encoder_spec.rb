@@ -16,39 +16,40 @@ RSpec.describe Mnemonica::Encoder do
       expect { call }.to raise_error(Mnemonica::InvalidFormat)
     end
   end
-
-  context 'with invalid input' do
-    context 'when invalid hex' do
-      let(:encodable) { '23az939fs2' }
-
-      include_examples 'invalid format'
-    end
-
-    context 'when invalid decimal' do
-      let(:encodable) { '' }
-      let(:dec) { '34234abc2342' }
-
-      include_examples 'invalid format'
-    end
-
-    context 'when invalid bin' do
-      let(:encodable) { '' }
-      let(:dec) { '010010abc10101' }
-
-      include_examples 'invalid format'
-    end
-  end
+  #
+  # context 'with invalid input' do
+  #   context 'when invalid hex' do
+  #     let(:encodable) { '23az939fs2' }
+  #
+  #     include_examples 'invalid format'
+  #   end
+  #
+  #   context 'when invalid decimal' do
+  #     let(:encodable) { '' }
+  #     let(:dec) { '34234abc2342' }
+  #
+  #     include_examples 'invalid format'
+  #   end
+  #
+  #   context 'when invalid bin' do
+  #     let(:encodable) { '' }
+  #     let(:dec) { '010010abc10101' }
+  #
+  #     include_examples 'invalid format'
+  #   end
+  # end
 
   context 'with valid input' do
     let(:output) do
       <<~TEXT.strip
         In Miami I saw
-        1. A precious body flow and list
+        1. A pretty body flow and list
         2. A blushing wedding flow and tow
         3. An infantile ice hide and remember
         4. An obese shape join and wail
         5. A next stick know and melt
         6. An easy crew deserve and manufacture
+        7. A hairy application
       TEXT
     end
 
