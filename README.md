@@ -2,17 +2,32 @@
 
 Mnemonica is a system for converting between arbitrary strings of data and a series of memorable English phrases. It leans toward visualization and personification as its primary mnemonic mechanism, favoring action scenes around an entity like an animal.
 
-The primary use case is memorizing cryptocurrency private keys, often referred to as creating a "brain wallet." This system is inspired by [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki) but adds extra mnemonic mechanisms:
+The primary use case is memorizing cryptocurrency private keys, often referred to as creating a "brain wallet." This system is inspired by [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki) but adds extra features:
 
-(1) Words are selected for mental visualization, favoring concrete over abstract
-(2) Phrases adhere to a repetitive grammar
+(1) Encode an arbitrary length string
+(2) Versioning is built into the mnemonic phrase
+(3) Words are selected for mental visualization, favoring concrete over abstract
+(4) Phrases adhere to a repeating grammar
 
-The theory is that these additions will aid in longterm memorization of phrases.
+Phrases produced by Mnemonica take the following form:
 
-Mnemonic also incorporates versioning slugs to ensure correct encoding/decoding as the lexicon evolves.
+```
+In [version_slug] at [time] I saw
+1. [adjective] [noun] [verb] and [verb]
+2. [adjective [noun]
+````
 
+For example
 
-Phrases produced by Mnemonica take the form `[adjective] [noun] [verb] and [verb]`. For example:
+```
+In Miami at 6pm I saw
+1. A pretty body flow and list
+2. A blushing wedding flow and tow
+```
+
+The `version_slug` is typically a well-known city, such as `Miami`. The `time` contains a digit that refers to the number of bits contained in the last word (allowing arbitrary length string encoding). The list of phrases represents a deterministic encoding of the original string.
+
+This paragraph can deterministically be decoded using the same version of Mnemonica.
 
 Adjectives should be visual (colors, locations, textures)
 Nouns should be well-known animals/characters/entities or otherwise personifiable.

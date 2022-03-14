@@ -13,12 +13,18 @@ module Mnemonica
   class Error < StandardError; end
   class InvalidFormat < Error; end
   class InvalidVersion < Error; end
+  class InvalidWord < Error; end
+  class InvalidTime < Error; end
 
-  def self.encode(str)
-    Encoder.new(str).call
+  def self.encode(str, format: nil)
+    Encoder.new(str, format:).call
+  end
+
+  def self.decode(str, format: nil)
+    Decoder.new(str, format:).call
   end
 end
 
 BITS_PER_WORD = 10
-LEXICONS = %w[adjective noun verb verb].freeze
-CONNECTING_WORDS = %w[in i saw and a an].freeze
+LEXICONS = %i[adjective noun verb verb].freeze
+CONNECTING_WORDS = %w[in i saw and a an at].freeze

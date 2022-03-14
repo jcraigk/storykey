@@ -3,6 +3,7 @@ accelerate
 accept
 accomplish
 achieve
+blushing
 acquire
 acted
 activate
@@ -16,7 +17,7 @@ adopt
 advise
 afford
 agree
-alert
+alerting
 alight
 allow
 altered

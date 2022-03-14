@@ -7,12 +7,17 @@ AllCops:
     - bin/*
   NewCops: enable
   TargetRubyVersion: 3.1.1
+Gemspec/RequireMFA:
+  Enabled: false
 Layout/EmptyLineAfterGuardClause:
   Enabled: false
 Layout/EmptyLineAfterMagicComment:
   Enabled: false
 Layout/LineLength:
   Max: 100
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*
 Metrics/ClassLength:
   Max: 250
 Metrics/ModuleLength:

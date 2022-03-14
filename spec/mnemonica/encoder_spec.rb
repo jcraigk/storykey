@@ -4,6 +4,15 @@ RSpec.describe Mnemonica::Encoder do
   subject(:call) { described_class.new(encodable, format:).call }
 
   let(:format) { nil }
+  let(:lexicon) do
+    LEXICONS.index_with do |lex|
+      (0..1_024).to_a.map { |num| "#{lex}#{num}" }
+    end
+  end
+
+  before do
+    allow(Mnemonica::Lexicon).to receive(:call).and_return(lexicon)
+  end
 
   shared_examples 'success' do
     it 'returns expected output' do
@@ -42,14 +51,14 @@ RSpec.describe Mnemonica::Encoder do
   context 'with valid input' do
     let(:output) do
       <<~TEXT.strip
-        In Miami I saw
-        1. A pretty body flow and list
-        2. A blushing wedding flow and tow
-        3. An infantile ice hide and remember
-        4. An obese shape join and wail
-        5. A next stick know and melt
-        6. An easy crew deserve and manufacture
-        7. A hairy application
+        In #{Mnemonica::VERSION_SLUG} at 6pm I saw
+        1. An adjective873 noun107 verb342 and verb498
+        2. An adjective108 noun1001 verb342 and verb945
+        3. An adjective585 noun457 verb402 and verb709
+        4. An adjective782 noun829 verb459 and verb993
+        5. An adjective764 noun884 verb474 and verb528
+        6. An adjective300 noun231 verb229 and verb514
+        7. An adjective493 noun37
       TEXT
     end
 

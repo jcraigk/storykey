@@ -9,44 +9,56 @@ class Mnemonica::Decoder
   def call
     @format ||= :hex
 
-    ensure_version!
-    ensure_format!
-    decoded
+    validate_version!
+    validate_time!
+    validate_phrase!
+
+    decoded_str
   end
 
   private
 
-  def ensure_format!
-    # @format ||= :hex
+  def validate_time!
+    return if last_segment_size <= BITS_PER_WORD
+    raise Mnemonica::InvalidTime, 'Invalid time specified'
   end
 
-  def ensure_version!
+  def validate_version!
     return if version_word.casecmp(Mnemonica::VERSION_SLUG).zero?
     raise Mnemonica::InvalidVersion, version_error_msg
   end
 
+  def validate_phrase!
+    return unless decimals.include?(nil)
+    raise Mnemonica::InvalidWord, 'Invalid word detected'
+  end
+
   def version_error_msg
     <<~TEXT
-      Missing or invalid version slug! (Given '#{version_word.titleize}' but this version of the software expects '#{Mnemonica::VERSION_SLUG}').
+      Missing or invalid version slug! Given '#{version_word.titleize}' but expected '#{Mnemonica::VERSION_SLUG}'.
     TEXT
   end
 
-  def decoded
+  def decoded_str
     case format.to_sym
     when :bin then bin_str
     when :dec then bin_str.to_i(2).to_s(10)
     when :hex then bin_str.to_i(2).to_s(16)
-    else raise Mnemonica::InvalidFormat, 'Invalid format specified, valid options are bin, dec, and hex' # TODO: DRY
+    else raise Mnemonica::InvalidFormat, 'Invalid format specified'
     end
   end
 
   def bin_str
-    decimals.map { |d| d.to_s(2).rjust(BITS_PER_WORD, '0') }.join
+    decimals.each_with_index.map do |dec, idx|
+      num_bits = idx + 1 == decimals.size ? last_segment_size : BITS_PER_WORD
+      dec.to_s(2).rjust(num_bits, '0')
+    end.join
   end
 
   def decimals
+    return @decimals if @decimals
     idx = -1
-    phrase_words.map do |word|
+    @decimals = phrase_words.map do |word|
       idx += 1
       idx = idx % LEXICONS.size
       lexicon_words[LEXICONS[idx]].find_index(word)
@@ -57,21 +69,25 @@ class Mnemonica::Decoder
     @words ||=
       str.split(/\s+/)
          .map(&:downcase)
-         .select do |word|
-           word.match?(/\A[a-z]+\Z/) &&
-             !word.in?(CONNECTING_WORDS)
+         .reject do |word|
+           word.match?(/\A\d+\.\Z/) ||
+             word.in?(CONNECTING_WORDS)
          end
   end
 
   def phrase_words
-    @phrase_words ||= words[1..]
+    @phrase_words ||= words[2..]
   end
 
   def version_word
-    words.first
+    @version_word ||= words.first
+  end
+
+  def last_segment_size
+    @last_segment_size ||= words.second.gsub(/^\d/, '').to_i
   end
 
   def lexicon_words
-    @lexicon_words ||= Mnemonica::Lexicon.new.call
+    @lexicon_words ||= Mnemonica::Lexicon.call
   end
 end

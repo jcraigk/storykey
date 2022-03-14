@@ -2,9 +2,13 @@
 class Mnemonica::Lexicon
   extend ::ActiveSupport::Concern
 
-  def call
-    LEXICONS.index_with do |lexicon|
-      File.readlines("lexicons/#{lexicon}s.txt").map(&:strip)
+  def self.call
+    LEXICONS.uniq.index_with do |lexicon|
+      words = []
+      Dir.glob("lexicons/#{lexicon}s/*.txt") do |file|
+        words += File.readlines(file).compact.map(&:strip)
+      end
+      words.sort
     end
   end
 end

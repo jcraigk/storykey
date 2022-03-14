@@ -8,6 +8,7 @@ class Mnemonica::Encoder
   def call
     @str = str.strip
     @format ||= :hex
+
     validate_format!
     paragraph
   end
@@ -19,7 +20,11 @@ class Mnemonica::Encoder
   end
 
   def version_lead
-    "In #{Mnemonica::VERSION_SLUG} I saw"
+    "In #{Mnemonica::VERSION_SLUG} at #{time} I saw"
+  end
+
+  def time
+    "#{bin_segments.last.size}pm"
   end
 
   def enumerated_phrases
@@ -31,14 +36,27 @@ class Mnemonica::Encoder
   def raw_phrases
     phrase = ''
     words.each_with_index.with_object([]) do |(word, idx), phrases|
-      lex_idx = idx % LEXICONS.size
-      phrase += 'and ' if lex_idx == LEXICONS.size - 1
+      lex_idx = idx % num_lexicons
+      phrase += 'and ' if penultimate_word?(lex_idx)
       phrase += "#{word} "
-      if (lex_idx == LEXICONS.size - 1) || (idx == words.size - 1)
+      if phrase_done?(lex_idx, idx)
         phrases << phrase.strip
         phrase = ''
       end
     end
+  end
+
+  # The last phrase may not contain a full set of words
+  def phrase_done?(lex_idx, idx)
+    (lex_idx == num_lexicons - 1) || (idx == words.size - 1)
+  end
+
+  def penultimate_word?(idx)
+    idx == num_lexicons - 1
+  end
+
+  def num_lexicons
+    LEXICONS.size
   end
 
   def words
@@ -51,7 +69,7 @@ class Mnemonica::Encoder
   end
 
   def lexicon_words
-    @lexicon_words ||= Mnemonica::Lexicon.new.call
+    @lexicon_words ||= Mnemonica::Lexicon.call
   end
 
   def decimals
