@@ -46,7 +46,7 @@ class Mnemonica::Encoder
     end
   end
 
-  # The last phrase may not contain a full set of words
+  # The last phrase may be partial
   def phrase_done?(lex_idx, idx)
     (lex_idx == num_lexicons - 1) || (idx == words.size - 1)
   end
@@ -85,8 +85,8 @@ class Mnemonica::Encoder
   def bin_segments
     idx = 0
     parts = []
-    while idx < bin_str.size
-      parts << bin_str[idx..(idx + BITS_PER_WORD - 1)]
+    while idx < binary_str.size
+      parts << binary_str[idx..(idx + BITS_PER_WORD - 1)]
       idx += BITS_PER_WORD
     end
     parts
@@ -116,14 +116,22 @@ class Mnemonica::Encoder
     raise_invalid_format('Hexidecimal format specified but data contains invalid characters')
   end
 
+  def binary_str
+    @binary_str ||= bin_str + checksum
+  end
+
   def bin_str
     @bin_str ||=
       case format&.to_sym
       when :bin then str
       when :dec then str.to_i.to_s(2)
       when :hex then str.hex.to_s(2)
-      else raise_invalid_format('Invalid format specified, valid options are bin, dec, and hex')
+      else raise_invalid_format('Invalid format specified')
       end
+  end
+
+  def checksum
+    Digest::SHA256.hexdigest(bin_str).hex.to_s(2).first(BITS_PER_WORD)
   end
 
   def raise_invalid_format(msg)

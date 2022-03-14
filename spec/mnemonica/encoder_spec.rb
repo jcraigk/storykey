@@ -58,7 +58,7 @@ RSpec.describe Mnemonica::Encoder do
         4. An adjective782 noun829 verb459 and verb993
         5. An adjective764 noun884 verb474 and verb528
         6. An adjective300 noun231 verb229 and verb514
-        7. An adjective493 noun37
+        7. An adjective493 noun607 verb60
       TEXT
     end
 

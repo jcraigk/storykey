@@ -15,6 +15,7 @@ module Mnemonica
   class InvalidVersion < Error; end
   class InvalidWord < Error; end
   class InvalidTime < Error; end
+  class InvalidChecksum < Error; end
 
   def self.encode(str, format: nil)
     Encoder.new(str, format:).call

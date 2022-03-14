@@ -1,7 +1,6 @@
 # TODO / IDEAS
 
 * Refactor lexicon to be a single hash with `word => int`, decoding can then occur on any template
-* Add checksum word(s) to end of phrase? tradeoffs?
 * If the last phrase consists of a single word, make it a noun
  * Is there a more elegant way to handle this and also the connector words?
  * Support multiple templates?

@@ -1,20 +1,21 @@
 # Mnemonica
 
-Mnemonica is a system for converting between arbitrary strings of data and a series of memorable English phrases. It leans toward visualization and personification as its primary mnemonic mechanism, favoring action scenes around an entity like an animal.
+Mnemonica is a system for converting between arbitrary strings of data and a series of memorable English phrases. Its grammar and lexicon is curated for concreteness and personification, supporting mental visuzliation.
 
 The primary use case is memorizing cryptocurrency private keys, often referred to as creating a "brain wallet." This system is inspired by [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki) but adds extra features:
 
-(1) Encode an arbitrary length string
-(2) Versioning is built into the mnemonic phrase
-(3) Words are selected for mental visualization, favoring concrete over abstract
-(4) Phrases adhere to a repeating grammar
+(1) Encode arbitrary length strings, supporting popular formats
+(2) Includes 10-bit checksum word to fortify phrases
+(3) Includes version slug to guarantee accurate decoding
+(4) Lexicon curated for mental visualization
+(5) Phrases adhere to a repeating grammar
 
 Phrases produced by Mnemonica take the following form:
 
 ```
-In [version_slug] at [time] I saw
+In [version slug] at [bit entropy of last word] I saw
 1. [adjective] [noun] [verb] and [verb]
-2. [adjective [noun]
+2. [adjective] [noun] [verb (checksum)]
 ````
 
 For example
@@ -22,24 +23,13 @@ For example
 ```
 In Miami at 6pm I saw
 1. A pretty body flow and list
-2. A blushing wedding flow and tow
+2. A blushing wedding flow
 ```
 
-The `version_slug` is typically a well-known city, such as `Miami`. The `time` contains a digit that refers to the number of bits contained in the last word (allowing arbitrary length string encoding). The list of phrases represents a deterministic encoding of the original string.
+The `version slug` is typically a well-known city, such as `Miami`. The `bity entropy of last word` contains a digit that refers to the number of bits contained in the last word (allowing arbitrary length string encoding). The `checksum` is an additional word added to fortify the whole phrase.
 
-This paragraph can deterministically be decoded using the same version of Mnemonica.
+This paragraph can be deterministically decoded using the same version of Mnemonica.
 
-Adjectives should be visual (colors, locations, textures)
-Nouns should be well-known animals/characters/entities or otherwise personifiable.
-Verbs should be actions a person/entity can do
-The adverbs should be person-based (emotions, etc)
-
-```
-1. Northern impala runs and dances
-2. Red tree sings and dies
-3. Ancient willow stands and forgives
-4. Nervous sparrow walks and bakes
-```
 
 ## Installation
 

@@ -57,6 +57,25 @@ RSpec.describe Mnemonica::Decoder do
         expect { call }.to raise_error(Mnemonica::InvalidWord)
       end
     end
+
+    context 'with invalid checksum' do
+      let(:input) do
+        <<~TEXT.strip
+          In Miami at 6pm I saw
+          1. An adjective873 noun107 verb342 and verb498
+          2. An adjective108 noun1001 verb342 and verb945
+          3. An adjective585 noun457 verb402 and verb709
+          4. An adjective782 noun829 verb459 and verb993
+          5. An adjective764 noun884 verb474 and verb528
+          6. An adjective300 noun231 verb229 and verb514
+          7. An adjective493 noun607 verb61
+        TEXT
+      end
+
+      it 'raises an exception' do
+        expect { call }.to raise_error(Mnemonica::InvalidChecksum)
+      end
+    end
   end
 
   context 'with valid input' do
@@ -69,7 +88,7 @@ RSpec.describe Mnemonica::Decoder do
         4. An adjective782 noun829 verb459 and verb993
         5. An adjective764 noun884 verb474 and verb528
         6. An adjective300 noun231 verb229 and verb514
-        7. An adjective493 noun37
+        7. An adjective493 noun607 verb60
       TEXT
     end
 

@@ -1,9 +1,12 @@
 bony
 bumpy
+chalky
+cloudy
 coarse
 damp
 dingy
 dry
+dusty
 feathered
 filthy
 firm
@@ -15,7 +18,9 @@ gleaming
 glistening
 glittery
 glossy
+grainy
 grimy
+gritty
 grungy
 hairy
 hard
@@ -25,6 +30,7 @@ moist
 moist
 mushy
 nasty
+porous
 rosy
 rough
 ruffled
@@ -37,4 +43,6 @@ silky
 slimy
 smooth
 soft
+sooty
+striped
 wet

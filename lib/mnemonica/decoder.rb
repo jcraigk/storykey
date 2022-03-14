@@ -11,7 +11,8 @@ class Mnemonica::Decoder
 
     validate_version!
     validate_time!
-    validate_phrase!
+    validate_lexicon!
+    validate_checksum!
 
     decoded_str
   end
@@ -28,7 +29,7 @@ class Mnemonica::Decoder
     raise Mnemonica::InvalidVersion, version_error_msg
   end
 
-  def validate_phrase!
+  def validate_lexicon!
     return unless decimals.include?(nil)
     raise Mnemonica::InvalidWord, 'Invalid word detected'
   end
@@ -41,18 +42,32 @@ class Mnemonica::Decoder
 
   def decoded_str
     case format.to_sym
-    when :bin then bin_str
-    when :dec then bin_str.to_i(2).to_s(10)
-    when :hex then bin_str.to_i(2).to_s(16)
+    when :bin then binary_str
+    when :dec then binary_str.to_i(2).to_s(10)
+    when :hex then binary_str.to_i(2).to_s(16)
     else raise Mnemonica::InvalidFormat, 'Invalid format specified'
     end
   end
 
   def bin_str
-    decimals.each_with_index.map do |dec, idx|
-      num_bits = idx + 1 == decimals.size ? last_segment_size : BITS_PER_WORD
-      dec.to_s(2).rjust(num_bits, '0')
-    end.join
+    @bin_str ||=
+      decimals.each_with_index.map do |dec, idx|
+        num_bits = idx + 1 == decimals.size ? last_segment_size : BITS_PER_WORD
+        dec.to_s(2).rjust(num_bits, '0')
+      end.join
+  end
+
+  def binary_str
+    @binary_str ||= bin_str[0..-(BITS_PER_WORD + 1)]
+  end
+
+  def validate_checksum!
+    return if calculated_checksum == bin_str.last(BITS_PER_WORD)
+    raise Mnemonica::InvalidChecksum, 'Checksum incorrect - invalid phrase!'
+  end
+
+  def calculated_checksum
+    Digest::SHA256.hexdigest(binary_str).hex.to_s(2).first(BITS_PER_WORD)
   end
 
   def decimals
@@ -84,7 +99,7 @@ class Mnemonica::Decoder
   end
 
   def last_segment_size
-    @last_segment_size ||= words.second.gsub(/^\d/, '').to_i
+    @last_segment_size ||= words.second.gsub(/[^\d]/, '').to_i
   end
 
   def lexicon_words
