@@ -70,14 +70,19 @@ class Mnemonica::Decoder
     Digest::SHA256.hexdigest(binary_str).hex.to_s(2).first(BITS_PER_WORD)
   end
 
-  def decimals
-    return @decimals if @decimals
-    idx = -1
-    @decimals = phrase_words.map do |word|
-      idx += 1
-      idx = idx % LEXICONS.size
-      lexicon_words[LEXICONS[idx]].find_index(word)
+  def word_decimals
+    return @word_decimals if @word_decimals
+    hash = {}
+    LEXICONS.each do |lex|
+      lexicon_words[lex].each_with_index do |word, idx|
+        hash[word] = idx
+      end
     end
+    @word_decimals = hash
+  end
+
+  def decimals
+    @decimals ||= phrase_words.map { |word| word_decimals[word] }
   end
 
   def words

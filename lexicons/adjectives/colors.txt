@@ -20,6 +20,7 @@ golden
 green
 grey
 indigo
+ebony
 lavender
 magenta
 maroon
@@ -38,6 +39,7 @@ tan
 teal
 turquoise
 vermilion
+umber
 violet
 white
 wisteria

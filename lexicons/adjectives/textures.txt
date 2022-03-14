@@ -5,6 +5,10 @@ cloudy
 coarse
 damp
 dingy
+sharp
+soggy
+woolly
+steamy
 dry
 dusty
 feathered

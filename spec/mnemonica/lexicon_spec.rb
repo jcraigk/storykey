@@ -48,6 +48,15 @@ RSpec.describe Mnemonica::Lexicon do
     expect(sha).to eq(Mnemonica::LEXICON_SHA)
   end
 
-  xit 'produdes words of expected syllabic content' do
+  # xit 'produdes words of expected syllabic content' do
+  # end
+
+  # Verify with external dictionary
+  xit 'produces real English words' do
+  end
+
+  # Adjective "twisted" vs verb "twisting"
+  # TODO: Is it bad or good to share bases?
+  xit 'avoids the same base across lexicons' do
   end
 end
