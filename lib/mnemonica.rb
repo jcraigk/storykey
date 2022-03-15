@@ -30,6 +30,12 @@ module Mnemonica
   def self.decode(str, format: nil)
     Decoder.new(str, format:).call
   end
+
+  def self.generate
+    data = SecureRandom.random_bytes(32).unpack('H*')[0]
+    phrase = encode(data, format: :hex)
+    data + "\n" + phrase
+  end
 end
 
 BITS_PER_WORD = 10
