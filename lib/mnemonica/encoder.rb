@@ -23,7 +23,8 @@ class Mnemonica::Encoder
   end
 
   def paragraph
-    "#{version_lead}\n#{enumerated_phrases.join(",\n")}"
+    maybe_newline = num_phrases == 1 ? ' ' : "\n"
+    "#{version_lead}#{maybe_newline}#{enumerated_phrases.join(",\n")}"
   end
 
   def version_lead
@@ -34,25 +35,35 @@ class Mnemonica::Encoder
     "#{bin_segments.last.size}pm"
   end
 
+  def num_phrases
+    @num_phrases ||= raw_phrases.size
+  end
+
   def enumerated_phrases
     raw_phrases.each_with_index.map do |phrase, idx|
-      if idx == raw_phrases.size - 1
-        "and #{phrase.with_indefinite_article}"
+      if idx == num_phrases - 1
+        str = phrase.with_indefinite_article
+        num_phrases == 1 ? str : "and #{str}"
       else
         "#{(raw_phrases.size - idx).humanize} #{phrase}"
       end
     end
   end
 
-  def raw_phrases
+  def raw_phrases # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     phrase = ''
     words.each_with_index.with_object([]) do |(word, idx), phrases|
       grammar_idx = idx % num_grammar_parts
       phrase +=
         case grammar_idx
         when 1 # First noun
-          idx == words.size - 1 ? word : word.pluralize
-        when 3 # Second noun
+          # If last phrase, singularize
+          if idx > words.size - num_grammar_parts
+            word
+          else
+            word.pluralize
+          end
+        when 3 # Second adjective
           word.with_indefinite_article
         else
           word

@@ -41,7 +41,7 @@ RSpec.describe Mnemonica::Encoder do
       end
 
       it 'raises an exception' do
-        expect { call }.to raise_error(Mnemonica::InputToolarge)
+        expect { call }.to raise_error(Mnemonica::InputTooLarge)
       end
     end
 
@@ -104,10 +104,16 @@ RSpec.describe Mnemonica::Encoder do
 
       include_examples 'success'
     end
+  end
 
-    xcontext 'when input length produces a partial last phrase' do
-      it 'does not end with an adjective' do
-      end
+  context 'with short input and partial last phrase' do
+    let(:output) do
+      <<~TEXT.strip
+        In #{Mnemonica::VERSION_SLUG} at 6pm I saw an adjective873 noun107 verb343 a noun224
+      TEXT
     end
+    let(:encodable) { 'da46b55' }
+
+    include_examples 'success'
   end
 end
