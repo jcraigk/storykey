@@ -11,7 +11,7 @@ class Mnemonica::Decoder
 
     validate_version!
     validate_time!
-    validate_lexicon!
+    validate_phrase!
     validate_checksum!
 
     decoded_str
@@ -29,7 +29,7 @@ class Mnemonica::Decoder
     raise Mnemonica::InvalidVersion, version_error_msg
   end
 
-  def validate_lexicon!
+  def validate_phrase!
     return unless decimals.include?(nil)
     raise Mnemonica::InvalidWord, 'Invalid word detected'
   end
@@ -71,14 +71,14 @@ class Mnemonica::Decoder
   end
 
   def word_decimals
-    return @word_decimals if @word_decimals
-    hash = {}
-    LEXICONS.each do |lex|
-      lexicon_words[lex].each_with_index do |word, idx|
-        hash[word] = idx
+    @word_decimals ||=
+      {}.tap do |hash|
+        LEXICONS.each do |lex|
+          lexicon[lex].each_with_index do |word, idx|
+            hash[word.downcase] = idx
+          end
+        end
       end
-    end
-    @word_decimals = hash
   end
 
   def decimals
@@ -107,7 +107,7 @@ class Mnemonica::Decoder
     @last_segment_size ||= words.second.gsub(/[^\d]/, '').to_i
   end
 
-  def lexicon_words
-    @lexicon_words ||= Mnemonica::Lexicon.call
+  def lexicon
+    @lexicon ||= Mnemonica::Lexicon.call
   end
 end

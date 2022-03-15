@@ -31,7 +31,6 @@ hard
 lumpy
 metallic
 moist
-moist
 mushy
 nasty
 porous

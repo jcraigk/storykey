@@ -4,6 +4,7 @@ authentic
 awesome
 awful
 bare
+stiff
 beautiful
 bent
 big
@@ -18,15 +19,12 @@ busy
 charred
 chilly
 clean
-clean
 cold
 cylindrical
 dark
 dead
 delicate
-delicate
 direct
-dirty
 dirty
 earthy
 electric
@@ -56,12 +54,10 @@ gorgeous
 grand
 grotesque
 gruesome
-guilty
 heavy
 hidden
 hideous
 hilarious
-little
 little
 lively
 luminous
@@ -94,7 +90,6 @@ poisonous
 precise
 pristine
 puny
-quick
 quick
 quiet
 ragged

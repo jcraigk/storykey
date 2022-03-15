@@ -1,6 +1,9 @@
 # TODO / IDEAS
 
-* Refactor lexicon to be a single hash with `word => int`, decoding can then occur on any template
+* Incorporate lexicon sha into checksum word and use that instead of version slug? Would be more secure and would eliminate something user would need to remember
+* Omit time part if input is default priv key length (256 bit)
+* Put hard limit on input size (max 10 phrases)
+* If single phrase, do not enumerate
 * If the last phrase consists of a single word, make it a noun
  * Is there a more elegant way to handle this and also the connector words?
  * Support multiple templates?

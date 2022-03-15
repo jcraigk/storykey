@@ -27,5 +27,7 @@ module Mnemonica
 end
 
 BITS_PER_WORD = 10
-LEXICONS = %i[adjective noun verb verb].freeze
 CONNECTING_WORDS = %w[in i saw and a an at].freeze
+GRAMMAR = %i[adjective noun verb verb].freeze
+LEXICONS = %i[adjective noun verb].freeze
+NUM_PAD_WORDS = 26

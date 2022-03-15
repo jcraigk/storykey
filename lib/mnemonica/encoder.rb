@@ -36,7 +36,7 @@ class Mnemonica::Encoder
   def raw_phrases
     phrase = ''
     words.each_with_index.with_object([]) do |(word, idx), phrases|
-      lex_idx = idx % num_lexicons
+      lex_idx = idx % num_grammar_parts
       phrase += 'and ' if penultimate_word?(lex_idx)
       phrase += "#{word} "
       if phrase_done?(lex_idx, idx)
@@ -48,28 +48,28 @@ class Mnemonica::Encoder
 
   # The last phrase may be partial
   def phrase_done?(lex_idx, idx)
-    (lex_idx == num_lexicons - 1) || (idx == words.size - 1)
+    (lex_idx == num_grammar_parts - 1) || (idx == words.size - 1)
   end
 
   def penultimate_word?(idx)
-    idx == num_lexicons - 1
+    idx == num_grammar_parts - 1
   end
 
-  def num_lexicons
-    LEXICONS.size
+  def num_grammar_parts
+    GRAMMAR.size
   end
 
   def words
     idx = -1
-    decimals.map do |dec|
+    decimals.map do |decimal|
       idx += 1
-      idx = idx % LEXICONS.size
-      lexicon_words[LEXICONS[idx]][dec]
+      idx = idx % GRAMMAR.size
+      lexicon[GRAMMAR[idx]][decimal]
     end
   end
 
-  def lexicon_words
-    @lexicon_words ||= Mnemonica::Lexicon.call
+  def lexicon
+    @lexicon ||= Mnemonica::Lexicon.call
   end
 
   def decimals

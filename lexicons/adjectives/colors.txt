@@ -15,12 +15,12 @@ chartreuse
 chocolate
 crimson
 cyan
+ebony
 fuchsia
 golden
 green
 grey
 indigo
-ebony
 lavender
 magenta
 maroon
@@ -38,8 +38,8 @@ silver
 tan
 teal
 turquoise
-vermilion
 umber
+vermilion
 violet
 white
 wisteria
