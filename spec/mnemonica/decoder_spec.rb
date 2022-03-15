@@ -24,8 +24,8 @@ RSpec.describe Mnemonica::Decoder do
     context 'with missing or invalid version lead' do
       let(:input) do
         <<~TEXT.strip
-          1. An adjective873 noun107 verb342 and verb498
-          2. An adjective108 noun1001 verb342 and verb945
+          six adjective873 noun107s verb342 an adjective498 noun108,
+          five adjective1001 noun342s verb945 an adjective585 noun457,
         TEXT
       end
 
@@ -62,13 +62,12 @@ RSpec.describe Mnemonica::Decoder do
       let(:input) do
         <<~TEXT.strip
           In Miami at 6pm I saw
-          1. An adjective873 noun107 verb342 and verb498
-          2. An adjective108 noun1001 verb342 and verb945
-          3. An adjective585 noun457 verb402 and verb709
-          4. An adjective782 noun829 verb459 and verb993
-          5. An adjective764 noun884 verb474 and verb528
-          6. An adjective300 noun231 verb229 and verb514
-          7. An adjective493 noun607 verb61
+          six adjective873 noun107s verb342 an adjective498 noun108,
+          five adjective1001 noun342s verb945 an adjective585 noun457,
+          four adjective402 noun709s verb782 an adjective829 noun459,
+          three adjective993 noun764s verb884 an adjective474 noun528,
+          two adjective300 noun231s verb229 an adjective514 noun493,
+          and an adjective607 noun61
         TEXT
       end
 
@@ -82,13 +81,12 @@ RSpec.describe Mnemonica::Decoder do
     let(:input) do
       <<~TEXT.strip
         In Miami at 6pm I saw
-        1. An adjective873 noun107 verb342 and verb498
-        2. An adjective108 noun1001 verb342 and verb945
-        3. An adjective585 noun457 verb402 and verb709
-        4. An adjective782 noun829 verb459 and verb993
-        5. An adjective764 noun884 verb474 and verb528
-        6. An adjective300 noun231 verb229 and verb514
-        7. An adjective493 noun607 verb60
+        six adjective873 noun107s verb342 an adjective498 noun108,
+        five adjective1001 noun342s verb945 an adjective585 noun457,
+        four adjective402 noun709s verb782 an adjective829 noun459,
+        three adjective993 noun764s verb884 an adjective474 noun528,
+        two adjective300 noun231s verb229 an adjective514 noun493,
+        and an adjective607 noun60
       TEXT
     end
 

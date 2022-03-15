@@ -15,6 +15,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'activesupport'
   spec.add_dependency 'dry-initializer'
+  spec.add_dependency 'humanize'
   spec.add_dependency 'indefinite_article'
 
   spec.add_development_dependency 'rake'

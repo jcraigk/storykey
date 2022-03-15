@@ -7,9 +7,14 @@ athletic
 attentive
 cunning
 hesitant
+shady
+distrustful
 attractive
 albino
 awkward
+eligant
+enigmatic
+charismatic
 bashful
 daft
 blind

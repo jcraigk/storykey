@@ -1,8 +1,13 @@
 # frozen_string_literal: true
+require 'active_support/core_ext/enumerable'
+require 'active_support/core_ext/object/inclusion'
+require 'active_support/core_ext/string/inflections'
+require 'active_support/core_ext/string/access'
+require 'digest'
 require 'dry-initializer'
-require 'active_support/all' # TODO: we don't need /all
-require 'pry'
+require 'humanize'
 require 'indefinite_article'
+require 'pry'
 
 require_relative 'mnemonica/decoder'
 require_relative 'mnemonica/encoder'
@@ -16,6 +21,7 @@ module Mnemonica
   class InvalidWord < Error; end
   class InvalidTime < Error; end
   class InvalidChecksum < Error; end
+  class InputTooLarge < Error; end
 
   def self.encode(str, format: nil)
     Encoder.new(str, format:).call
@@ -27,7 +33,12 @@ module Mnemonica
 end
 
 BITS_PER_WORD = 10
-CONNECTING_WORDS = %w[in i saw and a an at].freeze
-GRAMMAR = %i[adjective noun verb verb].freeze
+CONNECTING_WORDS = %w[
+  in i saw and a an at
+  one two three four five six seven eight nine ten
+  eleven twelve thirteen fourteen fifteen
+].freeze
+GRAMMAR = %i[adjective noun verb adjective noun].freeze
 LEXICONS = %i[adjective noun verb].freeze
 NUM_PAD_WORDS = 26
+MAX_INPUT_BITS = 512

@@ -23,7 +23,7 @@ RSpec.describe Mnemonica::Lexicon do
   end
 
   it 'returns unique global downcased lexicon' do
-    # all_words.select { |e| all_words.count(e) > 1 }
+    all_words.select { |e| all_words.count(e) > 1 }
     expect(all_words.map(&:downcase).uniq.size).to eq(all_words.size)
   end
 

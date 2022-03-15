@@ -25,40 +25,51 @@ RSpec.describe Mnemonica::Encoder do
       expect { call }.to raise_error(Mnemonica::InvalidFormat)
     end
   end
-  #
-  # context 'with invalid input' do
-  #   context 'when invalid hex' do
-  #     let(:encodable) { '23az939fs2' }
-  #
-  #     include_examples 'invalid format'
-  #   end
-  #
-  #   context 'when invalid decimal' do
-  #     let(:encodable) { '' }
-  #     let(:dec) { '34234abc2342' }
-  #
-  #     include_examples 'invalid format'
-  #   end
-  #
-  #   context 'when invalid bin' do
-  #     let(:encodable) { '' }
-  #     let(:dec) { '010010abc10101' }
-  #
-  #     include_examples 'invalid format'
-  #   end
-  # end
+
+  context 'with invalid input' do
+    context 'when invalid hex chars' do
+      let(:encodable) { '23az939fs2' }
+
+      include_examples 'invalid format'
+    end
+
+    context 'when input is too long' do
+      let(:encodable) do
+        <<~TEXT
+          da46b559f21b3e955bb1925c964ac5c3b3d72fe1bf37476a104b0e7396027b65da46b559f21b3e955bb1925c964ac5c3b3d72fe1bf37476a104b0e7396027b65da46b559f21b3e955bb1925c964ac5c3b3d72fe1bf37476a104b0e7396027b65
+        TEXT
+      end
+
+      it 'raises an exception' do
+        expect { call }.to raise_error(Mnemonica::InputToolarge)
+      end
+    end
+
+    context 'when invalid decimal chars' do
+      let(:encodable) { '' }
+      let(:dec) { '34234abc2342' }
+
+      include_examples 'invalid format'
+    end
+
+    context 'when invalid bin chars' do
+      let(:encodable) { '' }
+      let(:dec) { '010010abc10101' }
+
+      include_examples 'invalid format'
+    end
+  end
 
   context 'with valid input' do
     let(:output) do
       <<~TEXT.strip
         In #{Mnemonica::VERSION_SLUG} at 6pm I saw
-        1. An adjective873 noun107 verb342 and verb498
-        2. An adjective108 noun1001 verb342 and verb945
-        3. An adjective585 noun457 verb402 and verb709
-        4. An adjective782 noun829 verb459 and verb993
-        5. An adjective764 noun884 verb474 and verb528
-        6. An adjective300 noun231 verb229 and verb514
-        7. An adjective493 noun607 verb60
+        six adjective873 noun107s verb342 an adjective498 noun108,
+        five adjective1001 noun342s verb945 an adjective585 noun457,
+        four adjective402 noun709s verb782 an adjective829 noun459,
+        three adjective993 noun764s verb884 an adjective474 noun528,
+        two adjective300 noun231s verb229 an adjective514 noun493,
+        and an adjective607 noun60
       TEXT
     end
 
@@ -92,6 +103,11 @@ RSpec.describe Mnemonica::Encoder do
       let(:format) { :dec }
 
       include_examples 'success'
+    end
+
+    xcontext 'when input length produces a partial last phrase' do
+      it 'does not end with an adjective' do
+      end
     end
   end
 end

@@ -89,10 +89,9 @@ class Mnemonica::Decoder
     @words ||=
       str.split(/\s+/)
          .map(&:downcase)
-         .reject do |word|
-           word.match?(/\A\d+\.\Z/) ||
-             word.in?(CONNECTING_WORDS)
-         end
+         .map { |word| word.tr(',', '') }
+         .map(&:singularize)
+         .reject { |word| word.in?(CONNECTING_WORDS) }
   end
 
   def phrase_words
@@ -100,11 +99,11 @@ class Mnemonica::Decoder
   end
 
   def version_word
-    @version_word ||= words.first
+    @version_word ||= words[0]
   end
 
   def last_segment_size
-    @last_segment_size ||= words.second.gsub(/[^\d]/, '').to_i
+    @last_segment_size ||= words[1].gsub(/[^\d]/, '').to_i
   end
 
   def lexicon

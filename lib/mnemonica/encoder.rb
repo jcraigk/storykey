@@ -10,13 +10,20 @@ class Mnemonica::Encoder
     @format ||= :hex
 
     validate_format!
+    validate_length!
+
     paragraph
   end
 
   private
 
+  def validate_length!
+    return if bin_str.size <= MAX_INPUT_BITS
+    raise Mnemonica::InputTooLarge, "Max input size is #{MAX_INPUT_BITS} bits"
+  end
+
   def paragraph
-    "#{version_lead}\n#{enumerated_phrases.join("\n")}"
+    "#{version_lead}\n#{enumerated_phrases.join(",\n")}"
   end
 
   def version_lead
@@ -29,17 +36,29 @@ class Mnemonica::Encoder
 
   def enumerated_phrases
     raw_phrases.each_with_index.map do |phrase, idx|
-      "#{idx + 1}. #{phrase.with_indefinite_article.humanize}"
+      if idx == raw_phrases.size - 1
+        "and #{phrase.with_indefinite_article}"
+      else
+        "#{(raw_phrases.size - idx).humanize} #{phrase}"
+      end
     end
   end
 
   def raw_phrases
     phrase = ''
     words.each_with_index.with_object([]) do |(word, idx), phrases|
-      lex_idx = idx % num_grammar_parts
-      phrase += 'and ' if penultimate_word?(lex_idx)
-      phrase += "#{word} "
-      if phrase_done?(lex_idx, idx)
+      grammar_idx = idx % num_grammar_parts
+      phrase +=
+        case grammar_idx
+        when 1 # First noun
+          idx == words.size - 1 ? word : word.pluralize
+        when 3 # Second noun
+          word.with_indefinite_article
+        else
+          word
+        end
+      phrase += ' '
+      if phrase_done?(grammar_idx, idx)
         phrases << phrase.strip
         phrase = ''
       end
@@ -47,12 +66,8 @@ class Mnemonica::Encoder
   end
 
   # The last phrase may be partial
-  def phrase_done?(lex_idx, idx)
-    (lex_idx == num_grammar_parts - 1) || (idx == words.size - 1)
-  end
-
-  def penultimate_word?(idx)
-    idx == num_grammar_parts - 1
+  def phrase_done?(grammar_idx, idx)
+    (grammar_idx == num_grammar_parts - 1) || (idx == words.size - 1)
   end
 
   def num_grammar_parts
@@ -60,11 +75,11 @@ class Mnemonica::Encoder
   end
 
   def words
-    idx = -1
-    decimals.map do |decimal|
-      idx += 1
-      idx = idx % GRAMMAR.size
-      lexicon[GRAMMAR[idx]][decimal]
+    decimals.each_with_index.map do |decimal, idx|
+      grammar_idx = idx % num_grammar_parts
+      # Substitude a noun if last word is adjective
+      grammar_idx += 1 if idx == decimals.size - 1 && GRAMMAR[grammar_idx] == :adjective
+      lexicon[GRAMMAR[grammar_idx]][decimal]
     end
   end
 

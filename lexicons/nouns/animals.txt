@@ -9,6 +9,7 @@ badger
 bat
 beagle
 bear
+partridge
 beaver
 bee
 beetle
