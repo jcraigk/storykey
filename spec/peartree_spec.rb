@@ -27,7 +27,7 @@ RSpec.describe Peartree do
     before do
       allow(Peartree::Decoder).to receive(:new).with(str, format: nil).and_return(mock_decoder)
       allow(mock_decoder).to receive(:call)
-      described_class.encode(str)
+      described_class.decode(str)
     end
 
     it 'calls Peartree::Decoder' do

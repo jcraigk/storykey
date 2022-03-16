@@ -58,9 +58,9 @@ class Peartree::Encoder
   def raw_phrases # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     phrase = ''
     words.each_with_index.with_object([]) do |(word, idx), phrases|
-      grammar_idx = idx % num_grammar_parts
+      speech_idx = idx % num_grammar_parts
       phrase +=
-        case grammar_idx
+        case speech_idx
         when 1 # First noun
           # If last phrase, singularize
           if idx > words.size - num_grammar_parts
@@ -74,7 +74,7 @@ class Peartree::Encoder
           word
         end
       phrase += ' '
-      if phrase_done?(grammar_idx, idx)
+      if phrase_done?(speech_idx, idx)
         phrases << phrase.strip
         phrase = ''
       end
@@ -82,8 +82,8 @@ class Peartree::Encoder
   end
 
   # The last phrase may be partial
-  def phrase_done?(grammar_idx, idx)
-    (grammar_idx == num_grammar_parts - 1) || (idx == words.size - 1)
+  def phrase_done?(speech_idx, idx)
+    (speech_idx == num_grammar_parts - 1) || (idx == words.size - 1)
   end
 
   def num_grammar_parts
@@ -92,15 +92,16 @@ class Peartree::Encoder
 
   def words
     decimals.each_with_index.map do |decimal, idx|
-      grammar_idx = idx % num_grammar_parts
+      speech_idx = idx % num_grammar_parts
+      part_of_speech = GRAMMAR[speech_idx]
       # Substitude a noun if last word is adjective
-      grammar_idx += 1 if idx == decimals.size - 1 && GRAMMAR[grammar_idx] == :adjective
-      lexicon[GRAMMAR[grammar_idx]][decimal]
+      part_of_speech = :noun if idx == decimals.size - 1 && part_of_speech == :adjective
+      lex.humanized[part_of_speech][decimal]
     end
   end
 
-  def lexicon
-    @lexicon ||= Peartree::Lexicon.call
+  def lex
+    @lex ||= Peartree::Lexicon.new
   end
 
   def decimals
@@ -124,6 +125,7 @@ class Peartree::Encoder
   end
 
   def validate_format!
+    # binding.pry
     case format.to_sym
     when :bin then validate_bin!
     when :dec then validate_dec!

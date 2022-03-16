@@ -13,19 +13,19 @@ RSpec.describe Peartree::Lexicon do
 
   it 'returns expected word count' do
     LEXICONS.each do |part_of_speech|
-      num = lex.lexicons[part_of_speech].grep_v(/\d/).size
+      num = lex.humanized[part_of_speech].grep_v(/\d/).size
       percent = (num / count.to_f) * 100
       puts "Actual #{part_of_speech} count: #{num} (#{percent.floor}%)"
     end
-    expect(lex.keywords.size).to eq(count * LEXICONS.size)
+    expect(lex.lexicon.size).to eq(count * LEXICONS.size)
   end
 
   it 'does not skip any decimals' do
     LEXICONS.each do |part_of_speech|
       (0..(count - 1)).each do |decimal|
-        keyword = lex.keywords.find do |_, v|
-          v[:part_of_speech] == part_of_speech &&
-            v[:decimal] == decimal
+        keyword = lex.lexicon.find do |_, v|
+          v.part_of_speech == part_of_speech &&
+            v.decimal == decimal
         end
         expect(keyword).not_to be_empty
       end
@@ -44,7 +44,7 @@ RSpec.describe Peartree::Lexicon do
 
   it 'returns unique words for each part of speech' do
     LEXICONS.each do |part_of_speech|
-      words = lex.lexicons[part_of_speech]
+      words = lex.humanized[part_of_speech]
       # TODO: add sort later
       expect(words.uniq).to eq(words)
     end
@@ -55,7 +55,7 @@ RSpec.describe Peartree::Lexicon do
   end
 
   xit 'returns lexicons that have unique 4-letter truncations' do
-    lex.lexicons.each do |_, words|
+    lex.humanized.each do |_, words|
       truncs = words.map { |w| w[0..3] }
       expect(truncs.uniq).to eq(truncs)
     end

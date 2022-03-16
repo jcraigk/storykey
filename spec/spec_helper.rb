@@ -2,6 +2,9 @@
 
 require 'peartree'
 
+# TODO: Include all
+require_relative 'support/shared_contexts/with_mocked_lexicon'
+
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = '.rspec_status'

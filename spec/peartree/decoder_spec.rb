@@ -4,15 +4,8 @@ RSpec.describe Peartree::Decoder do
   subject(:call) { described_class.new(input, format:).call }
 
   let(:format) { nil }
-  let(:lexicon) do
-    LEXICONS.index_with do |lex|
-      (0..1_024).to_a.map { |num| "#{lex}#{num}" }
-    end
-  end
 
-  before do
-    allow(Peartree::Lexicon).to receive(:call).and_return(lexicon)
-  end
+  include_context 'with mocked lexicon'
 
   shared_examples 'success' do
     it 'returns expected output' do
@@ -24,8 +17,8 @@ RSpec.describe Peartree::Decoder do
     context 'with missing or invalid version lead' do
       let(:input) do
         <<~TEXT.strip
-          six adjective873 noun107s verb342 an adjective498 noun108,
-          five adjective1001 noun342s verb945 an adjective585 noun457,
+          six adjectiveago noundcs verbmd an adjectivesd noundd,
+          five adjectivealm nounmds verbaji an adjectivevm nounqo,
         TEXT
       end
 
@@ -34,10 +27,10 @@ RSpec.describe Peartree::Decoder do
       end
     end
 
-    context 'with missing or invalid time' do
+    context 'with invalid time' do
       let(:input) do
         <<~TEXT.strip
-          In Miami at 12pm I saw an adjective873 noun107 verb342 and verb498
+          In Miami at 12pm I saw an adjectiveago noundc verbme a nounhp
         TEXT
       end
 
@@ -49,7 +42,7 @@ RSpec.describe Peartree::Decoder do
     context 'with invalid word(s)' do
       let(:input) do
         <<~TEXT.strip
-          In Miami at 1pm I saw a badword noun107 verb342 and verb498
+          In Miami at 1pm I saw a badword noundc verbme a nounhp
         TEXT
       end
 
@@ -62,12 +55,12 @@ RSpec.describe Peartree::Decoder do
       let(:input) do
         <<~TEXT.strip
           In Miami at 6pm I saw
-          six adjective873 noun107s verb342 an adjective498 noun108,
-          five adjective1001 noun342s verb945 an adjective585 noun457,
-          four adjective402 noun709s verb782 an adjective829 noun459,
-          three adjective993 noun764s verb884 an adjective474 noun528,
-          two adjective300 noun231s verb229 an adjective514 noun493,
-          and an adjective607 noun61
+          six adjectiveago noundcs verbmd an adjectivesd noundd,
+          five adjectivealm nounmds verbaji an adjectivevm nounqo,
+          four adjectiveol nounaags verbadb an adjectiveaew nounqq,
+          three adjectiveale nounacjs verbagz an adjectiverf nounth,
+          two adjectivekn nounhws verbhu an adjectivest nounry,
+          and an adjectivewi nounbg
         TEXT
       end
 
@@ -81,12 +74,12 @@ RSpec.describe Peartree::Decoder do
     let(:input) do
       <<~TEXT.strip
         In Miami at 6pm I saw
-        six adjective873 noun107s verb342 an adjective498 noun108,
-        five adjective1001 noun342s verb945 an adjective585 noun457,
-        four adjective402 noun709s verb782 an adjective829 noun459,
-        three adjective993 noun764s verb884 an adjective474 noun528,
-        two adjective300 noun231s verb229 an adjective514 noun493,
-        and an adjective607 noun60
+        six adjectiveago noundcs verbmd an adjectivesd noundd,
+        five adjectivealm nounmds verbaji an adjectivevm nounqo,
+        four adjectiveol nounaags verbadb an adjectiveaew nounqq,
+        three adjectiveale nounacjs verbagz an adjectiverf nounth,
+        two adjectivekn nounhws verbhu an adjectivest nounry,
+        and an adjectivewi nounbh
       TEXT
     end
 
@@ -119,6 +112,21 @@ RSpec.describe Peartree::Decoder do
         TEXT
       end
       let(:format) { :bin }
+
+      include_examples 'success'
+    end
+
+    # TODO: decide if means 256-bit-like (14 bits of checksum) OR
+    # evenly-split-on-words-like (10 bits)
+    # Always have at least 10 bits of checksum?
+    xcontext 'when no time given' do
+      let(:input) { super().gsub('at 6pm ', '') }
+      let(:output) do
+        <<~TEXT.strip
+          asdf
+        TEXT
+      end
+      let(:format) { :hex }
 
       include_examples 'success'
     end

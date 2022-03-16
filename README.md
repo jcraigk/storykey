@@ -1,6 +1,6 @@
 # Peartree
 
-Peartree is a system for converting between arbitrary strings of data and a series of memorable English phrases. Its grammar and lexicon is curated for concreteness and personification, supporting mental visuzliation.
+Peartree is a system for converting between arbitrary strings of data and a series of memorable English phrases. Its grammar and lexicon is curated for concreteness and personification, supporting mental visualization.
 
 The primary use case is memorizing cryptocurrency private keys, often referred to as creating a "brain wallet." This system is inspired by [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki) but adds extra features:
 
@@ -10,7 +10,7 @@ The primary use case is memorizing cryptocurrency private keys, often referred t
 (4) Lexicon curated for mental visualization
 (5) Phrases adhere to a repeating grammar
 
-Phrases produced by Peartree take the following form:
+A phrase produced by Peartree is presented as a song or a set of lyrics.
 
 ```
 In [version slug] at [bit entropy of last word] I saw

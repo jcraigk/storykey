@@ -21,7 +21,7 @@ class Peartree::Decoder
   private
 
   def validate_time!
-    return if last_segment_size <= BITS_PER_WORD
+    return if tail_bitsize <= BITS_PER_WORD
     raise Peartree::InvalidTime, 'Invalid time specified'
   end
 
@@ -53,7 +53,7 @@ class Peartree::Decoder
   def bin_str
     @bin_str ||=
       decimals.each_with_index.map do |dec, idx|
-        num_bits = idx + 1 == decimals.size ? last_segment_size : BITS_PER_WORD
+        num_bits = idx + 1 == decimals.size ? tail_bitsize : BITS_PER_WORD
         dec.to_s(2).rjust(num_bits, '0')
       end.join
   end
@@ -63,16 +63,19 @@ class Peartree::Decoder
   end
 
   def validate_checksum!
-    return if calculated_checksum == bin_str.last(BITS_PER_WORD)
-    raise Peartree::InvalidChecksum, 'Checksum incorrect - invalid phrase!'
+    return if checksum == (bits = bin_str.last(BITS_PER_WORD))
+    raise Peartree::InvalidChecksum, "Checksum '#{checksum}' mismatch with '#{bits}'!"
   end
 
-  def calculated_checksum
-    Digest::SHA256.hexdigest(binary_str).hex.to_s(2).first(BITS_PER_WORD)
+  def checksum
+    Digest::SHA256.hexdigest(binary_str)
+                  .hex
+                  .to_s(2)
+                  .first(BITS_PER_WORD)
   end
 
   def decimals
-    @decimals ||= phrase_words.map { |word| lex.decimal_map[word] }
+    @decimals ||= abbrevs.map { |abbrev| lex.lexicon[abbrev]&.decimal }
   end
 
   def words
@@ -84,23 +87,35 @@ class Peartree::Decoder
          .reject { |word| word.in?(LINKING_WORDS + lex.linking_words) }
   end
 
-  def phrase_words
-    @phrase_words ||= words[2..]
+  def abbrevs
+    @abbrevs ||= phrase.map { |w| w[0..(ABBREV_SIZE - 1)] }
+  end
+
+  def phrase
+    @phrase ||= words[(time_given? ? 2 : 1)..]
   end
 
   def version_word
     @version_word ||= words[0]
   end
 
-  def last_segment_size
-    @last_segment_size ||= words[1].gsub(/[^\d]/, '').to_i
+  # A "time" can be provided in poem header
+  # to indicate number of bits encoded in final word.
+  # "9pm" indicates 9 bits
+  # If no time specified, default to BITS_PER_WORD
+  def tail_bitsize
+    @tail_bitsize ||= time_given? ? bitsize_from_time : BITS_PER_WORD
+  end
+
+  def bitsize_from_time
+    words[1].gsub(/[^\d]/, '').to_i
+  end
+
+  def time_given?
+    @time_given ||= words[1].match?(/\A\d{1,2}(?:pm|Pm|pM|PM)/)
   end
 
   def lex
-    @lex ||= Peartree::Lexicon.call
-  end
-
-  def keywords
-    @keywords ||= lex.keywords
+    @lex ||= Peartree::Lexicon.new
   end
 end
