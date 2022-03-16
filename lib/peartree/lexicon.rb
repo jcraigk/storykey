@@ -1,7 +1,5 @@
 # frozen_string_literal: true
-class Peartree::Lexicon
-  extend ::ActiveSupport::Concern
-
+class Peartree::Lexicon < Peartree::Base
   def lexicon
     @lexicon ||= {}.tap do |hash|
       humanized.each do |part_of_speech, words|

@@ -17,6 +17,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'dry-initializer'
   spec.add_dependency 'humanize'
   spec.add_dependency 'indefinite_article'
+  spec.add_dependency 'base58'
 
   spec.add_development_dependency 'verbs'
   spec.add_development_dependency 'pry'

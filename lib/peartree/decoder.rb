@@ -1,18 +1,15 @@
 # frozen_string_literal: true
-class Peartree::Decoder
-  extend Dry::Initializer
-  extend ::ActiveSupport::Concern
-
+class Peartree::Decoder < Peartree::Base
   param :str
-  option :format
+  option :format, optional: true
 
   def call
+    @str = str.strip
     @format ||= :hex
-    @linking_words = []
 
     validate_version!
     validate_time!
-    validate_phrase!
+    validate_words!
     validate_checksum!
 
     decoded_str
@@ -30,7 +27,7 @@ class Peartree::Decoder
     raise Peartree::InvalidVersion, version_error_msg
   end
 
-  def validate_phrase!
+  def validate_words!
     return unless decimals.include?(nil)
     raise Peartree::InvalidWord, 'Invalid word detected'
   end
@@ -42,12 +39,7 @@ class Peartree::Decoder
   end
 
   def decoded_str
-    case format.to_sym
-    when :bin then binary_str
-    when :dec then binary_str.to_i(2).to_s(10)
-    when :hex then binary_str.to_i(2).to_s(16)
-    else raise Peartree::InvalidFormat, 'Invalid format specified'
-    end
+    Peartree::Coercer.call(binary_str, :bin, format)
   end
 
   def bin_str

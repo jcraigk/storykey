@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 RSpec.describe Peartree::Encoder do
-  subject(:call) { described_class.new(input, format:).call }
+  subject(:call) { described_class.call(input, format: format) }
 
   let(:format) { nil }
 
   include_context 'with mocked lexicon'
 
   shared_examples 'success' do
-    it 'returns expected output' do
-      expect(call).to eq(output)
+    it 'returns expected text' do
+      expect(call.text).to eq(text)
     end
   end
 
@@ -54,7 +54,7 @@ RSpec.describe Peartree::Encoder do
   end
 
   context 'with valid input' do
-    let(:output) do
+    let(:text) do
       <<~TEXT.strip
         In #{Peartree::VERSION_SLUG} I saw
         six adjectiveago noundcs verbmd an adjectivesd noundd,
@@ -100,7 +100,7 @@ RSpec.describe Peartree::Encoder do
   end
 
   context 'with short input and partial last phrase' do
-    let(:output) do
+    let(:text) do
       <<~TEXT.strip
         In #{Peartree::VERSION_SLUG} at 8pm I saw an adjectiveago noundc verbme a nounhp
       TEXT
@@ -111,7 +111,7 @@ RSpec.describe Peartree::Encoder do
   end
 
   context 'when last segment is not default size' do
-    let(:output) do
+    let(:text) do
       <<~TEXT.strip
         In #{Peartree::VERSION_SLUG} at 10pm I saw an adjectiveami nounafk
       TEXT

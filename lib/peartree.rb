@@ -1,14 +1,18 @@
 # frozen_string_literal: true
 require 'active_support/core_ext/enumerable'
 require 'active_support/core_ext/object/inclusion'
-require 'active_support/core_ext/string/inflections'
 require 'active_support/core_ext/string/access'
+require 'active_support/core_ext/string/inflections'
+require 'base58'
 require 'digest'
 require 'dry-initializer'
 require 'humanize'
 require 'indefinite_article'
 require 'pry'
 
+require_relative 'peartree/base'
+require_relative 'peartree/string'
+require_relative 'peartree/coercer'
 require_relative 'peartree/decoder'
 require_relative 'peartree/encoder'
 require_relative 'peartree/lexicon'
@@ -24,18 +28,19 @@ module Peartree
   class InputTooLarge < Error; end
 
   def self.encode(str, format: nil)
-    Encoder.new(str, format:).call
+    Encoder.call(str, format:)
   end
 
   def self.decode(str, format: nil)
-    Decoder.new(str, format:).call
+    Decoder.call(str, format:)
   end
 
   def self.generate
-    source = SecureRandom.random_bytes(32).unpack1('H*')
-    encoded = encode(source)
-    raise 'Invalid decode!' unless source == decode(encoded)
-    source + "\n========\n" + encoded
+    hex = SecureRandom.random_bytes(32).unpack1('H*')
+    phrase = encode(hex)
+    raise 'An error occurred!' if hex != decode(phrase.text)
+    key = Coercer.call(hex, :hex, :base58)
+    puts "Key: #{key}\n========\nPhrase: #{phrase.colorized}"
   end
 end
 

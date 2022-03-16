@@ -1,9 +1,7 @@
 # frozen_string_literal: true
-class Peartree::Encoder
-  extend Dry::Initializer
-
+class Peartree::Encoder < Peartree::Base
   param :str
-  option :format
+  option :format, optional: true
 
   def call
     @str = str.strip
@@ -12,42 +10,49 @@ class Peartree::Encoder
     validate_format!
     validate_length!
 
-    paragraph
+    Result.new(text, colorized)
   end
 
   private
+
+  def text
+    @text ||= colorized.no_color
+  end
+
+  def colorized
+    @colorized ||= "#{version_str}#{newline}#{phrases.join(",\n")}"
+  end
 
   def validate_length!
     return if bin_str.size <= MAX_INPUT_SIZE
     raise Peartree::InputTooLarge, "Max input size is #{MAX_INPUT_SIZE} bits"
   end
 
-  def paragraph
-    maybe_newline = num_phrases == 1 ? ' ' : "\n"
-    "#{version_lead}#{maybe_newline}#{enumerated_phrases.join(",\n")}"
+  def newline
+    num_phrases == 1 ? ' ' : "\n"
   end
 
-  def version_lead
-    "In #{Peartree::VERSION_SLUG} #{time}I saw"
+  def version_str
+    "In #{Peartree::VERSION_SLUG.bold} #{time}I saw"
   end
 
   def time
     return if last_segment_size == (DEFAULT_INPUT_SIZE % BITS_PER_WORD)
-    "at #{last_segment_size}pm "
+    "at #{last_segment_size.to_s.bold}pm "
   end
 
   def last_segment_size
-    @last_segment_size ||= bin_segments.last.size
+    bin_segments.last.size
   end
 
   def num_phrases
-    @num_phrases ||= raw_phrases.size
+    raw_phrases.size
   end
 
-  def enumerated_phrases
+  def phrases
     raw_phrases.each_with_index.map do |phrase, idx|
       if idx == num_phrases - 1
-        str = phrase.with_indefinite_article
+        str = "#{phrase.no_color.indefinite_article} #{phrase}"
         num_phrases == 1 ? str : "and #{str}"
       else
         "#{(raw_phrases.size - idx).humanize} #{phrase}"
@@ -55,23 +60,30 @@ class Peartree::Encoder
     end
   end
 
+  def highlight(word)
+    abbrev = word[0..(ABBREV_SIZE - 1)]
+    tail = word[(ABBREV_SIZE - 1)..]
+    "#{abbrev.bg_green}#{tail&.bold}"
+  end
+
   def raw_phrases # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     phrase = ''
     words.each_with_index.with_object([]) do |(word, idx), phrases|
       speech_idx = idx % num_grammar_parts
+      highlighted_singular = highlight(word)
       phrase +=
         case speech_idx
         when 1 # First noun
           # If last phrase, singularize
           if idx > words.size - num_grammar_parts
-            word
+            highlighted_singular
           else
-            word.pluralize
+            highlight(word.pluralize)
           end
         when 3 # Second adjective
-          word.with_indefinite_article
+          "#{word.indefinite_article} #{highlighted_singular}"
         else
-          word
+          highlighted_singular
         end
       phrase += ' '
       if phrase_done?(speech_idx, idx)
@@ -109,9 +121,7 @@ class Peartree::Encoder
   end
 
   def bin_to_dec(bin)
-    bin.reverse.chars.map.with_index do |digit, index|
-      digit.to_i * (2**index)
-    end.sum
+    Peartree::Coercer.call(bin, :bin, :dec).to_i
   end
 
   def bin_segments
@@ -125,7 +135,6 @@ class Peartree::Encoder
   end
 
   def validate_format!
-    # binding.pry
     case format.to_sym
     when :bin then validate_bin!
     when :dec then validate_dec!
@@ -154,13 +163,7 @@ class Peartree::Encoder
   end
 
   def bin_str
-    @bin_str ||=
-      case format&.to_sym
-      when :bin then str
-      when :dec then str.to_i.to_s(2)
-      when :hex then str.hex.to_s(2)
-      else raise_invalid_format('Invalid format specified')
-      end
+    @bin_str ||= Peartree::Coercer.call(str, format, :bin)
   end
 
   def checksum
@@ -170,4 +173,6 @@ class Peartree::Encoder
   def raise_invalid_format(msg)
     raise Peartree::InvalidFormat, msg
   end
+
+  Result = Struct.new(:text, :colorized)
 end
