@@ -8,8 +8,7 @@ aristocrat
 artist
 assistant
 athlete
-boxer
-fighter
+attendant
 attorney
 author
 bailiff
@@ -18,6 +17,8 @@ banker
 bartender
 bellhop
 bishop
+boxer
+burglar
 butcher
 captain
 carpenter
@@ -38,7 +39,9 @@ concierge
 cook
 coroner
 counselor
+crook
 curator
+cyclist
 dancer
 dealer
 dentist
@@ -56,11 +59,12 @@ engineer
 engraver
 ensign
 farmer
+fighter
 filmmaker
 fisher
 forester
+friar
 governor
-guard
 guitarist
 historian
 host
@@ -83,9 +87,12 @@ machinist
 maid
 major
 mechanic
+minister
+monk
 musician
 naturalist
 novelist
+nun
 optometrist
 organist
 orthodontist
@@ -96,10 +103,15 @@ pharmacist
 photographer
 physician
 pianist
+pickpocket
 pilot
+pirate
 plumber
 policeman
+porter
+preacher
 president
+priest
 producer
 professor
 programmer
@@ -107,8 +119,10 @@ prosecutor
 psychiatrist
 psychologist
 queen
+rabbi
 receptionist
 reporter
+robber
 runner
 sailor
 scientist
@@ -126,6 +140,7 @@ tattooist
 teacher
 teller
 therapist
+thief
 translator
 trapper
 typist
@@ -135,5 +150,6 @@ vocalist
 waiter
 watchman
 welder
+worshiper
 writer
 zoologist

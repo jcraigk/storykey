@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Mnemonica::Decoder do
+RSpec.describe Peartree::Decoder do
   subject(:call) { described_class.new(input, format:).call }
 
   let(:format) { nil }
@@ -11,7 +11,7 @@ RSpec.describe Mnemonica::Decoder do
   end
 
   before do
-    allow(Mnemonica::Lexicon).to receive(:call).and_return(lexicon)
+    allow(Peartree::Lexicon).to receive(:call).and_return(lexicon)
   end
 
   shared_examples 'success' do
@@ -30,7 +30,7 @@ RSpec.describe Mnemonica::Decoder do
       end
 
       it 'raises an exception' do
-        expect { call }.to raise_error(Mnemonica::InvalidVersion)
+        expect { call }.to raise_error(Peartree::InvalidVersion)
       end
     end
 
@@ -42,7 +42,7 @@ RSpec.describe Mnemonica::Decoder do
       end
 
       it 'raises an exception' do
-        expect { call }.to raise_error(Mnemonica::InvalidTime)
+        expect { call }.to raise_error(Peartree::InvalidTime)
       end
     end
 
@@ -54,7 +54,7 @@ RSpec.describe Mnemonica::Decoder do
       end
 
       it 'raises an exception' do
-        expect { call }.to raise_error(Mnemonica::InvalidWord)
+        expect { call }.to raise_error(Peartree::InvalidWord)
       end
     end
 
@@ -72,7 +72,7 @@ RSpec.describe Mnemonica::Decoder do
       end
 
       it 'raises an exception' do
-        expect { call }.to raise_error(Mnemonica::InvalidChecksum)
+        expect { call }.to raise_error(Peartree::InvalidChecksum)
       end
     end
   end

@@ -15,8 +15,6 @@ bee
 beetle
 bird
 bison
-blackbird
-bluejay
 boar
 bobcat
 buffalo
@@ -102,7 +100,7 @@ mammoth
 manatee
 marmoset
 meerkat
-mockinbird
+mockingbird
 mole
 mongoose
 moose

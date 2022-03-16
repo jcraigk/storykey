@@ -1,12 +1,12 @@
 # frozen_string_literal: true
-require_relative 'lib/mnemonica/version'
+require_relative 'lib/peartree/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'mnemonica'
-  spec.version       = Mnemonica::VERSION
+  spec.name          = 'peartree'
+  spec.version       = Peartree::VERSION
   spec.authors       = ['Justin Craig-Kuhn (JCK)']
   spec.email         = ['jcraigk@gmail.com']
-  spec.summary       = 'Mnemonica gives a memorable sentence in place of your crypto private key'
+  spec.summary       = 'Peartree gives a memorable paragraph in place of your crypto private key'
   spec.license       = 'MIT'
   spec.required_ruby_version = '>= 3.1.0'
   spec.bindir        = 'exe'
@@ -18,8 +18,9 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'humanize'
   spec.add_dependency 'indefinite_article'
 
-  spec.add_development_dependency 'rake'
+  spec.add_development_dependency 'verbs'
   spec.add_development_dependency 'pry'
+  spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rspec'
   spec.add_development_dependency 'rubocop'
   spec.add_development_dependency 'rubocop-performance'

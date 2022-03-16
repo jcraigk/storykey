@@ -1,3 +1,4 @@
+android
 angel
 astrologist
 cherub
@@ -8,7 +9,6 @@ dwarf
 enchanter
 gargoyle
 ghost
-android
 golem
 gremlin
 orc

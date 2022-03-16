@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Mnemonica::Lexicon do
+RSpec.describe Peartree::Lexicon do
   subject(:result) { described_class.call }
 
   let(:sha) { Digest::SHA256.hexdigest(result.flatten.join) }
@@ -23,12 +23,8 @@ RSpec.describe Mnemonica::Lexicon do
   end
 
   it 'returns unique global downcased lexicon' do
-    all_words.select { |e| all_words.count(e) > 1 }
+    # all_words.select { |w| all_words.count(w) > 1 }.map { |w| w.gsub(/\d/, '') }.uniq
     expect(all_words.map(&:downcase).uniq.size).to eq(all_words.size)
-  end
-
-  it 'returns verbs all ending with `ing`' do
-    expect(result[:verb].grep_v(/\ing\d?\Z/)).to be_empty # TODO: remove digit
   end
 
   xit 'returns lexicons that have unique 3-letter truncations' do
@@ -43,7 +39,7 @@ RSpec.describe Mnemonica::Lexicon do
   end
 
   it 'produces expected global sha' do
-    expect(sha).to eq(Mnemonica::LEXICON_SHA)
+    expect(sha).to eq(Peartree::LEXICON_SHA)
   end
 
   xit 'produdes words of expected syllabic content' do

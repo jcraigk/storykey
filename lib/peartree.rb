@@ -9,12 +9,12 @@ require 'humanize'
 require 'indefinite_article'
 require 'pry'
 
-require_relative 'mnemonica/decoder'
-require_relative 'mnemonica/encoder'
-require_relative 'mnemonica/lexicon'
-require_relative 'mnemonica/version'
+require_relative 'peartree/decoder'
+require_relative 'peartree/encoder'
+require_relative 'peartree/lexicon'
+require_relative 'peartree/version'
 
-module Mnemonica
+module Peartree
   class Error < StandardError; end
   class InvalidFormat < Error; end
   class InvalidVersion < Error; end
@@ -32,9 +32,10 @@ module Mnemonica
   end
 
   def self.generate
-    data = SecureRandom.random_bytes(32).unpack('H*')[0]
-    phrase = encode(data, format: :hex)
-    data + "\n" + phrase
+    source = SecureRandom.random_bytes(32).unpack1('H*')
+    encoded = encode(source)
+    raise 'Invalid decode!' unless source == decode(encoded)
+    source + "\n========\n" + encoded
   end
 end
 
@@ -48,3 +49,7 @@ GRAMMAR = %i[adjective noun verb adjective noun].freeze
 LEXICONS = %i[adjective noun verb].freeze
 NUM_PAD_WORDS = 26
 MAX_INPUT_BITS = 512
+
+#
+# 1024  512  256
+# adj

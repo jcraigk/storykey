@@ -1,6 +1,6 @@
-# Mnemonica
+# Peartree
 
-Mnemonica is a system for converting between arbitrary strings of data and a series of memorable English phrases. Its grammar and lexicon is curated for concreteness and personification, supporting mental visuzliation.
+Peartree is a system for converting between arbitrary strings of data and a series of memorable English phrases. Its grammar and lexicon is curated for concreteness and personification, supporting mental visuzliation.
 
 The primary use case is memorizing cryptocurrency private keys, often referred to as creating a "brain wallet." This system is inspired by [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki) but adds extra features:
 
@@ -10,7 +10,7 @@ The primary use case is memorizing cryptocurrency private keys, often referred t
 (4) Lexicon curated for mental visualization
 (5) Phrases adhere to a repeating grammar
 
-Phrases produced by Mnemonica take the following form:
+Phrases produced by Peartree take the following form:
 
 ```
 In [version slug] at [bit entropy of last word] I saw
@@ -28,7 +28,7 @@ In Miami at 6pm I saw
 
 The `version slug` is typically a well-known city, such as `Miami`. The `bity entropy of last word` contains a digit that refers to the number of bits contained in the last word (allowing arbitrary length string encoding). The `checksum` is an additional word added to fortify the whole phrase.
 
-This paragraph can be deterministically decoded using the same version of Mnemonica.
+This paragraph can be deterministically decoded using the same version of Peartree.
 
 
 ## Installation
@@ -36,7 +36,7 @@ This paragraph can be deterministically decoded using the same version of Mnemon
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'mnemonica'
+gem 'peartree'
 ```
 
 And then execute:
@@ -45,14 +45,14 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install mnemonica
+    $ gem install peartree
 
 ## Usage
 
 Produce a set of English phrases given input data (e.g. a cryptocurrency private key):
 
 ```
-Mnemonica.encode(data)
+Peartree.encode(data)
 ```
 
 `data` may be in the form of a hexidecimal (`ab29f3`), a binary string (`1001101`), or a decimal (`230938`).
@@ -60,17 +60,17 @@ Mnemonica.encode(data)
 Recover source data (e.g. a cryptocurrency private key) based on an English phrase generated using `encode` (above):
 
 ```
-Mnemonica.decode(phrase)
+Peartree.decode(phrase)
 ```
 
 Create a hash of source data so that a user may run `verify` to confirm they have memorized the correct code.
 
 ```
-Mnemonica.hash(data)
-Mnemonica.verify(phrase, hash)
+Peartree.hash(data)
+Peartree.verify(phrase, hash)
 ```
 
-Mnemonica can be used to encode, decode, and verify a phrase. Phrase verification ensures adherence to version lexicography as well checks it against a hash of the source data. This can be used for periodic quizzing of the user to fortify memory.
+Peartree can be used to encode, decode, and verify a phrase. Phrase verification ensures adherence to version lexicography as well checks it against a hash of the source data. This can be used for periodic quizzing of the user to fortify memory.
 
 ```
 nemon encode [data]
@@ -87,7 +87,7 @@ After checking out the repo, run `bin/setup` to install dependencies. Then, run 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/jcraigk/mnemonica.
+Bug reports and pull requests are welcome on GitHub at https://github.com/jcraigk/peartree.
 
 
 ## License

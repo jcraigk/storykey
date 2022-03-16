@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class Mnemonica::Encoder
+class Peartree::Encoder
   extend Dry::Initializer
 
   param :str
@@ -19,7 +19,7 @@ class Mnemonica::Encoder
 
   def validate_length!
     return if bin_str.size <= MAX_INPUT_BITS
-    raise Mnemonica::InputTooLarge, "Max input size is #{MAX_INPUT_BITS} bits"
+    raise Peartree::InputTooLarge, "Max input size is #{MAX_INPUT_BITS} bits"
   end
 
   def paragraph
@@ -28,11 +28,16 @@ class Mnemonica::Encoder
   end
 
   def version_lead
-    "In #{Mnemonica::VERSION_SLUG} at #{time} I saw"
+    "In #{Peartree::VERSION_SLUG} #{time}I saw"
   end
 
   def time
-    "#{bin_segments.last.size}pm"
+    return if last_segment_size == BITS_PER_WORD
+    "at #{last_segment_size}pm "
+  end
+
+  def last_segment_size
+    @last_segment_size ||= bin_segments.last.size
   end
 
   def num_phrases
@@ -95,7 +100,7 @@ class Mnemonica::Encoder
   end
 
   def lexicon
-    @lexicon ||= Mnemonica::Lexicon.call
+    @lexicon ||= Peartree::Lexicon.call
   end
 
   def decimals
@@ -161,6 +166,6 @@ class Mnemonica::Encoder
   end
 
   def raise_invalid_format(msg)
-    raise Mnemonica::InvalidFormat, msg
+    raise Peartree::InvalidFormat, msg
   end
 end

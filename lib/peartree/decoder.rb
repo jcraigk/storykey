@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class Mnemonica::Decoder
+class Peartree::Decoder
   extend Dry::Initializer
   extend ::ActiveSupport::Concern
 
@@ -21,22 +21,22 @@ class Mnemonica::Decoder
 
   def validate_time!
     return if last_segment_size <= BITS_PER_WORD
-    raise Mnemonica::InvalidTime, 'Invalid time specified'
+    raise Peartree::InvalidTime, 'Invalid time specified'
   end
 
   def validate_version!
-    return if version_word.casecmp(Mnemonica::VERSION_SLUG).zero?
-    raise Mnemonica::InvalidVersion, version_error_msg
+    return if version_word.casecmp(Peartree::VERSION_SLUG).zero?
+    raise Peartree::InvalidVersion, version_error_msg
   end
 
   def validate_phrase!
     return unless decimals.include?(nil)
-    raise Mnemonica::InvalidWord, 'Invalid word detected'
+    raise Peartree::InvalidWord, 'Invalid word detected'
   end
 
   def version_error_msg
     <<~TEXT
-      Missing or invalid version slug! Given '#{version_word.titleize}' but expected '#{Mnemonica::VERSION_SLUG}'.
+      Missing or invalid version slug! Given '#{version_word.titleize}' but expected '#{Peartree::VERSION_SLUG}'.
     TEXT
   end
 
@@ -45,7 +45,7 @@ class Mnemonica::Decoder
     when :bin then binary_str
     when :dec then binary_str.to_i(2).to_s(10)
     when :hex then binary_str.to_i(2).to_s(16)
-    else raise Mnemonica::InvalidFormat, 'Invalid format specified'
+    else raise Peartree::InvalidFormat, 'Invalid format specified'
     end
   end
 
@@ -63,7 +63,7 @@ class Mnemonica::Decoder
 
   def validate_checksum!
     return if calculated_checksum == bin_str.last(BITS_PER_WORD)
-    raise Mnemonica::InvalidChecksum, 'Checksum incorrect - invalid phrase!'
+    raise Peartree::InvalidChecksum, 'Checksum incorrect - invalid phrase!'
   end
 
   def calculated_checksum
@@ -107,6 +107,6 @@ class Mnemonica::Decoder
   end
 
   def lexicon
-    @lexicon ||= Mnemonica::Lexicon.call
+    @lexicon ||= Peartree::Lexicon.call
   end
 end

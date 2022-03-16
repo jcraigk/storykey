@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class Mnemonica::Lexicon
+class Peartree::Lexicon
   extend ::ActiveSupport::Concern
 
   def self.call
@@ -10,9 +10,9 @@ class Mnemonica::Lexicon
       end
 
       # TODO: Fill out the real lexicon
-      num_real_words = words.size
-      idx = words.size
-      while idx < (2**BITS_PER_WORD) + NUM_PAD_WORDS
+      num_real_words = idx = words.size
+      count = (2**BITS_PER_WORD) + NUM_PAD_WORDS
+      while idx < count
         suffix = (idx / num_real_words.to_f).floor
         words[idx] = "#{words[idx - (num_real_words * suffix)]}#{suffix + 1}"
         idx += 1
