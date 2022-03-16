@@ -40,7 +40,7 @@ module Peartree
 end
 
 BITS_PER_WORD = 10
-CONNECTING_WORDS = %w[
+LINKING_WORDS = %w[
   in i saw and a an at
   one two three four five six seven eight nine ten
   eleven twelve thirteen fourteen fifteen

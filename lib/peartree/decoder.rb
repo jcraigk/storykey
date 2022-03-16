@@ -8,6 +8,7 @@ class Peartree::Decoder
 
   def call
     @format ||= :hex
+    @linking_words = []
 
     validate_version!
     validate_time!
@@ -70,19 +71,8 @@ class Peartree::Decoder
     Digest::SHA256.hexdigest(binary_str).hex.to_s(2).first(BITS_PER_WORD)
   end
 
-  def word_decimals
-    @word_decimals ||=
-      {}.tap do |hash|
-        LEXICONS.each do |lex|
-          lexicon[lex].each_with_index do |word, idx|
-            hash[word.downcase] = idx
-          end
-        end
-      end
-  end
-
   def decimals
-    @decimals ||= phrase_words.map { |word| word_decimals[word] }
+    @decimals ||= phrase_words.map { |word| lex.decimal_map[word] }
   end
 
   def words
@@ -91,7 +81,7 @@ class Peartree::Decoder
          .map(&:downcase)
          .map { |word| word.tr(',', '') }
          .map(&:singularize)
-         .reject { |word| word.in?(CONNECTING_WORDS) }
+         .reject { |word| word.in?(LINKING_WORDS + lex.linking_words) }
   end
 
   def phrase_words
@@ -106,7 +96,11 @@ class Peartree::Decoder
     @last_segment_size ||= words[1].gsub(/[^\d]/, '').to_i
   end
 
-  def lexicon
-    @lexicon ||= Peartree::Lexicon.call
+  def lex
+    @lex ||= Peartree::Lexicon.call
+  end
+
+  def keywords
+    @keywords ||= lex.keywords
   end
 end

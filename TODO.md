@@ -1,5 +1,6 @@
 # TODO / IDEAS
 
+* Colorize output highlighting the different words and their types. use emoji as well.
 * Check for verbs that could also be nouns and vice versa - see if we can eliminate the biggest offendors - it should be clear what word type it is just by looking at the single word
 * Incorporate lexicon sha into checksum word and use that instead of version slug? Would be more secure and would eliminate something user would need to remember
 * Omit time part if input is default priv key length (256 bit)

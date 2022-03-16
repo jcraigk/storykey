@@ -13,7 +13,6 @@ bitter
 blissful
 calm
 carefree
-whimsical
 cautious
 cheerful
 chipper
@@ -88,3 +87,4 @@ thrilled
 unhappy
 upset
 uptight
+whimsical
