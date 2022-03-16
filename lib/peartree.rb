@@ -48,5 +48,6 @@ LINKING_WORDS = %w[
 GRAMMAR = %i[adjective noun verb adjective noun].freeze
 LEXICONS = %i[adjective noun verb].freeze
 NUM_PAD_WORDS = 26
-MAX_INPUT_BITS = 512
+MAX_INPUT_SIZE = 512
+DEFAULT_INPUT_SIZE = 256
 ABBREV_SIZE = 13 # TODO: get this down to 4 or 5

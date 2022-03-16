@@ -104,7 +104,11 @@ class Peartree::Decoder
   # "9pm" indicates 9 bits
   # If no time specified, default to BITS_PER_WORD
   def tail_bitsize
-    @tail_bitsize ||= time_given? ? bitsize_from_time : BITS_PER_WORD
+    @tail_bitsize ||= time_given? ? bitsize_from_time : default_bitsize
+  end
+
+  def default_bitsize
+    DEFAULT_INPUT_SIZE % BITS_PER_WORD
   end
 
   def bitsize_from_time

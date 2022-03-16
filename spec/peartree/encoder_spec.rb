@@ -56,7 +56,7 @@ RSpec.describe Peartree::Encoder do
   context 'with valid input' do
     let(:output) do
       <<~TEXT.strip
-        In #{Peartree::VERSION_SLUG} at 6pm I saw
+        In #{Peartree::VERSION_SLUG} I saw
         six adjectiveago noundcs verbmd an adjectivesd noundd,
         five adjectivealm nounmds verbaji an adjectivevm nounqo,
         four adjectiveol nounaags verbadb an adjectiveaew nounqq,
@@ -110,10 +110,10 @@ RSpec.describe Peartree::Encoder do
     include_examples 'success'
   end
 
-  context 'when input divides evenly' do
+  context 'when last segment is not default size' do
     let(:output) do
       <<~TEXT.strip
-        In #{Peartree::VERSION_SLUG} I saw an adjectiveami nounafk
+        In #{Peartree::VERSION_SLUG} at 10pm I saw an adjectiveami nounafk
       TEXT
     end
     let(:input) { '3ff' }

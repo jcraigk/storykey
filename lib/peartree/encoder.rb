@@ -18,8 +18,8 @@ class Peartree::Encoder
   private
 
   def validate_length!
-    return if bin_str.size <= MAX_INPUT_BITS
-    raise Peartree::InputTooLarge, "Max input size is #{MAX_INPUT_BITS} bits"
+    return if bin_str.size <= MAX_INPUT_SIZE
+    raise Peartree::InputTooLarge, "Max input size is #{MAX_INPUT_SIZE} bits"
   end
 
   def paragraph
@@ -32,7 +32,7 @@ class Peartree::Encoder
   end
 
   def time
-    return if last_segment_size == BITS_PER_WORD
+    return if last_segment_size == (DEFAULT_INPUT_SIZE % BITS_PER_WORD)
     "at #{last_segment_size}pm "
   end
 
