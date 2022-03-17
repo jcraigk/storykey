@@ -6,7 +6,7 @@ RSpec.shared_context 'with mocked lexicon' do
     h = {}
     ('a'..'zzz').each_with_index { |w, i| h[i + 1] = w }
     LEXICONS.index_with do |part_of_speech|
-      (0..(count-1)).map { |num| "#{part_of_speech}#{h[num]}" }
+      (0..(count - 1)).map { |num| "#{part_of_speech}#{h[num]}" }
     end
   end
   let(:lexicon) do

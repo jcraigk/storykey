@@ -33,12 +33,12 @@ class Peartree::Encoder < Peartree::Base
   end
 
   def version_str
-    "In #{Peartree::VERSION_SLUG.bold} #{time}I saw"
+    "In #{Peartree::VERSION_SLUG.cyan} #{time}I saw"
   end
 
   def time
     return if last_segment_size == (DEFAULT_INPUT_SIZE % BITS_PER_WORD)
-    "at #{last_segment_size.to_s.bold}pm "
+    "at #{last_segment_size.to_s.cyan}pm "
   end
 
   def last_segment_size
@@ -63,7 +63,7 @@ class Peartree::Encoder < Peartree::Base
   def highlight(word)
     abbrev = word[0..(ABBREV_SIZE - 1)]
     tail = word[(ABBREV_SIZE - 1)..]
-    "#{abbrev.bg_green}#{tail&.bold}"
+    "#{abbrev.magenta}#{tail&.bold}"
   end
 
   def raw_phrases # rubocop:disable Metrics/AbcSize, Metrics/MethodLength

@@ -7,7 +7,6 @@ acknowledge
 acquire
 address
 admire
-advance
 advise
 analyze
 applaud

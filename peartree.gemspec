@@ -14,12 +14,11 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'activesupport'
+  spec.add_dependency 'base58'
   spec.add_dependency 'dry-initializer'
   spec.add_dependency 'humanize'
   spec.add_dependency 'indefinite_article'
-  spec.add_dependency 'base58'
 
-  spec.add_development_dependency 'verbs'
   spec.add_development_dependency 'pry'
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rspec'
@@ -27,4 +26,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop-performance'
   spec.add_development_dependency 'rubocop-rake'
   spec.add_development_dependency 'rubocop-rspec'
+  spec.add_development_dependency 'verbs'
 end

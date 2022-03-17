@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Peartree::Encoder do
-  subject(:call) { described_class.call(input, format: format) }
+  subject(:call) { described_class.call(input, format:) }
 
   let(:format) { nil }
 

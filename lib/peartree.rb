@@ -40,7 +40,12 @@ module Peartree
     phrase = encode(hex)
     raise 'An error occurred!' if hex != decode(phrase.text)
     key = Coercer.call(hex, :hex, :base58)
-    puts "Key: #{key}\n========\nPhrase: #{phrase.colorized}"
+    puts [
+      'Key:'.bg_blue,
+      key,
+      'Phrase:'.bg_blue,
+      phrase.colorized
+    ].join("\n")
   end
 end
 

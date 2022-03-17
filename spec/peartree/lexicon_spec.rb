@@ -21,11 +21,10 @@ RSpec.describe Peartree::Lexicon do
   end
 
   it 'does not skip any decimals' do
-    LEXICONS.each do |part_of_speech|
+    LEXICONS.each do |lex|
       (0..(count - 1)).each do |decimal|
         keyword = lex.lexicon.find do |_, v|
-          v.part_of_speech == part_of_speech &&
-            v.decimal == decimal
+          v.part_of_speech == lex && v.decimal == decimal
         end
         expect(keyword).not_to be_empty
       end
