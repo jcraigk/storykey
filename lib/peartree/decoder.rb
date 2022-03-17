@@ -74,9 +74,16 @@ class Peartree::Decoder < Peartree::Base
     @words ||=
       str.split(/\s+/)
          .map(&:downcase)
-         .map { |word| word.tr(',', '') }
-         .map(&:singularize)
          .reject { |word| word.in?(LINKING_WORDS + lex.linking_words) }
+         .map do |word|
+           word = word.tr(',', '')
+           word = word.singularize if word_of_type?(:noun, word)
+           word
+         end
+  end
+
+  def word_of_type?(part_of_speech, word)
+    lex.humanized[part_of_speech].include?(word.singularize)
   end
 
   def abbrevs
