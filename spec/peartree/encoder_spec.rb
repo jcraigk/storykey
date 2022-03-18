@@ -57,12 +57,12 @@ RSpec.describe Peartree::Encoder do
     let(:text) do
       <<~TEXT.strip
         In #{Peartree::VERSION_SLUG} I saw
-        six adjectiveago noundcs verbmd an adjectivesd noundd,
-        five adjectivealm nounmds verbaji an adjectivevm nounqo,
-        four adjectiveol nounaags verbadb an adjectiveaew nounqq,
-        three adjectiveale nounacjs verbagz an adjectiverf nounth,
-        two adjectivekn nounhws verbhu an adjectivest nounry,
-        and an adjectivewi nounbh
+        1. an adjectiveago noundc verbmd an adjectivesd noundd,
+        2. an adjectivealm nounmd verbaji an adjectivevm nounqo,
+        3. an adjectiveol nounaag verbadb an adjectiveaew nounqq,
+        4. an adjectiveale nounacj verbagz an adjectiverf nounth,
+        5. an adjectivekn nounhw verbhu an adjectivest nounry,
+        6. and an adjectivewi nounbh
       TEXT
     end
 

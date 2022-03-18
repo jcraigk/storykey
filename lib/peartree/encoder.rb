@@ -51,12 +51,14 @@ class Peartree::Encoder < Peartree::Base
 
   def phrases
     raw_phrases.each_with_index.map do |phrase, idx|
-      if idx == num_phrases - 1
-        str = "#{phrase.no_color.indefinite_article} #{phrase}"
-        num_phrases == 1 ? str : "and #{str}"
-      else
-        "#{(raw_phrases.size - idx).humanize} #{phrase}"
+      parts = []
+      if num_phrases > 1
+        parts << "#{idx + 1}."
+        parts << 'and' if idx == num_phrases - 1
       end
+      parts << phrase.no_color.indefinite_article
+      parts << phrase
+      parts.join(' ')
     end
   end
 
@@ -66,21 +68,13 @@ class Peartree::Encoder < Peartree::Base
     "#{abbrev.magenta}#{tail&.bold}"
   end
 
-  def raw_phrases # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+  def raw_phrases # rubocop:disable Metrics/MethodLength
     phrase = ''
     words.each_with_index.with_object([]) do |(word, idx), phrases|
       speech_idx = idx % num_grammar_parts
       highlighted_singular = highlight(word)
       phrase +=
-        case speech_idx
-        when 1 # First noun
-          # If last phrase, singularize
-          if idx > words.size - num_grammar_parts
-            highlighted_singular
-          else
-            highlight(word.pluralize)
-          end
-        when 3 # Second adjective
+        if speech_idx.in?([3, 5]) # Second adjective
           "#{word.indefinite_article} #{highlighted_singular}"
         else
           highlighted_singular

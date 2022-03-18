@@ -6,7 +6,10 @@ believer
 boyfriend
 brother
 brute
+charlatan
 child
+dunce
+beast
 client
 cousin
 cowboy
@@ -17,6 +20,7 @@ employee
 father
 fraud
 friend
+genius
 gentleman
 grandfather
 grandmother
@@ -26,6 +30,8 @@ hijacker
 husband
 lady
 lowlife
+luddite
+miscreant
 mother
 orphan
 outsider
@@ -38,6 +44,7 @@ protagonist
 punk
 raider
 rascal
+robot
 scammer
 scoundrel
 shoplifter

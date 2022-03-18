@@ -4,7 +4,7 @@ class Peartree::Lexicon < Peartree::Base
     @lexicon ||= {}.tap do |hash|
       humanized.each do |part_of_speech, words|
         words.each_with_index do |humanized, decimal|
-          abbrev = humanized.downcase[0..(ABBREV_SIZE - 1)]
+          abbrev = humanized.split.first.downcase[0..(ABBREV_SIZE - 1)]
           hash[abbrev] = Keyword.new \
             humanized:, part_of_speech:, decimal:
         end

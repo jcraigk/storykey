@@ -52,8 +52,6 @@ end
 BITS_PER_WORD = 10
 LINKING_WORDS = %w[
   in i saw and a an at
-  one two three four five six seven eight nine ten
-  eleven twelve thirteen fourteen fifteen
 ].freeze
 GRAMMAR = %i[adjective noun verb adjective noun].freeze
 LEXICONS = %i[adjective noun verb].freeze

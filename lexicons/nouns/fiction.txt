@@ -11,11 +11,14 @@ gargoyle
 ghost
 golem
 gremlin
+halfling
+imp
 orc
 pagan
 sorcerer
 spirit
 succubus
+troll
 warlock
 witch
 wizard

@@ -17,8 +17,8 @@ RSpec.describe Peartree::Decoder do
     context 'with missing or invalid version lead' do
       let(:input) do
         <<~TEXT.strip
-          six adjectiveago noundcs verbmd an adjectivesd noundd,
-          five adjectivealm nounmds verbaji an adjectivevm nounqo,
+          1. an adjectiveago noundc verbmd an adjectivesd noundd,
+          2. an adjectivealm nounmd verbaji an adjectivevm nounqo,
         TEXT
       end
 
@@ -55,12 +55,12 @@ RSpec.describe Peartree::Decoder do
       let(:input) do
         <<~TEXT.strip
           In Miami at 6pm I saw
-          six adjectiveago noundcs verbmd an adjectivesd noundd,
-          five adjectivealm nounmds verbaji an adjectivevm nounqo,
-          four adjectiveol nounaags verbadb an adjectiveaew nounqq,
-          three adjectiveale nounacjs verbagz an adjectiverf nounth,
-          two adjectivekn nounhws verbhu an adjectivest nounry,
-          and an adjectivewi nounbg
+          1. an adjectiveago noundcs verbmd an adjectivesd noundd,
+          2. an adjectivealm nounmds verbaji an adjectivevm nounqo,
+          3. an adjectiveol nounaags verbadb an adjectiveaew nounqq,
+          4. an adjectiveale nounacjs verbagz an adjectiverf nounth,
+          5. an adjectivekn nounhws verbhu an adjectivest nounry,
+          6. and an adjectivewi nounbg
         TEXT
       end
 
