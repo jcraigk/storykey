@@ -23,7 +23,6 @@ module Peartree
   class InvalidFormat < Error; end
   class InvalidVersion < Error; end
   class InvalidWord < Error; end
-  class InvalidTime < Error; end
   class InvalidChecksum < Error; end
   class InputTooLarge < Error; end
 
@@ -59,3 +58,4 @@ NUM_PAD_WORDS = 26
 MAX_INPUT_SIZE = 512
 DEFAULT_INPUT_SIZE = 256
 ABBREV_SIZE = 13 # TODO: get this down to 4 or 5
+FOOTER_BITSIZE = 4 # BITS_PER_WORD <= 2^FOOTER_BITSIZE

@@ -30,7 +30,7 @@ RSpec.describe Peartree::Decoder do
     context 'with invalid time' do
       let(:input) do
         <<~TEXT.strip
-          In Miami at 12pm I saw an adjectiveago noundc verbme a nounhp
+          In Miami I saw an adjectiveago noundc verbme a nounhp
         TEXT
       end
 
@@ -42,7 +42,7 @@ RSpec.describe Peartree::Decoder do
     context 'with invalid word(s)' do
       let(:input) do
         <<~TEXT.strip
-          In Miami at 1pm I saw a badword noundc verbme a nounhp
+          In Miami I saw a badword noundc verbme a nounhp
         TEXT
       end
 
@@ -54,7 +54,7 @@ RSpec.describe Peartree::Decoder do
     context 'with invalid checksum' do
       let(:input) do
         <<~TEXT.strip
-          In Miami at 6pm I saw
+          In Miami I saw
           1. an adjectiveago noundcs verbmd an adjectivesd noundd,
           2. an adjectivealm nounmds verbaji an adjectivevm nounqo,
           3. an adjectiveol nounaags verbadb an adjectiveaew nounqq,
@@ -73,13 +73,13 @@ RSpec.describe Peartree::Decoder do
   context 'with valid input' do
     let(:input) do
       <<~TEXT.strip
-        In #{Peartree::VERSION_SLUG} at 2pm I saw
-        six adjectiveago noundcs verbmd an adjectivesd noundd,
-        five adjectivealm nounmds verbaji an adjectivevm nounqo,
-        four adjectiveol nounaags verbadb an adjectiveaew nounqq,
-        three adjectiveale nounacjs verbagz an adjectiverf nounth,
-        two adjectivekn nounhws verbhu an adjectivest nounry,
-        and an adjectiveaaq nounb
+        In #{Peartree::VERSION_SLUG} I saw
+        1. an adjectiveago noundc verbmd an adjectivesd noundd,
+        2. an adjectivealm nounmd verbaji an adjectivevm nounqo,
+        3. an adjectiveol nounaag verbadb an adjectiveaew nounqq,
+        4. an adjectiveale nounacj verbagz an adjectiverf nounth,
+        5. an adjectivekn nounhw verbhu an adjectivest nounry,
+        6. and an adjectivewi nounbh
       TEXT
     end
 

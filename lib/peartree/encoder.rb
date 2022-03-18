@@ -33,16 +33,22 @@ class Peartree::Encoder < Peartree::Base
   end
 
   def version_str
-    "In #{Peartree::VERSION_SLUG.cyan} #{time}I saw"
-  end
-
-  def time
-    return if last_segment_size == (DEFAULT_INPUT_SIZE % BITS_PER_WORD)
-    "at #{last_segment_size.to_s.cyan}pm "
+    "In #{Peartree::VERSION_SLUG.cyan} I saw"
   end
 
   def last_segment_size
     bin_segments.last.size
+  end
+
+  # Checksum uses any remaining bits in last segment
+  # Plus 6 more bits in the last word
+  # Before the final 4 tail bits
+  def checksum_bitsize
+    (BITS_PER_WORD * 2) - (tail_bitsize + FOOTER_BITSIZE)
+  end
+
+  def tail_bitsize
+    (bin_str.size % BITS_PER_WORD)
   end
 
   def num_phrases
@@ -153,7 +159,12 @@ class Peartree::Encoder < Peartree::Base
   end
 
   def binary_str
-    @binary_str ||= bin_str + checksum
+    return @binary_str if @binary_str
+    @binary_str ||= bin_str + checksum + footer
+  end
+
+  def footer
+    tail_bitsize.to_s(2).rjust(FOOTER_BITSIZE, '0')
   end
 
   def bin_str
@@ -161,7 +172,10 @@ class Peartree::Encoder < Peartree::Base
   end
 
   def checksum
-    Digest::SHA256.hexdigest(bin_str).hex.to_s(2).first(BITS_PER_WORD)
+    Digest::SHA256.hexdigest(bin_str)
+                  .hex
+                  .to_s(2)
+                  .first(checksum_bitsize)
   end
 
   def raise_invalid_format(msg)

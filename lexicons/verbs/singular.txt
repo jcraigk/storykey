@@ -21,7 +21,6 @@ arrest
 ask
 assure
 attack
-attract
 audit
 authenticate
 avoid

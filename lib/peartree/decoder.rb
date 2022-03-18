@@ -8,7 +8,6 @@ class Peartree::Decoder < Peartree::Base
     @format ||= :hex
 
     validate_version!
-    validate_time!
     validate_words!
     validate_checksum!
 
@@ -16,11 +15,6 @@ class Peartree::Decoder < Peartree::Base
   end
 
   private
-
-  def validate_time!
-    return if tail_bitsize <= BITS_PER_WORD
-    raise Peartree::InvalidTime, 'Invalid time specified'
-  end
 
   def validate_version!
     return if version_word.casecmp(Peartree::VERSION_SLUG).zero?
@@ -45,25 +39,44 @@ class Peartree::Decoder < Peartree::Base
   def bin_str
     @bin_str ||=
       decimals.each_with_index.map do |dec, idx|
-        num_bits = idx + 1 == decimals.size ? tail_bitsize : BITS_PER_WORD
-        dec.to_s(2).rjust(num_bits, '0')
+        dec.to_s(2).rjust(BITS_PER_WORD, '0')
       end.join
   end
 
   def binary_str
-    @binary_str ||= bin_str[0..-(BITS_PER_WORD + 1)]
+    @binary_str ||= bin_str[0..(checksum_start_idx - 1)]
   end
 
   def validate_checksum!
-    return if checksum == (bits = bin_str.last(BITS_PER_WORD))
-    raise Peartree::InvalidChecksum, "Checksum '#{checksum}' mismatch with '#{bits}'!"
+    return if computed_checksum == embedded_checksum
+    raise Peartree::InvalidChecksum, 'Checksum mismatch!'
   end
 
-  def checksum
+  def embedded_checksum
+    bin_str[checksum_start_idx..-(FOOTER_BITSIZE + 1)]
+  end
+
+  def checksum_start_idx
+    bin_str.size - (checksum_bitsize + FOOTER_BITSIZE)
+  end
+
+  def tail_bitsize
+    Peartree::Coercer.call(footer, :bin, :dec).to_i
+  end
+
+  def footer
+    bin_str.last(FOOTER_BITSIZE)
+  end
+
+  def checksum_bitsize
+    (BITS_PER_WORD * 2) - (tail_bitsize + FOOTER_BITSIZE)
+  end
+
+  def computed_checksum
     Digest::SHA256.hexdigest(binary_str)
                   .hex
                   .to_s(2)
-                  .first(BITS_PER_WORD)
+                  .first(checksum_bitsize)
   end
 
   def decimals
@@ -73,49 +86,32 @@ class Peartree::Decoder < Peartree::Base
   def words
     @words ||=
       str.split(/\s+/)
-         .map(&:downcase)
-         .reject { |word| word.in?(LINKING_WORDS + lex.linking_words) }
-         .map do |word|
-           word = word.tr(',', '')
-           word = word.singularize if word_of_type?(:noun, word)
-           word
-         end
+         .map { |w| w.downcase.gsub(/[^a-z]/, '') }
+         .reject { |w| w.blank? || w.in?(linking_words) }
   end
 
-  def word_of_type?(part_of_speech, word)
-    lex.humanized[part_of_speech].include?(word.singularize)
+  def linking_words
+    LINKING_WORDS + lex.linking_words
+  end
+
+  def word_of_type?(word, part_of_speech)
+    lex.lexicon[abbrev(word)]&.part_of_speech == part_of_speech
   end
 
   def abbrevs
-    @abbrevs ||= phrase.map { |w| w[0..(ABBREV_SIZE - 1)] }
+    @abbrevs ||= phrase_words.map { |w| abbrev(w) }
   end
 
-  def phrase
-    @phrase ||= words[(time_given? ? 2 : 1)..]
+  def abbrev(word)
+    word[0..(ABBREV_SIZE - 1)]
+  end
+
+  def phrase_words
+    @phrase_words ||= words[1..]
   end
 
   def version_word
     @version_word ||= words[0]
-  end
-
-  # A "time" can be provided in poem header
-  # to indicate number of bits encoded in final word.
-  # "9pm" indicates 9 bits
-  # If no time specified, default to BITS_PER_WORD
-  def tail_bitsize
-    @tail_bitsize ||= time_given? ? bitsize_from_time : default_bitsize
-  end
-
-  def default_bitsize
-    DEFAULT_INPUT_SIZE % BITS_PER_WORD
-  end
-
-  def bitsize_from_time
-    words[1].gsub(/[^\d]/, '').to_i
-  end
-
-  def time_given?
-    @time_given ||= words[1].match?(/\A\d{1,2}(?:pm|Pm|pM|PM)/)
   end
 
   def lex
