@@ -17,6 +17,7 @@ require_relative 'peartree/decoder'
 require_relative 'peartree/encoder'
 require_relative 'peartree/lexicon'
 require_relative 'peartree/version'
+require_relative 'peartree/generator'
 
 module Peartree
   class Error < StandardError; end
@@ -34,11 +35,11 @@ module Peartree
     Decoder.call(str, format:)
   end
 
-  def self.generate
-    hex = SecureRandom.random_bytes(32).unpack1('H*')
-    phrase = encode(hex)
-    raise 'An error occurred!' if hex != decode(phrase.text)
-    key = Coercer.call(hex, :hex, :base58)
+  def self.generate(bitsize: DEFAULT_BITSIZE)
+    bin = Peartree::Generator.call(bitsize)
+    phrase = encode(bin, format: :bin)
+    raise 'An error occurred!' if bin != decode(phrase.text, format: :bin)
+    key = Coercer.call(bin, :bin, :base58)
     puts [
       'Key:'.bg_blue,
       key,
@@ -49,13 +50,11 @@ module Peartree
 end
 
 BITS_PER_WORD = 10
-LINKING_WORDS = %w[
-  in i saw and a an at
-].freeze
+LINKING_WORDS = %w[in i saw and a an].freeze
 GRAMMAR = %i[adjective noun verb adjective noun].freeze
 LEXICONS = %i[adjective noun verb].freeze
 NUM_PAD_WORDS = 26
 MAX_INPUT_SIZE = 512
-DEFAULT_INPUT_SIZE = 256
+DEFAULT_BITSIZE = 256
 ABBREV_SIZE = 13 # TODO: get this down to 4 or 5
 FOOTER_BITSIZE = 4 # BITS_PER_WORD <= 2^FOOTER_BITSIZE

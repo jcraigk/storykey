@@ -5,7 +5,7 @@ RSpec.describe Peartree::Lexicon do
 
   let(:count) { (2**BITS_PER_WORD) + NUM_PAD_WORDS }
   let(:regex) { /\A(?:[A-Za-z0-9]{3,15})\s?(?:[a-z0-9]{2,5})?\Z/ }
-  let(:linking_words) { %w[at for from of on to up with] }
+  let(:linking_words) { %w[at for from in into of on out to up with] }
   let(:total_count) { count * LEXICONS.size }
 
   it 'matches expected sha' do

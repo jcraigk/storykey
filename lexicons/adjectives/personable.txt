@@ -157,9 +157,11 @@ grubby
 guilty
 gullible
 gutless
+gutsy
 haggard
 handsome
 hapless
+harsh
 hasty
 headless
 healthy
@@ -383,7 +385,6 @@ torpid
 touchy
 tough
 trashy
-trim
 truthful
 unkempt
 unlikely

@@ -14,6 +14,7 @@ assistant
 athlete
 attendant
 attorney
+auditor
 author
 bailiff
 baker
@@ -43,7 +44,6 @@ commando
 commentator
 composer
 concierge
-cook
 coroner
 counselor
 craftsman
