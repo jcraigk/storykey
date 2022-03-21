@@ -85,6 +85,7 @@ class Peartree::Encoder < Peartree::Base
     phrase = ''
     words.each_with_index.with_object([]) do |(word, idx), phrases|
       speech_idx = idx % num_grammar_parts
+      word = word.text
       highlighted_singular = highlight(word)
       phrase +=
         if speech_idx.in?([3, 5]) # Second adjective
@@ -115,7 +116,7 @@ class Peartree::Encoder < Peartree::Base
       part_of_speech = GRAMMAR[speech_idx]
       # Substitude a noun if last word is adjective
       part_of_speech = :noun if idx == decimals.size - 1 && part_of_speech == :adjective
-      lex.humanized[part_of_speech][decimal]
+      lex.lexicons[part_of_speech][decimal]
     end
   end
 

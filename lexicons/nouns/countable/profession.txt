@@ -6,12 +6,13 @@ advisor
 alchemist
 alderman
 analyst
-anarchist
 appraiser
 archeologist
 archer
 architect
 aristocrat
+arranger
+arsonist
 artist
 assistant
 astronaut
@@ -42,6 +43,7 @@ biologist
 birdwatcher
 bishop
 blogger
+bookie
 botanist
 boxer
 bricklayer
@@ -91,6 +93,7 @@ coward
 cowboy
 craftsman
 criminologist
+critic
 crook
 curator
 cyclist
@@ -138,6 +141,7 @@ general
 geneticist
 gladiator
 goalie
+golfer
 governor
 grenedier
 guide
@@ -191,6 +195,7 @@ minister
 monk
 mortician
 musician
+musketeer
 naturalist
 neurologist
 novelist
@@ -237,6 +242,8 @@ proctor
 producer
 professor
 programmer
+projectionist
+promoter
 prophet
 prosecutor
 prowler
@@ -307,6 +314,7 @@ undertaker
 unicyclist
 ventriloquist
 viceroy
+videographer
 violinist
 vizier
 vocalist

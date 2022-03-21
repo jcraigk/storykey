@@ -1,6 +1,13 @@
+abolitionist
+activist
+acupuncturist
 adult
+alarmist
+anarchist
+anesthesiologist
 animal
 antagonist
+anthropologist
 antihero
 aunt
 bachelor
@@ -14,8 +21,10 @@ brother
 brute
 candidate
 charlatan
+chauvinist
 child
 client
+conservationist
 contestant
 cousin
 creep
@@ -35,6 +44,7 @@ fellow
 fiend
 foe
 fraud
+freak
 freeloader
 freshman
 friend
@@ -76,6 +86,7 @@ parent
 passenger
 patient
 person
+pioneer
 player
 polytheist
 prey
@@ -111,7 +122,9 @@ tourist
 uncle
 vagabond
 villain
+visitor
 warden
+weirdo
 widow
 wife
 woman

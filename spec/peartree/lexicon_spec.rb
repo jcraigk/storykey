@@ -47,6 +47,8 @@ RSpec.describe Peartree::Lexicon do
   it 'returns unique words for each part of speech' do
     LEXICONS.each do |part|
       words = lex.lexicons[part].map(&:text)
+      # binding.pry
+      # words.select { |e| words.count(e) > 1 }.uniq.sort
       expect(words.uniq.sort).to eq(words)
     end
   end
