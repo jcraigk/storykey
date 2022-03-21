@@ -170,6 +170,7 @@ poodle
 porcupine
 porpoise
 possum
+puffin
 pug
 puma
 puppy

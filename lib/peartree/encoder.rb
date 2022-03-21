@@ -68,7 +68,7 @@ class Peartree::Encoder < Peartree::Base
         parts << "#{idx + 1}."
         parts << 'and' if idx == num_phrases - 1
       end
-      parts << phrase.no_color.indefinite_article
+      # parts << phrase.no_color.indefinite_article
       parts << phrase
       parts.join(' ')
     end
@@ -81,42 +81,42 @@ class Peartree::Encoder < Peartree::Base
     "#{ary[0].magenta} #{ary[1]}".strip
   end
 
-  def raw_phrases # rubocop:disable Metrics/MethodLength
-    phrase = ''
-    words.each_with_index.with_object([]) do |(word, idx), phrases|
-      speech_idx = idx % num_grammar_parts
-      word = word.text
-      highlighted_singular = highlight(word)
-      phrase +=
-        if speech_idx.in?([3, 5]) # Second adjective
-          "#{word.indefinite_article} #{highlighted_singular}"
-        else
-          highlighted_singular
+  def phrase_size
+    GRAMMAR.keys.max
+  end
+
+  def raw_phrases
+    word_groups.map { |words| grammatical_phrase(words) }
+  end
+
+  def grammatical_phrase(words)
+    str = ''
+    grammar = GRAMMAR[words.size]
+    grammar.each_with_index do |part_of_speech, idx|
+      text = words[idx].text
+      # Always print article on modified noun
+      # 'an envious Einstein kill Vader' vs
+      # 'envious Einstein kill Vader'
+      noun_idx, force_countable =
+        if part_of_speech == :adjective
+          [idx + 1, true]
+        elsif part_of_speech == :noun && grammar[idx - 1] != :adjective
+          [idx, false]
         end
-      phrase += ' '
-      if phrase_done?(speech_idx, idx)
-        phrases << phrase.strip
-        phrase = ''
+      if force_countable || (noun_idx && words[noun_idx].countable)
+        str += "#{text.indefinite_article} "
       end
+      str += "#{highlight(text)} "
     end
+    str.strip
   end
 
-  # The last phrase may be partial
-  def phrase_done?(speech_idx, idx)
-    (speech_idx == num_grammar_parts - 1) || (idx == words.size - 1)
-  end
-
-  def num_grammar_parts
-    GRAMMAR.size
-  end
-
-  def words
-    decimals.each_with_index.map do |decimal, idx|
-      speech_idx = idx % num_grammar_parts
-      part_of_speech = GRAMMAR[speech_idx]
-      # Substitude a noun if last word is adjective
-      part_of_speech = :noun if idx == decimals.size - 1 && part_of_speech == :adjective
-      lex.lexicons[part_of_speech][decimal]
+  def word_groups
+    decimals.each_slice(phrase_size).to_a.map do |dec_group|
+      grammar = GRAMMAR[dec_group.size]
+      dec_group.each_with_index.map do |decimal, idx|
+        lex.lexicons[grammar[idx]][decimal]
+      end
     end
   end
 

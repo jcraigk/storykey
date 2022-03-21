@@ -57,12 +57,13 @@ RSpec.describe Peartree::Encoder do
     let(:text) do
       <<~TEXT.strip
         In #{Peartree::VERSION_SLUG} I saw
-        1. an adjectiveago noundc verbmd an adjectivesd noundd,
-        2. an adjectivealm nounmd verbaji an adjectivevm nounqo,
-        3. an adjectiveol nounaag verbadb an adjectiveaew nounqq,
-        4. an adjectiveale nounacj verbagz an adjectiverf nounth,
-        5. an adjectivekn nounhw verbhu an adjectivest nounry,
-        6. and an adjectivewi nounbh
+        1. an adjectiveago noundc verbmd a nounsd,
+        2. an adjectivedd nounalm verbmd a nounaji,
+        3. an adjectivevm nounqo verbol a nounaag,
+        4. an adjectiveadb nounaew verbqq a nounale,
+        5. an adjectiveacj nounagz verbrf a nounth,
+        6. an adjectivekn nounhw verbhu a nounst,
+        7. and a nounry verbwi a nounakd
       TEXT
     end
 
@@ -102,7 +103,7 @@ RSpec.describe Peartree::Encoder do
   context 'with short input and partial last phrase' do
     let(:text) do
       <<~TEXT.strip
-        In #{Peartree::VERSION_SLUG} at 8pm I saw an adjectiveago noundc verbme a nounhp
+        In #{Peartree::VERSION_SLUG} I saw an adjectiveago noundc verbme a nounaht
       TEXT
     end
     let(:input) { 'da46b55' }
@@ -113,7 +114,7 @@ RSpec.describe Peartree::Encoder do
   context 'when last segment is not default size' do
     let(:text) do
       <<~TEXT.strip
-        In #{Peartree::VERSION_SLUG} at 10pm I saw an adjectiveami nounafk
+        In #{Peartree::VERSION_SLUG} I saw a nounami verbafk a nouniv
       TEXT
     end
     let(:input) { '3ff' }

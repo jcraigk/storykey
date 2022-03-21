@@ -21,7 +21,6 @@ attendant
 attorney
 auditor
 author
-authoritarian
 avatar
 aviator
 bailiff

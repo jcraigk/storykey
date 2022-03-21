@@ -7,7 +7,6 @@ anarchist
 anesthesiologist
 animal
 antagonist
-anthropologist
 antihero
 aunt
 bachelor
@@ -85,6 +84,7 @@ pantheist
 parent
 passenger
 patient
+pawn
 person
 pioneer
 player
