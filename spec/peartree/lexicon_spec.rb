@@ -7,30 +7,29 @@ RSpec.describe Peartree::Lexicon do
   let(:regex) { /\A(?:[A-Za-z0-9]{3,15})\s?(?:[a-z0-9]{2,5})?\Z/ }
   let(:linking_words) { %w[at for from in into of on out to up with] }
   let(:total_count) { count * LEXICONS.size }
+  let(:uniq_text) { lex.lexicons.values.flatten.map(&:text).map(&:downcase).sort }
 
   it 'matches expected sha' do
     expect(lex.sha).to eq(Peartree::LEXICON_SHA)
   end
 
   it 'returns expected word count' do
-    LEXICONS.each do |part_of_speech|
-      num = lex.humanized[part_of_speech].grep_v(/\d/).size
+    LEXICONS.each do |part|
+      num = lex.lexicons[part].map(&:text).grep_v(/\d/).size
       percent = (num / count.to_f) * 100
-      puts "Actual #{part_of_speech} count: #{num} (#{percent.floor}%)"
+      puts ">>>>>> #{part} count: #{num} (#{percent.floor}%)"
     end
-    expect(lex.lexicon.size).to eq(total_count)
+    expect(lex.dictionary.size).to eq(total_count)
   end
 
   it 'returns unique global downcased lexicon' do
-    # lex.all_humanized.select { |w| lex.all_humanized.count(w) > 1 }.map { |w| w.gsub(/\d/, '') }.uniq
-    uniq = lex.all_humanized.map(&:downcase).uniq
-    expect(uniq.size).to eq(total_count)
+    expect(uniq_text.size).to eq(total_count)
   end
 
   it 'does not skip any decimals' do
     LEXICONS.each do |part_of_speech|
       (0..(count - 1)).each do |decimal|
-        keyword = lex.lexicon.find do |_, v|
+        keyword = lex.dictionary.find do |_, v|
           v.part_of_speech == part_of_speech && v.decimal == decimal
         end
         expect(keyword).not_to be_empty
@@ -39,14 +38,16 @@ RSpec.describe Peartree::Lexicon do
   end
 
   it 'returns words of expected length and content' do
-    expect(lex.all_humanized.grep_v(regex)).to be_empty
+    LEXICONS.each do |part|
+      invalid = lex.lexicons[part].map(&:text).grep_v(regex)
+      expect(invalid).to be_empty
+    end
   end
 
   it 'returns unique words for each part of speech' do
-    LEXICONS.each do |part_of_speech|
-      words = lex.humanized[part_of_speech]
-      # TODO: add sort later
-      expect(words.uniq).to eq(words)
+    LEXICONS.each do |part|
+      words = lex.lexicons[part].map(&:text)
+      expect(words.uniq.sort).to eq(words)
     end
   end
 
@@ -55,7 +56,7 @@ RSpec.describe Peartree::Lexicon do
   end
 
   xit 'returns lexicons that have unique 4-letter truncations' do
-    lex.humanized.each do |_, words|
+    lex.lexicons.each do |_, words|
       truncs = words.map { |w| w[0..3] }
       expect(truncs.uniq).to eq(truncs)
     end

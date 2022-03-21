@@ -8,14 +8,12 @@ accommodate
 accompany
 accuse
 ache for
-acknowledge
 acquire
 activate
 address
 admire
 adopt
 adore
-advertise
 advise
 affirm
 agree with
@@ -39,7 +37,6 @@ arrange
 arrest
 ask
 assess
-associate with
 assure
 astonish
 attach
@@ -81,7 +78,6 @@ bless
 block
 bolt from
 bomb
-book
 boost
 bore
 borrow from
@@ -173,6 +169,7 @@ convict
 convince
 cook for
 copy
+corner
 correct
 counsel
 count
@@ -284,6 +281,7 @@ enlarge
 enlighten
 enlist
 enrage
+enroll
 enshrine
 entangle
 entertain
@@ -321,7 +319,6 @@ ferry
 fetch
 fight
 figure out
-fill
 film
 filter
 find
@@ -364,6 +361,7 @@ gnaw
 goad
 golf with
 google
+gossip with
 grab
 grade
 grease
@@ -379,7 +377,6 @@ growl at
 grumble at
 grunt at
 guard
-guide
 hail
 halt
 hammer
@@ -389,6 +386,7 @@ harm
 harness
 hat
 hatch
+haul
 haunt
 heal
 hear
@@ -492,7 +490,6 @@ jump
 justify
 keep
 kick
-kid
 kill
 kiss
 kneel for
@@ -515,6 +512,7 @@ legitimize
 lend to
 level
 liberate
+license
 lift
 limit
 link
@@ -849,6 +847,7 @@ snicker at
 sniff
 sob for
 solarize
+solicit
 solve for
 soothe
 spawn
@@ -954,6 +953,7 @@ tiptoe to
 tire out
 toggle
 tolerate
+torment
 toss
 totter to
 tow
@@ -982,7 +982,6 @@ truncate
 trust
 tug
 tune
-tutor
 uncover
 undercut
 underline
@@ -1010,6 +1009,7 @@ usurp
 vacation with
 validate
 vanquish
+vaporize
 ventilate
 verify
 vet

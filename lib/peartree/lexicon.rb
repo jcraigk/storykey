@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 class Peartree::Lexicon < Peartree::Base
-  def lexicon
-    @lexicon ||= {}.tap do |hash|
-      humanized.each do |part_of_speech, words|
-        words.each_with_index do |humanized, decimal|
-          abbrev = humanized.split.first.downcase[0..(ABBREV_SIZE - 1)]
-          hash[abbrev] = Keyword.new \
-            humanized:, part_of_speech:, decimal:
+  COUNTABLE = 'countable'
+
+  def dictionary
+    @dictionary ||= {}.tap do |lex|
+      lexicons.each do |part_of_speech, words|
+        words.each_with_index do |word, decimal|
+          lex[abbrev(word)] = keyword(word, part_of_speech, decimal)
         end
       end
     end
@@ -15,41 +15,54 @@ class Peartree::Lexicon < Peartree::Base
   # Any word after the first is a linking word,
   # included for aesthetics/grammar
   def linking_words
-    @linking_words ||= lexicon.filter_map do |_, attrs|
-      attrs.humanized.split[1..]
-    end.flatten.sort.uniq
+    @linking_words ||= dictionary.filter_map do |_, v|
+      v.text.split[1..]
+    end.flatten.map(&:downcase).sort.uniq
   end
 
-  def all_humanized
-    @all_humanized ||= humanized.values.flatten.sort
-  end
-
-  def humanized
-    @humanized ||= LEXICONS.index_with do |part_of_speech|
-      read_txtfiles(part_of_speech)
+  def lexicons
+    @lexicons ||= LEXICONS.index_with do |part_of_speech|
+      txtfile_words(part_of_speech)
     end
   end
 
   def sha
-    Digest::SHA256.hexdigest(lexicon.to_s).first(7)
+    Digest::SHA256.hexdigest(dictionary.to_s).first(7)
   end
 
   private
 
-  def read_txtfiles(part_of_speech)
-    txtfiles(part_of_speech).map do |file|
-      File.readlines(file)
-          .map(&:strip)
-          .reject do |line|
-            line.start_with?('#') || line.blank?
-          end
-    end.flatten.sort
+  def keyword(word, part_of_speech, decimal)
+    Keyword.new \
+      text: word.text,
+      countable: word.countable,
+      part_of_speech:,
+      decimal:
+  end
+
+  def abbrev(word)
+    word.text.split[0].downcase[0..(ABBREV_SIZE - 1)]
+  end
+
+  def txtfile_words(part_of_speech)
+    txtfiles(part_of_speech).map do |path|
+      txtfile_lines(path).map do |text|
+        Word.new(text, path.split('/')[-2] == COUNTABLE)
+      end
+    end.flatten.sort_by(&:text)
+  end
+
+  def txtfile_lines(path)
+    File.readlines(path)
+        .map(&:strip)
+        .reject { |l| l.start_with?('#') || l.blank? }
   end
 
   def txtfiles(part_of_speech)
-    Dir.glob("lexicons/#{part_of_speech}s/*.txt")
+    Dir.glob("lexicons/#{part_of_speech}s/**/*.txt")
   end
 
   Keyword = Struct.new \
-    :humanized, :part_of_speech, :decimal, keyword_init: true
+    :text, :part_of_speech, :decimal, :countable, keyword_init: true
+  Word = Struct.new(:text, :countable)
 end

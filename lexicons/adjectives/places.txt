@@ -10,9 +10,11 @@ Australian
 Austrian
 Belgian
 Bolivian
+Bosnian
 Brazilian
 British
 Bulgarian
+Burmese
 Canadian
 Chilean
 Chinese
@@ -20,6 +22,7 @@ Colombian
 Congolese
 Croatian
 Cuban
+Czech
 Danish
 Dutch
 Eastern

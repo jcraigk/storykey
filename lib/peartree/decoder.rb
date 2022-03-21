@@ -80,7 +80,9 @@ class Peartree::Decoder < Peartree::Base
   end
 
   def decimals
-    @decimals ||= abbrevs.map { |abbrev| lex.lexicon[abbrev]&.decimal }
+    @decimals ||= abbrevs.map do |abbrev|
+      lex.dictionary[abbrev].decimal
+    end
   end
 
   def words
@@ -95,7 +97,7 @@ class Peartree::Decoder < Peartree::Base
   end
 
   def word_of_type?(word, part_of_speech)
-    lex.lexicon[abbrev(word)]&.part_of_speech == part_of_speech
+    lex.dictionary[abbrev(word)]&.part_of_speech == part_of_speech
   end
 
   def abbrevs

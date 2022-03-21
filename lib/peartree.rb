@@ -51,7 +51,7 @@ end
 
 BITS_PER_WORD = 10
 LINKING_WORDS = %w[in i saw and a an].freeze
-GRAMMAR = %i[adjective noun verb adjective noun].freeze
+GRAMMAR = %i[adjective noun verb noun].freeze
 LEXICONS = %i[adjective noun verb].freeze
 NUM_PAD_WORDS = 26
 MAX_INPUT_SIZE = 512

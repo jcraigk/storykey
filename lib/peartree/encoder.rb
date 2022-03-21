@@ -3,6 +3,12 @@ class Peartree::Encoder < Peartree::Base
   param :str
   option :format, optional: true
 
+  BASE58_REGEX =
+    /\A[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]+\Z/
+  DEC_REGEX = /\A\d+\Z/
+  HEX_REGEX = /\A[\da-f]+\Z/
+  BIN_REGEX = /\A[0-1]+\Z/
+
   def call
     @str = str.strip
     @format ||= :hex
@@ -69,9 +75,10 @@ class Peartree::Encoder < Peartree::Base
   end
 
   def highlight(word)
-    abbrev = word[0..(ABBREV_SIZE - 1)]
-    tail = word[(ABBREV_SIZE - 1)..]
-    "#{abbrev.magenta}#{tail&.bold}"
+    # abbrev = word.split.first[0..(ABBREV_SIZE - 1)]
+    # tail = word[abbrev.size..]
+    ary = word.split
+    "#{ary[0].magenta} #{ary[1]}".strip
   end
 
   def raw_phrases # rubocop:disable Metrics/MethodLength
@@ -117,11 +124,9 @@ class Peartree::Encoder < Peartree::Base
   end
 
   def decimals
-    bin_segments.map { |b| bin_to_dec(b) }
-  end
-
-  def bin_to_dec(bin)
-    Peartree::Coercer.call(bin, :bin, :dec).to_i
+    bin_segments.map do |bin|
+      Peartree::Coercer.call(bin, :bin, :dec).to_i
+    end
   end
 
   def bin_segments
@@ -135,27 +140,17 @@ class Peartree::Encoder < Peartree::Base
   end
 
   def validate_format!
+    raise_invalid_str unless str.match?(format_regex)
+  end
+
+  def format_regex
     case format.to_sym
-    when :bin then validate_bin!
-    when :dec then validate_dec!
-    when :hex then validate_hex!
-    else raise_invalid_format("Invalid format given: #{format}")
+    when :bin then BIN_REGEX
+    when :dec then DEC_REGEX
+    when :hex then HEX_REGEX
+    when :base58 then BASE58_REGEX
+    else raise_invalid_format
     end
-  end
-
-  def validate_bin!
-    return if str.match?(/\A[0-1]+\Z/)
-    raise_invalid_format('Binary format specified but data contains invalid characters')
-  end
-
-  def validate_dec!
-    return if str.match?(/\A[0-9]+\Z/)
-    raise_invalid_format('Decimal format specified but data contains invalid characters')
-  end
-
-  def validate_hex!
-    return if str.match?(/\A[0-9a-f]+\Z/)
-    raise_invalid_format('Hexidecimal format specified but data contains invalid characters')
   end
 
   def binary_str
@@ -178,8 +173,13 @@ class Peartree::Encoder < Peartree::Base
                   .first(checksum_bitsize)
   end
 
-  def raise_invalid_format(msg)
-    raise Peartree::InvalidFormat, msg
+  def raise_invalid_str
+    raise Peartree::InvalidFormat, "Invalid input for format '#{format}'"
+  end
+
+  def raise_invalid_format
+    raise Peartree::InvalidFormat,
+          "Invalid format '#{format}'"
   end
 
   Result = Struct.new(:text, :colorized)
