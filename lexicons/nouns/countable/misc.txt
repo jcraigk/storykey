@@ -1,12 +1,7 @@
 abolitionist
 activist
-acupuncturist
-adult
 alarmist
 anarchist
-anesthesiologist
-animal
-antagonist
 antihero
 aunt
 bachelor
@@ -23,7 +18,6 @@ charlatan
 chauvinist
 child
 client
-conservationist
 contestant
 cousin
 creep

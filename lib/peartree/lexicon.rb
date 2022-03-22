@@ -45,11 +45,12 @@ class Peartree::Lexicon < Peartree::Base
   end
 
   def txtfile_words(part_of_speech)
-    txtfiles(part_of_speech).map do |path|
+    words = txtfiles(part_of_speech).map do |path|
       txtfile_lines(path).map do |text|
         Word.new(text, path.split('/')[-2] == COUNTABLE)
       end
-    end.flatten.sort_by(&:text)
+    end
+    words.flatten.sort_by { |w| [w.text.size, w.text] }
   end
 
   def txtfile_lines(path)

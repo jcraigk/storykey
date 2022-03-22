@@ -23,15 +23,16 @@ RSpec.describe Peartree::Lexicon do
       count = (2**BITS_PER_WORD) + (min_pad_words * GRAMMAR.first[1].count { |p| p == part })
       total_count += count
 
-      # num = lex.lexicons[part].size
-      # percent = (num / count.to_f) * 100
-      # puts ">>>>>> #{part} count: #{num} of #{count} (#{percent.floor}%)"
+      num = lex.lexicons[part].size
+      percent = (num / count.to_f) * 100
+      puts ">>>>>> #{part} count: #{num} of #{count} (#{percent.floor}%)"
 
       # Does not skip any decimals
       (0..(count - 1)).each do |decimal|
         keyword = lex.dictionary.find do |_, v|
           v.part_of_speech == part && v.decimal == decimal
         end
+        binding.pry if keyword.nil?
         expect(keyword).not_to be_empty
       end
     end
@@ -44,11 +45,12 @@ RSpec.describe Peartree::Lexicon do
     expect(malformed_words).to be_empty
   end
 
-  it 'returns unique words for each part of speech' do
+  it 'returns unique words sorted by length and value' do
     LEXICONS.each do |part|
       words = lex.lexicons[part].map(&:text)
       # words.select { |e| words.count(e) > 1 }.uniq.sort
-      expect(words.uniq.sort).to eq(words)
+      sorted_uniq = words.uniq.sort_by { |w| [w.size, w] }
+      expect(sorted_uniq).to eq(words)
     end
   end
 

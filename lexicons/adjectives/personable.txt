@@ -91,6 +91,7 @@ dizzy
 docile
 dogmatic
 domestic
+dowdy
 drab
 dreamy
 drunk
@@ -297,7 +298,6 @@ purring
 pushy
 queasy
 quirky
-rambunctious
 reckless
 reclusive
 regal
@@ -351,6 +351,7 @@ solitary
 sorrowful
 spicy
 splendid
+spotless
 sprightly
 spry
 steady

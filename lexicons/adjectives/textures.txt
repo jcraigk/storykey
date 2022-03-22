@@ -2,7 +2,6 @@ bony
 bumpy
 chalky
 cloudy
-coarse
 damp
 dingy
 dry
@@ -32,6 +31,7 @@ nasty
 plaid
 porous
 puffy
+reflective
 rosy
 rough
 rusty

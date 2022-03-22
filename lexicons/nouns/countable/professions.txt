@@ -253,7 +253,6 @@ rabbi
 realtor
 receptionist
 rector
-reflective
 reporter
 researcher
 reservist
@@ -311,9 +310,7 @@ tyrant
 umpire
 undertaker
 unicyclist
-ventriloquist
 viceroy
-videographer
 violinist
 vizier
 vocalist

@@ -503,6 +503,7 @@ leer at
 legitimize
 lend to
 level
+levitate
 liberate
 license
 lift
@@ -515,7 +516,6 @@ lodge with
 look at
 loot
 lose
-love
 lower
 lurk with
 magnify
