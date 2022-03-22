@@ -57,13 +57,13 @@ RSpec.describe Peartree::Encoder do
     let(:text) do
       <<~TEXT.strip
         In #{Peartree::VERSION_SLUG} I saw
-        1. an adjectiveago noundc verbmd a nounsd,
-        2. an adjectivedd nounalm verbmd a nounaji,
-        3. an adjectivevm nounqo verbol a nounaag,
-        4. an adjectiveadb nounaew verbqq a nounale,
-        5. an adjectiveacj nounagz verbrf a nounth,
-        6. an adjectivekn nounhw verbhu a nounst,
-        7. and a nounry verbwi a nounakd
+        1. an adjective-873 noun-107 verb-342 a noun-499,
+        2. an adjective-108 noun-1003 verb-343 a noun-947,
+        3. an adjective-586 noun-458 verb-404 a noun-712,
+        4. an adjective-784 noun-833 verb-462 a noun-999,
+        5. an adjective-766 noun-889 verb-478 a noun-531,
+        6. an adjective-301 noun-232 verb-229 a noun-518,
+        7. and a noun-496 verb-613 a noun-977
       TEXT
     end
 
@@ -104,7 +104,7 @@ RSpec.describe Peartree::Encoder do
     let(:input) { 'da46b55' }
     let(:text) do
       <<~TEXT.strip
-        In #{Peartree::VERSION_SLUG} I saw an adjectiveago noundc verbme a nounaht
+        In #{Peartree::VERSION_SLUG} I saw an adjective-873 noun-107 verb-343 a noun-905
       TEXT
     end
 
@@ -115,7 +115,7 @@ RSpec.describe Peartree::Encoder do
     let(:input) { '3ff' }
     let(:text) do
       <<~TEXT.strip
-        In #{Peartree::VERSION_SLUG} I saw a nounami verbafk a nouniv
+        In #{Peartree::VERSION_SLUG} I saw a noun-1023 verb-843 a noun-256
       TEXT
     end
 
@@ -132,20 +132,20 @@ RSpec.describe Peartree::Encoder do
     let(:text) do
       <<~TEXT.strip
         In #{Peartree::VERSION_SLUG} I saw
-        1. an adjective1 noun1 verb1 a noun2,
-        2. an adjective2 noun3 verb2 a noun4,
-        3. an adjective3 noun5 verb3 a noun6,
-        4. an adjective4 noun7 verb4 a noun8,
-        5. an adjective5 noun9 verb5 a noun10,
-        6. an adjective6 noun11 verb6 a noun12,
-        7. an adjective7 noun0 verb22 a noun29,
-        8. an adjective23 noun30 verb23 a noun31,
-        9. an adjective24 noun32 verb24 a noun33,
-        10. an adjective25 noun34 verb25 a noun35,
-        11. an adjective26 noun36 verb26 a noun37,
-        12. an adjective27 noun38 verb27 a noun39,
-        13. an adjective28 noun40 verb28 a noun167,
-        14. and a noun15
+        1. an adjective-1 noun-1 verb-1 a noun-2,
+        2. an adjective-2 noun-3 verb-2 a noun-4,
+        3. an adjective-3 noun-5 verb-3 a noun-6,
+        4. an adjective-4 noun-7 verb-4 a noun-8,
+        5. an adjective-5 noun-9 verb-5 a noun-10,
+        6. an adjective-6 noun-11 verb-6 a noun-12,
+        7. an adjective-7 noun-0 verb-22 a noun-29,
+        8. an adjective-23 noun-30 verb-23 a noun-31,
+        9. an adjective-24 noun-32 verb-24 a noun-33,
+        10. an adjective-25 noun-34 verb-25 a noun-35,
+        11. an adjective-26 noun-36 verb-26 a noun-37,
+        12. an adjective-27 noun-38 verb-27 a noun-39,
+        13. an adjective-28 noun-40 verb-28 a noun-167,
+        14. and a noun-15
       TEXT
     end
 

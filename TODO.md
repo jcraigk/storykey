@@ -1,5 +1,7 @@
 # TODO / IDEAS
 
+* Ask for input bitsize when encoding and left-pad the binary string with zeros if converting (add this to coercer). Also verify bitsize of input InvalidInputSize.
+
 * Instead of storing the last word size, might need to store original bitsize, and actually might need that on the input side too....so we know how many bits to left pad given the input.
 
 * Use https://openai.com/blog/dall-e/ or similar to generate images as cognitive aids

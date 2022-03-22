@@ -3,7 +3,7 @@
 RSpec.describe Peartree::Lexicon do
   subject(:lex) { described_class.new }
 
-  let(:regex) { /\A(?:[A-Za-z0-9]{3,15})\s?(?:[a-z0-9]{2,5})?\Z/ }
+  let(:regex) { /\A(?:[A-Za-z0-9\-]{3,15})\s?(?:[a-z0-9]{2,5})?\Z/ }
   let(:linking_words) { %w[at for from in into of on out to up with] }
   let(:uniq_text) { lex.lexicons.values.flatten.map(&:text).map(&:downcase).sort }
   let(:min_pad_words) do
@@ -17,15 +17,15 @@ RSpec.describe Peartree::Lexicon do
     expect(lex.sha).to eq(Peartree::LEXICON_SHA)
   end
 
-  it 'returns expected word counts' do
+  it 'returns expected word counts' do # rubocop:disable RSpec/ExampleLength
     total_count = 0
     LEXICONS.each do |part|
-      num = lex.lexicons[part].map(&:text).size
       count = (2**BITS_PER_WORD) + (min_pad_words * GRAMMAR.first[1].count { |p| p == part })
       total_count += count
 
-      percent = (num / count.to_f) * 100
-      puts ">>>>>> #{part} count: #{num} of #{count} (#{percent.floor}%)"
+      # num = lex.lexicons[part].size
+      # percent = (num / count.to_f) * 100
+      # puts ">>>>>> #{part} count: #{num} of #{count} (#{percent.floor}%)"
 
       # Does not skip any decimals
       (0..(count - 1)).each do |decimal|

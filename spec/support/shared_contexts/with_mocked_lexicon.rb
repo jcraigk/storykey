@@ -1,16 +1,23 @@
 # frozen_string_literal: true
 
 RSpec.shared_context 'with mocked lexicon' do
-  let(:count) { (2**BITS_PER_WORD) + NUM_PAD_WORDS }
   let(:booleans) { [true, false] }
+  let(:min_pad_words) do
+    ((MAX_INPUT_SIZE / BITS_PER_WORD.to_f) / GRAMMAR.first[1].count).ceil
+  end
   let(:lexicons) do
     h = {}
     ('a'..'zzz').each_with_index { |w, i| h[i + 1] = w }
     LEXICONS.index_with do |part_of_speech|
+      count =
+        (2**BITS_PER_WORD) +
+        (
+          min_pad_words *
+          GRAMMAR.first[1].count { |p| p == part_of_speech }
+        )
       (0..(count - 1)).map do |num|
         Peartree::Lexicon::Word.new \
-        "#{part_of_speech}#{num}", (num % 1).zero?
-          # "#{part_of_speech}#{h[num]}", (num % 1).zero?
+          "#{part_of_speech}-#{num}", (num % 1).zero?
       end
     end
   end

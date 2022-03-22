@@ -1,4 +1,3 @@
-
 Achilles
 Ackbar
 Agamemnon
@@ -11,6 +10,9 @@ Ares
 Artemis
 Athena
 Banquo
+R2-D2
+BB-8
+C-3PO
 Barbie
 Batman
 Beowulf

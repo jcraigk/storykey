@@ -82,7 +82,7 @@ class Peartree::Encoder < Peartree::Base
   end
 
   def raw_phrases
-    word_groups.map { |words| grammatical_phrase(words) }
+    @raw_phrases ||= word_groups.map { |words| grammatical_phrase(words) }
   end
 
   def grammatical_phrase(words)
@@ -94,8 +94,6 @@ class Peartree::Encoder < Peartree::Base
       str += "#{highlight(text)} "
     end
     str.strip
-  rescue => e
-    binding.pry
   end
 
   # Always prefix modified noun with article
@@ -112,21 +110,17 @@ class Peartree::Encoder < Peartree::Base
   end
 
   def word_groups
-    return @word_groups if @word_groups
-    lexicons = lex.lexicons.dup
-    @word_groups ||= decimals.each_slice(GRAMMAR.keys.max).to_a.map do |dec_group|
+    decimals.each_slice(GRAMMAR.keys.max).to_a.map do |dec_group|
       grammar = GRAMMAR[dec_group.size]
       dec_group.each_with_index.map do |decimal, idx|
         part_of_speech = grammar[idx]
-        words = lexicons[part_of_speech]
-        puts "cloning #{words[decimal]}"
+        words = lex.lexicons[part_of_speech]
         words[decimal].tap do
-          # word = 'adjectiveago'
           # Shift words to prevent repeats
           (decimal..(words.size - 2)).each do |x|
             words[x] = words[x + 1]
           end
-          lexicons[part_of_speech] = words[0..-2]
+          lex.lexicons[part_of_speech] = words[0..-2]
         end
       end
     end

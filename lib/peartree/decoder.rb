@@ -86,7 +86,7 @@ class Peartree::Decoder < Peartree::Base
   def words
     @words ||=
       str.split(/\s+/)
-         .map { |w| w.downcase.gsub(/[^a-z]/, '') }
+         .map { |w| w.downcase.gsub(/[^a-z\-\d]/, '') }
          .reject { |w| w.blank? || w.in?(linking_words) }
   end
 
