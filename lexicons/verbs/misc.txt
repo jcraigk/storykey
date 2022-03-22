@@ -4,7 +4,6 @@ abolish
 accelerate
 accept
 access
-accommodate
 accompany
 accuse
 ache for
@@ -39,11 +38,10 @@ ask
 assess
 assure
 astonish
-attach
+attach to
 attack
 audit
 augment
-authenticate
 avail
 avoid
 babble at
@@ -153,7 +151,6 @@ confound
 confront
 confuse
 conjure
-connect with
 conquer
 consecrate
 consider
@@ -162,7 +159,6 @@ construct
 consult
 contain
 contradict
-contribute to
 control
 convert
 convict
@@ -219,7 +215,6 @@ detach
 detect
 diagnos
 die for
-differ from
 diminish
 direct
 disagree with
@@ -274,7 +269,6 @@ endanger
 endorse
 endure
 energize
-engage with
 engrave
 enjoy
 enlarge
@@ -348,7 +342,6 @@ formulate
 forsake
 foster
 frame
-fraternize with
 freeze
 frown at
 fry
@@ -402,7 +395,6 @@ hit
 hoist
 hold
 holler at
-homogenize
 honor
 hook
 horrify
@@ -601,7 +593,6 @@ paralyze
 parasitize
 pardon
 parley with
-participate with
 partner with
 party with
 pass
@@ -636,7 +627,6 @@ poll
 pollute
 possess
 postpone
-postulate with
 pounce on
 practice with
 praise
@@ -776,7 +766,6 @@ scold
 scorch
 scorn
 scowl at
-scramble to
 scrap
 scratch
 screech at
@@ -827,7 +816,6 @@ single out
 sink
 sit with
 skate with
-skateboard with
 skew
 ski with
 skip
@@ -859,7 +847,7 @@ spite
 sponsor
 spot
 spray
-sprint with
+sprint to
 spy on
 squeeze
 stab
@@ -893,7 +881,6 @@ submerge
 submit to
 subsidize
 subsume
-subtract from
 sue
 suffer for
 suffocate

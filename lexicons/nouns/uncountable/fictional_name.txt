@@ -2,6 +2,7 @@
 Achilles
 Ackbar
 Agamemnon
+Ahab
 Amidala
 Aphrodite
 Apollo
@@ -10,6 +11,7 @@ Ares
 Artemis
 Athena
 Banquo
+Barbie
 Batman
 Beowulf
 Bilbo
@@ -39,6 +41,7 @@ Godzilla
 Gollum
 Grievous
 Grogu
+Gump
 Hades
 Hamlet
 Hector
@@ -50,6 +53,7 @@ Hulk
 Juliet
 Jupiter
 Kylo
+Lassie
 Legolas
 Leia
 Lolita
@@ -69,6 +73,7 @@ Penelope
 Persephone
 Petruchio
 Piglet
+Pikachu
 Pooh
 Poseiden
 Prospero
@@ -79,6 +84,7 @@ Saruman
 Sauron
 Scrooge
 Scylla
+Shrek
 Skywalker
 Spock
 Superman
@@ -93,3 +99,4 @@ Vader
 Venus
 Yoda
 Zeus
+Zorro

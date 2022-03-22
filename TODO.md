@@ -1,5 +1,7 @@
 # TODO / IDEAS
 
+* Instead of storing the last word size, might need to store original bitsize, and actually might need that on the input side too....so we know how many bits to left pad given the input.
+
 * Use https://openai.com/blog/dall-e/ or similar to generate images as cognitive aids
 
 * encode the "time" as last 4 bits of the checksum word. that reduces robustness of checksum to 1/64...use extra space in penultimate word for increasing that...so all phrases will encode a length of multiple of word size (270 for 257, for example, 9 checksum bits, 4 tail bits, )

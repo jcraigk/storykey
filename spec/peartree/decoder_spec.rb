@@ -13,60 +13,47 @@ RSpec.describe Peartree::Decoder do
     end
   end
 
-  describe 'invalid input' do
-    context 'with missing or invalid version lead' do
-      let(:input) do
-        <<~TEXT.strip
-          1. an adjectiveago noundc verbmd an adjectivesd noundd,
-          2. an adjectivealm nounmd verbaji an adjectivevm nounqo,
-        TEXT
-      end
-
-      it 'raises an exception' do
-        expect { call }.to raise_error(Peartree::InvalidVersion)
-      end
+  context 'with missing or invalid version lead' do
+    let(:input) do
+      <<~TEXT.strip
+        1. an adjectiveago noundc verbmd an adjectivesd noundd,
+        2. an adjectivealm nounmd verbaji an adjectivevm nounqo,
+      TEXT
     end
 
-    context 'with invalid time' do
-      let(:input) do
-        <<~TEXT.strip
-          In Miami I saw an adjectiveago noundc verbme a nounhp
-        TEXT
-      end
+    it 'raises an exception' do
+      expect { call }.to raise_error(Peartree::InvalidVersion)
+    end
+  end
 
-      it 'raises an exception' do
-        expect { call }.to raise_error(Peartree::InvalidTime)
-      end
+  context 'with invalid word(s)' do
+    let(:input) do
+      <<~TEXT.strip
+        In Miami I saw a badword noundc verbme a nounhp
+      TEXT
     end
 
-    context 'with invalid word(s)' do
-      let(:input) do
-        <<~TEXT.strip
-          In Miami I saw a badword noundc verbme a nounhp
-        TEXT
-      end
+    it 'raises an exception' do
+      expect { call }.to raise_error(Peartree::InvalidWord)
+    end
+  end
 
-      it 'raises an exception' do
-        expect { call }.to raise_error(Peartree::InvalidWord)
-      end
+  context 'with invalid checksum' do
+    let(:input) do
+      <<~TEXT.strip
+        In Miami I saw
+        1. an adjectiveago noundc verbmd a nounsd,
+        2. an adjectivedd nounalm verbmd a nounaji,
+        3. an adjectivevm nounqo verbol a nounaag,
+        4. an adjectiveadb nounaew verbqq a nounale,
+        5. an adjectiveacj nounagz verbrf a nounth,
+        6. an adjectivekn nounhw verbhu a nounst,
+        7. and a nounry verbwi a nounakz
+      TEXT
     end
 
-    context 'with invalid checksum' do
-      let(:input) do
-        <<~TEXT.strip
-          In Miami I saw
-          1. an adjectiveago noundcs verbmd an adjectivesd noundd,
-          2. an adjectivealm nounmds verbaji an adjectivevm nounqo,
-          3. an adjectiveol nounaags verbadb an adjectiveaew nounqq,
-          4. an adjectiveale nounacjs verbagz an adjectiverf nounth,
-          5. an adjectivekn nounhws verbhu an adjectivest nounry,
-          6. and an adjectivewi nounbg
-        TEXT
-      end
-
-      it 'raises an exception' do
-        expect { call }.to raise_error(Peartree::InvalidChecksum)
-      end
+    it 'raises an exception' do
+      expect { call }.to raise_error(Peartree::InvalidChecksum)
     end
   end
 
@@ -74,19 +61,20 @@ RSpec.describe Peartree::Decoder do
     let(:input) do
       <<~TEXT.strip
         In #{Peartree::VERSION_SLUG} I saw
-        1. an adjectiveago noundc verbmd an adjectivesd noundd,
-        2. an adjectivealm nounmd verbaji an adjectivevm nounqo,
-        3. an adjectiveol nounaag verbadb an adjectiveaew nounqq,
-        4. an adjectiveale nounacj verbagz an adjectiverf nounth,
-        5. an adjectivekn nounhw verbhu an adjectivest nounry,
-        6. and an adjectivewi nounbh
+        1. an adjectiveago noundc verbmd a nounsd,
+        2. an adjectivedd nounalm verbmd a nounaji,
+        3. an adjectivevm nounqo verbol a nounaag,
+        4. an adjectiveadb nounaew verbqq a nounale,
+        5. an adjectiveacj nounagz verbrf a nounth,
+        6. an adjectivekn nounhw verbhu a nounst,
+        7. and a nounry verbwi a nounakd
       TEXT
     end
 
     context 'when format is hex' do
       let(:output) do
         <<~TEXT.strip
-          da46b559f21b3e955bb1925c964ac5c3b3d72fe1bf37476a104b0e7396027b6
+          da46b559f21b3e955bb1925c964ac5c3b3d72fe1bf37476a104b0e7396027b65
         TEXT
       end
       let(:format) { :hex }
@@ -97,7 +85,7 @@ RSpec.describe Peartree::Decoder do
     context 'when format is dec' do
       let(:output) do
         <<~TEXT.strip
-          6170570745419210271509746663387773034649600806853778157181275666147352520630
+          98729131926707364344155946614204368554393612909660450514900410658357640330085
         TEXT
       end
       let(:format) { :dec }
@@ -108,32 +96,10 @@ RSpec.describe Peartree::Decoder do
     context 'when format is bin' do
       let(:output) do
         <<~TEXT.strip
-          110110100100011010110101010110011111001000011011001111101001010101011011101100011001001001011100100101100100101011000101110000111011001111010111001011111110000110111111001101110100011101101010000100000100101100001110011100111001011000000010011110110110
+          1101101001000110101101010101100111110010000110110011111010010101010110111011000110010010010111001001011001001010110001011100001110110011110101110010111111100001101111110011011101000111011010100001000001001011000011100111001110010110000000100111101101100101
         TEXT
       end
       let(:format) { :bin }
-
-      include_examples 'success'
-    end
-
-    context 'when no time is given' do
-      let(:input) do
-        <<~TEXT.strip
-          In #{Peartree::VERSION_SLUG} I saw
-          six adjectiveago noundcs verbmd an adjectivesd noundd,
-          five adjectivealm nounmds verbaji an adjectivevm nounqo,
-          four adjectiveol nounaags verbadb an adjectiveaew nounqq,
-          three adjectiveale nounacjs verbagz an adjectiverf nounth,
-          two adjectivekn nounhws verbhu an adjectivest nounry,
-          and an adjectivewi nounbh
-        TEXT
-      end
-      let(:output) do
-        <<~TEXT.strip
-          da46b559f21b3e955bb1925c964ac5c3b3d72fe1bf37476a104b0e7396027b65
-        TEXT
-      end
-      let(:format) { :hex }
 
       include_examples 'success'
     end

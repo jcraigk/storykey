@@ -37,14 +37,14 @@ module Peartree
 
   def self.generate(bitsize: DEFAULT_BITSIZE)
     bin = Peartree::Generator.call(bitsize)
-    phrase = encode(bin, format: :bin)
-    raise 'An error occurred!' if bin != decode(phrase.text, format: :bin)
+    story = encode(bin, format: :bin)
+    # raise 'An error occurred!' if bin != decode(story.text, format: :bin)
     key = Coercer.call(bin, :bin, :base58)
     puts [
       'Key:'.bg_blue,
       key,
-      'Phrase:'.bg_blue,
-      phrase.colorized
+      'Story:'.bg_blue,
+      story.colorized
     ].join("\n")
   end
 end
@@ -58,7 +58,6 @@ GRAMMAR = {
   1 => %i[noun]
 }.freeze
 LEXICONS = %i[adjective noun verb].freeze
-NUM_PAD_WORDS = 26
 MAX_INPUT_SIZE = 512
 DEFAULT_BITSIZE = 256
 ABBREV_SIZE = 13 # TODO: get this down to 4 or 5

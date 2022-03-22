@@ -41,17 +41,12 @@ classy
 clean
 clear
 cold
-collapsed
 colorful
 comical
-complete
-concise
-conscious
+complex
 conservative
-consistent
 cosmic
 coy
-cylindrical
 cynical
 dangerous
 dark
@@ -237,8 +232,6 @@ rapid
 rare
 raw
 reasonable
-rectangular
-remarkable
 resilient
 revolting
 rigid
@@ -246,7 +239,6 @@ ripe
 ritzy
 robust
 rotten
-round
 rustic
 sacred
 salient
@@ -291,7 +283,6 @@ swollen
 symmetrical
 symptomatic
 synthetic
-tenuous
 thorny
 tiny
 towering

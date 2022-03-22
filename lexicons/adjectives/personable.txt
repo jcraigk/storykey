@@ -8,7 +8,6 @@ ambitious
 ambulant
 angelic
 apathetic
-apologetic
 appreciative
 arrogant
 artistic
@@ -16,7 +15,6 @@ aspiring
 athletic
 attentive
 attractive
-auspicious
 average
 awkward
 bashful
@@ -200,7 +198,6 @@ inferior
 infernal
 informal
 innocent
-inscrutable
 insecure
 insidious
 insightful

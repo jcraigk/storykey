@@ -9,7 +9,8 @@ RSpec.shared_context 'with mocked lexicon' do
     LEXICONS.index_with do |part_of_speech|
       (0..(count - 1)).map do |num|
         Peartree::Lexicon::Word.new \
-          "#{part_of_speech}#{h[num]}", (num % 1).zero?
+        "#{part_of_speech}#{num}", (num % 1).zero?
+          # "#{part_of_speech}#{h[num]}", (num % 1).zero?
       end
     end
   end
@@ -27,6 +28,7 @@ RSpec.shared_context 'with mocked lexicon' do
           decimal:
       end
     end
+    h
   end
   let(:mock_lex) { instance_spy(Peartree::Lexicon) }
   let(:linking_words) { %w[at on for] }

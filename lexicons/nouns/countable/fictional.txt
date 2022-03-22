@@ -9,6 +9,8 @@ cherub
 chimera
 cyborg
 cyclops
+Grinch
+Terminator
 demon
 devil
 dragon

@@ -1,34 +1,31 @@
-# Peartree
+# StoryKey
 
-Peartree is a system for converting between arbitrary strings of data and a series of memorable English phrases. Its grammar and lexicon is curated for concreteness and personification, supporting mental visualization.
+StoryKey is a system for converting between arbitrary strings of data and memorable English phrases. The primary use case is memorizing a cryptocurrency private key, colloquially referred to as "making a brain wallet". StoryKey is inspired by [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki), adding extra features:
 
-The primary use case is memorizing cryptocurrency private keys, often referred to as creating a "brain wallet." This system is inspired by [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki) but adds extra features:
+(1) Encodes arbitrary length data from 1 to 512 bits
+(2) Includes checksum for robustness
+(3) Includes version slug to expose/guarantee accurate decoding
+(4) Enforces a simple English grammar to drive semantic associations
+(5) Lexicon is curated for mental visualization
+(6) No keywords are repeated
 
-(1) Encode arbitrary length strings, supporting popular formats
-(2) Includes 10-bit checksum word to fortify phrases
-(3) Includes version slug to guarantee accurate decoding
-(4) Lexicon curated for mental visualization
-(5) Phrases adhere to a repeating grammar
-
-A phrase produced by Peartree is presented as a song or a set of lyrics.
+A paragraph produced by StoryKey for a 256 bit string looks like this:
 
 ```
-In [version slug] at [bit entropy of last word] I saw
-1. [adjective] [noun] [verb] and [verb]
-2. [adjective] [noun] [verb (checksum)]
+In Miami I saw...
+1. a whimsical oriole provide for a cartoonist,
+2. a volatile coward inaugurate a walrus,
+3. an average polytheist insist on a cousin,
+4. a grandiose pug confound an orthodontist,
+5. a marbled herbalist offend Ackbar,
+6. a giant surgeon sue a golem,
+7. and a stoat pursue a harpist
 ````
 
-For example
-
-```
-In Miami at 6pm I saw
-1. A pretty body flow and list
-2. A blushing wedding flow
-```
-
-The `version slug` is typically a well-known city, such as `Miami`. The `bity entropy of last word` contains a digit that refers to the number of bits contained in the last word (allowing arbitrary length string encoding). The `checksum` is an additional word added to fortify the whole phrase.
-
-This paragraph can be deterministically decoded using the same version of Peartree.
+This paragraph can be deterministically decoded back into its binary source using the same version of StoryKey. The `version slug` is typically a well-known city, such as `Miami`. An exception will be raised if:
+ * the `version slug` does not match the current version of StoryKey
+ * any unrecognized `keywords` are provided
+ * the embedded `checksum` does not match the expected value
 
 
 ## Installation
@@ -52,25 +49,25 @@ Or install it yourself as:
 Produce a set of English phrases given input data (e.g. a cryptocurrency private key):
 
 ```
-Peartree.encode(data)
+data = 'JA6ymjiUiuMBcaSek3x7AxDyWQhgUJWZZBvcWBy3f7Lt'
+Peartree.encode(data, format: :base58)
 ```
 
-`data` may be in the form of a hexidecimal (`ab29f3`), a binary string (`1001101`), or a decimal (`230938`).
+`data` may be in the form of a hexidecimal (`ab29f3`), a binary string (`1001101`), a decimal (`230938`), or a base58 string (`uMBca`).
 
 Recover source data (e.g. a cryptocurrency private key) based on an English phrase generated using `encode` (above):
 
 ```
-Peartree.decode(phrase)
+Peartree.decode(story)
 ```
 
 Create a hash of source data so that a user may run `verify` to confirm they have memorized the correct code.
 
 ```
-Peartree.hash(data)
-Peartree.verify(phrase, hash)
+Peartree.quiz(hash)
 ```
 
-Peartree can be used to encode, decode, and verify a phrase. Phrase verification ensures adherence to version lexicography as well checks it against a hash of the source data. This can be used for periodic quizzing of the user to fortify memory.
+TODO: Commandline
 
 ```
 nemon encode [data]

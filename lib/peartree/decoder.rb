@@ -80,9 +80,7 @@ class Peartree::Decoder < Peartree::Base
   end
 
   def decimals
-    @decimals ||= abbrevs.map do |abbrev|
-      lex.dictionary[abbrev].decimal
-    end
+    @decimals ||= abbrevs.map { |a| lex.dictionary[a]&.decimal }
   end
 
   def words
@@ -101,15 +99,15 @@ class Peartree::Decoder < Peartree::Base
   end
 
   def abbrevs
-    @abbrevs ||= phrase_words.map { |w| abbrev(w) }
+    @abbrevs ||= story_words.map { |w| abbrev(w) }
   end
 
   def abbrev(word)
     word[0..(ABBREV_SIZE - 1)]
   end
 
-  def phrase_words
-    @phrase_words ||= words[1..]
+  def story_words
+    @story_words ||= words[1..]
   end
 
   def version_word

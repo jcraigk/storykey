@@ -81,10 +81,6 @@ class Peartree::Encoder < Peartree::Base
     "#{ary[0].magenta} #{ary[1]}".strip
   end
 
-  def phrase_size
-    GRAMMAR.keys.max
-  end
-
   def raw_phrases
     word_groups.map { |words| grammatical_phrase(words) }
   end
@@ -94,28 +90,44 @@ class Peartree::Encoder < Peartree::Base
     grammar = GRAMMAR[words.size]
     grammar.each_with_index do |part_of_speech, idx|
       text = words[idx].text
-      # Always print article on modified noun
-      # 'an envious Einstein kill Vader' vs
-      # 'envious Einstein kill Vader'
-      noun_idx, force_countable =
-        if part_of_speech == :adjective
-          [idx + 1, true]
-        elsif part_of_speech == :noun && grammar[idx - 1] != :adjective
-          [idx, false]
-        end
-      if force_countable || (noun_idx && words[noun_idx].countable)
-        str += "#{text.indefinite_article} "
-      end
+      str += "#{text.indefinite_article} " if add_article?(grammar, part_of_speech, idx, words)
       str += "#{highlight(text)} "
     end
     str.strip
+  rescue => e
+    binding.pry
+  end
+
+  # Always prefix modified noun with article
+  # 'an envious Einstein kill Vader' vs
+  # 'envious Einstein kill Vader'
+  def add_article?(grammar, part_of_speech, idx, words)
+    noun_idx, force_countable =
+      if part_of_speech == :adjective
+        [idx + 1, true]
+      elsif part_of_speech == :noun && grammar[idx - 1] != :adjective
+        [idx, false]
+      end
+    force_countable || (noun_idx && words[noun_idx].countable)
   end
 
   def word_groups
-    decimals.each_slice(phrase_size).to_a.map do |dec_group|
+    return @word_groups if @word_groups
+    lexicons = lex.lexicons.dup
+    @word_groups ||= decimals.each_slice(GRAMMAR.keys.max).to_a.map do |dec_group|
       grammar = GRAMMAR[dec_group.size]
       dec_group.each_with_index.map do |decimal, idx|
-        lex.lexicons[grammar[idx]][decimal]
+        part_of_speech = grammar[idx]
+        words = lexicons[part_of_speech]
+        puts "cloning #{words[decimal]}"
+        words[decimal].tap do
+          # word = 'adjectiveago'
+          # Shift words to prevent repeats
+          (decimal..(words.size - 2)).each do |x|
+            words[x] = words[x + 1]
+          end
+          lexicons[part_of_speech] = words[0..-2]
+        end
       end
     end
   end

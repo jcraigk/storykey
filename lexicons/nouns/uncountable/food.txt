@@ -1,12 +1,3 @@
-soup
-milk
-bread
-cheese
-pasta
-flour
-meat
-chocolate
-tiramisu
 flan
 sangria
 stew
