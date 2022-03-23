@@ -17,6 +17,7 @@ require_relative 'peartree/decoder'
 require_relative 'peartree/encoder'
 require_relative 'peartree/lexicon'
 require_relative 'peartree/version'
+require_relative 'peartree/tokenizer'
 require_relative 'peartree/generator'
 
 module Peartree
@@ -60,5 +61,4 @@ GRAMMAR = {
 LEXICONS = %i[adjective noun verb].freeze
 MAX_INPUT_SIZE = 512
 DEFAULT_BITSIZE = 256
-ABBREV_SIZE = 13 # TODO: get this down to 4 or 5
 FOOTER_BITSIZE = 4 # BITS_PER_WORD <= 2^FOOTER_BITSIZE

@@ -80,19 +80,37 @@ class Peartree::Decoder < Peartree::Base
   end
 
   def decimals
-    @decimals ||= base_words.map { |w| base_word_to_dec(w) }
+    return @decimals if @decimals
+
+    @decimals = []
+    idx = 0
+    while idx < tokens.size
+      token = tokens[idx]
+      # Try two words first
+      two_tokens = Peartree::Tokenizer.call("#{token}#{tokens[idx + 1]}")
+      decimal = token_to_decimal(two_tokens)
+      if decimal
+        idx += 1
+      else
+        decimal = token_to_decimal(token)
+      end
+      idx += 1
+      @decimals << decimal
+    end
+
+    @decimals
   end
 
-  def base_word_to_dec(base_word)
-    lex.base_words.each do |part_of_speech, base_words|
-      idx = base_words.index(base_word)
+  def token_to_decimal(token)
+    lex.words.each do |part, words|
+      idx = words.index { |w| w.token == token }
       next unless idx
 
       # Shift words to prevent repeats
-      (idx..(base_words.size - 2)).each do |x|
-        base_words[x] = base_words[x + 1]
+      (idx..(lex.words[part].size - 2)).each do |x|
+        lex.words[part][x] = lex.words[part][x + 1]
       end
-      lex.base_words[part_of_speech] = base_words[0..-2]
+      lex.words[part].pop
 
       return idx
     end
@@ -104,7 +122,7 @@ class Peartree::Decoder < Peartree::Base
     @words ||=
       str.split(/\s+/)
          .grep_v(/\A\d+\.\Z/)
-         .map { |w| w.downcase.gsub(/[^a-z\-\d]/, '') }
+         .map { |w| w.downcase.gsub(/[^a-z\d]/, '') }
          .reject { |w| w.blank? || w.in?(linking_words) }
   end
 
@@ -112,8 +130,10 @@ class Peartree::Decoder < Peartree::Base
     LINKING_WORDS + lex.linking_words
   end
 
-  def base_words
-    @base_words ||= story_words.map { |w| w[0..(ABBREV_SIZE - 1)] }
+  def tokens
+    @tokens ||= story_words.map do |word|
+      Peartree::Tokenizer.call(word)
+    end
   end
 
   def story_words

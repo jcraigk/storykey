@@ -3,7 +3,16 @@
 RSpec.describe Peartree::Lexicon do
   subject(:lex) { described_class.new }
 
-  let(:regex) { /\A(?:[A-Za-z0-9\-]{3,15})\s?(?:[a-z0-9]{2,5})?\Z/ }
+  let(:regex) do
+    /
+      \A
+      [a-zA-Z]
+      [a-zA-Z0-9\-.]{1,15}
+      (\s[a-zA-Z][a-zA-Z0-9\-]{1,15})?
+      (\s\[[a-z]+\])?
+      \Z
+    /x
+  end
   let(:linking_words) { %w[at for from in into of on out to up with] }
   let(:uniq_global_words) { global_words.map(&:downcase).uniq.sort }
   let(:global_words) { lex.words.values.flatten.map(&:text) }
@@ -22,9 +31,9 @@ RSpec.describe Peartree::Lexicon do
       count = (2**BITS_PER_WORD) + (min_pad_words * GRAMMAR.first[1].count { |p| p == part })
       total_count += count
 
-      num = lex.words[part].size
-      percent = (num / count.to_f) * 100
-      puts ">>>>>> #{part} count: #{num} of #{count} (#{percent.floor}%)"
+      # num = lex.words[part].size
+      # percent = (num / count.to_f) * 100
+      # puts ">>>>>> #{part} count: #{num} of #{count} (#{percent.floor}%)"
 
       # Does not skip any contiguous decimals
       (0..(count - 1)).each do |decimal|
@@ -41,15 +50,17 @@ RSpec.describe Peartree::Lexicon do
 
   it 'returns unique words sorted by length and value' do
     LEXICONS.each do |part|
-      words = lex.words[part].map(&:text)
-      # words.select { |e| words.count(e) > 1 }.uniq.sort
-      sorted_uniq = words.uniq.sort_by { |w| [w.size, w] }
+      words = lex.words[part]
+      sorted_uniq = words.uniq.sort_by { |w| [w.text.size, w.text] }
       expect(sorted_uniq).to eq(words)
     end
   end
 
   it 'returns expected linking words' do
     expect(lex.linking_words).to eq(linking_words)
+  end
+
+  xit 'returns expected base words' do
   end
 
   xit 'returns lexicons that have unique 4-letter truncations' do

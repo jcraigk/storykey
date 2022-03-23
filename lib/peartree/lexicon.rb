@@ -3,27 +3,18 @@ class Peartree::Lexicon < Peartree::Base
   COUNTABLE = 'countable'
 
   def words
-    @words ||= LEXICONS.index_with do |part_of_speech|
-      txtfile_words(part_of_speech)
+    @words ||= processed_words.transform_values do |words|
+      words.sort_by { |word| [word.text.size, word.text] }
     end
-  end
-
-  def base_words
-    @base_words ||=
-      words.transform_values do |words|
-        words.map do |word|
-          word.text.split[0].downcase[0..(ABBREV_SIZE - 1)]
-        end
-      end
   end
 
   # Any word after the first is a linking word,
   # included for aesthetics/grammar
-  # TODO: use markup instead to accommodate more forms
   def linking_words
-    @linking_words ||= words.transform_values do |words|
-      words.map { |word| word.text.split[1..] }
-    end.values.flatten.compact.uniq.sort
+    @linking_words ||=
+      raw_words.values.flatten.filter_map do |word|
+        word.text.match(/\[(.+)\]/).to_a[1]
+      end.uniq.sort
   end
 
   def sha
@@ -32,12 +23,21 @@ class Peartree::Lexicon < Peartree::Base
 
   private
 
-  def keyword(word, part_of_speech, decimal)
-    Keyword.new \
-      text: word.text,
-      countable: word.countable,
-      part_of_speech:,
-      decimal:
+  def processed_words
+    raw_words.transform_values do |words|
+      words.map do |word|
+        Word.new \
+          word.text.gsub(/[\[\]]/, ''),
+          word.countable,
+          Peartree::Tokenizer.call(word.text)
+      end
+    end
+  end
+
+  def raw_words
+    LEXICONS.index_with do |part_of_speech|
+      txtfile_words(part_of_speech)
+    end
   end
 
   def txtfile_words(part_of_speech)
@@ -46,7 +46,7 @@ class Peartree::Lexicon < Peartree::Base
         Word.new(text, path.split('/')[-2] == COUNTABLE)
       end
     end
-    words.flatten.sort_by { |w| [w.text.size, w.text] }
+    words.flatten
   end
 
   def txtfile_lines(path)
@@ -59,7 +59,5 @@ class Peartree::Lexicon < Peartree::Base
     Dir.glob("lexicons/#{part_of_speech}s/**/*.txt")
   end
 
-  Keyword = Struct.new \
-    :text, :part_of_speech, :decimal, :countable, keyword_init: true
-  Word = Struct.new(:text, :countable)
+  Word = Struct.new(:text, :countable, :token)
 end

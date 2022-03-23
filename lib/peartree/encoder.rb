@@ -74,11 +74,13 @@ class Peartree::Encoder < Peartree::Base
     end
   end
 
+  # TODO
   def highlight(word)
-    # abbrev = word.split.first[0..(ABBREV_SIZE - 1)]
+    word
+    # token = word.split.first[0..(ABBREV_SIZE - 1)]
     # tail = word[abbrev.size..]
-    ary = word.split
-    "#{ary[0].magenta} #{ary[1]}".strip
+    # matches = word.match(/\A(\[.+\])?([^\[\]]+)(\[.+\])?\Z/).to_a
+    # "#{ary[0].magenta} #{ary[1]}".strip
   end
 
   def raw_phrases

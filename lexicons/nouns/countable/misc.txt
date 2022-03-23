@@ -79,7 +79,6 @@ parent
 passenger
 patient
 pawn
-person
 pioneer
 player
 polytheist

@@ -6,8 +6,6 @@ RSpec.shared_context 'with mocked lexicon' do
     ((MAX_INPUT_SIZE / BITS_PER_WORD.to_f) / GRAMMAR.first[1].count).ceil
   end
   let(:words) do
-    h = {}
-    ('a'..'zzz').each_with_index { |w, i| h[i + 1] = w }
     LEXICONS.index_with do |part_of_speech|
       count =
         (2**BITS_PER_WORD) +
@@ -16,14 +14,27 @@ RSpec.shared_context 'with mocked lexicon' do
           GRAMMAR.first[1].count { |p| p == part_of_speech }
         )
       (0..(count - 1)).map do |num|
+        base = "#{part_of_speech}-#{num}"
+        text =
+          if part_of_speech == :noun
+            if (num % 1).zero?
+              base
+            else
+              "pre-#{num} #{base}"
+            end
+          elsif part_of_speech == :verb && (num % 20).zero?
+            "#{base} [with]"
+          end
         Peartree::Lexicon::Word.new \
-          "#{part_of_speech}-#{num}", (num % 1).zero?
+          text, (num % 1).zero?
       end
     end
   end
   let(:base_words) do
     words.transform_values do |ary|
-      ary.map { |w| w.text.split[0].downcase[0..(ABBREV_SIZE - 1)] }
+      ary.map do |word|
+        Peartree::Tokenizer.call(word.text)
+      end
     end
   end
   let(:mock_lex) { instance_spy(Peartree::Lexicon) }

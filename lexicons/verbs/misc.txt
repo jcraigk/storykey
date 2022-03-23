@@ -6,7 +6,7 @@ accept
 access
 accompany
 accuse
-ache for
+ache [for]
 acquire
 activate
 address
@@ -15,22 +15,22 @@ adopt
 adore
 advise
 affirm
-agree with
-aim at
+agree [with]
+aim [at]
 alarm
 align
 amaze
 amuse
 analyze
 annoy
-apologize to
+apologize [to]
 applaud
 appraise
 appreciate
 approach
 appropriate
 approve
-argue with
+argue [with]
 arm
 arrange
 arrest
@@ -38,29 +38,29 @@ ask
 assess
 assure
 astonish
-attach to
+attach [to]
 attack
 audit
 augment
 avail
 avoid
-babble at
+babble [at]
 backhand
 baffle
 bag
 balance
-balk at
+balk [at]
 ban
 bankrupt
 baptize
-bargain with
-bark at
+bargain [with]
+bark [at]
 bash
 bastardize
 bathe
 battle
 beautify
-beckon to
+beckon [to]
 become
 beguile
 bemuse
@@ -74,11 +74,11 @@ blame
 bleach
 bless
 block
-bolt from
+bolt [from]
 bomb
 boost
 bore
-borrow from
+borrow [from]
 bother
 brush
 build
@@ -86,24 +86,24 @@ burn
 burst
 bury
 bust
-cackle at
+cackle [at]
 calibrate
 call
-camp with
+camp [with]
 cancel
-capitalize on
+capitalize [on]
 capsize
 captivate
 capture
-care for
+care [for]
 carry
 carve
 categorize
-cater to
+cater [to]
 celebrate
 center
 change
-chant with
+chant [with]
 char
 charge
 charm
@@ -122,7 +122,7 @@ chronicle
 clamp
 clasp
 classify
-cling to
+cling [to]
 clip
 cloak
 clobber
@@ -138,13 +138,13 @@ command
 commission
 compel
 compensate
-compete with
-complain to
+compete [with]
+complain [to]
 compliment
 compress
 con
 condemn
-confess to
+confess [to]
 configure
 confine
 confound
@@ -163,7 +163,7 @@ control
 convert
 convict
 convince
-cook for
+cook [for]
 copy
 corner
 correct
@@ -171,24 +171,24 @@ counsel
 count
 counter
 cover
-crash into
-crawl to
+crash [into]
+crawl [to]
 create
 criticize
 critique
 crochet
 crucify
 crush
-cry for
+cry [for]
 cure
 customize
 cut
 damage
-dance with
+dance [with]
 dare
 dazzle
 deactivate
-deal with
+deal [with]
 debate
 debug
 deceive
@@ -205,7 +205,8 @@ delight
 deliver
 demand
 demobilize
-depend on
+deny
+depend [on]
 deprive
 deride
 describe
@@ -214,12 +215,12 @@ destroy
 detach
 detect
 diagnos
-die for
+die [for]
 diminish
 direct
-disagree with
+disagree [with]
 disappoint
-disapprove of
+disapprove [of]
 disarm
 discover
 discuss
@@ -227,7 +228,7 @@ disgust
 dismiss
 dispatch
 display
-dispose of
+dispose [of]
 distribute
 disturb
 divert
@@ -235,14 +236,13 @@ divid
 divide
 double
 doubt
-download
 downsize
 drag
 drain
 draw
-dream of
+dream [of]
 dress
-drink with
+drink [with]
 drive
 drop
 drown
@@ -257,7 +257,7 @@ elevate
 eliminate
 emaciate
 embarrass
-empathize with
+empathize [with]
 employ
 enable
 enchant
@@ -285,7 +285,7 @@ enumerate
 equalize
 equip
 erase
-escape from
+escape [from]
 escort
 evaluate
 exalt
@@ -293,7 +293,7 @@ examine
 exclude
 execute
 exempt
-exercise with
+exercise [with]
 exhaust
 exhibit
 expand
@@ -312,22 +312,22 @@ fence
 ferry
 fetch
 fight
-figure out
+figure [out]
 film
 filter
 find
 fire
-fish for
+fish [for]
 fix
 flag
 flatten
 flee
 fling
 flip
-flirt with
+flirt [with]
 float
 flush
-focus on
+focus [on]
 fold
 follow
 fool
@@ -343,32 +343,32 @@ forsake
 foster
 frame
 freeze
-frown at
+frown [at]
 fry
 fund
 furnish
-gamble with
+gamble [with]
 gather
-gaze at
+gaze [at]
 gnaw
 goad
-golf with
+golf [with]
 google
-gossip with
+gossip [with]
 grab
 grade
 grease
 greet
 grieve
 grill
-grin at
+grin [at]
 grind
 grip
-groan at
+groan [at]
 ground
-growl at
-grumble at
-grunt at
+growl [at]
+grumble [at]
+grunt [at]
 guard
 hail
 halt
@@ -387,23 +387,23 @@ heat
 heighten
 help
 hide
-hike with
+hike [with]
 hinder
-hint at
-hiss at
+hint [at]
+hiss [at]
 hit
 hoist
 hold
-holler at
+holler [at]
 honor
 hook
 horrify
-howl at
+howl [at]
 hug
-hum to
+hum [to]
 hunt
 hurl
-hurry to
+hurry [to]
 hurt
 hydrate
 hypnotize
@@ -425,7 +425,7 @@ impress
 imprint
 imprison
 improve
-improvise with
+improvise [with]
 inaugurate
 include
 incorporate
@@ -437,8 +437,8 @@ inform
 inherit
 initialize
 injure
-inquire with
-insist on
+inquire [with]
+insist [on]
 inspect
 inspire
 instruct
@@ -448,60 +448,60 @@ intercept
 interest
 interrogate
 interrupt
-intersect with
+intersect [with]
 intimidate
 introduce
-intrude on
+intrude [on]
 invalidate
 invent
 invert
-invest in
+invest [in]
 invigorate
 invite
 invoke
 involve
 ionize
-iron out
+iron [out]
 irritate
 isolate
 jab
-jabber at
+jabber [at]
 jail
 jam
 jeer
 jeopardize
-jest with
-jog with
+jest [with]
+jog [with]
 join
-joke with
+joke [with]
 jolt
 josh
 jostle
-juggle for
+juggle [for]
 jump
 justify
 keep
 kick
 kill
 kiss
-kneel for
+kneel [for]
 knight
 knit
 know
 label
-labor with
-land on
+labor [with]
+land [on]
 laud
-laugh at
+laugh [at]
 launch
 lead
-lean on
-learn from
+lean [on]
+learn [from]
 leash
 leave
-leer at
+leer [at]
 legitimize
-lend to
+lend [to]
 level
 levitate
 liberate
@@ -510,22 +510,22 @@ lift
 limit
 link
 liquidate
-listen to
-litter with
-lodge with
-look at
+listen [to]
+litter [with]
+lodge [with]
+look [at]
 loot
 lose
 lower
-lurk with
+lurk [with]
 magnify
 manage
 mangle
 manipulate
-march with
+march [with]
 mark
 marry
-marvel at
+marvel [at]
 massage
 maul
 maximize
@@ -535,8 +535,8 @@ melt
 memorize
 mention
 mentor
-merge with
-mess with
+merge [with]
+mess [with]
 mime
 minimize
 mislead
@@ -554,12 +554,12 @@ multiply
 mummify
 murder
 muscle
-mutter at
+mutter [at]
 nag
 name
 need
 negate
-negotiate with
+negotiate [with]
 normalize
 notice
 notify
@@ -567,14 +567,14 @@ nourish
 number
 nuzzle
 obey
-object to
+object [to]
 oblige
 observe
 obstruct
 obtain
 offend
 omit
-opine to
+opine [to]
 oppress
 optimize
 order
@@ -585,16 +585,16 @@ overwhelm
 owe
 own
 pacify
-package up
+package [up]
 page
 paint
-pair with
+pair [with]
 paralyze
 parasitize
 pardon
-parley with
-partner with
-party with
+parley [with]
+partner [with]
+party [with]
 pass
 pasteurize
 pat
@@ -604,33 +604,33 @@ peck
 peel
 pelt
 penalize
-perform for
+perform [for]
 perplex
 persuade
 perturb
 pet
 petrify
 phone
-pick up
+pick [up]
 pinch
 plagiarize
 plague
 plaster
-play with
+play [with]
 pleas
 please
 pluck
-point at
+point [at]
 poke
 polish
 poll
 pollute
 possess
 postpone
-pounce on
-practice with
+pounce [on]
+practice [with]
 praise
-pray for
+pray [for]
 prepar
 prepare
 present
@@ -639,16 +639,16 @@ press
 prick
 print
 produce
-profess to
-profit from
+profess [to]
+profit [from]
 prohibit
 promise
 promote
 prompt
-propose to
+propose [to]
 prosecute
 protect
-provide for
+provide [for]
 prune
 pry
 pull
@@ -667,11 +667,12 @@ quote
 race
 radio
 raise
-rant at
+rant [at]
+rap [with]
 ratify
 rattle
-rave with
-react to
+rave [with]
+react [to]
 read
 reassure
 recall
@@ -682,15 +683,15 @@ record
 recruit
 reduce
 refer
-reflect on
+reflect [on]
 refresh
 refuse
 register
 reify
 reject
-relax with
+relax [with]
 release
-rely on
+rely [on]
 remember
 remind
 remove
@@ -702,7 +703,7 @@ rent
 repair
 replace
 replicate
-reply to
+reply [to]
 report
 represent
 reproach
@@ -713,42 +714,40 @@ resent
 reset
 resist
 respect
-rest with
+rest [with]
 restart
 restore
 restrain
 restrict
 resurrect
 retain
-retreat from
+retreat [from]
 retrieve
-return to
+return [to]
 reverse
 revert
 review
 revitalize
 revive
 rewind
-rhyme with
 ride
 rinse
-roar at
+roar [at]
 roast
 rob
 rock
-roll into
+roll [into]
 rope
-rot with
+rot [with]
 rotate
-rub
 rue
 ruin
 rule
-run with
+run [with]
 rush
 sack
 sadden
-sail with
+sail [with]
 salute
 sanction
 satirize
@@ -756,21 +755,21 @@ saturate
 save
 savor
 scam
-scamper to
+scamper [to]
 scan
 scare
 schedule
 school
-scoff at
+scoff [at]
 scold
 scorch
 scorn
-scowl at
+scowl [at]
 scrap
 scratch
-screech at
+screech [at]
 scrub
-scurry to
+scurry [to]
 search
 seat
 secure
@@ -780,12 +779,12 @@ select
 sense
 serenade
 serve
-settle for
+settle [for]
 sever
 shade
 shake
 shampoo
-share with
+share [with]
 shatter
 shave
 shear
@@ -794,78 +793,79 @@ shift
 shirk
 shock
 shoot
-shop for
-shout at
+shop [for]
+shout [at]
 shove
-shriek at
+shriek [at]
 shrink
 shroud
-shrug at
+shrug [at]
 shun
 shunt
-shut out
+shut [out]
 sicken
 sidekick
 sidestep
-sigh at
+sigh [at]
 signal
 simplify
-sing for
+sing [for]
 singe
-single out
+single [out]
 sink
-sit with
-skate with
+sit [with]
+skate [with]
 skew
-ski with
+ski [with]
 skip
 slam
 slap
 slash
 slay
 slice
-slink to
+slink [to]
 smell
-smile at
-smoke with
+smile [at]
+smoke [with]
 smother
-snarl at
-sneer at
-snicker at
+snarl [at]
+sneer [at]
+snicker [at]
 sniff
-sob for
+snorkel [with]
+sob [for]
 solarize
 solicit
-solve for
+solve [for]
 soothe
 spawn
-speak to
+speak [to]
 spear
 spin
-spit on
+spit [on]
 spite
 sponsor
 spot
 spray
-sprint to
-spy on
+sprint [to]
+spy [on]
 squeeze
 stab
 stabilize
 stain
-stand with
-stare at
-stay with
-steal from
+stand [with]
+stare [at]
+stay [with]
+steal [from]
 steer
-step to
+step [to]
 sterilize
 stifle
 stimulate
 sting
 stir
 stomp
-stoop to
+stoop [to]
 stop
 store
 stow
@@ -873,16 +873,16 @@ straighten
 strengthen
 stretch
 strike
-struggle with
+struggle [with]
 stub
 study
 stun
 submerge
-submit to
+submit [to]
 subsidize
 subsume
 sue
-suffer for
+suffer [for]
 suffocate
 summon
 supervise
@@ -894,20 +894,20 @@ suppress
 surmise
 surpass
 surprise
-surrender to
+surrender [to]
 surround
 survey
 suspend
 sway
-swear at
+swear [at]
 sweep
-swerve at
-swim with
-swing at
+swerve [at]
+swim [with]
+swing [at]
 symbolize
 synthesize
 tabulate
-talk to
+talk [to]
 tally
 target
 tarnish
@@ -922,12 +922,12 @@ terminate
 terrify
 terrorize
 test
-testify for
+testify [for]
 tether
 thank
 thaw
-theorize with
-think of
+theorize [with]
+think [of]
 threaten
 thrill
 throw
@@ -936,27 +936,27 @@ tickle
 tilt
 time
 tip
-tiptoe to
-tire out
+tiptoe [to]
+tire [out]
 toggle
 tolerate
 torment
 toss
-totter to
+totter [to]
 tow
-toy with
+toy [with]
 trace
 track
-trade with
+trade [with]
 train
-tramp to
-transact with
+tramp [to]
+transact [with]
 transfer
 transform
-translate for
+translate [for]
 transport
 trap
-travel to
+travel [to]
 treat
 trick
 trigger
@@ -993,7 +993,7 @@ urge
 use
 usher
 usurp
-vacation with
+vacation [with]
 validate
 vanquish
 vaporize
@@ -1004,34 +1004,34 @@ veto
 vindicate
 visit
 vivify
-vomit on
-vouch for
+vomit [on]
+vouch [for]
 wager
-wake up
-wall in
+wake [up]
+wall [in]
 warn
 warp
 wash
 watch
-wave at
+wave [at]
 wedge
-weep for
+weep [for]
 weigh
 welcome
 westernize
 whack
-whimper at
-whine at
+whimper [at]
+whine [at]
 whirl
-whisper to
-wink at
-wish on
+whisper [to]
+wink [at]
+wish [on]
 wound
 wrap
 wreck
 wrestle
 wring
-write to
-yell at
-yelp at
-yield to
+write [to]
+yell [at]
+yelp [at]
+yield [to]

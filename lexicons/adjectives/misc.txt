@@ -88,7 +88,6 @@ finicky
 flagrant
 flat
 flawless
-floppy
 floral
 fragile
 frayed
@@ -270,6 +269,7 @@ stinky
 stout
 sturdy
 sublime
+subterranean
 subtle
 successful
 sunny
