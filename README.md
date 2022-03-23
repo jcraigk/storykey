@@ -33,7 +33,7 @@ This paragraph can be deterministically decoded back into its binary source usin
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'peartree'
+gem 'story_key'
 ```
 
 And then execute:
@@ -42,7 +42,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install peartree
+    $ gem install story_key
 
 ## Usage
 
@@ -50,7 +50,7 @@ Produce a set of English phrases given input data (e.g. a cryptocurrency private
 
 ```
 data = 'JA6ymjiUiuMBcaSek3x7AxDyWQhgUJWZZBvcWBy3f7Lt'
-Peartree.encode(data, format: :base58)
+StoryKey.encode(data, format: :base58)
 ```
 
 `data` may be in the form of a hexidecimal (`ab29f3`), a binary string (`1001101`), a decimal (`230938`), or a base58 string (`uMBca`).
@@ -58,13 +58,13 @@ Peartree.encode(data, format: :base58)
 Recover source data (e.g. a cryptocurrency private key) based on an English phrase generated using `encode` (above):
 
 ```
-Peartree.decode(story)
+StoryKey.decode(story)
 ```
 
 Create a hash of source data so that a user may run `verify` to confirm they have memorized the correct code.
 
 ```
-Peartree.quiz(hash)
+StoryKey.quiz(hash)
 ```
 
 TODO: Commandline
@@ -84,7 +84,7 @@ After checking out the repo, run `bin/setup` to install dependencies. Then, run 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/jcraigk/peartree.
+Bug reports and pull requests are welcome on GitHub at https://github.com/jcraigk/story_key.
 
 
 ## License

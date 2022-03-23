@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class Peartree::Base
+class StoryKey::Base
   extend Dry::Initializer
   extend ::ActiveSupport::Concern
 

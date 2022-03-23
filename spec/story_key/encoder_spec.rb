@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Peartree::Encoder do
+RSpec.describe StoryKey::Encoder do
   subject(:call) { described_class.call(input, format:) }
 
   let(:format) { nil }
@@ -15,7 +15,7 @@ RSpec.describe Peartree::Encoder do
 
   shared_examples 'invalid format' do
     it 'raises an exception' do
-      expect { call }.to raise_error(Peartree::InvalidFormat)
+      expect { call }.to raise_error(StoryKey::InvalidFormat)
     end
   end
 
@@ -34,7 +34,7 @@ RSpec.describe Peartree::Encoder do
       end
 
       it 'raises an exception' do
-        expect { call }.to raise_error(Peartree::InputTooLarge)
+        expect { call }.to raise_error(StoryKey::InputTooLarge)
       end
     end
 
@@ -56,7 +56,7 @@ RSpec.describe Peartree::Encoder do
   context 'with valid input' do
     let(:text) do
       <<~TEXT.strip
-        In #{Peartree::VERSION_SLUG} I saw
+        In #{StoryKey::VERSION_SLUG} I saw
         1. an adjective-873 noun-107 verb-342 a noun-499,
         2. an adjective-108 noun-1003 verb-343 a noun-947,
         3. an adjective-586 noun-458 verb-404 a noun-712,
@@ -104,7 +104,7 @@ RSpec.describe Peartree::Encoder do
     let(:input) { 'da46b55' }
     let(:text) do
       <<~TEXT.strip
-        In #{Peartree::VERSION_SLUG} I saw an adjective-873 noun-107 verb-343 a noun-905
+        In #{StoryKey::VERSION_SLUG} I saw an adjective-873 noun-107 verb-343 a noun-905
       TEXT
     end
 
@@ -115,7 +115,7 @@ RSpec.describe Peartree::Encoder do
     let(:input) { '3ff' }
     let(:text) do
       <<~TEXT.strip
-        In #{Peartree::VERSION_SLUG} I saw a noun-1023 verb-843 a noun-256
+        In #{StoryKey::VERSION_SLUG} I saw a noun-1023 verb-843 a noun-256
       TEXT
     end
 
@@ -131,7 +131,7 @@ RSpec.describe Peartree::Encoder do
     end
     let(:text) do
       <<~TEXT.strip
-        In #{Peartree::VERSION_SLUG} I saw
+        In #{StoryKey::VERSION_SLUG} I saw
         1. an adjective-1 noun-1 verb-1 a noun-2,
         2. an adjective-2 noun-3 verb-2 a noun-4,
         3. an adjective-3 noun-5 verb-3 a noun-6,

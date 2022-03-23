@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class Peartree::Lexicon < Peartree::Base
+class StoryKey::Lexicon < StoryKey::Base
   COUNTABLE = 'countable'
 
   def words
@@ -24,7 +24,7 @@ class Peartree::Lexicon < Peartree::Base
     txtfiles(part_of_speech).map do |path|
       txtfile_lines(path).map do |text|
         Word.new \
-          token: Peartree::Tokenizer.call(text),
+          token: StoryKey::Tokenizer.call(text),
           text: text.gsub(/\[|\]/, ''),
           countable: path.split('/')[-2] == COUNTABLE,
           preposition: text.match(/\[(.+)\]/).to_a[1]

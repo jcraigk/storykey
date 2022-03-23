@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Peartree::Decoder do
+RSpec.describe StoryKey::Decoder do
   subject(:call) { described_class.new(input, format:).call }
 
   let(:format) { nil }
@@ -22,26 +22,26 @@ RSpec.describe Peartree::Decoder do
     end
 
     it 'raises an exception' do
-      expect { call }.to raise_error(Peartree::InvalidVersion)
+      expect { call }.to raise_error(StoryKey::InvalidVersion)
     end
   end
 
   context 'with invalid word(s)' do
     let(:input) do
       <<~TEXT.strip
-        In #{Peartree::VERSION_SLUG} I saw a badword noun-107 verb-343 a noun-905
+        In #{StoryKey::VERSION_SLUG} I saw a badword noun-107 verb-343 a noun-905
       TEXT
     end
 
     it 'raises an exception' do
-      expect { call }.to raise_error(Peartree::InvalidWord)
+      expect { call }.to raise_error(StoryKey::InvalidWord)
     end
   end
 
   context 'with invalid checksum' do
     let(:input) do
       <<~TEXT.strip
-        In #{Peartree::VERSION_SLUG} I saw
+        In #{StoryKey::VERSION_SLUG} I saw
         1. an adjective-873 noun-107 verb-342 a noun-499,
         2. an adjective-108 noun-1003 verb-343 a noun-947,
         3. an adjective-586 noun-458 verb-404 a noun-712,
@@ -53,14 +53,14 @@ RSpec.describe Peartree::Decoder do
     end
 
     it 'raises an exception' do
-      expect { call }.to raise_error(Peartree::InvalidChecksum)
+      expect { call }.to raise_error(StoryKey::InvalidChecksum)
     end
   end
 
   context 'with valid input' do
     let(:input) do
       <<~TEXT.strip
-        In #{Peartree::VERSION_SLUG} I saw
+        In #{StoryKey::VERSION_SLUG} I saw
         1. an adjective-873 noun-107 verb-342 a noun-499,
         2. an adjective-108 noun-1003 verb-343 a noun-947,
         3. an adjective-586 noun-458 verb-404 a noun-712,

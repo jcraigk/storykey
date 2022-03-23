@@ -22,19 +22,19 @@ RSpec.shared_context 'with mocked lexicon' do
           else
             base
           end
-        Peartree::Lexicon::Word.new \
-          token: Peartree::Tokenizer.call(text),
+        StoryKey::Lexicon::Word.new \
+          token: StoryKey::Tokenizer.call(text),
           text: text.gsub(/\[|\]/, ''),
           countable: (num % 1).zero?,
           preposition: text.match(/\[(.+)\]/).to_a[1]
       end
     end
   end
-  let(:mock_lex) { instance_spy(Peartree::Lexicon) }
+  let(:mock_lex) { instance_spy(StoryKey::Lexicon) }
   let(:prepositions) { %w[at on for] }
 
   before do
-    allow(Peartree::Lexicon).to receive(:new).and_return(mock_lex)
+    allow(StoryKey::Lexicon).to receive(:new).and_return(mock_lex)
     allow(mock_lex).to receive(:words).and_return(words)
     allow(mock_lex).to receive(:prepositions).and_return(prepositions)
   end

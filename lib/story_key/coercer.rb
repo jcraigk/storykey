@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class Peartree::Coercer < Peartree::Base
+class StoryKey::Coercer < StoryKey::Base
   param :str
   param :input, default: -> { :hex }
   param :output, default: -> { :base58 }
@@ -17,7 +17,7 @@ class Peartree::Coercer < Peartree::Base
       when :dec, :decimal then str.to_i.to_s(2)
       when :hex, :hexidecimal then str.hex.to_s(2)
       when :base58 then Base58.base58_to_int(str, :bitcoin).to_s(2)
-      else raise Peartree::InvalidFormat, "Invalid input format: #{input}"
+      else raise StoryKey::InvalidFormat, "Invalid input format: #{input}"
       end
   end
 
@@ -27,7 +27,7 @@ class Peartree::Coercer < Peartree::Base
     when :dec, :decimal then decimal_str
     when :hex, :hexidecimal then hexidecimal_str
     when :base58 then base58_str
-    else raise Peartree::InvalidFormat, "Invalid output format: #{output}"
+    else raise StoryKey::InvalidFormat, "Invalid output format: #{output}"
     end
   end
 

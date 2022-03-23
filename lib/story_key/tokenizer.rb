@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class Peartree::Tokenizer < Peartree::Base
+class StoryKey::Tokenizer < StoryKey::Base
   param :text
 
   SIZE = 13 # TODO: get this down to 4 or 5

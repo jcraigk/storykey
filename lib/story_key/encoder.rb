@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class Peartree::Encoder < Peartree::Base
+class StoryKey::Encoder < StoryKey::Base
   param :str
   option :format, optional: true
 
@@ -31,7 +31,7 @@ class Peartree::Encoder < Peartree::Base
 
   def validate_length!
     return if bin_str.size <= MAX_INPUT_SIZE
-    raise Peartree::InputTooLarge, "Max input size is #{MAX_INPUT_SIZE} bits"
+    raise StoryKey::InputTooLarge, "Max input size is #{MAX_INPUT_SIZE} bits"
   end
 
   def newline
@@ -39,7 +39,7 @@ class Peartree::Encoder < Peartree::Base
   end
 
   def version_str
-    "In #{Peartree::VERSION_SLUG.cyan} I saw"
+    "In #{StoryKey::VERSION_SLUG.cyan} I saw"
   end
 
   def last_segment_size
@@ -129,12 +129,12 @@ class Peartree::Encoder < Peartree::Base
   end
 
   def lex
-    @lex ||= Peartree::Lexicon.new
+    @lex ||= StoryKey::Lexicon.new
   end
 
   def decimals
     bin_segments.map do |bin|
-      Peartree::Coercer.call(bin, :bin, :dec).to_i
+      StoryKey::Coercer.call(bin, :bin, :dec).to_i
     end
   end
 
@@ -172,7 +172,7 @@ class Peartree::Encoder < Peartree::Base
   end
 
   def bin_str
-    @bin_str ||= Peartree::Coercer.call(str, format, :bin)
+    @bin_str ||= StoryKey::Coercer.call(str, format, :bin)
   end
 
   def checksum
@@ -183,11 +183,11 @@ class Peartree::Encoder < Peartree::Base
   end
 
   def raise_invalid_str
-    raise Peartree::InvalidFormat, "Invalid input for format '#{format}'"
+    raise StoryKey::InvalidFormat, "Invalid input for format '#{format}'"
   end
 
   def raise_invalid_format
-    raise Peartree::InvalidFormat,
+    raise StoryKey::InvalidFormat,
           "Invalid format '#{format}'"
   end
 

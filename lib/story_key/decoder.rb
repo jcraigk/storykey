@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class Peartree::Decoder < Peartree::Base
+class StoryKey::Decoder < StoryKey::Base
   param :str
   option :format, optional: true
 
@@ -17,23 +17,23 @@ class Peartree::Decoder < Peartree::Base
   private
 
   def validate_version!
-    return if version_word.casecmp(Peartree::VERSION_SLUG).zero?
-    raise Peartree::InvalidVersion, version_error_msg
+    return if version_word.casecmp(StoryKey::VERSION_SLUG).zero?
+    raise StoryKey::InvalidVersion, version_error_msg
   end
 
   def validate_words!
     return unless decimals.include?(nil)
-    raise Peartree::InvalidWord, 'Invalid word detected'
+    raise StoryKey::InvalidWord, 'Invalid word detected'
   end
 
   def version_error_msg
     <<~TEXT
-      Missing or invalid version slug! Given '#{version_word.titleize}' but expected '#{Peartree::VERSION_SLUG}'.
+      Missing or invalid version slug! Given '#{version_word.titleize}' but expected '#{StoryKey::VERSION_SLUG}'.
     TEXT
   end
 
   def decoded_str
-    Peartree::Coercer.call(binary_str, :bin, format)
+    StoryKey::Coercer.call(binary_str, :bin, format)
   end
 
   def bin_str
@@ -49,7 +49,7 @@ class Peartree::Decoder < Peartree::Base
 
   def validate_checksum!
     return if computed_checksum == embedded_checksum
-    raise Peartree::InvalidChecksum, 'Checksum mismatch!'
+    raise StoryKey::InvalidChecksum, 'Checksum mismatch!'
   end
 
   def embedded_checksum
@@ -61,7 +61,7 @@ class Peartree::Decoder < Peartree::Base
   end
 
   def tail_bitsize
-    Peartree::Coercer.call(footer, :bin, :dec).to_i
+    StoryKey::Coercer.call(footer, :bin, :dec).to_i
   end
 
   def footer
@@ -87,7 +87,7 @@ class Peartree::Decoder < Peartree::Base
     while idx < tokens.size
       token = tokens[idx]
       # Try two words first
-      two_tokens = Peartree::Tokenizer.call("#{token}#{tokens[idx + 1]}")
+      two_tokens = StoryKey::Tokenizer.call("#{token}#{tokens[idx + 1]}")
       decimal = token_to_decimal(two_tokens)
       if decimal
         idx += 1
@@ -132,7 +132,7 @@ class Peartree::Decoder < Peartree::Base
 
   def tokens
     @tokens ||= story_words.map do |word|
-      Peartree::Tokenizer.call(word)
+      StoryKey::Tokenizer.call(word)
     end
   end
 
@@ -145,6 +145,6 @@ class Peartree::Decoder < Peartree::Base
   end
 
   def lex
-    @lex ||= Peartree::Lexicon.new
+    @lex ||= StoryKey::Lexicon.new
   end
 end

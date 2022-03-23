@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Peartree::Coercer do
+RSpec.describe StoryKey::Coercer do
   subject(:call) { described_class.call(str, input, output) }
 
   let(:bin) do

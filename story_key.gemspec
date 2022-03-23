@@ -1,12 +1,12 @@
 # frozen_string_literal: true
-require_relative 'lib/peartree/version'
+require_relative 'lib/story_key/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'peartree'
-  spec.version       = Peartree::VERSION
+  spec.name          = 'story_key'
+  spec.version       = StoryKey::VERSION
   spec.authors       = ['Justin Craig-Kuhn (JCK)']
   spec.email         = ['jcraigk@gmail.com']
-  spec.summary       = 'Peartree gives a memorable paragraph in place of your crypto private key'
+  spec.summary       = 'StoryKey gives a memorable paragraph in place of your crypto private key'
   spec.license       = 'MIT'
   spec.required_ruby_version = '>= 3.1.0'
   spec.bindir        = 'exe'

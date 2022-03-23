@@ -305,6 +305,7 @@ extract
 extricate
 face
 fasten
+fatigue
 favor
 feed
 feel
@@ -334,8 +335,7 @@ fool
 forbid
 force
 foresee
-forget
-forgiv
+forget [about]
 forgive
 fork
 formulate

@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class Peartree::Generator < Peartree::Base
+class StoryKey::Generator < StoryKey::Base
   param :bitsize
 
   def call

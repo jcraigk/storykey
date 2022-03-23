@@ -10,17 +10,17 @@ require 'humanize'
 require 'indefinite_article'
 require 'pry'
 
-require_relative 'peartree/base'
-require_relative 'peartree/coercer'
-require_relative 'peartree/decoder'
-require_relative 'peartree/encoder'
-require_relative 'peartree/generator'
-require_relative 'peartree/lexicon'
-require_relative 'peartree/string'
-require_relative 'peartree/tokenizer'
-require_relative 'peartree/version'
+require_relative 'story_key/base'
+require_relative 'story_key/coercer'
+require_relative 'story_key/decoder'
+require_relative 'story_key/encoder'
+require_relative 'story_key/generator'
+require_relative 'story_key/lexicon'
+require_relative 'story_key/string'
+require_relative 'story_key/tokenizer'
+require_relative 'story_key/version'
 
-module Peartree
+module StoryKey
   class Error < StandardError; end
   class InvalidFormat < Error; end
   class InvalidVersion < Error; end
@@ -37,7 +37,7 @@ module Peartree
   end
 
   def self.generate(bitsize: DEFAULT_BITSIZE)
-    bin = Peartree::Generator.call(bitsize)
+    bin = StoryKey::Generator.call(bitsize)
     story = encode(bin, format: :bin)
     raise 'An error occurred!' if bin != decode(story.text, format: :bin)
     key = Coercer.call(bin, :bin, :base58)

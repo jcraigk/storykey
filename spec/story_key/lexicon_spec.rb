@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Peartree::Lexicon do
+RSpec.describe StoryKey::Lexicon do
   subject(:lex) { described_class.new }
 
   let(:regex) do
@@ -13,7 +13,7 @@ RSpec.describe Peartree::Lexicon do
       \Z
     /x
   end
-  let(:prepositions) { %w[at for from in into of on out to up with] }
+  let(:prepositions) { %w[about at for from in into of on out to up with] }
   let(:uniq_global_words) { global_words.map(&:downcase).uniq.sort }
   let(:global_words) { lex.words.values.flatten.map(&:text) }
   let(:min_pad_words) do
@@ -22,7 +22,7 @@ RSpec.describe Peartree::Lexicon do
   let(:malformed_words) { global_words.grep_v(regex) }
 
   it 'matches expected sha' do
-    expect(lex.sha).to eq(Peartree::LEXICON_SHA)
+    expect(lex.sha).to eq(StoryKey::LEXICON_SHA)
   end
 
   it 'returns expected word counts' do # rubocop:disable RSpec/ExampleLength
@@ -37,7 +37,7 @@ RSpec.describe Peartree::Lexicon do
 
       # Does not skip any contiguous decimals
       (0..(count - 1)).each do |decimal|
-        expect(lex.words[part][decimal]).to be_a(Peartree::Lexicon::Word)
+        expect(lex.words[part][decimal]).to be_a(StoryKey::Lexicon::Word)
       end
     end
 

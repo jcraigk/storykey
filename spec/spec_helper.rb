@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'peartree'
+require 'story_key'
 
 # TODO: Include all
 require_relative 'support/shared_contexts/with_mocked_lexicon'
