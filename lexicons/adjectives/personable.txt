@@ -55,6 +55,7 @@ cooperative
 corrupt
 cowardly
 crafty
+crass
 crazy
 cruel
 cuddly
@@ -228,7 +229,6 @@ loyal
 lucid
 lucky
 ludicrous
-lusty
 macabre
 male
 masculine

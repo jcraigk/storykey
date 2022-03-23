@@ -16,8 +16,8 @@ RSpec.describe Peartree::Decoder do
   context 'with missing or invalid version lead' do
     let(:input) do
       <<~TEXT.strip
-        1. an adjectiveago noundc verbmd an adjectivesd noundd,
-        2. an adjectivealm nounmd verbaji an adjectivevm nounqo,
+        1. an adjective-873 noun-107 verb-342 a noun-499,
+        2. an adjective-108 noun-1003 verb-343 a noun-947,
       TEXT
     end
 
@@ -29,7 +29,7 @@ RSpec.describe Peartree::Decoder do
   context 'with invalid word(s)' do
     let(:input) do
       <<~TEXT.strip
-        In Miami I saw a badword noundc verbme a nounhp
+        In #{Peartree::VERSION_SLUG} I saw a badword noun-107 verb-343 a noun-905
       TEXT
     end
 
@@ -41,14 +41,14 @@ RSpec.describe Peartree::Decoder do
   context 'with invalid checksum' do
     let(:input) do
       <<~TEXT.strip
-        In Miami I saw
-        1. an adjectiveago noundc verbmd a nounsd,
-        2. an adjectivedd nounalm verbmd a nounaji,
-        3. an adjectivevm nounqo verbol a nounaag,
-        4. an adjectiveadb nounaew verbqq a nounale,
-        5. an adjectiveacj nounagz verbrf a nounth,
-        6. an adjectivekn nounhw verbhu a nounst,
-        7. and a nounry verbwi a nounakz
+        In #{Peartree::VERSION_SLUG} I saw
+        1. an adjective-873 noun-107 verb-342 a noun-499,
+        2. an adjective-108 noun-1003 verb-343 a noun-947,
+        3. an adjective-586 noun-458 verb-404 a noun-712,
+        4. an adjective-784 noun-833 verb-462 a noun-999,
+        5. an adjective-766 noun-889 verb-478 a noun-531,
+        6. an adjective-301 noun-232 verb-229 a noun-518,
+        7. and a noun-496 verb-613 a noun-978
       TEXT
     end
 
@@ -61,13 +61,13 @@ RSpec.describe Peartree::Decoder do
     let(:input) do
       <<~TEXT.strip
         In #{Peartree::VERSION_SLUG} I saw
-        1. an adjectiveago noundc verbmd a nounsd,
-        2. an adjectivedd nounalm verbmd a nounaji,
-        3. an adjectivevm nounqo verbol a nounaag,
-        4. an adjectiveadb nounaew verbqq a nounale,
-        5. an adjectiveacj nounagz verbrf a nounth,
-        6. an adjectivekn nounhw verbhu a nounst,
-        7. and a nounry verbwi a nounakd
+        1. an adjective-873 noun-107 verb-342 a noun-499,
+        2. an adjective-108 noun-1003 verb-343 a noun-947,
+        3. an adjective-586 noun-458 verb-404 a noun-712,
+        4. an adjective-784 noun-833 verb-462 a noun-999,
+        5. an adjective-766 noun-889 verb-478 a noun-531,
+        6. an adjective-301 noun-232 verb-229 a noun-518,
+        7. and a noun-496 verb-613 a noun-977
       TEXT
     end
 

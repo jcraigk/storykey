@@ -12,14 +12,14 @@ StoryKey is a system for converting between arbitrary strings of data and memora
 A paragraph produced by StoryKey for a 256 bit string looks like this:
 
 ```
-In Miami I saw...
-1. a whimsical oriole provide for a cartoonist,
-2. a volatile coward inaugurate a walrus,
-3. an average polytheist insist on a cousin,
-4. a grandiose pug confound an orthodontist,
-5. a marbled herbalist offend Ackbar,
-6. a giant surgeon sue a golem,
-7. and a stoat pursue a harpist
+In Miami I saw
+1. a Peruvian freeloader impress an orc,
+2. a feeble grouse shroud a crab,
+3. a Somalian tattooist betray Saruman,
+4. a guilty punk lurk with Ahab,
+5. a blushing Batman plagiarize an arsonist,
+6. a Chinese goblin critique an aunt,
+7. and a genius restore R2-D2
 ````
 
 This paragraph can be deterministically decoded back into its binary source using the same version of StoryKey. The `version slug` is typically a well-known city, such as `Miami`. An exception will be raised if:

@@ -2,32 +2,32 @@
 class Peartree::Lexicon < Peartree::Base
   COUNTABLE = 'countable'
 
-  def dictionary
-    @dictionary ||= {}.tap do |lex|
-      lexicons.each do |part_of_speech, words|
-        words.each_with_index do |word, decimal|
-          lex[abbrev(word)] = keyword(word, part_of_speech, decimal)
-        end
-      end
-    end
-  end
-
-  # Any word after the first is a linking word,
-  # included for aesthetics/grammar
-  def linking_words
-    @linking_words ||= dictionary.filter_map do |_, v|
-      v.text.split[1..]
-    end.flatten.map(&:downcase).sort.uniq
-  end
-
-  def lexicons
-    @lexicons ||= LEXICONS.index_with do |part_of_speech|
+  def words
+    @words ||= LEXICONS.index_with do |part_of_speech|
       txtfile_words(part_of_speech)
     end
   end
 
+  def base_words
+    @base_words ||=
+      words.transform_values do |words|
+        words.map do |word|
+          word.text.split[0].downcase[0..(ABBREV_SIZE - 1)]
+        end
+      end
+  end
+
+  # Any word after the first is a linking word,
+  # included for aesthetics/grammar
+  # TODO: use markup instead to accommodate more forms
+  def linking_words
+    @linking_words ||= words.transform_values do |words|
+      words.map { |word| word.text.split[1..] }
+    end.values.flatten.compact.uniq.sort
+  end
+
   def sha
-    Digest::SHA256.hexdigest(dictionary.to_s).first(7)
+    Digest::SHA256.hexdigest(words.to_s).first(7)
   end
 
   private
@@ -38,10 +38,6 @@ class Peartree::Lexicon < Peartree::Base
       countable: word.countable,
       part_of_speech:,
       decimal:
-  end
-
-  def abbrev(word)
-    word.text.split[0].downcase[0..(ABBREV_SIZE - 1)]
   end
 
   def txtfile_words(part_of_speech)

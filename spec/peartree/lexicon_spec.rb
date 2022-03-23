@@ -5,13 +5,12 @@ RSpec.describe Peartree::Lexicon do
 
   let(:regex) { /\A(?:[A-Za-z0-9\-]{3,15})\s?(?:[a-z0-9]{2,5})?\Z/ }
   let(:linking_words) { %w[at for from in into of on out to up with] }
-  let(:uniq_text) { lex.lexicons.values.flatten.map(&:text).map(&:downcase).sort }
+  let(:uniq_global_words) { global_words.map(&:downcase).uniq.sort }
+  let(:global_words) { lex.words.values.flatten.map(&:text) }
   let(:min_pad_words) do
     ((MAX_INPUT_SIZE / BITS_PER_WORD.to_f) / GRAMMAR.first[1].count).ceil
   end
-  let(:malformed_words) do
-    lex.dictionary.map { |_, v| v.text }.grep_v(regex)
-  end
+  let(:malformed_words) { global_words.grep_v(regex) }
 
   it 'matches expected sha' do
     expect(lex.sha).to eq(Peartree::LEXICON_SHA)
@@ -23,22 +22,17 @@ RSpec.describe Peartree::Lexicon do
       count = (2**BITS_PER_WORD) + (min_pad_words * GRAMMAR.first[1].count { |p| p == part })
       total_count += count
 
-      num = lex.lexicons[part].size
+      num = lex.words[part].size
       percent = (num / count.to_f) * 100
       puts ">>>>>> #{part} count: #{num} of #{count} (#{percent.floor}%)"
 
-      # Does not skip any decimals
+      # Does not skip any contiguous decimals
       (0..(count - 1)).each do |decimal|
-        keyword = lex.dictionary.find do |_, v|
-          v.part_of_speech == part && v.decimal == decimal
-        end
-        binding.pry if keyword.nil?
-        expect(keyword).not_to be_empty
+        expect(lex.words[part][decimal]).to be_a(Peartree::Lexicon::Word)
       end
     end
 
-    expect(lex.dictionary.size).to eq(total_count)
-    expect(uniq_text.size).to eq(total_count)
+    expect(uniq_global_words.size).to eq(total_count)
   end
 
   it 'returns words of expected length and content' do
@@ -47,7 +41,7 @@ RSpec.describe Peartree::Lexicon do
 
   it 'returns unique words sorted by length and value' do
     LEXICONS.each do |part|
-      words = lex.lexicons[part].map(&:text)
+      words = lex.words[part].map(&:text)
       # words.select { |e| words.count(e) > 1 }.uniq.sort
       sorted_uniq = words.uniq.sort_by { |w| [w.size, w] }
       expect(sorted_uniq).to eq(words)

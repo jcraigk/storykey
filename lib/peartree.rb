@@ -38,7 +38,7 @@ module Peartree
   def self.generate(bitsize: DEFAULT_BITSIZE)
     bin = Peartree::Generator.call(bitsize)
     story = encode(bin, format: :bin)
-    # raise 'An error occurred!' if bin != decode(story.text, format: :bin)
+    raise 'An error occurred!' if bin != decode(story.text, format: :bin)
     key = Coercer.call(bin, :bin, :base58)
     puts [
       'Key:'.bg_blue,

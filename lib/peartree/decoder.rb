@@ -38,7 +38,7 @@ class Peartree::Decoder < Peartree::Base
 
   def bin_str
     @bin_str ||=
-      decimals.each_with_index.map do |dec, idx|
+      decimals.map do |dec|
         dec.to_s(2).rjust(BITS_PER_WORD, '0')
       end.join
   end
@@ -80,12 +80,30 @@ class Peartree::Decoder < Peartree::Base
   end
 
   def decimals
-    @decimals ||= abbrevs.map { |a| lex.dictionary[a]&.decimal }
+    @decimals ||= base_words.map { |w| base_word_to_dec(w) }
+  end
+
+  def base_word_to_dec(base_word)
+    lex.base_words.each do |part_of_speech, base_words|
+      idx = base_words.index(base_word)
+      next unless idx
+
+      # Shift words to prevent repeats
+      (idx..(base_words.size - 2)).each do |x|
+        base_words[x] = base_words[x + 1]
+      end
+      lex.base_words[part_of_speech] = base_words[0..-2]
+
+      return idx
+    end
+
+    nil
   end
 
   def words
     @words ||=
       str.split(/\s+/)
+         .grep_v(/\A\d+\.\Z/)
          .map { |w| w.downcase.gsub(/[^a-z\-\d]/, '') }
          .reject { |w| w.blank? || w.in?(linking_words) }
   end
@@ -94,16 +112,8 @@ class Peartree::Decoder < Peartree::Base
     LINKING_WORDS + lex.linking_words
   end
 
-  def word_of_type?(word, part_of_speech)
-    lex.dictionary[abbrev(word)]&.part_of_speech == part_of_speech
-  end
-
-  def abbrevs
-    @abbrevs ||= story_words.map { |w| abbrev(w) }
-  end
-
-  def abbrev(word)
-    word[0..(ABBREV_SIZE - 1)]
+  def base_words
+    @base_words ||= story_words.map { |w| w[0..(ABBREV_SIZE - 1)] }
   end
 
   def story_words

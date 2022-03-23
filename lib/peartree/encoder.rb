@@ -114,13 +114,13 @@ class Peartree::Encoder < Peartree::Base
       grammar = GRAMMAR[dec_group.size]
       dec_group.each_with_index.map do |decimal, idx|
         part_of_speech = grammar[idx]
-        words = lex.lexicons[part_of_speech]
+        words = lex.words[part_of_speech]
         words[decimal].tap do
           # Shift words to prevent repeats
           (decimal..(words.size - 2)).each do |x|
             words[x] = words[x + 1]
           end
-          lex.lexicons[part_of_speech] = words[0..-2]
+          lex.words[part_of_speech] = words[0..-2]
         end
       end
     end
