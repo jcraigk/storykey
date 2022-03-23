@@ -1,10 +1,8 @@
 # TODO / IDEAS
 
-* Use markup to indicate extra words and support multiple words like "van Gogh" and "Marge Simpson". Dictionary should combine/downcase the primary part for the key. When decoding, check for multi-word match first.
+* BUG! Ask for input bitsize when encoding and left-pad the binary string with zeros if converting (add this to coercer). Also verify bitsize of input InvalidInputSize (must be <= specified)
 
 * Fuzzy finder auto-complete for recovery process
-
-* Ask for input bitsize when encoding and left-pad the binary string with zeros if converting (add this to coercer). Also verify bitsize of input InvalidInputSize (must be <= specified)
 
 * Use https://openai.com/blog/dall-e/ or similar to generate images as cognitive aids
 

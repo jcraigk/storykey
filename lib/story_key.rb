@@ -16,7 +16,6 @@ require_relative 'story_key/decoder'
 require_relative 'story_key/encoder'
 require_relative 'story_key/generator'
 require_relative 'story_key/lexicon'
-require_relative 'story_key/string'
 require_relative 'story_key/tokenizer'
 require_relative 'story_key/version'
 
@@ -42,9 +41,9 @@ module StoryKey
     raise 'An error occurred!' if bin != decode(story.text, format: :bin)
     key = Coercer.call(bin, :bin, :base58)
     puts [
-      'Key:'.bg_blue,
+      "\e[44mKey:\e[0m",
       key,
-      'Story:'.bg_blue,
+      "\e[44mStory:\e[0m",
       story.colorized
     ].join("\n")
   end

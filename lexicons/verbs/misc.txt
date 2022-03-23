@@ -111,7 +111,7 @@ charter
 chase
 chastise
 cheat
-check
+check [on]
 cheer
 chew
 chide

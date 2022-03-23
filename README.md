@@ -3,11 +3,12 @@
 StoryKey is a system for converting between arbitrary strings of data and memorable English phrases. The primary use case is memorizing a cryptocurrency private key, colloquially referred to as "making a brain wallet". StoryKey is inspired by [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki), adding extra features:
 
 (1) Encodes arbitrary length data from 1 to 512 bits
-(2) Includes checksum for robustness
+(2) Includes checksum for robustness (keep?)
 (3) Includes version slug to expose/guarantee accurate decoding
 (4) Enforces a simple English grammar to drive semantic associations
 (5) Lexicon is curated for mental visualization
 (6) No keywords are repeated
+(7) Presents the story with colorized grammar
 
 A paragraph produced by StoryKey for a 256 bit string looks like this:
 

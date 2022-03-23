@@ -24,6 +24,7 @@ class StoryKey::Lexicon < StoryKey::Base
     txtfiles(part_of_speech).map do |path|
       txtfile_lines(path).map do |text|
         Word.new \
+          part_of_speech:,
           token: StoryKey::Tokenizer.call(text),
           text: text.gsub(/\[|\]/, ''),
           countable: path.split('/')[-2] == COUNTABLE,
@@ -43,5 +44,6 @@ class StoryKey::Lexicon < StoryKey::Base
   end
 
   Word = Struct.new \
-    :token, :text, :countable, :preposition, keyword_init: true
+    :token, :text, :countable, :preposition, :part_of_speech,
+    keyword_init: true
 end

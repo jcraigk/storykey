@@ -8,6 +8,13 @@ class StoryKey::Encoder < StoryKey::Base
   DEC_REGEX = /\A\d+\Z/
   HEX_REGEX = /\A[\da-f]+\Z/
   BIN_REGEX = /\A[0-1]+\Z/
+  COLORS = {
+    adjective: 36,
+    noun: 33,
+    preposition: nil,
+    slug: 31,
+    verb: 35
+  }.freeze
 
   def call
     @str = str.strip
@@ -22,7 +29,7 @@ class StoryKey::Encoder < StoryKey::Base
   private
 
   def text
-    @text ||= colorized.no_color
+    @text ||= colorized.gsub(/\e\[\d+m/, '')
   end
 
   def colorized
@@ -39,7 +46,7 @@ class StoryKey::Encoder < StoryKey::Base
   end
 
   def version_str
-    "In #{StoryKey::VERSION_SLUG.cyan} I saw"
+    "In #{colorize(StoryKey::VERSION_SLUG, COLORS[:slug])} I saw"
   end
 
   def last_segment_size
@@ -63,24 +70,31 @@ class StoryKey::Encoder < StoryKey::Base
 
   def phrases
     raw_phrases.each_with_index.map do |phrase, idx|
-      parts = []
-      if num_phrases > 1
-        parts << "#{idx + 1}."
-        parts << 'and' if idx == num_phrases - 1
-      end
-      # parts << phrase.no_color.indefinite_article
-      parts << phrase
-      parts.join(' ')
+      [].tap do |ary|
+        if num_phrases > 1
+          ary << "#{idx + 1}."
+          ary << 'and' if idx == num_phrases - 1
+        end
+        ary << phrase
+      end.join(' ')
     end
   end
 
-  # TODO
   def highlight(word)
-    word
-    # token = word.split.first[0..(ABBREV_SIZE - 1)]
-    # tail = word[abbrev.size..]
-    # matches = word.match(/\A(\[.+\])?([^\[\]]+)(\[.+\])?\Z/).to_a
-    # "#{ary[0].magenta} #{ary[1]}".strip
+    ary =
+      if word.preposition
+        [word.text.split(word.preposition)[0].strip, word.preposition]
+      else
+        [word.text]
+      end
+    main = colorize(ary[0], COLORS[word.part_of_speech])
+    prep = colorize(ary[1], COLORS[:preposition])
+    "#{main} #{prep}".strip
+  end
+
+  def colorize(text, num)
+    return text if text.blank? || num.blank?
+    "\e[#{num}m#{text}\e[0m"
   end
 
   def raw_phrases
@@ -91,9 +105,15 @@ class StoryKey::Encoder < StoryKey::Base
     str = ''
     grammar = GRAMMAR[words.size]
     grammar.each_with_index do |part_of_speech, idx|
-      text = words[idx].text
-      str += "#{text.indefinite_article} " if add_article?(grammar, part_of_speech, idx, words)
-      str += "#{highlight(text)} "
+      next if (word = words[idx]).blank?
+      if add_article?(grammar, part_of_speech, idx, words)
+        article = colorize(word.text.indefinite_article, COLORS[:preposition])
+        str += "#{article} "
+      end
+      str += "#{highlight(word)} "
+      # text = words[idx].text
+      # str += "#{text.indefinite_article} " if add_article?(grammar, part_of_speech, idx, words)
+      # str += "#{highlight(words[idx])} "
     end
     str.strip
   end

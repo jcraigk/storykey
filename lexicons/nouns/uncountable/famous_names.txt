@@ -47,6 +47,7 @@ Demi Moore
 Democritus
 Dickens
 Diogenes
+Dostoevsky
 Einstein
 Elvis
 Emily Dickinson
@@ -55,7 +56,6 @@ Frances Coppola
 Frank Sinatra
 Fraz Kafka
 Freud
-Dostoevsky
 Galileo
 Gandhi
 George Carlin
@@ -162,6 +162,7 @@ Tolkien
 Tom Cruise
 Tom Hanks
 Tutankhamun
+van Gogh
 Vanderbilt
 Vermeer
 Virgil
