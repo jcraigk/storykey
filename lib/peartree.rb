@@ -11,14 +11,14 @@ require 'indefinite_article'
 require 'pry'
 
 require_relative 'peartree/base'
-require_relative 'peartree/string'
 require_relative 'peartree/coercer'
 require_relative 'peartree/decoder'
 require_relative 'peartree/encoder'
-require_relative 'peartree/lexicon'
-require_relative 'peartree/version'
-require_relative 'peartree/tokenizer'
 require_relative 'peartree/generator'
+require_relative 'peartree/lexicon'
+require_relative 'peartree/string'
+require_relative 'peartree/tokenizer'
+require_relative 'peartree/version'
 
 module Peartree
   class Error < StandardError; end
@@ -51,7 +51,7 @@ module Peartree
 end
 
 BITS_PER_WORD = 10
-LINKING_WORDS = %w[in i saw and a an].freeze
+PREPOSITIONS = %w[in i saw and a an].freeze
 GRAMMAR = {
   4 => %i[adjective noun verb noun],
   3 => %i[noun verb noun],

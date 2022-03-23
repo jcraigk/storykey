@@ -13,7 +13,7 @@ RSpec.describe Peartree::Lexicon do
       \Z
     /x
   end
-  let(:linking_words) { %w[at for from in into of on out to up with] }
+  let(:prepositions) { %w[at for from in into of on out to up with] }
   let(:uniq_global_words) { global_words.map(&:downcase).uniq.sort }
   let(:global_words) { lex.words.values.flatten.map(&:text) }
   let(:min_pad_words) do
@@ -56,8 +56,8 @@ RSpec.describe Peartree::Lexicon do
     end
   end
 
-  it 'returns expected linking words' do
-    expect(lex.linking_words).to eq(linking_words)
+  it 'returns expected prepositions' do
+    expect(lex.prepositions).to eq(prepositions)
   end
 
   xit 'returns expected base words' do

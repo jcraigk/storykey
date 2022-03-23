@@ -3,50 +3,33 @@ class Peartree::Lexicon < Peartree::Base
   COUNTABLE = 'countable'
 
   def words
-    @words ||= processed_words.transform_values do |words|
-      words.sort_by { |word| [word.text.size, word.text] }
+    @words ||= LEXICONS.index_with do |part_of_speech|
+      txtfile_words(part_of_speech).sort_by do |word|
+        [word.text.size, word.text]
+      end
     end
   end
 
-  # Any word after the first is a linking word,
-  # included for aesthetics/grammar
-  def linking_words
-    @linking_words ||=
-      raw_words.values.flatten.filter_map do |word|
-        word.text.match(/\[(.+)\]/).to_a[1]
-      end.uniq.sort
+  def prepositions
+    @prepositions ||= words.values.flatten.filter_map(&:preposition).uniq.sort
   end
 
   def sha
-    Digest::SHA256.hexdigest(words.to_s).first(7)
+    @sha ||= Digest::SHA256.hexdigest(words.to_s).first(7)
   end
 
   private
 
-  def processed_words
-    raw_words.transform_values do |words|
-      words.map do |word|
-        Word.new \
-          word.text.gsub(/[\[\]]/, ''),
-          word.countable,
-          Peartree::Tokenizer.call(word.text)
-      end
-    end
-  end
-
-  def raw_words
-    LEXICONS.index_with do |part_of_speech|
-      txtfile_words(part_of_speech)
-    end
-  end
-
   def txtfile_words(part_of_speech)
-    words = txtfiles(part_of_speech).map do |path|
+    txtfiles(part_of_speech).map do |path|
       txtfile_lines(path).map do |text|
-        Word.new(text, path.split('/')[-2] == COUNTABLE)
+        Word.new \
+          token: Peartree::Tokenizer.call(text),
+          text: text.gsub(/\[|\]/, ''),
+          countable: path.split('/')[-2] == COUNTABLE,
+          preposition: text.match(/\[(.+)\]/).to_a[1]
       end
-    end
-    words.flatten
+    end.flatten
   end
 
   def txtfile_lines(path)
@@ -59,5 +42,6 @@ class Peartree::Lexicon < Peartree::Base
     Dir.glob("lexicons/#{part_of_speech}s/**/*.txt")
   end
 
-  Word = Struct.new(:text, :countable, :token)
+  Word = Struct.new \
+    :token, :text, :countable, :preposition, keyword_init: true
 end

@@ -30,7 +30,7 @@ RSpec.describe Peartree::Tokenizer do
     include_examples 'success'
   end
 
-  context 'with linking words' do
+  context 'with a preposition' do
     let(:str) { 'look [at]' }
     let(:token) { 'look' }
 

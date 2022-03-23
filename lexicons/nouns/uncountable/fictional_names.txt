@@ -1,8 +1,6 @@
 Achilles
-Ackbar
+Admiral Ackbar
 Agamemnon
-Ahab
-Amidala
 Aphrodite
 Apollo
 Aragorn
@@ -10,17 +8,17 @@ Ares
 Artemis
 Athena
 Banquo
-R2-D2
-BB-8
-C-3PO
 Barbie
 Batman
+BB-8
 Beowulf
 Bilbo
 Binks
 Boromir
+C-3PO
 Calrissian
 Calypso
+Captain Ahab
 Capulet
 Cassandra
 Catwoman
@@ -54,7 +52,7 @@ Horatio
 Hulk
 Juliet
 Jupiter
-Kylo
+Kylo Ren
 Lassie
 Legolas
 Leia
@@ -79,7 +77,9 @@ Pikachu
 Pooh
 Poseiden
 Prospero
+Queen Amidala
 Queequeg
+R2-D2
 Rambo
 Romeo
 Saruman

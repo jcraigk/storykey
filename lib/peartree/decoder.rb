@@ -123,11 +123,11 @@ class Peartree::Decoder < Peartree::Base
       str.split(/\s+/)
          .grep_v(/\A\d+\.\Z/)
          .map { |w| w.downcase.gsub(/[^a-z\d]/, '') }
-         .reject { |w| w.blank? || w.in?(linking_words) }
+         .reject { |w| w.blank? || w.in?(prepositions) }
   end
 
-  def linking_words
-    LINKING_WORDS + lex.linking_words
+  def prepositions
+    PREPOSITIONS + lex.prepositions
   end
 
   def tokens
