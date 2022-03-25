@@ -4,6 +4,8 @@ RSpec.shared_context 'with mocked lexicon' do
   let(:min_pad_words) do
     ((MAX_INPUT_SIZE / BITS_PER_WORD.to_f) / GRAMMAR.first[1].count).ceil
   end
+  let(:multinoun_frequency) { 7 }
+  let(:preposition_frequency) { 20 }
   let(:words) do
     LEXICONS.index_with do |part_of_speech|
       count =
@@ -15,9 +17,9 @@ RSpec.shared_context 'with mocked lexicon' do
       (0..(count - 1)).map do |num|
         base = "#{part_of_speech}-#{num}"
         text =
-          if part_of_speech == :noun && (num % 7).zero?
+          if part_of_speech == :noun && (num % multinoun_frequency).zero?
             "pre-#{num} #{base}"
-          elsif part_of_speech == :verb && (num % 20).zero?
+          elsif part_of_speech == :verb && (num % preposition_frequency).zero?
             "#{base} [with]"
           else
             base

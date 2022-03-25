@@ -10,9 +10,9 @@ RSpec.describe StoryKey do
     let(:mock_encoder) { instance_spy(StoryKey::Encoder) }
 
     before do
-      allow(StoryKey::Encoder).to receive(:new).with(str, format: nil).and_return(mock_encoder)
+      allow(StoryKey::Encoder).to receive(:new).with(str:, format: nil).and_return(mock_encoder)
       allow(mock_encoder).to receive(:call)
-      described_class.encode(str)
+      described_class.encode(str:)
     end
 
     it 'calls StoryKey::Encoder' do
@@ -25,9 +25,9 @@ RSpec.describe StoryKey do
     let(:mock_decoder) { instance_spy(StoryKey::Decoder) }
 
     before do
-      allow(StoryKey::Decoder).to receive(:new).with(str, format: nil).and_return(mock_decoder)
+      allow(StoryKey::Decoder).to receive(:new).with(str:, format: nil).and_return(mock_decoder)
       allow(mock_decoder).to receive(:call)
-      described_class.decode(str)
+      described_class.decode(str:)
     end
 
     it 'calls StoryKey::Decoder' do

@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 class StoryKey::Coercer < StoryKey::Base
-  param :str
-  param :input, default: -> { :hex }
-  param :output, default: -> { :base58 }
+  option :str
+  option :bitsize, default: -> {}
+  option :input
+  option :output
 
   def call
     converted_str
@@ -11,7 +12,11 @@ class StoryKey::Coercer < StoryKey::Base
   private
 
   def binary_str
-    @binary_str ||=
+    bitsize ? bin.rjust(bitsize, '0') : bin
+  end
+
+  def bin
+    @bin ||=
       case input.to_sym
       when :bin, :binary then str
       when :dec, :decimal then str.to_i.to_s(2)

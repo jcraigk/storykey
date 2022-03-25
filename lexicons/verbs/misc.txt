@@ -837,6 +837,7 @@ sob [for]
 solarize
 solicit
 solve [for]
+somersault [for]
 soothe
 spawn
 speak [to]
@@ -865,7 +866,6 @@ stimulate
 sting
 stir
 stomp
-stoop [to]
 stop
 store
 stow

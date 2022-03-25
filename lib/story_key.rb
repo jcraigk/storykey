@@ -25,27 +25,30 @@ module StoryKey
   class InvalidVersion < Error; end
   class InvalidWord < Error; end
   class InvalidChecksum < Error; end
-  class InputTooLarge < Error; end
+  class KeyTooLarge < Error; end
 
-  def self.encode(str, format: nil)
-    Encoder.call(str, format:)
+  def self.encode(...)
+    Encoder.call(...)
   end
 
-  def self.decode(str, format: nil)
-    Decoder.call(str, format:)
+  def self.decode(...)
+    Decoder.call(...)
   end
 
   def self.generate(bitsize: DEFAULT_BITSIZE)
-    bin = StoryKey::Generator.call(bitsize)
-    story = encode(bin, format: :bin)
-    raise 'An error occurred!' if bin != decode(story.text, format: :bin)
-    key = Coercer.call(bin, :bin, :base58)
-    puts [
-      "\e[44mKey:\e[0m",
-      key,
-      "\e[44mStory:\e[0m",
-      story.colorized
-    ].join("\n")
+    1000.times do
+      key = StoryKey::Generator.call(bitsize:)
+      format = :bin
+      encoded = encode(key:, bitsize:, format:)
+      raise 'An error occurred!' if key != decode(story: encoded.story, format:)
+      key = Coercer.call(str: key, bitsize:, input: format, output: :base58)
+      puts [
+        "\e[44mKey:\e[0m",
+        key,
+        "\e[44mStory:\e[0m",
+        encoded.colorized
+      ].join("\n")
+    end
   end
 end
 

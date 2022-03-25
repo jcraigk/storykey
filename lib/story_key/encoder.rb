@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 class StoryKey::Encoder < StoryKey::Base
-  param :str
+  option :bitsize, optional: true
   option :format, optional: true
+  option :key
 
   BASE58_REGEX =
     /\A[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]+\Z/
@@ -17,28 +18,30 @@ class StoryKey::Encoder < StoryKey::Base
   }.freeze
 
   def call
-    @str = str.strip
-    @format ||= :hex
+    @key = key.strip
+    @format ||= :base58
+
+    # puts_debug
 
     validate_format!
     validate_length!
 
-    Result.new(text, colorized)
+    Result.new(story:, colorized:)
   end
 
   private
 
-  def text
-    @text ||= colorized.gsub(/\e\[\d+m/, '')
+  def story
+    @story ||= colorized.gsub(/\e\[\d+m/, '').gsub(/\d+\./, '').delete("\n").squish
   end
 
   def colorized
-    @colorized ||= "#{version_str}#{newline}#{phrases.join(",\n")}"
+    @colorized ||= "#{version_str}#{newline}#{phrases.join(",\n")}."
   end
 
   def validate_length!
     return if bin_str.size <= MAX_INPUT_SIZE
-    raise StoryKey::InputTooLarge, "Max input size is #{MAX_INPUT_SIZE} bits"
+    raise StoryKey::KeyTooLarge, "Max input size is #{MAX_INPUT_SIZE} bits"
   end
 
   def newline
@@ -83,7 +86,7 @@ class StoryKey::Encoder < StoryKey::Base
   def highlight(word)
     ary =
       if word.preposition
-        [word.text.split(word.preposition)[0].strip, word.preposition]
+        [word.text.gsub(/\s#{word.preposition}\Z/, ''), word.preposition]
       else
         [word.text]
       end
@@ -138,11 +141,8 @@ class StoryKey::Encoder < StoryKey::Base
         part_of_speech = grammar[idx]
         words = lex.words[part_of_speech]
         words[decimal].tap do
-          # Shift words to prevent repeats
-          (decimal..(words.size - 2)).each do |x|
-            words[x] = words[x + 1]
-          end
-          lex.words[part_of_speech] = words[0..-2]
+          # Remove word to prevent repeats, shifting others down
+          lex.words[part_of_speech] = words[..(decimal - 1)] + words[(decimal + 1)..]
         end
       end
     end
@@ -153,8 +153,8 @@ class StoryKey::Encoder < StoryKey::Base
   end
 
   def decimals
-    bin_segments.map do |bin|
-      StoryKey::Coercer.call(bin, :bin, :dec).to_i
+    bin_segments.map do |str|
+      StoryKey::Coercer.call(str:, input: :bin, output: :dec).to_i
     end
   end
 
@@ -169,7 +169,7 @@ class StoryKey::Encoder < StoryKey::Base
   end
 
   def validate_format!
-    raise_invalid_str unless str.match?(format_regex)
+    raise_invalid_key unless key.match?(format_regex)
   end
 
   def format_regex
@@ -183,7 +183,6 @@ class StoryKey::Encoder < StoryKey::Base
   end
 
   def binary_str
-    return @binary_str if @binary_str
     @binary_str ||= bin_str + checksum + footer
   end
 
@@ -192,7 +191,7 @@ class StoryKey::Encoder < StoryKey::Base
   end
 
   def bin_str
-    @bin_str ||= StoryKey::Coercer.call(str, format, :bin)
+    @bin_str ||= StoryKey::Coercer.call(str: key, bitsize:, input: format, output: :bin)
   end
 
   def checksum
@@ -202,7 +201,7 @@ class StoryKey::Encoder < StoryKey::Base
                   .first(checksum_bitsize)
   end
 
-  def raise_invalid_str
+  def raise_invalid_key
     raise StoryKey::InvalidFormat, "Invalid input for format '#{format}'"
   end
 
@@ -211,5 +210,17 @@ class StoryKey::Encoder < StoryKey::Base
           "Invalid format '#{format}'"
   end
 
-  Result = Struct.new(:text, :colorized)
+  def puts_debug
+    puts "====ENCODER===="
+    puts "key: #{key}"
+    puts "bin: #{bin_str}"
+    puts "decimals: #{decimals}"
+    puts "checksum: #{checksum}"
+    puts "checksum_bitsize: #{checksum_bitsize}"
+    puts "tail_bitsize: #{tail_bitsize}"
+    puts "story: #{story}"
+    puts "colorized: #{colorized}"
+  end
+
+  Result = Struct.new(:story, :colorized, keyword_init: true)
 end

@@ -1,14 +1,15 @@
 # frozen_string_literal: true
 class StoryKey::Decoder < StoryKey::Base
-  param :str
+  option :story
   option :format, optional: true
 
   def call
-    @str = str.strip
-    @format ||= :hex
+    @story = story.strip
+    @format ||= :base58
+
+    # puts_debug
 
     validate_version!
-    validate_words!
     validate_checksum!
 
     decoded_str
@@ -16,14 +17,29 @@ class StoryKey::Decoder < StoryKey::Base
 
   private
 
+  def decoded_str
+    StoryKey::Coercer.call(str: bin_str, input: :bin, output: format)
+  end
+
+  def binary_str
+    @binary_str ||=
+      decimals.map do |dec|
+        dec.to_s(2).rjust(BITS_PER_WORD, '0')
+      end.join
+  end
+
+  def bin_str
+    @bin_str ||= binary_str[0..(checksum_start_idx - 1)]
+  end
+
+  def validate_checksum!
+    return if computed_checksum == embedded_checksum
+    raise StoryKey::InvalidChecksum, 'Checksum mismatch!'
+  end
+
   def validate_version!
     return if version_word.casecmp(StoryKey::VERSION_SLUG).zero?
     raise StoryKey::InvalidVersion, version_error_msg
-  end
-
-  def validate_words!
-    return unless decimals.include?(nil)
-    raise StoryKey::InvalidWord, 'Invalid word detected'
   end
 
   def version_error_msg
@@ -32,40 +48,24 @@ class StoryKey::Decoder < StoryKey::Base
     TEXT
   end
 
-  def decoded_str
-    StoryKey::Coercer.call(binary_str, :bin, format)
-  end
-
-  def bin_str
-    @bin_str ||=
-      decimals.map do |dec|
-        dec.to_s(2).rjust(BITS_PER_WORD, '0')
-      end.join
-  end
-
-  def binary_str
-    @binary_str ||= bin_str[0..(checksum_start_idx - 1)]
-  end
-
-  def validate_checksum!
-    return if computed_checksum == embedded_checksum
-    raise StoryKey::InvalidChecksum, 'Checksum mismatch!'
+  def tail_bitsize
+    StoryKey::Coercer.call(
+      str: footer,
+      input: :bin,
+      output: :dec
+    ).to_i
   end
 
   def embedded_checksum
-    bin_str[checksum_start_idx..-(FOOTER_BITSIZE + 1)]
+    binary_str[checksum_start_idx..-(FOOTER_BITSIZE + 1)]
   end
 
   def checksum_start_idx
-    bin_str.size - (checksum_bitsize + FOOTER_BITSIZE)
-  end
-
-  def tail_bitsize
-    StoryKey::Coercer.call(footer, :bin, :dec).to_i
+    binary_str.size - (checksum_bitsize + FOOTER_BITSIZE)
   end
 
   def footer
-    bin_str.last(FOOTER_BITSIZE)
+    binary_str.last(FOOTER_BITSIZE)
   end
 
   def checksum_bitsize
@@ -73,57 +73,30 @@ class StoryKey::Decoder < StoryKey::Base
   end
 
   def computed_checksum
-    Digest::SHA256.hexdigest(binary_str)
+    Digest::SHA256.hexdigest(bin_str)
                   .hex
                   .to_s(2)
                   .first(checksum_bitsize)
   end
 
   def decimals
-    return @decimals if @decimals
-
-    @decimals = []
-    idx = 0
-    while idx < tokens.size
-      token = tokens[idx]
-      # Try two words first
-      two_tokens = StoryKey::Tokenizer.call("#{token}#{tokens[idx + 1]}")
-      decimal = token_to_decimal(two_tokens)
-      if decimal
-        idx += 1
-      else
-        decimal = token_to_decimal(token)
-      end
-      idx += 1
-      @decimals << decimal
-    end
-
-    @decimals
+    @decimals ||= tokens.map { |token| token_to_decimal(token) }
   end
 
   def token_to_decimal(token)
     lex.words.each do |part, words|
-      idx = words.index { |w| w.token == token }
-      next unless idx
-
-      # Shift words to prevent repeats
-      (idx..(lex.words[part].size - 2)).each do |x|
-        lex.words[part][x] = lex.words[part][x + 1]
-      end
-      lex.words[part].pop
-
+      next unless (idx = words.index { |w| w.token == token })
+      lex.words[part] = words[..(idx - 1)] + words[(idx + 1)..]
       return idx
     end
-
-    nil
   end
 
   def words
     @words ||=
-      str.split(/\s+/)
-         .grep_v(/\A\d+\.\Z/)
-         .map { |w| w.downcase.gsub(/[^a-z\d]/, '') }
-         .reject { |w| w.blank? || w.in?(prepositions) }
+      story.split(/\s+/)
+           .grep_v(/\A\d+\.\Z/)
+           .map { |w| w.downcase.gsub(/[^a-z\d]/, '') }
+           .reject { |w| w.blank? || w.in?(prepositions) }
   end
 
   def prepositions
@@ -131,9 +104,29 @@ class StoryKey::Decoder < StoryKey::Base
   end
 
   def tokens
-    @tokens ||= story_words.map do |word|
-      StoryKey::Tokenizer.call(word)
+    @tokens ||= [].tap do |tokens|
+      idx = 0
+      while idx < story_words.size
+        word = story_words[idx]
+        combined = StoryKey::Tokenizer.call("#{word} #{story_words[idx + 1]}")
+        single = StoryKey::Tokenizer.call(word)
+        token =
+          if combined.in?(valid_tokens)
+            idx += 1
+            combined
+          elsif single.in?(valid_tokens)
+            single
+          else
+            raise StoryKey::InvalidWord, "Invalid word detected: '#{word}'"
+          end
+        idx += 1
+        tokens << token
+      end
     end
+  end
+
+  def valid_tokens
+    @valid_tokens ||= lex.words.values.flatten.map(&:token)
   end
 
   def story_words
@@ -146,5 +139,16 @@ class StoryKey::Decoder < StoryKey::Base
 
   def lex
     @lex ||= StoryKey::Lexicon.new
+  end
+
+  def puts_debug
+    puts "====DECODER===="
+    puts "bin: #{bin_str}"
+    puts "tokens: #{tokens}"
+    puts "decimals: #{decimals}"
+    puts "checksum: #{computed_checksum}"
+    puts "embedded_checksum: #{embedded_checksum}"
+    puts "checksum_bitsize: #{checksum_bitsize}"
+    puts "tail_bitsize: #{tail_bitsize}"
   end
 end

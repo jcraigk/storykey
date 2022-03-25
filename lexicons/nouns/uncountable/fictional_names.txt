@@ -13,7 +13,6 @@ Batman
 BB-8
 Beowulf
 Bilbo
-Jar-Jar Binks
 Boromir
 C-3PO
 Calrissian
@@ -49,6 +48,7 @@ Hera
 Hercules
 Hermes
 Horatio
+Jar-Jar Binks
 Juliet
 Jupiter
 Kylo Ren

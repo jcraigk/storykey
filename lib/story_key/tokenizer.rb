@@ -2,8 +2,6 @@
 class StoryKey::Tokenizer < StoryKey::Base
   param :text
 
-  SIZE = 13 # TODO: get this down to 4 or 5
-
   def call
     token_from_text
   end
@@ -13,6 +11,8 @@ class StoryKey::Tokenizer < StoryKey::Base
   def token_from_text
     text.downcase
         .gsub(/\[.+\]/, '')
-        .gsub(/[^a-z0-9]/, '')[0..(SIZE - 1)]
+        .gsub(/[^a-z0-9\s]/, '')
+        .strip
+        .gsub(/\s+/, '-')
   end
 end
