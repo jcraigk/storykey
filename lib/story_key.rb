@@ -36,19 +36,17 @@ module StoryKey
   end
 
   def self.generate(bitsize: DEFAULT_BITSIZE)
-    1000.times do
-      key = StoryKey::Generator.call(bitsize:)
-      format = :bin
-      encoded = encode(key:, bitsize:, format:)
-      raise 'An error occurred!' if key != decode(story: encoded.story, format:)
-      key = Coercer.call(str: key, bitsize:, input: format, output: :base58)
-      puts [
-        "\e[44mKey:\e[0m",
-        key,
-        "\e[44mStory:\e[0m",
-        encoded.colorized
-      ].join("\n")
-    end
+    key = StoryKey::Generator.call(bitsize:)
+    format = :bin
+    encoded = encode(key:, bitsize:, format:)
+    raise 'An error occurred!' if key != decode(story: encoded.story, format:)
+    key = Coercer.call(str: key, bitsize:, input: format, output: :base58)
+    puts [
+      "\e[44mKey:\e[0m",
+      key,
+      "\e[44mStory:\e[0m",
+      encoded.colorized
+    ].join("\n")
   end
 end
 

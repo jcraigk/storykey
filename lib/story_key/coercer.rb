@@ -22,8 +22,14 @@ class StoryKey::Coercer < StoryKey::Base
       when :dec, :decimal then str.to_i.to_s(2)
       when :hex, :hexidecimal then str.hex.to_s(2)
       when :base58 then Base58.base58_to_int(str, :bitcoin).to_s(2)
-      else raise StoryKey::InvalidFormat, "Invalid input format: #{input}"
+      else raise_invalid_input
       end
+  rescue ArgumentError
+    raise_invalid_input
+  end
+
+  def raise_invalid_input
+    raise StoryKey::InvalidFormat, "Invalid input format: #{input}"
   end
 
   def converted_str

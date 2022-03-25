@@ -25,7 +25,7 @@ RSpec.describe StoryKey::Tokenizer do
 
   context 'with multiple words' do
     let(:str) { 'Steve Apple' }
-    let(:token) { 'steveapple' }
+    let(:token) { 'steve-apple' }
 
     include_examples 'success'
   end

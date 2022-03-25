@@ -57,30 +57,19 @@ RSpec.describe StoryKey::Encoder do
   context 'with valid key' do
     let(:story) do
       <<~TEXT.strip
-        In #{StoryKey::VERSION_SLUG} I saw
-        1. an adjective-873 noun-107 verb-342 a noun-499,
-        2. an adjective-108 noun-1003 verb-343 a noun-947,
-        3. an adjective-586 noun-458 verb-404 a noun-712,
-        4. an adjective-784 pre-833 noun-833 verb-462 a noun-999,
-        5. an adjective-766 pre-889 noun-889 verb-478 a noun-531,
-        6. an adjective-301 noun-232 verb-229 a pre-518 noun-518,
-        7. and a noun-496 verb-613 a noun-977
+        In #{StoryKey::VERSION_SLUG} I saw an adjective-873 noun-107 verb-342 a noun-499, an adjective-108 noun-1003 verb-343 a noun-947, an adjective-586 noun-458 verb-404 a noun-712, an adjective-784 pre-833 noun-833 verb-462 a noun-999, an adjective-766 pre-889 noun-889 verb-478 a noun-531, an adjective-301 noun-232 verb-229 a pre-518 noun-518, and a noun-496 verb-613 a noun-977.
       TEXT
     end
 
     context 'when key is in default base58 format' do
-      let(:key) do
-        <<~TEXT
-          98729131926707364344155946614204368554393612909660450514900410658357640330085
-        TEXT
-      end
+      let(:key) { 'Fh4QxGsSAazZWHRogYPMFqLrF4VmXcjhSEtnnVp9eCHJ' }
 
       include_examples 'success'
     end
 
     context 'when key is in hexidecimal format' do
       let(:format) { :hex }
-      let(:key) { 'Fh4QxGsSAazZWHRogYPMFqLrF4VmXcjhSEtnnVp9eCHJ' }
+      let(:key) { 'da46b559f21b3e955bb1925c964ac5c3b3d72fe1bf37476a104b0e7396027b65' }
 
       include_examples 'success'
     end
@@ -108,22 +97,11 @@ RSpec.describe StoryKey::Encoder do
     end
   end
 
-  context 'with short key and partial last phrase' do
+  context 'with short key' do
     let(:key) { 'da46b55' }
     let(:story) do
       <<~TEXT.strip
-        In #{StoryKey::VERSION_SLUG} I saw an adjective-873 noun-107 verb-343 a noun-905
-      TEXT
-    end
-
-    include_examples 'success'
-  end
-
-  context 'when last segment is not default size' do
-    let(:key) { '3ff' }
-    let(:story) do
-      <<~TEXT.strip
-        In #{StoryKey::VERSION_SLUG} I saw a noun-1023 verb-843 a noun-256
+        In #{StoryKey::VERSION_SLUG} I saw an adjective-648 noun-285 verb-318 a noun-551, and an adjective-500 noun-257.
       TEXT
     end
 
@@ -139,21 +117,7 @@ RSpec.describe StoryKey::Encoder do
     end
     let(:story) do
       <<~TEXT.strip
-        In #{StoryKey::VERSION_SLUG} I saw
-        1. an adjective-1 noun-1 verb-1 a noun-2,
-        2. an adjective-2 noun-3 verb-2 a noun-4,
-        3. an adjective-3 noun-5 verb-3 a noun-6,
-        4. an adjective-4 pre-7 noun-7 verb-4 a noun-8,
-        5. an adjective-5 noun-9 verb-5 a noun-10,
-        6. an adjective-6 noun-11 verb-6 a noun-12,
-        7. an adjective-7 noun-13 verb-7 a pre-14 noun-14,
-        8. an adjective-8 noun-15 verb-8 a noun-16,
-        9. an adjective-9 noun-17 verb-9 a noun-18,
-        10. an adjective-10 noun-19 verb-10 a noun-20,
-        11. an adjective-11 pre-21 noun-21 verb-11 a noun-22,
-        12. an adjective-12 noun-23 verb-12 a noun-24,
-        13. an adjective-13 noun-25 verb-13 a pre-980 noun-980,
-        14. and a pre-875 noun-875
+        In #{StoryKey::VERSION_SLUG} I saw an adjective-1 noun-1 verb-1 a noun-2, an adjective-2 noun-3 verb-2 a noun-4, an adjective-3 noun-5 verb-3 a noun-6, an adjective-4 pre-7 noun-7 verb-4 a noun-8, an adjective-5 noun-9 verb-5 a noun-10, an adjective-6 noun-11 verb-6 a noun-12, an adjective-7 noun-13 verb-7 a pre-14 noun-14, an adjective-8 noun-15 verb-8 a noun-16, an adjective-9 noun-17 verb-9 a noun-18, an adjective-10 noun-19 verb-10 a noun-20, an adjective-11 pre-21 noun-21 verb-11 a noun-22, an adjective-12 noun-23 verb-12 a noun-24, an adjective-13 noun-25 verb-13 a pre-980 noun-980, and a pre-875 noun-875.
       TEXT
     end
 

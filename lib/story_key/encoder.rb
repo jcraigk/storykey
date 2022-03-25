@@ -4,8 +4,7 @@ class StoryKey::Encoder < StoryKey::Base
   option :format, optional: true
   option :key
 
-  BASE58_REGEX =
-    /\A[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]+\Z/
+  BASE58_REGEX = /\A[1-9A-Za-z]+\Z/
   DEC_REGEX = /\A\d+\Z/
   HEX_REGEX = /\A[\da-f]+\Z/
   BIN_REGEX = /\A[0-1]+\Z/
@@ -21,8 +20,6 @@ class StoryKey::Encoder < StoryKey::Base
     @key = key.strip
     @format ||= :base58
 
-    # puts_debug
-
     validate_format!
     validate_length!
 
@@ -32,7 +29,7 @@ class StoryKey::Encoder < StoryKey::Base
   private
 
   def story
-    @story ||= colorized.gsub(/\e\[\d+m/, '').gsub(/\d+\./, '').delete("\n").squish
+    @story ||= colorized.gsub(/\e\[\d+m/, '').gsub(/\n\d+\./, '').delete("\n").squish
   end
 
   def colorized
@@ -208,18 +205,6 @@ class StoryKey::Encoder < StoryKey::Base
   def raise_invalid_format
     raise StoryKey::InvalidFormat,
           "Invalid format '#{format}'"
-  end
-
-  def puts_debug
-    puts "====ENCODER===="
-    puts "key: #{key}"
-    puts "bin: #{bin_str}"
-    puts "decimals: #{decimals}"
-    puts "checksum: #{checksum}"
-    puts "checksum_bitsize: #{checksum_bitsize}"
-    puts "tail_bitsize: #{tail_bitsize}"
-    puts "story: #{story}"
-    puts "colorized: #{colorized}"
   end
 
   Result = Struct.new(:story, :colorized, keyword_init: true)
