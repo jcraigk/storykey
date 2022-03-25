@@ -122,7 +122,4 @@ RSpec.describe StoryKey::Encoder do
 
     include_examples 'success'
   end
-
-  xcontext 'with hex and bitsize provided, resulting in left padded zeroes' do
-  end
 end

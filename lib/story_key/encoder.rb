@@ -107,13 +107,9 @@ class StoryKey::Encoder < StoryKey::Base
     grammar.each_with_index do |part_of_speech, idx|
       next if (word = words[idx]).blank?
       if add_article?(grammar, part_of_speech, idx, words)
-        article = colorize(word.text.indefinite_article, COLORS[:preposition])
-        str += "#{article} "
+        str += "#{colorize(word.text.indefinite_article, COLORS[:preposition])} "
       end
       str += "#{highlight(word)} "
-      # text = words[idx].text
-      # str += "#{text.indefinite_article} " if add_article?(grammar, part_of_speech, idx, words)
-      # str += "#{highlight(words[idx])} "
     end
     str.strip
   end
@@ -133,15 +129,18 @@ class StoryKey::Encoder < StoryKey::Base
 
   def word_groups
     decimals.each_slice(GRAMMAR.keys.max).to_a.map do |dec_group|
-      grammar = GRAMMAR[dec_group.size]
       dec_group.each_with_index.map do |decimal, idx|
-        part_of_speech = grammar[idx]
-        words = lex.words[part_of_speech]
-        words[decimal].tap do
-          # Remove word to prevent repeats, shifting others down
-          lex.words[part_of_speech] = words[..(decimal - 1)] + words[(decimal + 1)..]
-        end
+        word_from_decimal(GRAMMAR[dec_group.size], decimal, idx)
       end
+    end
+  end
+
+  def word_from_decimal(grammar, decimal, idx)
+    part_of_speech = grammar[idx]
+    words = lex.words[part_of_speech]
+    words[decimal].tap do
+      # Shift words to prevent repeats
+      lex.words[part_of_speech] = words[..(decimal - 1)] + words[(decimal + 1)..]
     end
   end
 

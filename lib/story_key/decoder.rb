@@ -107,22 +107,27 @@ class StoryKey::Decoder < StoryKey::Base
     @tokens ||= [].tap do |tokens|
       idx = 0
       while idx < story_words.size
-        word = story_words[idx]
-        combined = StoryKey::Tokenizer.call("#{word} #{story_words[idx + 1]}")
-        single = StoryKey::Tokenizer.call(word)
-        token =
-          if combined.in?(valid_tokens)
-            idx += 1
-            combined
-          elsif single.in?(valid_tokens)
-            single
-          else
-            raise StoryKey::InvalidWord, "Invalid word detected: '#{word}'"
-          end
-        idx += 1
+        token, idx = token_from_words(story_words, idx)
         tokens << token
       end
     end
+  end
+
+  def token_from_words(story_words, idx) # rubocop:disable Metrics/MethodLength
+    word = story_words[idx]
+    combined = StoryKey::Tokenizer.call("#{word} #{story_words[idx + 1]}")
+    single = StoryKey::Tokenizer.call(word)
+    token =
+      if combined.in?(valid_tokens)
+        idx += 1
+        combined
+      elsif single.in?(valid_tokens)
+        single
+      else
+        raise StoryKey::InvalidWord, "Invalid word detected: '#{word}'"
+      end
+
+    [token, idx + 1]
   end
 
   def valid_tokens

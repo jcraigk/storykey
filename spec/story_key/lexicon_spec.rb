@@ -29,17 +29,11 @@ RSpec.describe StoryKey::Lexicon do
     LEXICONS.each do |part|
       count = (2**BITS_PER_WORD) + (min_pad_words * GRAMMAR.first[1].count { |p| p == part })
       total_count += count
-
-      # num = lex.words[part].size
-      # percent = (num / count.to_f) * 100
-      # puts ">>>>>> #{part} count: #{num} of #{count} (#{percent.floor}%)"
-
       # Does not skip any contiguous decimals
       (0..(count - 1)).each do |decimal|
         expect(lex.words[part][decimal]).to be_a(StoryKey::Lexicon::Word)
       end
     end
-
     expect(uniq_global_words.size).to eq(total_count)
   end
 
@@ -57,27 +51,5 @@ RSpec.describe StoryKey::Lexicon do
 
   it 'returns expected prepositions' do
     expect(lex.prepositions).to eq(prepositions)
-  end
-
-  xit 'returns expected base words' do
-  end
-
-  xit 'returns lexicons that have unique 4-letter truncations' do
-    lex.lexicons.each do |_, words|
-      truncs = words.map { |w| w[0..3] }
-      expect(truncs.uniq).to eq(truncs)
-    end
-  end
-
-  xit 'produdes words of expected syllabic content' do
-  end
-
-  # Verify with external dictionary
-  xit 'produces real English words' do
-  end
-
-  # Adjective "twisted" vs verb "twisting"
-  # TODO: Is it bad or good to share bases?
-  xit 'avoids the same base across lexicons' do
   end
 end

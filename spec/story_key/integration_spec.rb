@@ -1,12 +1,12 @@
 # frozen_string_literal: true
-RSpec.describe 'integration' do
+RSpec.describe 'integration' do # rubocop:disable RSpec/DescribeClass
   let(:bitsize) { nil }
   let(:format) { nil }
   let(:encoded) { StoryKey.encode(key:, bitsize:, format:) }
   let(:output) { StoryKey.decode(story: encoded.story, format:) }
 
   shared_examples 'success' do
-    it 'encodes and decodes the key successfully' do
+    it 'encodes and decodes the key' do
       expect(output).to eq(key)
     end
   end

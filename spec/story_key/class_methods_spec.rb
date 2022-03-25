@@ -3,7 +3,7 @@ class TestClass
   extend StoryKey::ClassMethods
 end
 
-RSpec.describe TestClass do
+RSpec.describe TestClass do # rubocop:disable RSpec/FilePath
   describe '#encode' do
     let(:key) { 'abcd1234' }
     let(:mock_encoder) { instance_spy(StoryKey::Encoder) }
