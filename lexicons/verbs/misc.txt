@@ -9,7 +9,6 @@ accuse
 ache [for]
 acquire
 activate
-address
 admire
 adopt
 adore
@@ -217,6 +216,7 @@ detect
 diagnos
 die [for]
 diminish
+dine [with]
 direct
 disagree [with]
 disappoint
@@ -343,6 +343,7 @@ forsake
 foster
 frame
 freeze
+frisk
 frown [at]
 fry
 fund
@@ -597,7 +598,6 @@ partner [with]
 party [with]
 pass
 pasteurize
-pat
 patch
 pay
 peck

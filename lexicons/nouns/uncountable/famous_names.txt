@@ -1,85 +1,141 @@
 Abraham Lincoln
 Adam Sandler
 Adele
+Agatha Christie
 Al Pacino
+Aldous Huxley
+Alec Baldwin
 Alfred Hitchcock
 Amenhotep
 Andrew Carnegie
 Andy Warhol
+Angelina Jolie
 Antonin Dvorak
+Antonio Banderas
 Archimedes
 Aristotle
+Ashton Kutcher
+Audrey Hepburn
 Augustus
+Ayn Rand
 Bach
+Barbra Streisand
 Basquiat
 Beethoven
 Ben Affleck
+Ben Stiller
 Benjamin Franklin
-Bergman
+Betty White
+Bill Murray
 Bob Dylan
 Boole
 Borges
 Bosch
 Brad Pitt
+Bradley Cooper
 Brahms
 Bruce Willis
 Bukowski
+Buster Keaton
 Caligula
+Cameron Diaz
 Carl Jung
+Cary Grant
+Cate Blanchett
 Cervantes
 Cezanne
-Chaplin
 Charlemagne
+Charles Darwin
+Charlie Chaplin
 Chaucer
 Chopin
 Cicero
+Clark Gable
+Claude Debussy
 Cleopatra
 Clint Eastwood
+Colin Firth
 Confucius
 Copernicus
-Dante
-Darwin
+Cornelius Vanderbilt
+Dante Alighieri
 David Bowie
 David Letterman
-Debussy
-Degas
 Demi Moore
 Democritus
+Dennis Quaid
+Diane Keaton
 Dickens
 Diogenes
 Dostoevsky
+Drew Barrymore
+Dustin Hoffman
+Edgar Degas
 Einstein
-Elvis
+Elizabeth Hurley
+Elizabeth Taylor
+Elvis Presley
 Emily Dickinson
 Epicurus
+Erwin Schrodinger
 Frances Coppola
+Frank Herbert
 Frank Sinatra
-Fraz Kafka
-Freud
+Franz Kafka
+Fred Astaire
 Galileo
 Gandhi
+Gary Cooper
+Gene Hackman
+Gene Kelly
 George Carlin
 George Clooney
 George Orwell
 Gershwin
 Ginsberg
 Goethe
+Grace Kelly
+Gregory Peck
 Guevara
+Gwyneth Paltrow
 Hadrian
 Handel
+Harrison Ford
+Heath Ledger
 Hegel
 Heisenberg
+Helen Hunt
+Helen Mirren
 Hemingway
 Hendrix
 Henri Matisse
 Hitler
 Homer Simpson
+Hugh Jackman
 Humphrey Bogart
 Immanuel Kant
+Ingmar Bergman
+Ingrid Bergman
 Isaac Asimov
 Isaac Newton
+Jack Black
+Jack Kerouac
+Jack London
 Jack Nicholson
 Jackson Pollock
+James Stewart
+Jane Fonda
+Jason Bateman
+Jason Segel
+Jeff Bridges
+Jennifer Garner
+Jim Carrey
+Joaquin Phoenix
+Jodie Foster
+Johannes Vermeer
+John Belushi
+John Cusack
+John Goodman
 John Hopkins
 John Keats
 John Lenin
@@ -87,30 +143,44 @@ John Locke
 John Milton
 John Rockefeller
 John Steinbeck
-Johnny Carson
+John Wayne
 Johnny Depp
+Joseph Conrad
+Joseph Heller
 Judas
 Jules Verne
+Julia Roberts
 Julius Caesar
 Karl Marx
+Kate Winslet
+Katharine Hepburn
 Keanu Reeves
 Kevin Costner
+Kirsten Dunst
 Kurt Vonnegut
 Laertes
 Leo Tolstoy
 Leonardio DiCaprio
+Liam Neeson
 Louis Armstrong
 Madonna
+Mao Zedong
 Marcus Aurelius
 Margaret Thatcher
+Marilyn Monroe
 Mark Twain
 Mark Wahlberg
+Marlon Brando
 Martin Scorsese
 Mary Shelley
-Matthew McConaughey
+Matt Damon
+Maya Angelou
 Melville
+Meryl Streep
 Methuselah
+Michael Douglas
 Michelangelo
+Michelle Pfeiffer
 Mick Jagger
 Mondrian
 Monet
@@ -119,14 +189,20 @@ Mozart
 Munch
 Mussolini
 Napoleon
+Natalie Portman
 Nelson Mandela
 Nero
+Nicolas Cage
+Nicole Kidman
 Nietzsche
 Nikola Tesla
 Noam Chomsky
-Picasso
+Oscar Wilde
+Owen Wilson
+Pablo Picasso
+Paul Giamatti
+Paul Newman
 Plato
-Poe
 Pythagoras
 Quentin Tarantino
 Rachmaninoff
@@ -134,47 +210,63 @@ Raphael
 Ray Bradbury
 Rene Descartes
 Richard Feynman
-Rousseau
+Richard Wagner
+Roald Dahl
+Rob Lowe
+Robert DeNiro
+Robert Redford
+Robert Schumann
+Rosario Dawson
 Rudyard Kipling
+Russell Crowe
+Ryan Gosling
+Ryan Reynolds
+Salman Rushdie
 Sandra Bullock
 Satoshi Nakamoto
-Schrodinger
-Schumann
+Scarlett Johansson
 Scott Fitzgerald
+Sean Connery
 Sean Penn
 Shakespeare
+Sigmund Freud
 Socrates
+Sophia Loren
 Sophocles
 Stalin
 Stanley Kubrick
 Stephen King
+Steve Carell
+Steve Martin
+Steve McQueen
 Steven Soderbergh
 Steven Spielberg
 Stravinsky
 Tchaikovsky
+Tennessee Williams
 Terry Gilliam
 Thomas Edison
 Thomas Hobbes
 Thoreau
 Tiberius
+Tina Fey
 Tiresias
 Tolkien
 Tom Cruise
 Tom Hanks
+Toni Morrison
 Tutankhamun
 van Gogh
-Vanderbilt
-Vermeer
 Virgil
 Virginia Woolf
 Vivaldi
 Voltaire
-Wagner
 Walt Whitman
 Will Smith
+William Blake
 William Faulkner
+William Shatner
 Winston Churchill
 Wittgenstein
 Xerxes
-Zedong
 Zeno

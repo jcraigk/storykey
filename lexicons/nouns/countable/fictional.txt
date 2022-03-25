@@ -1,6 +1,5 @@
 android
 angel
-astrologist
 banshee
 basilisk
 centaur
@@ -10,6 +9,8 @@ cyborg
 cyclops
 demon
 devil
+Balrog
+Nazgul
 dragon
 drake
 druid
@@ -26,7 +27,6 @@ golem
 gorgon
 gremlin
 griffin
-Gungan
 harpy
 hydra
 imp
@@ -36,23 +36,15 @@ leviathan
 manticore
 mermaid
 minotaur
-nymph
 ogre
-oni
 orc
-pagan
 pegasus
 phantom
 phoenix
 pixie
 poltergeist
-revenant
 sorcerer
-specter
 sphinx
-spirit
-spook
-succubus
 troll
 unicorn
 valkyrie

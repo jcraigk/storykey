@@ -29,6 +29,11 @@ RSpec.describe StoryKey::Lexicon do
     LEXICONS.each do |part|
       count = (2**BITS_PER_WORD) + (min_pad_words * GRAMMAR.first[1].count { |p| p == part })
       total_count += count
+
+      num = lex.words[part].size
+      percent = (num / count.to_f) * 100
+      puts ">>>>>> #{part} count: #{num} of #{count} (#{percent.floor}%)"
+
       # Does not skip any contiguous decimals
       (0..(count - 1)).each do |decimal|
         expect(lex.words[part][decimal]).to be_a(StoryKey::Lexicon::Word)
