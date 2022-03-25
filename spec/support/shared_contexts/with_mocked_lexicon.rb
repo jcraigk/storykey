@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 RSpec.shared_context 'with mocked lexicon' do
   let(:min_pad_words) do
     ((MAX_INPUT_SIZE / BITS_PER_WORD.to_f) / GRAMMAR.first[1].count).ceil

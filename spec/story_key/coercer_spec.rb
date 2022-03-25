@@ -1,7 +1,6 @@
 # frozen_string_literal: true
-
 RSpec.describe StoryKey::Coercer do
-  subject(:call) { described_class.call(str:, bitsize:, input:, output:) }
+  subject(:call) { described_class.call(str:, bitsize:, from:, to:) }
 
   let(:bitsize) { 256 }
   let(:bin) do
@@ -15,7 +14,7 @@ RSpec.describe StoryKey::Coercer do
 
   shared_examples 'success' do
     context 'when output is :bin' do
-      let(:output) { :bin }
+      let(:to) { :bin }
       let(:expected) { bin }
 
       it 'returns expected value' do
@@ -24,7 +23,7 @@ RSpec.describe StoryKey::Coercer do
     end
 
     context 'when output is :dec' do
-      let(:output) { :dec }
+      let(:to) { :dec }
       let(:expected) { dec }
 
       it 'returns expected value' do
@@ -33,7 +32,7 @@ RSpec.describe StoryKey::Coercer do
     end
 
     context 'when output is :hex' do
-      let(:output) { :hex }
+      let(:to) { :hex }
       let(:expected) { hex }
 
       it 'returns expected value' do
@@ -42,7 +41,7 @@ RSpec.describe StoryKey::Coercer do
     end
 
     context 'when output is :base58' do
-      let(:output) { :base58 }
+      let(:to) { :base58 }
       let(:expected) { base58 }
 
       it 'returns expected value' do
@@ -52,28 +51,28 @@ RSpec.describe StoryKey::Coercer do
   end
 
   context 'when input is :bin' do
-    let(:input) { :bin }
+    let(:from) { :bin }
     let(:str) { bin }
 
     include_examples 'success'
   end
 
   context 'when input is :dec' do
-    let(:input) { :dec }
+    let(:from) { :dec }
     let(:str) { dec }
 
     include_examples 'success'
   end
 
   context 'when input is :hex' do
-    let(:input) { :hex }
+    let(:from) { :hex }
     let(:str) { hex }
 
     include_examples 'success'
   end
 
   context 'when input is :base58' do
-    let(:input) { :base58 }
+    let(:from) { :base58 }
     let(:str) { base58 }
 
     include_examples 'success'

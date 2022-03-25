@@ -2,8 +2,8 @@
 class StoryKey::Coercer < StoryKey::Base
   option :str
   option :bitsize, default: -> {}
-  option :input
-  option :output
+  option :from
+  option :to
 
   def call
     converted_str
@@ -17,7 +17,7 @@ class StoryKey::Coercer < StoryKey::Base
 
   def bin
     @bin ||=
-      case input.to_sym
+      case from.to_sym
       when :bin, :binary then str
       when :dec, :decimal then str.to_i.to_s(2)
       when :hex, :hexidecimal then str.hex.to_s(2)
@@ -29,16 +29,16 @@ class StoryKey::Coercer < StoryKey::Base
   end
 
   def raise_invalid_input
-    raise StoryKey::InvalidFormat, "Invalid input format: #{input}"
+    raise StoryKey::InvalidFormat, "Invalid input format: #{from}"
   end
 
   def converted_str
-    case output.to_sym
+    case to.to_sym
     when :bin, :binary then binary_str
     when :dec, :decimal then decimal_str
     when :hex, :hexidecimal then hexidecimal_str
     when :base58 then base58_str
-    else raise StoryKey::InvalidFormat, "Invalid output format: #{output}"
+    else raise StoryKey::InvalidFormat, "Invalid output format: #{to}"
     end
   end
 

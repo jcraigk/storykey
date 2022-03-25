@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 RSpec.describe StoryKey::Decoder do
   subject(:call) { described_class.new(story:, format:).call }
 

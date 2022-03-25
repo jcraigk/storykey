@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 class StoryKey::Encoder < StoryKey::Base
-  option :bitsize, optional: true
-  option :format, optional: true
+  option :bitsize, default: -> {}
+  option :format, default: -> {}
   option :key
 
   BASE58_REGEX = /\A[1-9A-Za-z]+\Z/
@@ -151,7 +151,7 @@ class StoryKey::Encoder < StoryKey::Base
 
   def decimals
     bin_segments.map do |str|
-      StoryKey::Coercer.call(str:, input: :bin, output: :dec).to_i
+      StoryKey::Coercer.call(str:, from: :bin, to: :dec).to_i
     end
   end
 
@@ -188,7 +188,7 @@ class StoryKey::Encoder < StoryKey::Base
   end
 
   def bin_str
-    @bin_str ||= StoryKey::Coercer.call(str: key, bitsize:, input: format, output: :bin)
+    @bin_str ||= StoryKey::Coercer.call(str: key, bitsize:, from: format, to: :bin)
   end
 
   def checksum

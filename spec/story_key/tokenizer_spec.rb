@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 RSpec.describe StoryKey::Tokenizer do
   subject(:call) { described_class.call(str) }
 

@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 RSpec.describe StoryKey::Encoder do
   subject(:call) { described_class.call(key:, bitsize:, format:) }
 

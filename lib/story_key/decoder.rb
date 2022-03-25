@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 class StoryKey::Decoder < StoryKey::Base
   option :story
-  option :format, optional: true
+  option :format, default: -> {}
 
   def call
     @story = story.strip
@@ -18,7 +18,7 @@ class StoryKey::Decoder < StoryKey::Base
   private
 
   def decoded_str
-    StoryKey::Coercer.call(str: bin_str, input: :bin, output: format)
+    StoryKey::Coercer.call(str: bin_str, from: :bin, to: format)
   end
 
   def binary_str
@@ -51,8 +51,8 @@ class StoryKey::Decoder < StoryKey::Base
   def tail_bitsize
     StoryKey::Coercer.call(
       str: footer,
-      input: :bin,
-      output: :dec
+      from: :bin,
+      to: :dec
     ).to_i
   end
 
@@ -142,7 +142,7 @@ class StoryKey::Decoder < StoryKey::Base
   end
 
   def puts_debug
-    puts "====DECODER===="
+    puts '====DECODER===='
     puts "bin: #{bin_str}"
     puts "tokens: #{tokens}"
     puts "decimals: #{decimals}"

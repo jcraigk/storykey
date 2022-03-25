@@ -14,40 +14,15 @@ require_relative 'story_key/base'
 require_relative 'story_key/coercer'
 require_relative 'story_key/decoder'
 require_relative 'story_key/encoder'
+require_relative 'story_key/errors'
 require_relative 'story_key/generator'
 require_relative 'story_key/lexicon'
 require_relative 'story_key/tokenizer'
 require_relative 'story_key/version'
+require_relative 'story_key/class_methods'
 
 module StoryKey
-  class Error < StandardError; end
-  class InvalidFormat < Error; end
-  class InvalidVersion < Error; end
-  class InvalidWord < Error; end
-  class InvalidChecksum < Error; end
-  class KeyTooLarge < Error; end
-
-  def self.encode(...)
-    Encoder.call(...)
-  end
-
-  def self.decode(...)
-    Decoder.call(...)
-  end
-
-  def self.generate(bitsize: DEFAULT_BITSIZE)
-    key = StoryKey::Generator.call(bitsize:)
-    format = :bin
-    encoded = encode(key:, bitsize:, format:)
-    raise 'An error occurred!' if key != decode(story: encoded.story, format:)
-    key = Coercer.call(str: key, bitsize:, input: format, output: :base58)
-    puts [
-      "\e[44mKey:\e[0m",
-      key,
-      "\e[44mStory:\e[0m",
-      encoded.colorized
-    ].join("\n")
-  end
+  extend StoryKey::ClassMethods
 end
 
 BITS_PER_WORD = 10
