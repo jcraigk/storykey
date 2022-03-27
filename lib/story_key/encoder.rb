@@ -23,22 +23,22 @@ class StoryKey::Encoder < StoryKey::Base
     validate_format!
     validate_length!
 
-    Result.new(story:, colorized:)
+    Result.new(story:, humanized:)
   end
 
   private
 
   def story
-    @story ||= colorized.gsub(/\e\[\d+m/, '').gsub(/\n\d+\./, '').delete("\n").squish
+    @story ||= humanized.gsub(/\e\[\d+m/, '').gsub(/\n\d+\./, '').delete("\n").squish
   end
 
-  def colorized
-    @colorized ||= "#{version_str}#{newline}#{phrases.join(",\n")}."
+  def humanized
+    @humanized ||= "#{version_str}#{newline}#{phrases.join(",\n")}."
   end
 
   def validate_length!
-    return if bin_str.size <= MAX_INPUT_SIZE
-    raise StoryKey::KeyTooLarge, "Max input size is #{MAX_INPUT_SIZE} bits"
+    return if bin_str.size <= MAX_KEY_SIZE
+    raise StoryKey::KeyTooLarge, "Max input size is #{MAX_KEY_SIZE} bits"
   end
 
   def newline
@@ -206,5 +206,5 @@ class StoryKey::Encoder < StoryKey::Base
           "Invalid format '#{format}'"
   end
 
-  Result = Struct.new(:story, :colorized, keyword_init: true)
+  Result = Struct.new(:story, :humanized, keyword_init: true)
 end

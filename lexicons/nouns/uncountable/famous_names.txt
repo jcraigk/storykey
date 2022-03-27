@@ -3,6 +3,7 @@ Adam Sandler
 Adele
 Agatha Christie
 Al Pacino
+Alan Turing
 Aldous Huxley
 Alec Baldwin
 Alfred Hitchcock
@@ -20,7 +21,6 @@ Augustus
 Ayn Rand
 Bach
 Barbra Streisand
-Basquiat
 Beethoven
 Ben Affleck
 Ben Stiller
@@ -28,27 +28,20 @@ Benjamin Franklin
 Betty White
 Bill Murray
 Bob Dylan
-Boole
-Borges
-Bosch
 Brad Pitt
 Bradley Cooper
-Brahms
 Bruce Willis
-Bukowski
 Buster Keaton
 Caligula
 Cameron Diaz
 Carl Jung
 Cary Grant
 Cate Blanchett
-Cervantes
-Cezanne
 Charlemagne
+Charles Bukowski
 Charles Darwin
+Charles Dickens
 Charlie Chaplin
-Chaucer
-Chopin
 Cicero
 Clark Gable
 Claude Debussy
@@ -65,7 +58,6 @@ Demi Moore
 Democritus
 Dennis Quaid
 Diane Keaton
-Dickens
 Diogenes
 Dostoevsky
 Drew Barrymore
@@ -83,11 +75,14 @@ Frank Herbert
 Frank Sinatra
 Franz Kafka
 Fred Astaire
+Frederic Chopin
 Galileo
 Gandhi
 Gary Cooper
 Gene Hackman
 Gene Kelly
+Geoffrey Chaucer
+George Boole
 George Carlin
 George Clooney
 George Orwell
@@ -109,6 +104,7 @@ Helen Mirren
 Hemingway
 Hendrix
 Henri Matisse
+Hieronymus Bosch
 Hitler
 Homer Simpson
 Hugh Jackman
@@ -132,6 +128,7 @@ Jennifer Garner
 Jim Carrey
 Joaquin Phoenix
 Jodie Foster
+Johannes Brahms
 Johannes Vermeer
 John Belushi
 John Cusack
@@ -156,6 +153,7 @@ Kate Winslet
 Katharine Hepburn
 Keanu Reeves
 Kevin Costner
+King Arthur
 Kirsten Dunst
 Kurt Vonnegut
 Laertes
@@ -179,6 +177,7 @@ Melville
 Meryl Streep
 Methuselah
 Michael Douglas
+Michael Jackson
 Michelangelo
 Michelle Pfeiffer
 Mick Jagger
@@ -200,6 +199,7 @@ Noam Chomsky
 Oscar Wilde
 Owen Wilson
 Pablo Picasso
+Paul Cezanne
 Paul Giamatti
 Paul Newman
 Plato
