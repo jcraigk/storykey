@@ -6,6 +6,7 @@ PATH
       base58
       dry-initializer
       indefinite_article
+      remedy
       thor
 
 GEM
@@ -36,6 +37,7 @@ GEM
       method_source (~> 1.0)
     rainbow (3.1.1)
     regexp_parser (2.2.1)
+    remedy (0.3.0)
     rexml (3.2.5)
     rspec (3.11.0)
       rspec-core (~> 3.11.0)

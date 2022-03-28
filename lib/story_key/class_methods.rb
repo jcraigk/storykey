@@ -8,6 +8,10 @@ module StoryKey::ClassMethods
     StoryKey::Decoder.call(...)
   end
 
+  def recover
+    StoryKey::Recover.call
+  end
+
   def generate(bitsize: DEFAULT_BITSIZE)
     key = StoryKey::Generator.call(bitsize:)
     key = StoryKey::Coercer.call(str: key, bitsize:, from: :bin, to: :base58)

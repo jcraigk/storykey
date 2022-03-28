@@ -11,16 +11,16 @@ class StoryKey::CLI < Thor
 
   desc 'encode KEY',
        'Encode a key passed as an argument'
-  option :format, desc: 'Format of key [base58|hex|bin|dec]', default: :base58
-  option :style, desc: 'Style of story [humanized|text]', default: :humanized
+  option :format, desc: 'Format of key', enum: %w[base58 hex bin dec], default: :base58
+  option :style, desc: 'Style of story', enum: %w[humanized text], default: :humanized
   def encode(key)
     puts encode_key(key, options[:format], options[:style])
   end
 
   desc 'encodefile SOURCE DESTINATION',
        'Encode a key from SOURCE and write story to DESTINATION'
-  option :format, desc: 'Format of key [base58|hex|bin|dec]', default: :base58
-  option :style, desc: 'Style of story [humanized|text]', default: :humanized
+  option :format, desc: 'Format of key', enum: %w[base58 hex bin dec], default: :base58
+  option :style, desc: 'Style of story', enum: %w[humanized text], default: :text
   def encodefile(source, destination)
     raise 'SOURCE and DESTINATION must be different' if source == destination
     story = encode_key(File.read(source), options[:format], options[:style])
@@ -30,7 +30,7 @@ class StoryKey::CLI < Thor
 
   desc 'decode STORY',
        'Decode a story passed as an argument'
-  option :format, desc: 'Format of key [base58|hex|bin|dec]', default: :base58
+  option :format, desc: 'Format of key', enum: %w[base58 hex bin dec], default: :base58
   def decode(story)
     format ||= options[:format]
     puts StoryKey.decode(story:, format:)
@@ -38,12 +38,17 @@ class StoryKey::CLI < Thor
 
   desc 'decodefile SOURCE DESTINATION',
        'Decode a story from SOURCE and write key to DESTINATION'
-  option :format, desc: 'Format of key [base58|hex|bin|dec]', default: :base58
+  option :format, desc: 'Format of key', enum: %w[base58 hex bin dec], default: :base58
   def decodefile(source, destination)
     raise 'SOURCE and DESTINATION must be different' if source == destination
     key = StoryKey.decode(story: File.read(source), format: options[:format])
     File.write(destination, key)
     puts "Key written to #{destination}"
+  end
+
+  desc 'recover', 'Decode a story interactively'
+  def recover
+    StoryKey.recover
   end
 
   private
