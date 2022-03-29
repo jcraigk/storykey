@@ -3,24 +3,28 @@ class StoryKey::Recover < StoryKey::Base
   include Remedy
 
   attr_accessor :num_phrases, :num_tail_words, :user_str,
-                :options, :option_idx, :word_idx
+                :options, :option_idx, :word_idx, :instructions, :prompt
 
   # FRAME_VERTICAL = "\u02551"
   FRAME_HORIZONTAL = '='
   BG_MAGENTA = 45
   BG_GREEN = 42
-  PROMPT = 'Enter word: '
+  GREEN = 32
+  BG_BLUE = 44
+  RED = 31;
+  BG_RED = 41
   NUM_OPTIONS = 5
 
   def call
     @word_idx = 0
     @option_idx = 0
-    @options = []
-    @user_str = ''
+    clear_options
+    clear_user_str
+    @prompt = 'Enter word: '
 
-    prompt_version
-    prompt_num_phrases
-    prompt_num_tail_words
+    ask_version_slug
+    ask_num_phrases
+    ask_num_tail_words
     interactive_phrase_recovery
   end
 
@@ -37,24 +41,24 @@ class StoryKey::Recover < StoryKey::Base
         move_option_cursor(key_sym)
       when :left, :right, :tab
         move_word_cursor(key_sym)
-        @user_str = ''
+        clear_user_str
       when :backspace, :delete
         @user_str = @user_str[0..-2]
-        update_options
+        refresh_options
       when :carriage_return, :control_m
         if (word = options[option_idx]).present?
           words[word_idx] = word
-          decode! if board_complete?
+          return decode! if board_complete?
           move_word_cursor(:right)
-          @user_str = ''
-          @options = []
+          clear_user_str
+          clear_options
         end
       when :control_c, :control_d
         quit_console!
       else
         if key_sym.match?(/([a-zA-Z0-9\s]|dash)/)
           @user_str += key.to_s
-          update_options
+          refresh_options
         end
       end
 
@@ -62,17 +66,40 @@ class StoryKey::Recover < StoryKey::Base
     end
   end
 
+  def clear_user_str
+    @user_str = ''
+  end
+
+  def clear_options
+    @options = []
+    @option_idx = 0
+  end
+
   def decode!
-    puts "Decoding!"
+    clear_user_str
+    clear_options
+    begin
+      key = StoryKey.decode(story: "#{StoryKey::VERSION_SLUG} #{words.join(' ')}")
+      @instructions = "#{colorize('Key:', BG_BLUE)} #{colorize(key, GREEN)}"
+    rescue StoryKey::InvalidChecksum
+      @instructions = colorize('Checksum failed! Invalid story.', BG_RED)
+    end
+
+    @prompt = colorize('(press any key to exit)', RED)
+    @word_idx = -1
+    draw
+    console.get_key
     quit_console!
   end
 
-  def update_options
-    @options =
-      lex.words[parts_of_speech[word_idx].to_sym]
-         .map(&:text)
-         .grep(/.*#{user_str.chars.join('.*')}.*/i)
-         .take(NUM_OPTIONS)
+  # TODO: Use third party fuzzy matching solution?
+  def refresh_options
+    chars = user_str.chars
+    all_words = lex.words[parts_of_speech[word_idx].to_sym].map(&:text)
+    substr_matches = user_str.size > 2 ? all_words.grep(/.*#{user_str}.*/i) : []
+    fuzzy_matches = all_words.grep(/.*#{chars.join('.*')}.*/i)
+    @options = (substr_matches + fuzzy_matches).uniq.take(NUM_OPTIONS)
+    # @options.map { |opt| opt.gsub(/(#{chars.join('|')})/) { |m| colorize(m, BG_GREEN) } }
     @option_idx = 0
   end
 
@@ -81,7 +108,7 @@ class StoryKey::Recover < StoryKey::Base
     listen
   end
 
-  def prompt_version
+  def ask_version_slug
     print "Did your story take place in #{StoryKey::VERSION_SLUG}? (y) "
     key = console.get_key
     puts
@@ -89,7 +116,7 @@ class StoryKey::Recover < StoryKey::Base
     quit('Sorry, this version of StoryKey can\'t decode your story')
   end
 
-  def prompt_num_phrases
+  def ask_num_phrases
     num_parts = GRAMMAR.first[1].count
     default = ((DEFAULT_BITSIZE / BITS_PER_WORD.to_f) / num_parts).ceil
     max = ((MAX_KEY_SIZE / BITS_PER_WORD.to_f) / num_parts).ceil
@@ -102,7 +129,7 @@ class StoryKey::Recover < StoryKey::Base
     end
   end
 
-  def prompt_num_tail_words
+  def ask_num_tail_words
     default = 3 # TODO: derive this
     print "How many words in last phrase? (#{default}) "
     input = gets
@@ -151,27 +178,25 @@ class StoryKey::Recover < StoryKey::Base
     end
   end
 
-  def menu_rows
+  def option_rows
     options.each_with_index.map do |opt, idx|
-      str = "#{' ' * PROMPT.size}#{opt}"
-      idx == option_idx ? colorize(str, BG_MAGENTA) : str
+      "#{' ' * prompt.size}#{idx == option_idx ? colorize(opt, BG_GREEN) : opt}"
     end
-  end
-
-  def user_prompt_str
-    "#{PROMPT}#{user_str}"
-  end
-
-  def instructions
-    colorize("\u2190 \u2192  Navigate story | \u2191 \u2193  Autocomplete", 44)
   end
 
   def move_word_cursor(key)
     @word_idx = word_idx.send((key == :left ? '-' : '+'), 1) % words.size
+    clear_user_str
+    clear_options
   end
 
   def move_option_cursor(key)
-    @option_idx = option_idx.send((key == :left ? '-' : '+'), 1) % options.size
+    @option_idx =
+      if options.any?
+        option_idx.send((key == :up ? '-' : '+'), 1) % options.size
+      else
+        0
+      end
   end
 
   def board_complete?
@@ -183,6 +208,8 @@ class StoryKey::Recover < StoryKey::Base
   end
 
   def init_viewport
+    @instructions = colorize("\u2190 \u2192  Navigate story | \u2191 \u2193  Autocomplete", 44)
+
     ANSI.screen.safe_reset!
     ANSI.cursor.home!
     ANSI.command.clear_screen!
@@ -199,20 +226,20 @@ class StoryKey::Recover < StoryKey::Base
   end
 
   def draw
-    viewport.draw(user_prompt, Size([0, 0]), board_view, menu_view)
+    viewport.draw(user_prompt, Size([0, 0]), board_view, options_view)
   end
 
   def user_prompt
     hr = FRAME_HORIZONTAL * 40
-    Partial.new([hr, instructions, hr, user_prompt_str])
+    Partial.new([hr, instructions, hr, "#{prompt}#{user_str}"])
   end
 
   def board_view
     Partial.new(board_rows)
   end
 
-  def menu_view
-    Partial.new(menu_rows)
+  def options_view
+    Partial.new(option_rows)
   end
 
   def viewport
