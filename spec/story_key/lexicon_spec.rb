@@ -16,7 +16,7 @@ RSpec.describe StoryKey::Lexicon do
   let(:uniq_global_words) { global_words.map(&:downcase).uniq.sort }
   let(:global_words) { lex.words.values.flatten.map(&:text) }
   let(:min_pad_words) do
-    ((MAX_KEY_SIZE / BITS_PER_WORD.to_f) / GRAMMAR.first[1].count).ceil
+    ((MAX_KEY_SIZE / BITS_PER_WORD.to_f) / GRAMMAR.keys.max).ceil
   end
   let(:malformed_words) { global_words.grep_v(regex) }
   let(:parts_of_speech) { GRAMMAR.values.flatten.uniq }

@@ -1,6 +1,7 @@
 # TODO / IDEAS
 
-* Fuzzy finder auto-complete for recovery process
+* Recovery
+  * Insert correct grammar as each word is typed (extract from encoder)
 
 MAYBE
 * Eliminate base words across parts of speech

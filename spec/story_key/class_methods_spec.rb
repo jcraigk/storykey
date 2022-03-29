@@ -34,6 +34,19 @@ RSpec.describe TestClass do # rubocop:disable RSpec/FilePath
     end
   end
 
-  xdescribe '#generate' do
+  describe '#generate' do
+    let(:mock_generator) { instance_spy(StoryKey::Generator) }
+    let(:key) { 'abc' }
+
+    before do
+      allow(StoryKey::Generator).to receive(:new).and_return(mock_generator)
+      allow(mock_generator).to receive(:call).and_return(key)
+    end
+
+    it 'calls StoryKey::Generator and StoryKey::Coercer' do
+      result = described_class.generate
+      expect(mock_generator).to have_received(:call)
+      expect(result.first).to eq(key)
+    end
   end
 end

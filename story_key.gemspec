@@ -17,8 +17,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'base58'
   spec.add_dependency 'dry-initializer'
   spec.add_dependency 'indefinite_article'
-  spec.add_dependency 'thor'
   spec.add_dependency 'remedy'
+  spec.add_dependency 'thor'
 
   spec.add_development_dependency 'pry'
   spec.add_development_dependency 'rspec'

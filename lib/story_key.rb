@@ -27,8 +27,8 @@ PREPOSITIONS = %w[in i saw and a an].freeze
 
 require_relative 'story_key/base'
 require_relative 'story_key/class_methods'
-require_relative 'story_key/cli'
-require_relative 'story_key/cli/recover'
+require_relative 'story_key/console'
+require_relative 'story_key/console/recover'
 require_relative 'story_key/coercer'
 require_relative 'story_key/decoder'
 require_relative 'story_key/encoder'
