@@ -16,9 +16,10 @@ RSpec.describe StoryKey::Lexicon do
   let(:uniq_global_words) { global_words.map(&:downcase).uniq.sort }
   let(:global_words) { lex.words.values.flatten.map(&:text) }
   let(:min_pad_words) do
-    ((MAX_INPUT_SIZE / BITS_PER_WORD.to_f) / GRAMMAR.first[1].count).ceil
+    ((MAX_KEY_SIZE / BITS_PER_WORD.to_f) / GRAMMAR.keys.max).ceil
   end
   let(:malformed_words) { global_words.grep_v(regex) }
+  let(:parts_of_speech) { GRAMMAR.values.flatten.uniq }
 
   it 'matches expected sha' do
     expect(lex.sha).to eq(StoryKey::LEXICON_SHA)
@@ -26,7 +27,7 @@ RSpec.describe StoryKey::Lexicon do
 
   it 'returns expected word counts' do # rubocop:disable RSpec/ExampleLength
     total_count = 0
-    LEXICONS.each do |part|
+    parts_of_speech.each do |part|
       count = (2**BITS_PER_WORD) + (min_pad_words * GRAMMAR.first[1].count { |p| p == part })
       total_count += count
 
@@ -47,7 +48,7 @@ RSpec.describe StoryKey::Lexicon do
   end
 
   it 'returns unique words sorted by length and value' do
-    LEXICONS.each do |part|
+    parts_of_speech.each do |part|
       words = lex.words[part]
       sorted_uniq = words.uniq.sort_by { |w| [w.text.size, w.text] }
       expect(sorted_uniq).to eq(words)

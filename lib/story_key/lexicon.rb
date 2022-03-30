@@ -3,7 +3,7 @@ class StoryKey::Lexicon < StoryKey::Base
   COUNTABLE = 'countable'
 
   def words
-    @words ||= LEXICONS.index_with do |part_of_speech|
+    @words ||= GRAMMAR.values.flatten.uniq.index_with do |part_of_speech|
       txtfile_words(part_of_speech).sort_by do |word|
         [word.text.size, word.text]
       end

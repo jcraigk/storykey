@@ -7,7 +7,6 @@ alluring
 ambitious
 ambulant
 angelic
-apathetic
 appreciative
 arrogant
 artistic
@@ -265,6 +264,7 @@ obsequious
 observant
 old
 opulent
+ostentatious
 outgoing
 overjoyed
 pale

@@ -8,7 +8,7 @@ StoryKey is a system for converting between arbitrary strings of data and memora
 (4) Enforces a simple English grammar to drive semantic associations
 (5) Lexicon is curated for mental visualization
 (6) No keywords are repeated
-(7) Presents the story with colorized grammar
+(7) Presents the story with humanized grammar
 
 A paragraph produced by StoryKey for a 256 bit string looks like this:
 
