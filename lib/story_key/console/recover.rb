@@ -32,22 +32,22 @@ class StoryKey::Recover < StoryKey::Base
 
   def listen # rubocop:disable Metrics/MethodLength
     console.loop do |key|
-      key_sym = key.to_s.to_sym
+      key = key.to_s.to_sym
       case key_sym
       when EXIT_WORD then quit_console
-      when :up, :down then move_option_cursor(key_sym)
-      when :left, :right, :tab then move_word_cursor(key_sym)
+      when :up, :down then move_option_cursor(key)
+      when :left, :right, :tab then move_word_cursor(key)
       when :backspace, :delete then input_backspace
       when :carriage_return, :control_m then input_enter
-      else input_misc_key
+      else input_misc_key(key)
       end
 
       draw
     end
   end
 
-  def input_misc_key
-    return unless key_sym.match?(/([a-zA-Z0-9\s]|dash)/)
+  def input_misc_key(key)
+    return unless key.match?(/([a-zA-Z0-9\s]|dash)/)
     @user_str += key.to_s
     refresh_options
   end
@@ -113,21 +113,30 @@ class StoryKey::Recover < StoryKey::Base
     quit('Sorry, this version of StoryKey can\'t decode your story')
   end
 
+  def num_parts
+    GRAMMAR.keys.max
+  end
+
+  def default_num_phrases
+    ((DEFAULT_BITSIZE / BITS_PER_WORD.to_f) / num_parts).ceil
+  end
+
+  def max_num_phrases
+    ((MAX_KEY_SIZE / BITS_PER_WORD.to_f) / num_parts).ceil
+  end
+
   def ask_num_phrases
-    num_parts = GRAMMAR.keys.max
-    default = ((DEFAULT_BITSIZE / BITS_PER_WORD.to_f) / num_parts).ceil
-    max = ((MAX_KEY_SIZE / BITS_PER_WORD.to_f) / num_parts).ceil
-    print "How many phrases are in your story? (#{default}) "
+    print "How many phrases are in your story? (#{default_num_phrases}) "
     ARGV.clear
     input = gets
-    input = default if input.blank?
+    input = default_num_phrases if input.blank?
     @num_phrases = input.to_i.tap do |i|
-      quit('Invalid number') unless i.in?(1..max)
+      quit('Invalid number') unless i.in?(1..max_num_phrases)
     end
   end
 
   def ask_num_tail_words
-    default = 3 # TODO: derive this
+    default = 3
     print "How many words in last phrase? (#{default}) "
     input = gets
     input = default if input.blank?
@@ -151,6 +160,7 @@ class StoryKey::Recover < StoryKey::Base
     @words = ary
   end
 
+  # TODO: Grammarize
   def board_rows
     ["In #{StoryKey::VERSION_SLUG} I saw"].tap do |ary|
       idx = 0
@@ -204,7 +214,7 @@ class StoryKey::Recover < StoryKey::Base
 
   def init_viewport
     @instructions = colorize \
-      "\u2190 \u2192 Story | \u2191 \u2193 Suggestions | Ctrl-X", BG_BLUE
+      "\u2190 \u2192  Story   \u2191 \u2193 Suggestions   Ctr-X", BG_BLUE
     ANSI.screen.safe_reset!
     ANSI.cursor.home!
     ANSI.command.clear_screen!
@@ -225,7 +235,7 @@ class StoryKey::Recover < StoryKey::Base
   end
 
   def user_prompt
-    hr = FRAME_HORIZONTAL * 40
+    hr = FRAME_HORIZONTAL * 36
     Partial.new([hr, instructions, hr, "#{prompt}#{user_str}"])
   end
 
