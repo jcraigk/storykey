@@ -6,7 +6,7 @@ class StoryKey::Console < Thor
   desc 'new [BITSIZE]',
        "Create a new key/story (default #{::DEFAULT_BITSIZE} bits, max #{::MAX_KEY_SIZE})"
   def new(bitsize = ::DEFAULT_BITSIZE)
-    key, story = StoryKey.generate(bitsize:)
+    key, story = StoryKey.generate(bitsize: bitsize.to_i)
     puts [titleize('Key'), key, titleize('Story'), story.humanized].join("\n")
   end
 
