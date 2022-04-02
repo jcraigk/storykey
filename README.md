@@ -7,9 +7,9 @@
 
 ![Story Key Logo](https://user-images.githubusercontent.com/104095/160752597-45ab3b7b-a3a3-43ef-b546-9c163f389927.png)
 
-| Gem Version | City  | Lexicon SHA |
-|-------------|-------|-------------|
-| 0.1.0       | Miami | 401e37e     |
+| Gem Version | Locale | Lexicon SHA |
+|-------------|--------|-------------|
+| 0.1.0       | Miami  | 401e37e     |
 
 
 # StoryKey
@@ -18,7 +18,7 @@ StoryKey is a [Brainwallet](https://en.bitcoin.it/wiki/Brainwallet) inspired by 
 
 Each story is provided in two formats:
 * Humanized
-  * Version header ("In Miami I saw")
+  * Version locale header ("In Miami I saw")
   * Enumerated phrases
   * Colorized parts of speech (adjectives, verbs, nouns)
   * Grammatical filler (articles, prepositions, conjunctions, punctuation)
@@ -68,7 +68,7 @@ Seed Phrase:
 pensive ellen-ripley surpass musician unhappy pug drink-vodka dove opulent dante-alighieri diagnose huckleberry-finn frantic sister eat-pretzels mozart cunning meerkat trim balloonist rich ocelot step john-wayne civilian convict locust
 ````
 
-This paragraph or seed phrase can be deterministically decoded back into its original format using the same version of StoryKey. The `version slug` is typically a well-known city, such as `Miami`. During key recovery, an exception will be raised if:
+This paragraph or seed phrase can be deterministically decoded back into its original format using the same version of StoryKey. The locale of the story (e.g. `Miami`), identifies that version. During key recovery, an exception will be raised if:
  * the `version slug` does not match the current version of StoryKey
  * the embedded `checksum` does not match the expected value
 
