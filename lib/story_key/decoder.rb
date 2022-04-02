@@ -5,7 +5,7 @@ class StoryKey::Decoder < StoryKey::Base
 
   def call
     @story = story.strip
-    @format ||= :base58
+    @format ||= StoryKey::DEFAULT_FORMAT
 
     validate_version!
     validate_checksum!
@@ -22,7 +22,7 @@ class StoryKey::Decoder < StoryKey::Base
   def binary_str
     @binary_str ||=
       decimals.map do |dec|
-        dec.to_s(2).rjust(BITS_PER_WORD, '0')
+        dec.to_s(2).rjust(StoryKey::BITS_PER_ENTRY, '0')
       end.join
   end
 
@@ -55,19 +55,19 @@ class StoryKey::Decoder < StoryKey::Base
   end
 
   def embedded_checksum
-    binary_str[checksum_start_idx..-(FOOTER_BITSIZE + 1)]
+    binary_str[checksum_start_idx..-(StoryKey::FOOTER_BITSIZE + 1)]
   end
 
   def checksum_start_idx
-    binary_str.size - (checksum_bitsize + FOOTER_BITSIZE)
+    binary_str.size - (checksum_bitsize + StoryKey::FOOTER_BITSIZE)
   end
 
   def footer
-    binary_str.last(FOOTER_BITSIZE)
+    binary_str.last(StoryKey::FOOTER_BITSIZE)
   end
 
   def checksum_bitsize
-    (BITS_PER_WORD * 2) - (tail_bitsize + FOOTER_BITSIZE)
+    (StoryKey::BITS_PER_ENTRY * 2) - (tail_bitsize + StoryKey::FOOTER_BITSIZE)
   end
 
   def computed_checksum
@@ -98,7 +98,7 @@ class StoryKey::Decoder < StoryKey::Base
   end
 
   def prepositions
-    PREPOSITIONS + lex.prepositions
+    StoryKey::PREPOSITIONS + lex.prepositions
   end
 
   def tokens

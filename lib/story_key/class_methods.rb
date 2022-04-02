@@ -12,7 +12,7 @@ module StoryKey::ClassMethods
     StoryKey::Console::Recover.call
   end
 
-  def generate(bitsize: DEFAULT_BITSIZE)
+  def generate(bitsize: StoryKey::DEFAULT_BITSIZE)
     key = StoryKey::Generator.call(bitsize:)
     encoded = encode(key:, bitsize:)
     raise 'An error occurred!' if key != decode(story: encoded.text)

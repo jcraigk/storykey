@@ -117,15 +117,15 @@ class StoryKey::Console::Recover < StoryKey::Base
   end
 
   def num_parts
-    GRAMMAR.keys.max
+    StoryKey::GRAMMAR.keys.max
   end
 
   def default_num_phrases
-    ((DEFAULT_BITSIZE / BITS_PER_WORD.to_f) / num_parts).ceil
+    ((StoryKey::DEFAULT_BITSIZE / StoryKey::BITS_PER_ENTRY.to_f) / num_parts).ceil
   end
 
   def max_num_phrases
-    ((MAX_KEY_SIZE / BITS_PER_WORD.to_f) / num_parts).ceil
+    ((StoryKey::MAX_BITSIZE / StoryKey::BITS_PER_ENTRY.to_f) / num_parts).ceil
   end
 
   def ask_num_phrases
@@ -149,7 +149,7 @@ class StoryKey::Console::Recover < StoryKey::Base
   end
 
   def max_parts_in_phrase
-    GRAMMAR.keys.max
+    StoryKey::GRAMMAR.keys.max
   end
 
   def entries
@@ -157,7 +157,7 @@ class StoryKey::Console::Recover < StoryKey::Base
     ary = []
     num_phrases.times do |idx|
       grammar_idx = idx + 1 == num_phrases ? num_tail_entries : max_parts_in_phrase
-      grammar = GRAMMAR[grammar_idx]
+      grammar = StoryKey::GRAMMAR[grammar_idx]
       ary += grammar.map { |part_of_speech| "[#{part_of_speech}]" }
     end
     @entries = ary
@@ -167,7 +167,7 @@ class StoryKey::Console::Recover < StoryKey::Base
   def board_rows
     ["In #{StoryKey::VERSION_SLUG} I saw"].tap do |ary|
       idx = 0
-      entries.each_slice(GRAMMAR.keys.max).to_a.each_with_index.map do |entry_group, row|
+      entries.each_slice(StoryKey::GRAMMAR.keys.max).to_a.each_with_index.map do |entry_group, row|
         parts = []
         last_row = row == num_phrases - 1
         parts << "#{row + 1}." if num_phrases > 1
