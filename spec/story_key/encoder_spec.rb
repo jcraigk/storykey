@@ -9,7 +9,7 @@ RSpec.describe StoryKey::Encoder do
 
   shared_examples 'success' do
     it 'returns expected story' do
-      expect(call.story).to eq(story)
+      expect(call.text).to eq(story)
     end
   end
 

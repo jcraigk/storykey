@@ -38,7 +38,7 @@ mermaid
 minotaur
 ogre
 orc
-pegasus
+Pegasus
 phantom
 phoenix
 pixie

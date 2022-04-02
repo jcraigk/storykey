@@ -8,7 +8,6 @@ dry
 dusty
 feathered
 filthy
-firm
 flimsy
 fluffy
 foamy
@@ -27,8 +26,8 @@ lumpy
 metallic
 moldy
 mushy
-nasty
 plaid
+pliable
 porous
 puffy
 reflective

@@ -3,8 +3,8 @@ RSpec.shared_context 'with mocked lexicon' do
   let(:min_pad_words) do
     ((MAX_KEY_SIZE / BITS_PER_WORD.to_f) / GRAMMAR.keys.max).ceil
   end
-  let(:multinoun_frequency) { 7 }
-  let(:preposition_frequency) { 20 }
+  let(:multiword_freq) { 15 }
+  let(:preposition_freq) { 20 }
   let(:words) do
     GRAMMAR.values.flatten.uniq.index_with do |part_of_speech|
       count =
@@ -14,16 +14,10 @@ RSpec.shared_context 'with mocked lexicon' do
           GRAMMAR.first[1].count { |p| p == part_of_speech }
         )
       (0..(count - 1)).map do |num|
-        base = "#{part_of_speech}-#{num}"
-        text =
-          if part_of_speech == :noun && (num % multinoun_frequency).zero?
-            "pre-#{num} #{base}"
-          elsif part_of_speech == :verb && (num % preposition_frequency).zero?
-            "#{base} [with]"
-          else
-            base
-          end
-        StoryKey::Lexicon::Word.new \
+        text = "#{part_of_speech}-#{num}"
+        text = "pre-#{num} #{text}" if (num % multiword_freq).zero?
+        text = "#{text} [with]" if part_of_speech == :verb && (num % preposition_freq).zero?
+        StoryKey::Lexicon::Entry.new \
           token: StoryKey::Tokenizer.call(text),
           text: text.gsub(/\[|\]/, ''),
           countable: (num % 1).zero?,
@@ -36,7 +30,7 @@ RSpec.shared_context 'with mocked lexicon' do
 
   before do
     allow(StoryKey::Lexicon).to receive(:new).and_return(mock_lex)
-    allow(mock_lex).to receive(:words).and_return(words)
+    allow(mock_lex).to receive(:entries).and_return(entries)
     allow(mock_lex).to receive(:prepositions).and_return(prepositions)
   end
 end

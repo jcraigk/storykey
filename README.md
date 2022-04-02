@@ -28,7 +28,7 @@ Features:
 6. Avoids word repetition within the story
 7. Provides interactive command-line recovery assistance
 
-Each word of the story encodes 10 bits. The checksum length is variable based on the input size and space available in the last two words after appending for a 4-bit footer. Here are a few example key sizes along with their respective story and checksum sizes.
+Each word of the story encodes 10 bits. The checksum length is variable based on the input size and space available in the last two words after accounting for a 4-bit footer. Here are a few example key sizes along with their respective story and checksum sizes.
 
 | Key bits | Story words | Checksum bits |
 |----------|-------------|---------------|
@@ -63,7 +63,21 @@ This paragraph can be deterministically decoded back into its binary source usin
  * the `version slug` does not match the current version of StoryKey
  * the embedded `checksum` does not match the expected value
 
-### Visualization
+
+### Lexicon Curation
+
+The lexicon was selected using the following criteria:
+
+1. Anthropomorphism. All parts of speech - adjective, noun, and verb - must fit logically when composed into phrases. To accommodate, entries were selected based on how closely they could produce a mental image of commonly known anthropomorphic entities interacting with one another.
+ - Adjectives: personal physical qualities, moods, colors, textures
+ - Nouns: famous people/characters, professions, animals
+ - Verbs: physical actions with subject/object, favoring transitive
+2. Visual content. Words should be concrete vs abstract and convey vivid mental imagery.
+3. Cultural acceptability (reject sexually suggestive and overtly violent words).
+4. Balancing brevity and clarity.
+
+
+### Graphical Visualization
 
 When machine learning becomes less expensive, StoryKey stories may be converted to graphical panels similar to the [DALL-E Project](https://openai.com/blog/dall-e/). This will likely aid in the memorization process for some users.
 

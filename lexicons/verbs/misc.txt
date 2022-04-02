@@ -1,43 +1,38 @@
 abandon
-abash
-abolish
-accelerate
-accept
-access
 accompany
+accost
 accuse
-ache [for]
 acquire
-activate
 admire
 adopt
 adore
+adulate
 advise
-affirm
+aggravate
 agree [with]
 aim [at]
 alarm
-align
+alert
+align [with]
 amaze
+amble [to]
 amuse
 analyze
 annoy
 apologize [to]
 applaud
 appraise
-appreciate
 approach
-appropriate
-approve
+approve [of]
 argue [with]
 arm
-arrange
 arrest
 ask
+asphyxiate
 assess
+assist
 assure
 astonish
-attach [to]
 attack
 audit
 augment
@@ -47,80 +42,85 @@ babble [at]
 backhand
 baffle
 bag
+bake biscuits [with]
+bake bread [with]
+bake brownies [with]
+bake casseroles [with]
+bake cookies [with]
+bake cupcakes [with]
+bake muffins [with]
+bake pies [with]
+bake scones [with]
 balance
-balk [at]
-ban
 bankrupt
-baptize
 bargain [with]
 bark [at]
 bash
-bastardize
 bathe
 battle
 beautify
 beckon [to]
-become
 beguile
+belittle
+bellow [at]
 bemuse
 berate
-bet
 betray
-bill
+birdwatch [with]
 bisect
 bite
 blame
+blare [at]
+blast
 bleach
 bless
 block
+boil
 bolt [from]
 bomb
 boost
 bore
 borrow [from]
 bother
-brush
-build
+brag [to]
+brainwash
+brush [off]
 burn
 burst
 bury
 bust
+buzz
+bypass
 cackle [at]
-calibrate
+cajole
 call
 camp [with]
 cancel
-capitalize [on]
-capsize
 captivate
 capture
 care [for]
 carry
-carve
-categorize
 cater [to]
-celebrate
-center
-change
+caution
+celebrate [with]
 chant [with]
-char
-charge
+charge [at]
 charm
-charter
 chase
 chastise
+chat [with]
 cheat
 check [on]
 cheer
-chew
+chew [on]
+chew gum [with]
 chide
 choke
 choose
 chop
-chronicle
+clamor [for]
 clamp
 clasp
-classify
 cling [to]
 clip
 cloak
@@ -129,9 +129,9 @@ clone
 club
 clutch
 coax
-codify
 coerce
 collect
+collide [with]
 comb
 command
 commission
@@ -141,79 +141,68 @@ compete [with]
 complain [to]
 compliment
 compress
-con
 condemn
 confess [to]
-configure
 confine
 confound
 confront
 confuse
+congratulate
 conjure
 conquer
-consecrate
-consider
 console
-construct
 consult
 contain
 contradict
 control
-convert
 convict
 convince
 cook [for]
+cook beans [with]
+cook broccoli [with]
+cook cabbage [with]
+cook carrots [with]
+cook chowder [with]
+cook stew [with]
+cooperate [with]
 copy
 corner
 correct
 counsel
-count
-counter
 cover
 crash [into]
 crawl [to]
-create
+credit
 criticize
-critique
-crochet
-crucify
+crochet [with]
 crush
 cry [for]
 cure
-customize
 cut
-damage
+dally [with]
 dance [with]
 dare
 dazzle
-deactivate
 deal [with]
 debate
-debug
 deceive
-decode
 decorate
-decrypt
 defeat
-define
+defend
 deflate
 dehydrate
 deify
 delay
 delight
-deliver
 demand
 demobilize
 deny
-depend [on]
-deprive
 deride
-describe
 desert
 destroy
 detach
 detect
-diagnos
+diagnose
 die [for]
 diminish
 dine [with]
@@ -231,49 +220,175 @@ display
 dispose [of]
 distribute
 disturb
+ditch
 divert
-divid
 divide
-double
 doubt
-downsize
 drag
-drain
 draw
 dream [of]
 dress
-drink [with]
+drink beer [with]
+drink brandy [with]
+drink chai [with]
+drink coffee [with]
+drink cognac [with]
+drink gin [with]
+drink juice [with]
+drink mead [with]
+drink nectar [with]
+drink punch [with]
+drink rum [with]
+drink sake [with]
+drink smoothies [with]
+drink soda [with]
+drink tea [with]
+drink tequila [with]
+drink vermouth [with]
+drink vodka [with]
+drink whiskey [with]
+drink wine [with]
 drive
 drop
 drown
-duplicate
-eat
-edify
-edit
+eat almonds [with]
+eat apples [with]
+eat apricots [with]
+eat asparagus [with]
+eat avocado [with]
+eat bacon [with]
+eat bagels [with]
+eat bananas [with]
+eat beans [with]
+eat biscuits [with]
+eat blueberries [with]
+eat bread [with]
+eat breakfast [with]
+eat broccoli [with]
+eat brownies [with]
+eat burritos [with]
+eat cabbage [with]
+eat candy [with]
+eat carrots [with]
+eat cashews [with]
+eat casserole [with]
+eat cauliflower [with]
+eat cereal [with]
+eat cheese [with]
+eat cheesecake [with]
+eat cherries [with]
+eat chicken [with]
+eat chips [with]
+eat chocolate [with]
+eat chowder [with]
+eat churros [with]
+eat coconut [with]
+eat cookies [with]
+eat corn [with]
+eat crackers [with]
+eat crepes [with]
+eat croissants [with]
+eat cupcakes [with]
+eat curry [with]
+eat custard [with]
+eat dinner [with]
+eat doughnuts [with]
+eat eggplant [with]
+eat fajitas [with]
+eat figs [with]
+eat grapes [with]
+eat guacamole [with]
+eat gumbo [with]
+eat hamburgers [with]
+eat hummus [with]
+eat jambalaya [with]
+eat jelly [with]
+eat kale [with]
+eat kebobs [with]
+eat lasagna [with]
+eat lemons [with]
+eat limes [with]
+eat lobster [with]
+eat lunch [with]
+eat mangos [with]
+eat marzipan [with]
+eat meatloaf [with]
+eat minestrone [with]
+eat mollusks [with]
+eat mooncakes [with]
+eat muffins [with]
+eat mushrooms [with]
+eat nachos [with]
+eat noodles [with]
+eat olives [with]
+eat onions [with]
+eat oysters [with]
+eat pancakes [with]
+eat papaya [with]
+eat pasta [with]
+eat pastries [with]
+eat peaches [with]
+eat pears [with]
+eat peas [with]
+eat pecans [with]
+eat pie [with]
+eat pistachios [with]
+eat pizza [with]
+eat plums [with]
+eat popcorn [with]
+eat popsicles [with]
+eat porridge [with]
+eat potatoes [with]
+eat prawn [with]
+eat pretzels [with]
+eat prunes [with]
+eat pudding [with]
+eat radishes [with]
+eat raisins [with]
+eat ramen [with]
+eat raspberries [with]
+eat rice [with]
+eat salad [with]
+eat salmon [with]
+eat sandwiches [with]
+eat scallions [with]
+eat scones [with]
+eat soup [with]
+eat spinach [with]
+eat squash [with]
+eat steak [with]
+eat stew [with]
+eat strawberries [with]
+eat strudel [with]
+eat sushi [with]
+eat tacos [with]
+eat tarts [with]
+eat toast [with]
+eat tortillas [with]
+eat truffles [with]
+eat waffles [with]
+eat walnuts [with]
+eat yogurt [with]
 educate
-ejudicate
+elbow
+electrocute
 elegize
 elevate
 eliminate
-emaciate
 embarrass
+embrace
 empathize [with]
 employ
+emulate
 enable
 enchant
-encircle
-encode
 encourage
-encrypt
 endanger
+endear
 endorse
-endure
 energize
-engrave
 enjoy
-enlarge
 enlighten
-enlist
 enrage
 enroll
 enshrine
@@ -281,12 +396,11 @@ entangle
 entertain
 enthrall
 entice
-enumerate
-equalize
+entrap
 equip
 erase
 escape [from]
-escort
+evade
 evaluate
 exalt
 examine
@@ -296,96 +410,73 @@ exempt
 exercise [with]
 exhaust
 exhibit
-expand
-expend
-experience
-explain
-extend
-extract
-extricate
+exile
+explain [to]
 face
-fasten
-fatigue
-favor
+feast [with]
 feed
-feel
 fence
 ferry
 fetch
 fight
 figure [out]
 film
-filter
+filter [out]
 find
 fire
-fish [for]
+fish [with]
 fix
 flag
 flatten
-flee
-fling
+flatter
+flee [from]
 flip
 flirt [with]
-float
-flush
+float [with]
+flush [out]
 focus [on]
 fold
 follow
 fool
 forbid
 force
-foresee
-forget [about]
-forgive
-fork
-formulate
-forsake
-foster
 frame
 freeze
 frisk
+frolic [with]
 frown [at]
 fry
 fund
 furnish
+gallop [with]
 gamble [with]
-gather
+gawk [at]
 gaze [at]
+glorify
 gnaw
 goad
 golf [with]
-google
+gorge [with]
 gossip [with]
-grab
 grade
-grease
 greet
 grieve
-grill
 grin [at]
-grind
-grip
 groan [at]
-ground
 growl [at]
 grumble [at]
 grunt [at]
 guard
 hail
 halt
-hammer
 hang
 harass
 harm
 harness
-hat
 hatch
 haul
-haunt
 heal
 hear
-heat
-heighten
 help
 hide
 hike [with]
@@ -393,13 +484,15 @@ hinder
 hint [at]
 hiss [at]
 hit
+hobble [to]
+hogtie
 hoist
 hold
 holler [at]
 honor
-hook
 horrify
 howl [at]
+huddle [with]
 hug
 hum [to]
 hunt
@@ -418,106 +511,96 @@ imbibe
 imitate
 immolate
 immunize
-immure
 impair
+impede
 imperil
 implore
 impress
-imprint
 imprison
-improve
-improvise [with]
 inaugurate
-include
 incorporate
-induce
+indoctrinate
 indulge
 infest
 inflate
 inform
-inherit
-initialize
+inherit [from]
+inhibit
 injure
 inquire [with]
 insist [on]
 inspect
 inspire
 instruct
+insult
 insure
-integrate
 intercept
-interest
 interrogate
 interrupt
-intersect [with]
+interview
 intimidate
 introduce
 intrude [on]
 invalidate
-invent
-invert
 invest [in]
 invigorate
 invite
+invoice
 invoke
-involve
-ionize
-iron [out]
+irradiate
 irritate
 isolate
 jab
 jabber [at]
 jail
-jam
-jeer
+jam [with]
+jeer [at]
 jeopardize
 jest [with]
 jog [with]
-join
-joke [with]
+join [with]
 jolt
 josh
 jostle
 juggle [for]
-jump
-justify
-keep
+jump [over]
 kick
 kill
 kiss
 kneel [for]
 knight
-knit
-know
-label
+knit [with]
 labor [with]
 land [on]
+lasso
 laud
 laugh [at]
 launch
 lead
 lean [on]
+leap [over]
 learn [from]
 leash
-leave
+lecture [to]
 leer [at]
-legitimize
 lend [to]
 level
 levitate
 liberate
-license
+lie [to]
 lift
 limit
-link [with]
-liquidate
+limp [to]
 listen [to]
 litter [with]
+lobotomize
+lock [up]
 lodge [with]
 look [at]
 loot
 lose
-lower
+lurch [at]
+lure
 lurk [with]
 magnify
 manage
@@ -529,67 +612,40 @@ marry
 marvel [at]
 massage
 maul
-maximize
 measure
 meet
 melt
-memorize
-mention
-mentor
-merge [with]
-mess [with]
-mime
-minimize
+mimic
 mislead
 mobilize
-modernize
-modify
 monitor
 mortify
 motivate
 mourn
 move
 mug
-multiple
-multiply
 mummify
 murder
-muscle
+murmer [at]
 mutter [at]
 nag
-name
-need
-negate
 negotiate [with]
-normalize
-notice
+neutralize
 notify
 nourish
-number
+nurture
 nuzzle
 obey
 object [to]
-oblige
+obliterate
 observe
 obstruct
-obtain
 offend
-omit
-opine [to]
-oppress
-optimize
-order
-organize
-overcome
-overtake
 overwhelm
-owe
-own
 pacify
-package [up]
 page
 paint
-pair [with]
+pamper
 paralyze
 parasitize
 pardon
@@ -597,41 +653,52 @@ parley [with]
 partner [with]
 party [with]
 pass
-pasteurize
-patch
 pay
-peck
-peel
 pelt
 penalize
 perform [for]
 perplex
 persuade
 perturb
+pester
 pet
 petrify
-phone
-pick [up]
+pierce
 pinch
 plagiarize
-plague
 plaster
-play [with]
-pleas
-please
+play badminton [with]
+play baseball [with]
+play basketball [with]
+play blackjack [with]
+play bocce [with]
+play checkers [with]
+play chess [with]
+play cribbage [with]
+play croquet [with]
+play football [with]
+play golf [with]
+play guitar [with]
+play hockey [with]
+play music [with]
+play piano [with]
+play poker [with]
+play pool [with]
+play roulette [with]
+play rugby [with]
+play rummy [with]
+play tennis [with]
+play violin [with]
+play volleyball [with]
 pluck
 point [at]
-poke
-polish
+poison
 poll
 pollute
-possess
-postpone
-pounce [on]
 practice [with]
 praise
+prance [with]
 pray [for]
-prepar
 prepare
 present
 preserve
@@ -639,84 +706,54 @@ press
 prick
 print
 produce
-profess [to]
 profit [from]
-prohibit
-promise
+promise [to]
 promote
-prompt
 propose [to]
 prosecute
 protect
-provide [for]
-prune
-pry
+provoke
 pull
 punch
 puncture
 punish
-purify
 pursue
 push
-quadruple
-quantify
-quantize
+quarrel [with]
+quell
 question
 quiz
 quote
 race
-radio
 raise
 rant [at]
 rap [with]
 ratify
 rattle
 rave [with]
-react [to]
-read
-reassure
-recall
-receive
-recognize
-recommend
+read [with]
 record
 recruit
-reduce
-refer
-reflect [on]
-refresh
 refuse
+refute
+regale
 register
-reify
 reject
 relax [with]
 release
-rely [on]
-remember
-remind
 remove
 rename
-render
-renew
+rendezvous [with]
 renounce
-rent
-repair
-replace
-replicate
 reply [to]
 report
-represent
 reproach
 repulse
-require
 rescue
 resent
 reset
 resist
-respect
 rest [with]
-restart
-restore
 restrain
 restrict
 resurrect
@@ -724,32 +761,29 @@ retain
 retreat [from]
 retrieve
 return [to]
-reverse
 revert
 review
-revitalize
 revive
-rewind
-ride
-rinse
+ridicule
+roam [with]
 roar [at]
 roast
 rob
 rock
-roll [into]
-rope
 rot [with]
 rotate
 rue
 ruin
 rule
 run [with]
-rush
+rush [to]
 sack
+sacrifice
 sadden
 sail [with]
 salute
 sanction
+sass
 satirize
 saturate
 save
@@ -758,29 +792,26 @@ scam
 scamper [to]
 scan
 scare
-schedule
+schlep
 school
 scoff [at]
 scold
 scorch
 scorn
 scowl [at]
-scrap
 scratch
+scream [at]
 screech [at]
 scrub
+scuffle [with]
 scurry [to]
 search
 seat
 secure
 seek
 seize
-select
-sense
 serenade
 serve
-settle [for]
-sever
 shade
 shake
 shampoo
@@ -790,6 +821,7 @@ shave
 shear
 shelter
 shift
+ship
 shirk
 shock
 shoot
@@ -801,38 +833,40 @@ shrink
 shroud
 shrug [at]
 shun
-shunt
 shut [out]
 sicken
 sidekick
 sidestep
 sigh [at]
 signal
-simplify
 sing [for]
 singe
-single [out]
+single out
 sink
 sit [with]
 skate [with]
-skew
 ski [with]
 skip
+skulk [with]
 slam
 slap
 slash
 slay
 slice
 slink [to]
-smell
+smack
 smile [at]
 smoke [with]
+smoke cigars [with]
 smother
 snarl [at]
 sneer [at]
 snicker [at]
 sniff
 snorkel [with]
+snub
+snuff
+soak
 sob [for]
 solarize
 solicit
@@ -845,6 +879,7 @@ spear
 spin
 spit [on]
 spite
+spoil
 sponsor
 spot
 spray
@@ -854,6 +889,8 @@ squeeze
 stab
 stabilize
 stain
+stalk
+stall
 stand [with]
 stare [at]
 stay [with]
@@ -862,76 +899,66 @@ steer
 step [to]
 sterilize
 stifle
-stimulate
 sting
-stir
-stomp
+stomp [on]
 stop
-store
-stow
-straighten
+straighten [out]
+strangle
 strengthen
 stretch
 strike
+stroll [with]
 struggle [with]
-stub
+strut [for]
 study
 stun
+subdue
 submerge
 submit [to]
-subsidize
-subsume
 sue
 suffer [for]
 suffocate
 summon
 supervise
 supplant
-supplement
 supply
 support
 suppress
-surmise
 surpass
 surprise
 surrender [to]
-surround
 survey
 suspend
+swagger [with]
 sway
 swear [at]
 sweep
 swerve [at]
 swim [with]
 swing [at]
-symbolize
 synthesize
 tabulate
 talk [to]
 tally
 target
-tarnish
 taunt
 teach
 tease
 televise
-tell
-tempt
 tenderize
 terminate
 terrify
 terrorize
 test
-testify [for]
 tether
 thank
-thaw
+thaw [out]
 theorize [with]
-think [of]
 threaten
 thrill
 throw
 thump
+thwart
 tickle
 tilt
 time
@@ -949,89 +976,62 @@ trace
 track
 trade [with]
 train
-tramp [to]
 transact [with]
-transfer
-transform
 translate [for]
 transport
-trap
 travel [to]
-treat
 trick
 trigger
 trim
 trip
-triple
-trouble
 trounce
-truncate
 trust
-tug
-tune
+tryst [with]
+tussle [with]
+tutor
+twirl
 uncover
 undercut
-underline
-understand
-undo
 unearth
-unify
 unleash
-unlock
 unmask
-unpack
-unravel
 untie
 unveil
 unwrap
-upend
-upgrade
 uproot
 upset
 upstage
 urge
-use
 usher
 usurp
 vacation [with]
-validate
+vaccinate
 vanquish
 vaporize
 ventilate
-verify
-vet
 veto
-vindicate
 visit
-vivify
 vomit [on]
 vouch [for]
-wager
+wade [with]
+wager [on]
 wake [up]
 wall [in]
+wander [with]
 warn
-warp
 wash
-watch
 wave [at]
-wedge
 weep [for]
 weigh
 welcome
-westernize
 whack
 whimper [at]
 whine [at]
-whirl
 whisper [to]
 wink [at]
-wish [on]
 wound
-wrap
+wrap [up]
 wreck
 wrestle
-wring
-write [to]
 yell [at]
-yelp [at]
 yield [to]

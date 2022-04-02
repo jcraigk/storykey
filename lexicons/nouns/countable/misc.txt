@@ -11,8 +11,6 @@ contestant
 cousin
 defendant
 deity
-dissident
-employee
 father
 fiend
 foe

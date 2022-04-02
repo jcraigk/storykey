@@ -23,13 +23,17 @@ class StoryKey::Encoder < StoryKey::Base
     validate_format!
     validate_length!
 
-    Result.new(story:, humanized:)
+    Story.new(text:, humanized:, tokenized:)
   end
 
   private
 
-  def story
-    @story ||= humanized.gsub(/\e\[\d+m/, '').gsub(/\n\d+\./, '').delete("\n").squish
+  def tokenized
+    @tokenized ||= entry_groups.flatten.map(&:token).join(' ')
+  end
+
+  def text
+    @text ||= humanized.gsub(/\e\[\d+m/, '').gsub(/\n\d+\./, '').delete("\n").squish
   end
 
   def humanized
@@ -80,14 +84,14 @@ class StoryKey::Encoder < StoryKey::Base
     end
   end
 
-  def highlight(word)
+  def highlight(entry)
     ary =
-      if word.preposition
-        [word.text.gsub(/\s#{word.preposition}\Z/, ''), word.preposition]
+      if entry.preposition
+        [entry.text.gsub(/\s#{entry.preposition}\Z/, ''), entry.preposition]
       else
-        [word.text]
+        [entry.text]
       end
-    main = colorize(ary[0], COLORS[word.part_of_speech])
+    main = colorize(ary[0], COLORS[entry.part_of_speech])
     prep = colorize(ary[1], COLORS[:preposition])
     "#{main} #{prep}".strip
   end
@@ -98,18 +102,18 @@ class StoryKey::Encoder < StoryKey::Base
   end
 
   def raw_phrases
-    @raw_phrases ||= word_groups.map { |words| grammatical_phrase(words) }
+    @raw_phrases ||= entry_groups.map { |entries| grammatical_phrase(entries) }
   end
 
-  def grammatical_phrase(words)
+  def grammatical_phrase(entries)
     str = ''
-    grammar = GRAMMAR[words.size]
+    grammar = GRAMMAR[entries.size]
     grammar.each_with_index do |part_of_speech, idx|
-      next if (word = words[idx]).blank?
-      if add_article?(grammar, part_of_speech, idx, words)
-        str += "#{colorize(word.text.indefinite_article, COLORS[:preposition])} "
+      next if (entry = entries[idx]).blank?
+      if add_article?(grammar, part_of_speech, idx, entries)
+        str += "#{colorize(entry.text.indefinite_article, COLORS[:preposition])} "
       end
-      str += "#{highlight(word)} "
+      str += "#{highlight(entry)} "
     end
     str.strip
   end
@@ -117,30 +121,31 @@ class StoryKey::Encoder < StoryKey::Base
   # Always prefix modified noun with article
   # 'an envious Einstein kill Vader' vs
   # 'envious Einstein kill Vader'
-  def add_article?(grammar, part_of_speech, idx, words)
+  def add_article?(grammar, part_of_speech, idx, entries)
     noun_idx, force_countable =
       if part_of_speech == :adjective
         [idx + 1, true]
       elsif part_of_speech == :noun && grammar[idx - 1] != :adjective
         [idx, false]
       end
-    force_countable || (noun_idx && words[noun_idx].countable)
+    force_countable || (noun_idx && entries[noun_idx].countable)
   end
 
-  def word_groups
-    decimals.each_slice(GRAMMAR.keys.max).to_a.map do |dec_group|
-      dec_group.each_with_index.map do |decimal, idx|
-        word_from_decimal(GRAMMAR[dec_group.size], decimal, idx)
+  def entry_groups
+    @entry_groups ||=
+      decimals.each_slice(GRAMMAR.keys.max).to_a.map do |dec_group|
+        dec_group.each_with_index.map do |decimal, idx|
+          entry_from_decimal(GRAMMAR[dec_group.size], decimal, idx)
+        end
       end
-    end
   end
 
-  def word_from_decimal(grammar, decimal, idx)
+  def entry_from_decimal(grammar, decimal, idx)
     part_of_speech = grammar[idx]
-    words = lex.words[part_of_speech]
-    words[decimal].tap do
-      # Shift words to prevent repeats
-      lex.words[part_of_speech] = words[..(decimal - 1)] + words[(decimal + 1)..]
+    entries = lex.entries[part_of_speech]
+    entries[decimal].tap do
+      # Shift entries to prevent repeats
+      lex.entries[part_of_speech] = entries[..(decimal - 1)] + entries[(decimal + 1)..]
     end
   end
 
@@ -206,5 +211,5 @@ class StoryKey::Encoder < StoryKey::Base
           "Invalid format '#{format}'"
   end
 
-  Result = Struct.new(:story, :humanized, keyword_init: true)
+  Story = Struct.new(:text, :humanized, :tokenized, keyword_init: true)
 end

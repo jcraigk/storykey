@@ -2,31 +2,30 @@
 class StoryKey::Lexicon < StoryKey::Base
   COUNTABLE = 'countable'
 
-  def words
-    @words ||= GRAMMAR.values.flatten.uniq.index_with do |part_of_speech|
-      txtfile_words(part_of_speech).sort_by do |word|
-        [word.text.size, word.text]
-      end
+  def entries
+    @entries ||= GRAMMAR.values.flatten.uniq.index_with do |part_of_speech|
+      txtfile_entries(part_of_speech).sort_by(&:token)
     end
   end
 
   def prepositions
-    @prepositions ||= words.values.flatten.filter_map(&:preposition).uniq.sort
+    @prepositions ||= entries.values.flatten.filter_map(&:preposition).uniq.sort
   end
 
   def sha
-    @sha ||= Digest::SHA256.hexdigest(words.to_s).first(7)
+    @sha ||= Digest::SHA256.hexdigest(entries.to_s).first(7)
   end
 
   private
 
-  def txtfile_words(part_of_speech)
+  def txtfile_entries(part_of_speech)
     txtfiles(part_of_speech).map do |path|
       txtfile_lines(path).map do |text|
-        Word.new \
+        Entry.new \
+          raw: text,
+          text: text.gsub(/\[|\]/, ''),
           part_of_speech:,
           token: StoryKey::Tokenizer.call(text),
-          text: text.gsub(/\[|\]/, ''),
           countable: path.split('/')[-2] == COUNTABLE,
           preposition: text.match(/\[(.+)\]/).to_a[1]
       end
@@ -43,7 +42,7 @@ class StoryKey::Lexicon < StoryKey::Base
     Dir.glob("lexicons/#{part_of_speech}s/**/*.txt")
   end
 
-  Word = Struct.new \
-    :token, :text, :countable, :preposition, :part_of_speech,
+  Entry = Struct.new \
+    :raw, :token, :text, :countable, :preposition, :part_of_speech,
     keyword_init: true
 end

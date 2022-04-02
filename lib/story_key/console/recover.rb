@@ -91,11 +91,11 @@ class StoryKey::Recover < StoryKey::Base
     colorize('Checksum failed! Invalid story.', BG_RED)
   end
 
-  def refresh_options # rubocop:disable Metrics/AbcSize
+  def refresh_options
     chars = user_str.chars
-    all_words = lex.words[parts_of_speech[word_idx].to_sym].map(&:text)
-    substr_matches = user_str.size > 2 ? all_words.grep(/.*#{user_str}.*/i) : []
-    fuzzy_matches = all_words.grep(/.*#{chars.join('.*')}.*/i)
+    lexicon = lex.entries[parts_of_speech[word_idx].to_sym].map(&:text)
+    substr_matches = user_str.size > 2 ? lexicon.grep(/.*#{user_str}.*/i) : []
+    fuzzy_matches = lexicon.grep(/.*#{chars.join('.*')}.*/i)
     @options = (substr_matches + fuzzy_matches).uniq.take(NUM_OPTIONS)
     @option_idx = 0
   end

@@ -84,9 +84,9 @@ class StoryKey::Decoder < StoryKey::Base
   end
 
   def token_to_decimal(token)
-    lex.words.each do |part, words|
-      next unless (idx = words.index { |w| w.token == token })
-      lex.words[part] = words[..(idx - 1)] + words[(idx + 1)..]
+    lex.entries.each do |part, entries|
+      next unless (idx = entries.index { |w| w.token == token })
+      lex.entries[part] = entries[..(idx - 1)] + entries[(idx + 1)..]
       return idx
     end
   end
@@ -131,7 +131,7 @@ class StoryKey::Decoder < StoryKey::Base
   end
 
   def valid_tokens
-    @valid_tokens ||= lex.words.values.flatten.map(&:token)
+    @valid_tokens ||= lex.entries.values.flatten.map(&:token)
   end
 
   def story_words

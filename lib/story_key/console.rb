@@ -7,7 +7,7 @@ class StoryKey::Console < Thor
        "Create a new key/story (default #{::DEFAULT_BITSIZE} bits, max #{::MAX_KEY_SIZE})"
   def new(bitsize = ::DEFAULT_BITSIZE)
     key, story = StoryKey.generate(bitsize: bitsize.to_i)
-    puts [titleize('Key'), key, titleize('Story'), story.humanized].join("\n")
+    puts story_str(key, story)
   end
 
   desc 'encode [KEY]',
@@ -71,5 +71,16 @@ class StoryKey::Console < Thor
 
   def titleize(str)
     "\e[44m#{str}:\e[0m"
+  end
+
+  def story_str(key, story)
+    [
+      titleize('Key'),
+      key,
+      titleize('Story'),
+      story.humanized,
+      titleize('Seed Phrase'),
+      story.tokenized
+    ].join("\n")
   end
 end

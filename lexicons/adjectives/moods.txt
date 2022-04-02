@@ -1,10 +1,9 @@
-affable
 alarmed
-alert
 amiable
 angry
 anxious
 apprehensive
+awestruck
 bellicose
 belligerent
 bereaved
@@ -12,12 +11,10 @@ bitter
 blissful
 calm
 carefree
-cautious
 cheerful
 chipper
 content
 cool
-cordial
 crabby
 defensive
 depressed
@@ -68,10 +65,12 @@ lonely
 mad
 mean
 mellow
+mercurial
 merry
 miffed
 mirthful
 miserable
+moonstruck
 morose
 mournful
 nervous
@@ -80,6 +79,7 @@ optimistic
 passionate
 peaceful
 pensive
+perky
 pessimistic
 pugnacious
 rowdy
@@ -95,6 +95,7 @@ snide
 somber
 spiteful
 squeamish
+stern
 stoic
 stupefied
 sulky

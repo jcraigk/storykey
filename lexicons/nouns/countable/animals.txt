@@ -139,6 +139,7 @@ ostrich
 otter
 owl
 oyster
+panda
 panther
 parakeet
 parrot
