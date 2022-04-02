@@ -7,7 +7,7 @@ require:
 AllCops:
   Exclude:
     - bin/*
-    - vendor/bundle/**/*
+    - vendor/**/*
   NewCops: enable
   TargetRubyVersion: 3.1.1
 Gemspec/RequireMFA:
