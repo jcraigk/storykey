@@ -3,13 +3,9 @@
 * Why blank line on CLI?
 * Bug: `bin/storykey new 512` - seems to get into deep loops and produce `a bad Neo arm Neo`
 
-"step"
 FIX SIMILAR BASES:
 "translate",
 "translator",
-
-"theorist",
-"theorize",
 
 "support",
 "supportive",
@@ -17,26 +13,19 @@ FIX SIMILAR BASES:
 "supervise",
 "supervisor",
 
+scammer/scam
+
 "super",
 "superb",
 
 "stylish",
 "stylist",
 
-"report",
-"reporter",
-
-"regal",
-"regale",
-
 "quarrel",
 "quarrelsome",
 
 "push",
 "pushy",
-
-"prosecute",
-"prosecutor",
 
 "promote",
 "promoter",
@@ -110,7 +99,3 @@ FIX SIMILAR BASES:
 
 "appraise",
 "appraiser",
-
-
-MAYBE
-* Zeitwerk?
