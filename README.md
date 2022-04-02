@@ -14,7 +14,7 @@
 
 # StoryKey
 
-StoryKey is a [Brainwallet](https://en.bitcoin.it/wiki/Brainwallet) inspired by [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki). It converts an arbitrary string of data, such as a cryptocurrency private key, into an English paragraph intended for longterm human memory. It also assists in decoding the story back into its original form.
+StoryKey is a [Brainwallet](https://en.bitcoin.it/wiki/Brainwallet) inspired by [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki) written in Ruby. It converts an arbitrary string of data, such as a cryptocurrency private key, into an English paragraph intended for longterm human memory. It also assists in decoding the story back into its original form.
 
 Each story is provided in two formats:
 * Humanized
@@ -27,7 +27,8 @@ Each story is provided in two formats:
   * Space-delimited lowercase alphanumeric/dash
   * Useful as a seed phrase for generating derivative keys
 
-Features:
+## Features
+
 * Encodes arbitrary length keys from 1 to 512 bits (default 256)
 * Includes checksum for integrity
 * Includes version slug to ensure accurate decoding
@@ -118,31 +119,27 @@ $ gem install story_key
 This library may be used by calling Ruby methods or directly from the command line.
 
 
+### Command Line Usage
+
+Invoke the command line interface by running `bin/storykey`. It has several options, including the Ruby methods mentioned above.
+
+```
+StoryKey commands:
+  storykey decode [STORY]  # Decode a story passed as an argument or from a file
+  storykey encode [KEY]    # Encode a key passed as an argument or from a file
+  storykey help [COMMAND]  # Describe available commands or one specific command
+  storykey new [BITSIZE]   # Create a new key/story (default 256 bits, max 512)
+  storykey recover         # Decode a story interactively
+```
+
+The command line also features an interactive recovery tool to aid in converting a story back into its source key. Run `bin/storykey recover` to initiate the process:
+
+![Key/Story Example](https://user-images.githubusercontent.com/104095/161376334-4a591100-e3fc-41ce-b931-4773bebc23fd.png)
+
+
 ### Ruby Usage
 
 After installing the gem, you may run `bin/console` or `require` the gem in your own project.
-
-
-### Encode key => story
-
-Produce an English paragraph given input data (e.g. a cryptocurrency private key):
-
-```
-data = 'JA6ymjiUiuMBcaSek3x7AxDyWQhgUJWZZBvcWBy3f7Lt'
-StoryKey.encode(key:)
-```
-
-`key` may be in the form of a hexidecimal (`ab29f3`), a binary string (`1001101`), a decimal (`230938`), or a base58 string (`uMBca`). If not in the default base58, `format` must be provided.
-
-
-### Decode story => key
-
-Recover source data (e.g. a cryptocurrency private key) based on the English paragraph:
-
-```
-3.1.1# StoryKey.decode(story: 'In Miami I saw an official Benjamin Franklin transport Matt Damon')
- => "4NTM"
-```
 
 
 ### Generate new key/story
@@ -163,22 +160,33 @@ Generate a new random key/story pair.
 ```
 
 
-## Command Line
+### Encode key => story
 
-Invoke the command line interface by running `bin/storykey`. It has several options, including the Ruby methods mentioned above.
+Produce an English paragraph given input data (e.g. a cryptocurrency private key):
 
 ```
-StoryKey commands:
-  storykey decode [STORY]  # Decode a story passed as an argument or from a file
-  storykey encode [KEY]    # Encode a key passed as an argument or from a file
-  storykey help [COMMAND]  # Describe available commands or one specific command
-  storykey new [BITSIZE]   # Create a new key/story (default 256 bits, max 512)
-  storykey recover         # Decode a story interactively
+3.1.1# StoryKey.encode(key: '4eqfoXzMDyqQW6p8zAQj7c8KkynK5K2BW6D5Vfp7xCaQ')
+ =>
+ #<struct StoryKey::Story
+ text=
+  "In Miami I saw a dim Balrog eat hummus with an appraiser, a facetious scholar play badminton with an economist, a witty uncle insure Bruce Willis, an appreciative dolphin blare at a cyclist, a blissful James Bond undercut a connoisseur, a green Hugh Jackman eat cheese with a bison, and Elvis Presley snorkel with a counselor.",
+ humanized=
+  "In \e[31mMiami\e[0m I saw\n1. a \e[36mdim\e[0m \e[33mBalrog\e[0m \e[35meat hummus\e[0m with an \e[33mappraiser\e[0m,\n2. a \e[36mfacetious\e[0m \e[33mscholar\e[0m \e[35mplay badminton\e[0m with an \e[33meconomist\e[0m,\n3. a \e[36mwitty\e[0m \e[33muncle\e[0m \e[35minsure\e[0m \e[33mBruce Willis\e[0m,\n4. an \e[36mappreciative\e[0m \e[33mdolphin\e[0m \e[35mblare\e[0m at a \e[33mcyclist\e[0m,\n5. a \e[36mblissful\e[0m \e[33mJames Bond\e[0m \e[35mundercut\e[0m a \e[33mconnoisseur\e[0m,\n6. a \e[36mgreen\e[0m \e[33mHugh Jackman\e[0m \e[35meat cheese\e[0m with a \e[33mbison\e[0m,\n7. and \e[33mElvis Presley\e[0m \e[35msnorkel\e[0m with a \e[33mcounselor\e[0m.",
+ tokenized=
+  "dim balrog eat-hummus appraiser facetious scholar play-badminton economist witty uncle insure bruce-willis appreciative dolphin blare cyclist blissful james-bond undercut connoisseur green hugh-jackman eat-cheese bison elvis-presley snorkel counselor">
 ```
 
-The command line also features an interactive recovery tool to aid in converting a story back into its source key. Run `bin/storykey recover` to initiate the process:
+`key` may be in the form of a hexidecimal (`ab29f3`), a binary string (`1001101`), a decimal (`230938`), or a base58 string (`uMBca`). If not in the default base58, `format` must be provided.
 
-![Key/Story Example](https://user-images.githubusercontent.com/104095/161376334-4a591100-e3fc-41ce-b931-4773bebc23fd.png)
+
+### Decode story => key
+
+Recover source data (e.g. a cryptocurrency private key) based on the English paragraph:
+
+```
+3.1.1# StoryKey.decode(story: 'In Miami I saw an official Benjamin Franklin transport Matt Damon')
+ => "4NTM"
+```
 
 
 ## Development
