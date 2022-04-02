@@ -23,7 +23,7 @@ class StoryKey::Encoder < StoryKey::Base
     validate_format!
     validate_length!
 
-    Story.new(text:, humanized:, tokenized:)
+    StoryKey::Story.new(text:, humanized:, tokenized:)
   end
 
   private
@@ -210,6 +210,4 @@ class StoryKey::Encoder < StoryKey::Base
     raise StoryKey::InvalidFormat,
           "Invalid format '#{format}'"
   end
-
-  Story = Struct.new(:text, :humanized, :tokenized, keyword_init: true)
 end

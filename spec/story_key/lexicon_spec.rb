@@ -35,7 +35,7 @@ RSpec.describe StoryKey::Lexicon do
 
       # Does not skip any contiguous decimals
       (0..(count - 1)).each do |decimal|
-        expect(lex.entries[part][decimal]).to be_a(StoryKey::Lexicon::Entry)
+        expect(lex.entries[part][decimal]).to be_a(StoryKey::Entry)
       end
     end
     expect(all_tokens.size).to eq(total_count)

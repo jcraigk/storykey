@@ -11,7 +11,24 @@ require 'pry'
 require 'remedy'
 require 'thor'
 
-module StoryKey; end
+require 'zeitwerk'
+loader = Zeitwerk::Loader.for_gem
+loader.setup
+
+module StoryKey
+  class Error < StandardError; end
+  class InvalidFormat < Error; end
+  class InvalidVersion < Error; end
+  class InvalidWord < Error; end
+  class InvalidChecksum < Error; end
+  class KeyTooLarge < Error; end
+
+  Entry = Struct.new \
+    :raw, :token, :text, :countable, :preposition, :part_of_speech,
+    keyword_init: true
+  Story = Struct.new \
+    :text, :humanized, :tokenized, keyword_init: true
+end
 
 BITS_PER_WORD = 10
 GRAMMAR = {
@@ -25,15 +42,4 @@ FOOTER_BITSIZE = 4 # BITS_PER_WORD <= 2^FOOTER_BITSIZE
 MAX_KEY_SIZE = 512
 PREPOSITIONS = %w[in i saw and a an].freeze
 
-require_relative 'story_key/base'
-require_relative 'story_key/class_methods'
-require_relative 'story_key/coercer'
-require_relative 'story_key/console'
-require_relative 'story_key/console/recover'
-require_relative 'story_key/decoder'
-require_relative 'story_key/encoder'
-require_relative 'story_key/errors'
-require_relative 'story_key/generator'
-require_relative 'story_key/lexicon'
-require_relative 'story_key/tokenizer'
-require_relative 'story_key/version'
+loader.eager_load

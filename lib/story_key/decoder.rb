@@ -7,8 +7,6 @@ class StoryKey::Decoder < StoryKey::Base
     @story = story.strip
     @format ||= :base58
 
-    # puts_debug
-
     validate_version!
     validate_checksum!
 
@@ -144,16 +142,5 @@ class StoryKey::Decoder < StoryKey::Base
 
   def lex
     @lex ||= StoryKey::Lexicon.new
-  end
-
-  def puts_debug
-    puts '====DECODER===='
-    puts "bin: #{bin_str}"
-    puts "tokens: #{tokens}"
-    puts "decimals: #{decimals}"
-    puts "checksum: #{computed_checksum}"
-    puts "embedded_checksum: #{embedded_checksum}"
-    puts "checksum_bitsize: #{checksum_bitsize}"
-    puts "tail_bitsize: #{tail_bitsize}"
   end
 end

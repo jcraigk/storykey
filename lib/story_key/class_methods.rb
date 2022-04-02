@@ -9,7 +9,7 @@ module StoryKey::ClassMethods
   end
 
   def recover
-    StoryKey::Recover.call
+    StoryKey::Console::Recover.call
   end
 
   def generate(bitsize: DEFAULT_BITSIZE)

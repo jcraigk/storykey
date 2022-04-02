@@ -1,9 +1,7 @@
 # TODO
 
+* Why blank line on CLI?
 * Bug: `bin/storykey new 512` - seems to get into deep loops and produce `a bad Neo arm Neo`
-
-* Recovery
-  * Insert correct grammar as each word is typed (extract from encoder)
 
 "step"
 FIX SIMILAR BASES:
@@ -114,8 +112,5 @@ FIX SIMILAR BASES:
 "appraiser",
 
 
-
 MAYBE
-* Eliminate base words across parts of speech
 * Zeitwerk?
-* Utilize personal knowledge by providing targeted lexicons: musicians, sports figures, then provide a bitmask for this along with version_slug so lead would be "In Miami at the Pier I saw" with Pier referring to specific set of lexicons to be used OR just entirely different place.

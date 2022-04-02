@@ -17,7 +17,7 @@ RSpec.shared_context 'with mocked lexicon' do
         text = "#{part_of_speech}-#{num}"
         text = "pre-#{num} #{text}" if (num % multiword_freq).zero?
         text = "#{text} [with]" if part_of_speech == :verb && (num % preposition_freq).zero?
-        StoryKey::Lexicon::Entry.new \
+        StoryKey::Entry.new \
           token: StoryKey::Tokenizer.call(text),
           text: text.gsub(/\[|\]/, ''),
           countable: (num % 1).zero?,

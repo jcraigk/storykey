@@ -140,7 +140,8 @@ StoryKey.encode(key:)
 Recover source data (e.g. a cryptocurrency private key) based on the English paragraph:
 
 ```
-StoryKey.decode(story:)
+3.1.1# StoryKey.decode(story: 'In Miami I saw an official Benjamin Franklin transport Matt Damon')
+ => "4NTM"
 ```
 
 
@@ -149,7 +150,16 @@ StoryKey.decode(story:)
 Generate a new random key/story pair.
 
 ```
-StoryKey.generate
+3.1.1# StoryKey.generate
+ =>
+["4eqfoXzMDyqQW6p8zAQj7c8KkynK5K2BW6D5Vfp7xCaQ",
+ #<struct StoryKey::Story
+  text=
+   "In Miami I saw a dim Balrog eat hummus with an appraiser, a facetious scholar play badminton with an economist, a witty uncle insure Bruce Willis, an appreciative dolphin blare at a cyclist, a blissful James Bond undercut a connoisseur, a green Hugh Jackman eat cheese with a bison, and Elvis Presley snorkel with a counselor.",
+  humanized=
+   "In \e[31mMiami\e[0m I saw\n1. a \e[36mdim\e[0m \e[33mBalrog\e[0m \e[35meat hummus\e[0m with an \e[33mappraiser\e[0m,\n2. a \e[36mfacetious\e[0m \e[33mscholar\e[0m \e[35mplay badminton\e[0m with an \e[33meconomist\e[0m,\n3. a \e[36mwitty\e[0m \e[33muncle\e[0m \e[35minsure\e[0m \e[33mBruce Willis\e[0m,\n4. an \e[36mappreciative\e[0m \e[33mdolphin\e[0m \e[35mblare\e[0m at a \e[33mcyclist\e[0m,\n5. a \e[36mblissful\e[0m \e[33mJames Bond\e[0m \e[35mundercut\e[0m a \e[33mconnoisseur\e[0m,\n6. a \e[36mgreen\e[0m \e[33mHugh Jackman\e[0m \e[35meat cheese\e[0m with a \e[33mbison\e[0m,\n7. and \e[33mElvis Presley\e[0m \e[35msnorkel\e[0m with a \e[33mcounselor\e[0m.",
+  tokenized=
+   "dim balrog eat-hummus appraiser facetious scholar play-badminton economist witty uncle insure bruce-willis appreciative dolphin blare cyclist blissful james-bond undercut connoisseur green hugh-jackman eat-cheese bison elvis-presley snorkel counselor">]
 ```
 
 
@@ -166,7 +176,9 @@ StoryKey commands:
   storykey recover         # Decode a story interactively
 ```
 
-The command line also features an interactive recovery tool to aid in converting a story back into its source key. Run `bin/storykey recover` to initiate the process.
+The command line also features an interactive recovery tool to aid in converting a story back into its source key. Run `bin/storykey recover` to initiate the process:
+
+![Key/Story Example](https://user-images.githubusercontent.com/104095/161376334-4a591100-e3fc-41ce-b931-4773bebc23fd.png)
 
 
 ## Development
