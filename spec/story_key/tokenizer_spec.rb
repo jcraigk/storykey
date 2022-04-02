@@ -35,4 +35,11 @@ RSpec.describe StoryKey::Tokenizer do
 
     include_examples 'success'
   end
+
+  context 'with a mixture' do
+    let(:str) { 'meet R2-D2 [with]' }
+    let(:token) { 'meet-r2-d2' }
+
+    include_examples 'success'
+  end
 end
