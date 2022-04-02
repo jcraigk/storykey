@@ -7,36 +7,36 @@
 
 ![Story Key Logo](https://user-images.githubusercontent.com/104095/160752597-45ab3b7b-a3a3-43ef-b546-9c163f389927.png)
 
-| Gem version | Story setting |
-|-------------|---------------|
-| 0.1.0       | Miami         |
+| Gem Version | City  |
+|-------------|-------|
+| 0.1.0       | Miami |
 
 
 # StoryKey
 
-StoryKey is a [Brainwallet](https://en.bitcoin.it/wiki/Brainwallet) inspired by [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki). It converts an arbitrary string of data, such as a cryptocurrency private key, into an English paragraph intended for longterm human memory. It also assists in decoding the story back into the original data.
+StoryKey is a [Brainwallet](https://en.bitcoin.it/wiki/Brainwallet) inspired by [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki). It converts an arbitrary string of data, such as a cryptocurrency private key, into an English paragraph intended for longterm human memory. It also assists in decoding the story back into its original form.
 
 Each story is provided in two formats:
-1. Humanized
- - Version header ("In Miami I saw")
- - Enumerated phrases
- - Colorized parts of speech (adjectives, verbs, nouns)
- - Grammatical filler (articles, prepositions, conjunctions, punctuation)
-2. Tokenized (seed phrase)
- - ordered list of unique tokens
- - lowercase alphanumeric and dashes only
+* Humanized
+ * Version header ("In Miami I saw")
+ * Enumerated phrases
+ * Colorized parts of speech (adjectives, verbs, nouns)
+ * Grammatical filler (articles, prepositions, conjunctions, punctuation)
+* Tokenized
+ * ordered list of unique tokens
+ * space-delimited lowercase alphanumeric/dash
+ * useful as a seed phrase for generating derivative keys
 
 Features:
+* Encodes arbitrary length keys from 1 to 512 bits (default 256)
+* Includes checksum for integrity
+* Includes version slug to ensure accurate decoding
+* Uses a repeating English grammar to aid in mnemonics
+* Uses a lexicon curated for mental visualization
+* Avoids word repetition
+* Provides interactive command-line recovery
 
-1. Encodes arbitrary length keys from 1 to 512 bits (default 256)
-2. Includes checksum for integrity
-3. Includes version slug to ensure accurate decoding
-4. Uses a repeating English grammar to aid in mnemonics
-5. Uses a lexicon curated for mental visualization
-6. Avoids word repetition
-7. Provides interactive command-line recovery
-
-Each token (word or word sequence) of the story encodes 10 bits. The checksum length is variable based on the input size and space available in the last two tokens after accounting for a 4-bit footer. Here are a few example key sizes along with their respective story and checksum sizes.
+Each token of the story (word or compound) encodes 10 bits. The checksum length is variable based on the input size and space available in the last two tokens after accounting for a 4-bit footer. Here are a few example key sizes along with their respective story and checksum sizes.
 
 | Key bits | Story tokens | Checksum bits |
 |----------|--------------|---------------|
@@ -47,7 +47,7 @@ Each token (word or word sequence) of the story encodes 10 bits. The checksum le
 | 384      | 40           | 12            |
 | 512      | 53           | 14            |
 
-An example key and its associated story and seed phrase are shown below:
+An example key and its associated story and seed phrase are shown below.
 
 Screenshot from terminal:
 ![Key/Story Example](https://user-images.githubusercontent.com/104095/161372021-1edb5999-453d-453a-a7bb-d2fc2bcc3120.png)
@@ -78,14 +78,14 @@ This paragraph or seed phrase can be deterministically decoded back into its ori
 
 The lexicon was selected using the following criteria:
 
-1. Anthropomorphism. All parts of speech - adjective, noun, and verb - must fit logically when composed into phrases. To accommodate, entries were selected based on how closely they could produce a mental image of commonly known anthropomorphic entities interacting with one another. To produce enough verbs, compound actions such as "eat breakfast" were also used.
- - Adjectives: personal physical qualities, moods, colors, textures
- - Nouns: famous people/characters, professions, animals
- - Verbs: physical actions connecting subject/object, favoring transitive
-2. Visualization. Entries should be concrete vs abstract and convey vivid mental imagery.
-3. Cultural acceptability. Reject sexually suggestive and other controversial imagery.
-4. Eliminate similar base words across parts of speech.
-5. Balance brevity with clarity.
+* Anthropomorphism. All parts of speech - adjective, noun, and verb - must fit logically when composed into phrases. To accommodate, entries were selected based on how closely they could produce a mental image of commonly known anthropomorphic entities interacting with one another. To produce enough verbs, compound actions such as "eat breakfast" were also used.
+  * Adjectives: personal physical qualities, moods, colors, textures
+  * Nouns: famous people/characters, professions, animals
+  * Verbs: physical actions connecting subject/object, favoring transitive, sometimes compound
+* Visualization. Entries should be concrete vs abstract and convey vivid mental imagery.
+* Cultural acceptability. Reject sexually suggestive and other controversial imagery.
+* Eliminate similar base words across parts of speech.
+* Balance brevity with clarity.
 
 
 ### Graphical Visualization
