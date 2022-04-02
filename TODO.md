@@ -3,6 +3,8 @@
 * Why blank line on CLI?
 * Bug: `bin/storykey new 512` - seems to get into deep loops and produce `a bad Neo arm Neo`
 
+Hitler
+Check other famous names
 FIX SIMILAR BASES:
 "translate",
 "translator",
