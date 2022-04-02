@@ -18,14 +18,14 @@ StoryKey is a [Brainwallet](https://en.bitcoin.it/wiki/Brainwallet) inspired by 
 
 Each story is provided in two formats:
 * Humanized
- * Version header ("In Miami I saw")
- * Enumerated phrases
- * Colorized parts of speech (adjectives, verbs, nouns)
- * Grammatical filler (articles, prepositions, conjunctions, punctuation)
+  * Version header ("In Miami I saw")
+  * Enumerated phrases
+  * Colorized parts of speech (adjectives, verbs, nouns)
+  * Grammatical filler (articles, prepositions, conjunctions, punctuation)
 * Tokenized
- * ordered list of unique tokens
- * space-delimited lowercase alphanumeric/dash
- * useful as a seed phrase for generating derivative keys
+  * Ordered list of unique tokens
+  * Space-delimited lowercase alphanumeric/dash
+  * Useful as a seed phrase for generating derivative keys
 
 Features:
 * Encodes arbitrary length keys from 1 to 512 bits (default 256)
@@ -79,9 +79,9 @@ This paragraph or seed phrase can be deterministically decoded back into its ori
 The lexicon was selected using the following criteria:
 
 * Anthropomorphism. All parts of speech - adjective, noun, and verb - must fit logically when composed into phrases. To accommodate, entries were selected based on how closely they could produce a mental image of commonly known anthropomorphic entities interacting with one another. To produce enough verbs, compound actions such as "eat breakfast" were also used.
-  * Adjectives: personal physical qualities, moods, colors, textures
-  * Nouns: famous people/characters, professions, animals
-  * Verbs: physical actions connecting subject/object, favoring transitive, sometimes compound
+   * Adjectives: personal physical qualities, moods, colors, textures
+   * Nouns: famous people/characters, professions, animals
+   * Verbs: physical actions connecting subject/object, favoring transitive, sometimes compound
 * Visualization. Entries should be concrete vs abstract and convey vivid mental imagery.
 * Cultural acceptability. Reject sexually suggestive and other controversial imagery.
 * Eliminate similar base words across parts of speech.
