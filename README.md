@@ -7,9 +7,9 @@
 
 ![Story Key Logo](https://user-images.githubusercontent.com/104095/160752597-45ab3b7b-a3a3-43ef-b546-9c163f389927.png)
 
-| Gem Version | City  |
-|-------------|-------|
-| 0.1.0       | Miami |
+| Gem Version | City  | Lexicon SHA |
+|-------------|-------|-------------|
+| 0.1.0       | Miami | 401e37e     |
 
 
 # StoryKey
@@ -50,10 +50,8 @@ Each token of the story (word or compound) encodes 10 bits. The checksum length 
 
 An example key and its associated story and seed phrase are shown below.
 
-Screenshot from terminal:
 ![Key/Story Example](https://user-images.githubusercontent.com/104095/161372021-1edb5999-453d-453a-a7bb-d2fc2bcc3120.png)
 
-Text:
 ```
 Key:
 CH8krjSZpGFmxnKo9QPqQEd9oMUkXnLcUhhEQFLrGCtg
@@ -121,7 +119,7 @@ This library may be used by calling Ruby methods or directly from the command li
 
 ### Command Line Usage
 
-Invoke the command line interface by running `bin/storykey`. It has several options, including the Ruby methods mentioned above.
+Invoke the command line interface by running `bin/storykey`.
 
 ```
 StoryKey commands:
