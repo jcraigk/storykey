@@ -4,8 +4,8 @@ class StoryKey::Generator < StoryKey::Base
   option :format, default: -> {}
 
   def call
-    @bitsize ||= DEFAULT_BITSIZE
-    @format ||= :base58
+    @bitsize ||= StoryKey::DEFAULT_BITSIZE
+    @format ||= StoryKey::DEFAULT_FORMAT
 
     formatted_str
   end

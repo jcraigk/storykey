@@ -8,6 +8,7 @@ PATH
       indefinite_article
       remedy
       thor
+      zeitwerk
 
 GEM
   remote: https://rubygems.org/
@@ -37,7 +38,6 @@ GEM
       coderay (~> 1.1)
       method_source (~> 1.0)
     rainbow (3.1.1)
-    rake (13.0.6)
     regexp_parser (2.2.1)
     remedy (0.3.0)
     rexml (3.2.5)
@@ -83,6 +83,7 @@ GEM
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.1.0)
+    zeitwerk (2.5.4)
 
 PLATFORMS
   arm64-darwin-21
@@ -90,7 +91,6 @@ PLATFORMS
 DEPENDENCIES
   bundler
   pry
-  rake
   rspec
   rubocop
   rubocop-performance

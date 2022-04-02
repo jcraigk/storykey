@@ -4,8 +4,10 @@ class StoryKey::Console < Thor
   map '-i' => :recover
 
   desc 'new [BITSIZE]',
-       "Create a new key/story (default #{::DEFAULT_BITSIZE} bits, max #{::MAX_KEY_SIZE})"
-  def new(bitsize = ::DEFAULT_BITSIZE)
+       <<~TEXT
+         Create a new key/story (default #{StoryKey::DEFAULT_BITSIZE} bits, max #{StoryKey::MAX_BITSIZE})
+       TEXT
+  def new(bitsize = StoryKey::DEFAULT_BITSIZE)
     key, story = StoryKey.generate(bitsize: bitsize.to_i)
     puts story_str(key, story)
   end

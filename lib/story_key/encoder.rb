@@ -18,12 +18,12 @@ class StoryKey::Encoder < StoryKey::Base
 
   def call
     @key = key.strip
-    @format ||= :base58
+    @format ||= StoryKey::DEFAULT_FORMAT
 
     validate_format!
     validate_length!
 
-    Story.new(text:, humanized:, tokenized:)
+    StoryKey::Story.new(text:, humanized:, tokenized:)
   end
 
   private
@@ -41,8 +41,8 @@ class StoryKey::Encoder < StoryKey::Base
   end
 
   def validate_length!
-    return if bin_str.size <= MAX_KEY_SIZE
-    raise StoryKey::KeyTooLarge, "Max input size is #{MAX_KEY_SIZE} bits"
+    return if bin_str.size <= StoryKey::MAX_BITSIZE
+    raise StoryKey::KeyTooLarge, "Max input size is #{StoryKey::MAX_BITSIZE} bits"
   end
 
   def newline
@@ -61,11 +61,11 @@ class StoryKey::Encoder < StoryKey::Base
   # Plus 6 more bits in the last word
   # Before the final 4 tail bits
   def checksum_bitsize
-    (BITS_PER_WORD * 2) - (tail_bitsize + FOOTER_BITSIZE)
+    (StoryKey::BITS_PER_ENTRY * 2) - (tail_bitsize + StoryKey::FOOTER_BITSIZE)
   end
 
   def tail_bitsize
-    (bin_str.size % BITS_PER_WORD)
+    (bin_str.size % StoryKey::BITS_PER_ENTRY)
   end
 
   def num_phrases
@@ -107,7 +107,7 @@ class StoryKey::Encoder < StoryKey::Base
 
   def grammatical_phrase(entries)
     str = ''
-    grammar = GRAMMAR[entries.size]
+    grammar = StoryKey::GRAMMAR[entries.size]
     grammar.each_with_index do |part_of_speech, idx|
       next if (entry = entries[idx]).blank?
       if add_article?(grammar, part_of_speech, idx, entries)
@@ -133,9 +133,9 @@ class StoryKey::Encoder < StoryKey::Base
 
   def entry_groups
     @entry_groups ||=
-      decimals.each_slice(GRAMMAR.keys.max).to_a.map do |dec_group|
+      decimals.each_slice(StoryKey::GRAMMAR.keys.max).to_a.map do |dec_group|
         dec_group.each_with_index.map do |decimal, idx|
-          entry_from_decimal(GRAMMAR[dec_group.size], decimal, idx)
+          entry_from_decimal(StoryKey::GRAMMAR[dec_group.size], decimal, idx)
         end
       end
   end
@@ -163,8 +163,8 @@ class StoryKey::Encoder < StoryKey::Base
     idx = 0
     parts = []
     while idx < binary_str.size
-      parts << binary_str[idx..(idx + BITS_PER_WORD - 1)]
-      idx += BITS_PER_WORD
+      parts << binary_str[idx..(idx + StoryKey::BITS_PER_ENTRY - 1)]
+      idx += StoryKey::BITS_PER_ENTRY
     end
     parts
   end
@@ -188,7 +188,7 @@ class StoryKey::Encoder < StoryKey::Base
   end
 
   def footer
-    tail_bitsize.to_s(2).rjust(FOOTER_BITSIZE, '0')
+    tail_bitsize.to_s(2).rjust(StoryKey::FOOTER_BITSIZE, '0')
   end
 
   def bin_str
@@ -210,6 +210,4 @@ class StoryKey::Encoder < StoryKey::Base
     raise StoryKey::InvalidFormat,
           "Invalid format '#{format}'"
   end
-
-  Story = Struct.new(:text, :humanized, :tokenized, keyword_init: true)
 end

@@ -14,10 +14,10 @@ RSpec.describe StoryKey::Lexicon do
   let(:all_tokens) { all_entries.map(&:token).sort }
   let(:all_entries) { lex.entries.values.flatten }
   let(:min_pad_words) do
-    ((MAX_KEY_SIZE / BITS_PER_WORD.to_f) / GRAMMAR.keys.max).ceil
+    ((StoryKey::MAX_BITSIZE / StoryKey::BITS_PER_ENTRY.to_f) / StoryKey::GRAMMAR.keys.max).ceil
   end
   let(:malformed_entries) { all_entries.map(&:raw).grep_v(regex) }
-  let(:parts_of_speech) { GRAMMAR.values.flatten.uniq }
+  let(:parts_of_speech) { StoryKey::GRAMMAR.values.flatten.uniq }
 
   it 'matches expected sha' do
     expect(lex.sha).to eq(StoryKey::LEXICON_SHA)
@@ -26,7 +26,8 @@ RSpec.describe StoryKey::Lexicon do
   it 'returns expected entry counts' do # rubocop:disable RSpec/ExampleLength
     total_count = 0
     parts_of_speech.each do |part|
-      count = (2**BITS_PER_WORD) + (min_pad_words * GRAMMAR.first[1].count { |p| p == part })
+      count = (2**StoryKey::BITS_PER_ENTRY) +
+              (min_pad_words * StoryKey::GRAMMAR.first[1].count { |p| p == part })
       total_count += count
 
       num = lex.entries[part].size
@@ -35,7 +36,7 @@ RSpec.describe StoryKey::Lexicon do
 
       # Does not skip any contiguous decimals
       (0..(count - 1)).each do |decimal|
-        expect(lex.entries[part][decimal]).to be_a(StoryKey::Lexicon::Entry)
+        expect(lex.entries[part][decimal]).to be_a(StoryKey::Entry)
       end
     end
     expect(all_tokens.size).to eq(total_count)

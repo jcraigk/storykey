@@ -1,23 +1,23 @@
 # frozen_string_literal: true
 RSpec.shared_context 'with mocked lexicon' do
   let(:min_pad_words) do
-    ((MAX_KEY_SIZE / BITS_PER_WORD.to_f) / GRAMMAR.keys.max).ceil
+    ((StoryKey::MAX_BITSIZE / StoryKey::BITS_PER_ENTRY.to_f) / StoryKey::GRAMMAR.keys.max).ceil
   end
   let(:multiword_freq) { 15 }
   let(:preposition_freq) { 20 }
   let(:entries) do
-    GRAMMAR.values.flatten.uniq.index_with do |part_of_speech|
+    StoryKey::GRAMMAR.values.flatten.uniq.index_with do |part_of_speech|
       count =
-        (2**BITS_PER_WORD) +
+        (2**StoryKey::BITS_PER_ENTRY) +
         (
           min_pad_words *
-          GRAMMAR.first[1].count { |p| p == part_of_speech }
+          StoryKey::GRAMMAR.first[1].count { |p| p == part_of_speech }
         )
       (0..(count - 1)).map do |num|
         text = "#{part_of_speech}-#{num}"
         text = "pre-#{num} #{text}" if (num % multiword_freq).zero?
         text = "#{text} [with]" if part_of_speech == :verb && (num % preposition_freq).zero?
-        StoryKey::Lexicon::Entry.new \
+        StoryKey::Entry.new \
           token: StoryKey::Tokenizer.call(text),
           text: text.gsub(/\[|\]/, ''),
           countable: (num % 1).zero?,

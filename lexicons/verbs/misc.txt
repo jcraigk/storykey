@@ -10,6 +10,7 @@ adulate
 advise
 aggravate
 agree [with]
+aid
 aim [at]
 alarm
 alert
@@ -58,6 +59,7 @@ bark [at]
 bash
 bathe
 battle
+beat [up]
 beautify
 beckon [to]
 beguile
@@ -499,6 +501,7 @@ hunt
 hurl
 hurry [to]
 hurt
+hustle
 hydrate
 hypnotize
 idolize
@@ -641,6 +644,7 @@ obliterate
 observe
 obstruct
 offend
+overcharge
 overwhelm
 pacify
 page
@@ -710,7 +714,6 @@ profit [from]
 promise [to]
 promote
 propose [to]
-prosecute
 protect
 provoke
 pull
@@ -736,7 +739,6 @@ record
 recruit
 refuse
 refute
-regale
 register
 reject
 relax [with]
@@ -746,7 +748,6 @@ rename
 rendezvous [with]
 renounce
 reply [to]
-report
 reproach
 repulse
 rescue
@@ -896,7 +897,6 @@ stare [at]
 stay [with]
 steal [from]
 steer
-step [to]
 sterilize
 stifle
 sting
@@ -935,6 +935,7 @@ swear [at]
 sweep
 swerve [at]
 swim [with]
+swindle
 swing [at]
 synthesize
 tabulate
@@ -953,7 +954,6 @@ test
 tether
 thank
 thaw [out]
-theorize [with]
 threaten
 thrill
 throw

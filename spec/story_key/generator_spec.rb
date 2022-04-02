@@ -2,7 +2,7 @@
 RSpec.describe StoryKey::Generator do
   subject(:call) { described_class.new(bitsize:, format:).call }
 
-  let(:bitsize) { DEFAULT_BITSIZE }
+  let(:bitsize) { StoryKey::DEFAULT_BITSIZE }
   let(:format) { :bin }
 
   it 'generates a binary string' do

@@ -1,42 +1,42 @@
 # frozen_string_literal: true
-class StoryKey::Recover < StoryKey::Base
+class StoryKey::Console::Recover < StoryKey::Base
   include Remedy
 
   BG_BLUE = 44
-  BG_GREEN = 42
   BG_MAGENTA = 45
+  CYAN = 36
   BG_RED = 41
   EXIT_WORD = :control_x
-  FRAME_HORIZONTAL = '='
+  FRAME_HORIZONTAL = '─'
   GREEN = 32
   NUM_OPTIONS = 5
   RED = 31
 
   def call
-    @word_idx = 0
+    @entry_idx = 0
     @option_idx = 0
     clear_options
     clear_user_str
-    @prompt = 'Enter word: '
+    @prompt = 'Enter word(s): '
 
     ask_version_slug
     ask_num_phrases
-    ask_num_tail_words
+    ask_num_tail_entries
     interactive_phrase_recovery
   end
 
-  attr_accessor :num_phrases, :num_tail_words, :instructions, :prompt,
-                :user_str, :options, :option_idx, :word_idx
+  attr_accessor :num_phrases, :num_tail_entries, :instructions, :prompt,
+                :user_str, :options, :option_idx, :entry_idx
 
   private
 
-  def listen # rubocop:disable Metrics/MethodLength
+  def listen
     console.loop do |key|
       key = key.to_s.to_sym
-      case key_sym
+      case key
       when EXIT_WORD then quit_console
       when :up, :down then move_option_cursor(key)
-      when :left, :right, :tab then move_word_cursor(key)
+      when :left, :right, :tab then move_entry_cursor(key)
       when :backspace, :delete then input_backspace
       when :carriage_return, :control_m then input_enter
       else input_misc_key(key)
@@ -53,10 +53,10 @@ class StoryKey::Recover < StoryKey::Base
   end
 
   def input_enter
-    return if (word = options[option_idx]).blank?
-    words[word_idx] = word
+    return if (entry = options[option_idx]).blank?
+    entries[entry_idx] = decolorize(entry)
     return decode_and_hault if board_complete?
-    move_word_cursor(:right)
+    move_entry_cursor(:right)
   end
 
   def clear_user_str
@@ -76,7 +76,7 @@ class StoryKey::Recover < StoryKey::Base
   def decode_and_hault
     clear_user_str
     clear_options
-    @word_idx = -1
+    @entry_idx = -1
     @instructions = decode_story
     @prompt = colorize('(press any key to exit)', RED)
     draw
@@ -85,7 +85,7 @@ class StoryKey::Recover < StoryKey::Base
   end
 
   def decode_story
-    key = StoryKey.decode(story: "#{StoryKey::VERSION_SLUG} #{words.join(' ')}")
+    key = StoryKey.decode(story: "#{StoryKey::VERSION_SLUG} #{entries.join(' ')}")
     "#{colorize('Key:', BG_BLUE)} #{colorize(key, GREEN)}"
   rescue StoryKey::InvalidChecksum
     colorize('Checksum failed! Invalid story.', BG_RED)
@@ -93,10 +93,13 @@ class StoryKey::Recover < StoryKey::Base
 
   def refresh_options
     chars = user_str.chars
-    lexicon = lex.entries[parts_of_speech[word_idx].to_sym].map(&:text)
+    lexicon = lex.entries[parts_of_speech[entry_idx].to_sym].map(&:text)
     substr_matches = user_str.size > 2 ? lexicon.grep(/.*#{user_str}.*/i) : []
     fuzzy_matches = lexicon.grep(/.*#{chars.join('.*')}.*/i)
-    @options = (substr_matches + fuzzy_matches).uniq.take(NUM_OPTIONS)
+    @options = (substr_matches + fuzzy_matches - entries).uniq.take(NUM_OPTIONS)
+    @options.map! do |opt|
+      opt.gsub(/#{chars.join('|')}/) { |char| colorize(char, CYAN) }
+    end
     @option_idx = 0
   end
 
@@ -106,7 +109,7 @@ class StoryKey::Recover < StoryKey::Base
   end
 
   def ask_version_slug
-    print "Did your story take place in #{StoryKey::VERSION_SLUG}? (y) "
+    print "Did your story happen in #{StoryKey::VERSION_SLUG}? [Y/n] "
     key = console.get_key
     puts
     return if confirm?(key)
@@ -114,19 +117,19 @@ class StoryKey::Recover < StoryKey::Base
   end
 
   def num_parts
-    GRAMMAR.keys.max
+    StoryKey::GRAMMAR.keys.max
   end
 
   def default_num_phrases
-    ((DEFAULT_BITSIZE / BITS_PER_WORD.to_f) / num_parts).ceil
+    ((StoryKey::DEFAULT_BITSIZE / StoryKey::BITS_PER_ENTRY.to_f) / num_parts).ceil
   end
 
   def max_num_phrases
-    ((MAX_KEY_SIZE / BITS_PER_WORD.to_f) / num_parts).ceil
+    ((StoryKey::MAX_BITSIZE / StoryKey::BITS_PER_ENTRY.to_f) / num_parts).ceil
   end
 
   def ask_num_phrases
-    print "How many phrases are in your story? (#{default_num_phrases}) "
+    print "How many phrases? [#{default_num_phrases}] "
     ARGV.clear
     input = gets
     input = default_num_phrases if input.blank?
@@ -135,44 +138,41 @@ class StoryKey::Recover < StoryKey::Base
     end
   end
 
-  def ask_num_tail_words
+  def ask_num_tail_entries
     default = 3
-    print "How many words in last phrase? (#{default}) "
+    print "How many parts in last phrase? [#{default}] "
     input = gets
     input = default if input.blank?
-    @num_tail_words = input.to_i.tap do |i|
+    @num_tail_entries = input.to_i.tap do |i|
       quit('Invalid number') unless i.in?(1..max_parts_in_phrase)
     end
   end
 
   def max_parts_in_phrase
-    GRAMMAR.keys.max
+    StoryKey::GRAMMAR.keys.max
   end
 
-  def words
-    return @words if @words
+  def entries
+    return @entries if @entries
     ary = []
     num_phrases.times do |idx|
-      grammar_idx = idx + 1 == num_phrases ? num_tail_words : max_parts_in_phrase
-      grammar = GRAMMAR[grammar_idx]
+      grammar_idx = idx + 1 == num_phrases ? num_tail_entries : max_parts_in_phrase
+      grammar = StoryKey::GRAMMAR[grammar_idx]
       ary += grammar.map { |part_of_speech| "[#{part_of_speech}]" }
     end
-    @words = ary
+    @entries = ary
   end
 
   # TODO: Grammarize
   def board_rows
     ["In #{StoryKey::VERSION_SLUG} I saw"].tap do |ary|
       idx = 0
-      words.each_slice(GRAMMAR.keys.max).to_a.each_with_index.map do |word_group, row|
+      entries.each_slice(StoryKey::GRAMMAR.keys.max).to_a.each_with_index.map do |entry_group, row|
         parts = []
         last_row = row == num_phrases - 1
-        if num_phrases > 1
-          parts << "#{row + 1}."
-          parts << (last_row ? 'and a' : 'an')
-        end
-        word_group.each do |word|
-          parts << (word_idx == idx ? colorize(word, BG_MAGENTA) : word)
+        parts << "#{row + 1}." if num_phrases > 1
+        entry_group.each do |entry|
+          parts << (entry_idx == idx ? colorize(entry, BG_MAGENTA) : entry)
           idx += 1
         end
 
@@ -185,12 +185,12 @@ class StoryKey::Recover < StoryKey::Base
 
   def option_rows
     options.each_with_index.map do |opt, idx|
-      "#{' ' * prompt.size}#{idx == option_idx ? colorize(opt, BG_GREEN) : opt}"
+      "#{' ' * prompt.size}#{idx == option_idx ? colorize(opt, BG_MAGENTA) : opt}"
     end
   end
 
-  def move_word_cursor(key)
-    @word_idx = word_idx.send((key == :left ? '-' : '+'), 1) % words.size
+  def move_entry_cursor(key)
+    @entry_idx = entry_idx.send((key == :left ? '-' : '+'), 1) % entries.size
     clear_user_str
     clear_options
   end
@@ -205,10 +205,10 @@ class StoryKey::Recover < StoryKey::Base
   end
 
   def board_complete?
-    words.grep(/\[.+\]/).empty?
+    entries.grep(/\[.+\]/).empty?
   end
 
-  def num_words
+  def num_entries
     (num_phrases - 1)
   end
 
@@ -227,7 +227,11 @@ class StoryKey::Recover < StoryKey::Base
 
   def colorize(text, num)
     return text if text.blank? || num.blank?
-    "\e[#{num}m#{text}\e[0m"
+    "\e[#{num}m#{decolorize(text)}\e[0m"
+  end
+
+  def decolorize(text)
+    text.gsub(/\e\[\d+m/, '')
   end
 
   def draw
@@ -268,7 +272,7 @@ class StoryKey::Recover < StoryKey::Base
   end
 
   def parts_of_speech
-    @parts_of_speech ||= words.map { |w| w.tr('[]', '') }
+    @parts_of_speech ||= entries.map { |w| w.tr('[]', '') }
   end
 
   def lex
