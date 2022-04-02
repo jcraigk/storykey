@@ -13,7 +13,7 @@ class StoryKey::Lexicon < StoryKey::Base
   end
 
   def sha
-    @sha ||= Digest::SHA256.hexdigest(entries.to_s).first(7)
+    @sha ||= Digest::SHA256.hexdigest(entries.to_s).first(StoryKey::LEXICON_SHA_SIZE)
   end
 
   private

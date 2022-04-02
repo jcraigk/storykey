@@ -26,6 +26,7 @@ module StoryKey
     2 => %i[adjective noun],
     1 => %i[noun]
   }.freeze
+  LEXICON_SHA_SIZE = 7
   MAX_BITSIZE = 512
   PREPOSITIONS = %w[in i saw and a an].freeze
 
