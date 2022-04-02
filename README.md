@@ -18,7 +18,7 @@ StoryKey is a [Brainwallet](https://en.bitcoin.it/wiki/Brainwallet) inspired by 
 
 Each story is provided in two formats:
 * Humanized
-  * Version locale header ("In Miami I saw")
+  * Version locale header ("In Miami I saw...")
   * Enumerated phrases
   * Colorized parts of speech (adjectives, verbs, nouns)
   * Grammatical filler (articles, prepositions, conjunctions, punctuation)
@@ -34,10 +34,10 @@ Each story is provided in two formats:
 * Includes version slug to ensure accurate decoding
 * Uses a repeating English grammar to aid in mnemonics
 * Uses a lexicon curated for mental visualization
-* Avoids word repetition
+* Avoids token repetition
 * Provides interactive command-line recovery
 
-Each token of the story (word or compound) encodes 10 bits. The checksum length is variable based on the input size and space available in the last two tokens after accounting for a 4-bit footer. Here are a few example key sizes along with their respective story and checksum sizes.
+Each token of the story, which may be a single word or short compound phrase, encodes 10 bits. The checksum length is variable based on the input size and space available in the last two tokens after accounting for a 4-bit footer. Here are a few example key sizes along with their respective story and checksum sizes.
 
 | Key bits | Story tokens | Checksum bits |
 |----------|--------------|---------------|
@@ -68,7 +68,7 @@ Seed Phrase:
 pensive ellen-ripley surpass musician unhappy pug drink-vodka dove opulent dante-alighieri diagnose huckleberry-finn frantic sister eat-pretzels mozart cunning meerkat trim balloonist rich ocelot step john-wayne civilian convict locust
 ````
 
-This paragraph or seed phrase can be deterministically decoded back into its original format using the same version of StoryKey. The locale of the story (e.g. `Miami`), identifies that version. During key recovery, an exception will be raised if:
+This paragraph or seed phrase can be deterministically decoded back into its original form using the same version of StoryKey. The locale of the story (e.g. `Miami`) identifies that version. During key recovery, an exception will be raised if:
  * the `version slug` does not match the current version of StoryKey
  * the embedded `checksum` does not match the expected value
 
