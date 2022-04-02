@@ -5,9 +5,7 @@ RSpec.describe StoryKey::Lexicon do
   let(:regex) do
     /
       \A
-      [a-zA-Z]
-      [a-zA-Z0-9\-.]{1,15}
-      (\s[a-zA-Z][a-zA-Z0-9\-]{1,15})?
+      ([a-zA-Z][a-zA-Z0-9\-.]{1,15}\s?){1,2}
       (\s\[[a-z]{1,5}\])?
       \Z
     /x

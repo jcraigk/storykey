@@ -14,52 +14,62 @@
 
 # StoryKey
 
-StoryKey is a [Brainwallet](https://en.bitcoin.it/wiki/Brainwallet) inspired by [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki). It can be used to memorize private keys or any arbitrary string of data between 1 and 512 bits.
+StoryKey is a [Brainwallet](https://en.bitcoin.it/wiki/Brainwallet) inspired by [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki). It converts an arbitrary string of data, such as a cryptocurrency private key, into an English paragraph intended for longterm human memory. It also assists in decoding the story back into the original data.
 
-It uses three parts of English speech - adjectives, nouns, and verbs - to produce phrases that are sequenced into stories. Each story represents a lossless version of the original data, in a format that is easier for a human to remember.
+Each story is provided in two formats:
+1. Humanized
+ - Version header ("In Miami I saw")
+ - Enumerated phrases
+ - Colorized parts of speech (adjectives, verbs, nouns)
+ - Grammatical filler (articles, prepositions, conjunctions, punctuation)
+2. Tokenized (seed phrase)
+ - ordered list of unique tokens
+ - lowercase alphanumeric and dashes only
 
 Features:
 
 1. Encodes arbitrary length keys from 1 to 512 bits (default 256)
-2. Includes checksum to validate the story
+2. Includes checksum for integrity
 3. Includes version slug to ensure accurate decoding
-4. Presents a repeating English grammar to aid in memorization
-5. Utilizes a lexicon curated for mental visualization
-6. Avoids word repetition within the story
-7. Provides interactive command-line recovery assistance
+4. Uses a repeating English grammar to aid in mnemonics
+5. Uses a lexicon curated for mental visualization
+6. Avoids word repetition
+7. Provides interactive command-line recovery
 
-Each word of the story encodes 10 bits. The checksum length is variable based on the input size and space available in the last two words after accounting for a 4-bit footer. Here are a few example key sizes along with their respective story and checksum sizes.
+Each token (word or word sequence) of the story encodes 10 bits. The checksum length is variable based on the input size and space available in the last two tokens after accounting for a 4-bit footer. Here are a few example key sizes along with their respective story and checksum sizes.
 
-| Key bits | Story words | Checksum bits |
-|----------|-------------|---------------|
-| 64       | 8           | 12            |
-| 128      | 14          | 8             |
-| 192      | 21          | 14            |
-| 256      | 27          | 10            |
-| 384      | 40          | 12            |
-| 512      | 53          | 14            |
+| Key bits | Story tokens | Checksum bits |
+|----------|--------------|---------------|
+| 64       | 8            | 12            |
+| 128      | 14           | 8             |
+| 192      | 21           | 14            |
+| 256      | 27           | 10            |
+| 384      | 40           | 12            |
+| 512      | 53           | 14            |
 
-An example key and its associated story are shown below:
+An example key and its associated story and seed phrase are shown below:
 
 Screenshot from terminal:
-![Key/Story Example](https://user-images.githubusercontent.com/104095/160753139-e2a6fb07-a135-4e9e-8069-5c4eb2b5be0d.png)
+![Key/Story Example](https://user-images.githubusercontent.com/104095/161372021-1edb5999-453d-453a-a7bb-d2fc2bcc3120.png)
 
 Text:
 ```
 Key:
-2VD2SKZTu5JBh8XeuFYzd9zLAtfW2YKNEsTgf8bHS7Lz
+CH8krjSZpGFmxnKo9QPqQEd9oMUkXnLcUhhEQFLrGCtg
 Story:
 In Miami I saw
-1. a vile zombie overcome a harpy,
-2. a pitiful Dustin Hoffman grumble at Henri Matisse,
-3. a sleek physicist rush Pippin Took,
-4. a sandy Gene Hackman decorate Epicurus,
-5. a defensive osprey replicate a snob,
-6. an exultant jurist attack Methuselah,
-7. and Jack Sparrow quiz a bobcat.
+1. a pensive Ellen Ripley surpass a musician,
+2. an unhappy pug drink vodka with a dove,
+3. an opulent Dante Alighieri diagnose Huckleberry Finn,
+4. a frantic sister eat pretzels with Mozart,
+5. a cunning meerkat trim a balloonist,
+6. a rich ocelot step to John Wayne,
+7. and a civilian convict a locust.
+Seed Phrase:
+pensive ellen-ripley surpass musician unhappy pug drink-vodka dove opulent dante-alighieri diagnose huckleberry-finn frantic sister eat-pretzels mozart cunning meerkat trim balloonist rich ocelot step john-wayne civilian convict locust
 ````
 
-This paragraph can be deterministically decoded back into its binary source using the same version of StoryKey. The `version slug` is typically a well-known city, such as `Miami`. During key recovery, an exception will be raised if:
+This paragraph or seed phrase can be deterministically decoded back into its original format using the same version of StoryKey. The `version slug` is typically a well-known city, such as `Miami`. During key recovery, an exception will be raised if:
  * the `version slug` does not match the current version of StoryKey
  * the embedded `checksum` does not match the expected value
 
@@ -68,18 +78,19 @@ This paragraph can be deterministically decoded back into its binary source usin
 
 The lexicon was selected using the following criteria:
 
-1. Anthropomorphism. All parts of speech - adjective, noun, and verb - must fit logically when composed into phrases. To accommodate, entries were selected based on how closely they could produce a mental image of commonly known anthropomorphic entities interacting with one another.
+1. Anthropomorphism. All parts of speech - adjective, noun, and verb - must fit logically when composed into phrases. To accommodate, entries were selected based on how closely they could produce a mental image of commonly known anthropomorphic entities interacting with one another. To produce enough verbs, compound actions such as "eat breakfast" were also used.
  - Adjectives: personal physical qualities, moods, colors, textures
  - Nouns: famous people/characters, professions, animals
- - Verbs: physical actions with subject/object, favoring transitive
-2. Visual content. Words should be concrete vs abstract and convey vivid mental imagery.
-3. Cultural acceptability (reject sexually suggestive and overtly violent words).
-4. Balancing brevity and clarity.
+ - Verbs: physical actions connecting subject/object, favoring transitive
+2. Visualization. Entries should be concrete vs abstract and convey vivid mental imagery.
+3. Cultural acceptability. Reject sexually suggestive and other controversial imagery.
+4. Eliminate similar base words across parts of speech.
+5. Balance brevity with clarity.
 
 
 ### Graphical Visualization
 
-When machine learning becomes less expensive, StoryKey stories may be converted to graphical panels similar to the [DALL-E Project](https://openai.com/blog/dall-e/). This will likely aid in the memorization process for some users.
+When AI becomes more common, StoryKey stories may be converted to graphical panels similar to the [DALL-E Project](https://openai.com/blog/dall-e/). This will likely aid in the memorization process for many users.
 
 
 ## Installation
@@ -101,13 +112,16 @@ Or install it yourself as:
 $ gem install story_key
 ```
 
+
 ## Usage
 
 This library may be used by calling Ruby methods or directly from the command line.
 
+
 ### Ruby Usage
 
 After installing the gem, you may run `bin/console` or `require` the gem in your own project.
+
 
 ### Encode key => story
 
@@ -137,6 +151,7 @@ Generate a new random key/story pair.
 ```
 StoryKey.generate
 ```
+
 
 ## Command Line
 

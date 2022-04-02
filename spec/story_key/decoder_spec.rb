@@ -40,14 +40,7 @@ RSpec.describe StoryKey::Decoder do
   context 'with invalid checksum' do
     let(:story) do
       <<~TEXT.strip
-        In #{StoryKey::VERSION_SLUG} I saw
-        1. an adjective-873 noun-107 verb-342 a noun-499,
-        2. an adjective-108 noun-1003 verb-343 a noun-947,
-        3. an adjective-586 noun-458 verb-404 a noun-712,
-        4. an adjective-784 pre-833 noun-833 verb-462 a noun-999,
-        5. an adjective-766 pre-889 noun-889 verb-478 a noun-531,
-        6. an adjective-301 noun-232 verb-229 a pre-518 noun-518,
-        7. and a noun-496 verb-613 a noun-978
+        In #{StoryKey::VERSION_SLUG} I saw an adjective-873 noun-107 verb-342 a noun-499, an adjective-108 noun-1003 verb-343 a noun-947, an adjective-586 noun-458 verb-404 a noun-712, an adjective-784 noun-833 verb-462 a noun-999, an adjective-766 noun-889 verb-478 a noun-531, an adjective-301 noun-232 verb-229 a noun-518, and a noun-496 verb-613 a noun-978.
       TEXT
     end
 
@@ -59,14 +52,7 @@ RSpec.describe StoryKey::Decoder do
   context 'with valid story' do
     let(:story) do
       <<~TEXT.strip
-        In #{StoryKey::VERSION_SLUG} I saw
-        1. an adjective-873 noun-107 verb-342 a noun-499,
-        2. an adjective-108 noun-1003 verb-343 a noun-947,
-        3. an adjective-586 noun-458 verb-404 a noun-712,
-        4. an adjective-784 pre-833 noun-833 verb-462 a noun-999,
-        5. an adjective-766 pre-889 noun-889 verb-478 a noun-531,
-        6. an adjective-301 noun-232 verb-229 a pre-518 noun-518,
-        7. and a noun-496 verb-613 a noun-977
+        In #{StoryKey::VERSION_SLUG} I saw an adjective-873 noun-107 verb-342 a noun-499, an adjective-108 noun-1003 verb-343 a noun-947, an adjective-586 noun-458 verb-404 a noun-712, an adjective-784 noun-833 verb-462 a noun-999, an adjective-766 noun-889 verb-478 a noun-531, an adjective-301 noun-232 verb-229 a noun-518, and a noun-496 verb-613 a noun-977.
       TEXT
     end
 

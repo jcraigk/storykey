@@ -8,14 +8,13 @@ Austin Powers
 Batman
 Beowulf
 Boromir
-Captain Ahab
-Captain Kirk
 Catwoman
 Donnie Darko
 Ellen Ripley
 Fenrir
 Ferris Bueller
 Forrest Gump
+Huckleberry Finn
 Freddy Krueger
 Godzilla
 Groot
@@ -28,6 +27,7 @@ Indiana Jones
 Iron Man
 Jack Sparrow
 James Bond
+James Kirk
 Jason Voorhees
 Macbeth
 Marty McFly
@@ -56,6 +56,7 @@ Tarzan
 The Dude
 The Joker
 Thor
+Tom Sawyer
 Tony Montana
 Tyler Durden
 Zeus

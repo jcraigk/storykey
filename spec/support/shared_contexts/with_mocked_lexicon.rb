@@ -5,7 +5,7 @@ RSpec.shared_context 'with mocked lexicon' do
   end
   let(:multiword_freq) { 15 }
   let(:preposition_freq) { 20 }
-  let(:words) do
+  let(:entries) do
     GRAMMAR.values.flatten.uniq.index_with do |part_of_speech|
       count =
         (2**BITS_PER_WORD) +

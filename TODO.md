@@ -1,13 +1,119 @@
 # TODO
 
-* Encoder should also provide list of raw words
-* Generate could produce list in 3-4 columns
 * Bug: `bin/storykey new 512` - seems to get into deep loops and produce `a bad Neo arm Neo`
-
-* Try to use these words: https://github.com/bitcoin/bips/blob/master/bip-0039/english.txt
 
 * Recovery
   * Insert correct grammar as each word is typed (extract from encoder)
+
+"step"
+FIX SIMILAR BASES:
+"translate",
+"translator",
+
+"theorist",
+"theorize",
+
+"support",
+"supportive",
+
+"supervise",
+"supervisor",
+
+"super",
+"superb",
+
+"stylish",
+"stylist",
+
+"report",
+"reporter",
+
+"regal",
+"regale",
+
+"quarrel",
+"quarrelsome",
+
+"push",
+"pushy",
+
+"prosecute",
+"prosecutor",
+
+"promote",
+"promoter",
+
+"produce",
+"producer",
+
+"paint",
+"painter",
+
+"optimist",
+"optimistic",
+
+"lead",
+"leader",
+
+"dwarf",
+"dwarfish",
+
+"dream",
+"dreamy",
+
+"doubt",
+"doubtful",
+
+"coward",
+"cowardly",
+
+"counsel",
+"counselor",
+
+"comedian",
+"comical",
+
+"collect",
+"collector",
+
+"broke",
+"broken",
+"broker",
+
+"birdwatch",
+"birdwatcher",  
+
+"audit",
+"auditor",
+
+"attendant",
+"attentive",
+
+"assist",
+"assistant",
+
+"artist",
+"artistic",
+
+"adorable",
+"adore",
+
+"advise",
+"advisor",
+
+"alarm",
+"alarmed",
+
+"analyst",
+"analyze",
+
+"angel",
+"angelic",
+
+"appraise",
+"appraiser",
+
+
 
 MAYBE
 * Eliminate base words across parts of speech

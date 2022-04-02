@@ -113,7 +113,6 @@ cheat
 check [on]
 cheer
 chew [on]
-chew gum [with]
 chide
 choke
 choose
@@ -202,6 +201,7 @@ desert
 destroy
 detach
 detect
+devour
 diagnose
 die [for]
 diminish
@@ -231,6 +231,7 @@ dress
 drink beer [with]
 drink brandy [with]
 drink chai [with]
+drink cider [with]
 drink coffee [with]
 drink cognac [with]
 drink gin [with]
@@ -272,7 +273,6 @@ eat candy [with]
 eat carrots [with]
 eat cashews [with]
 eat casserole [with]
-eat cauliflower [with]
 eat cereal [with]
 eat cheese [with]
 eat cheesecake [with]
@@ -282,7 +282,7 @@ eat chips [with]
 eat chocolate [with]
 eat chowder [with]
 eat churros [with]
-eat coconut [with]
+eat coconuts [with]
 eat cookies [with]
 eat corn [with]
 eat crackers [with]
