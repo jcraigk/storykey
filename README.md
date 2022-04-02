@@ -14,7 +14,7 @@
 
 # StoryKey
 
-StoryKey is a [Brainwallet](https://en.bitcoin.it/wiki/Brainwallet) inspired by [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki) written in Ruby. It converts an arbitrary string of data, such as a cryptocurrency private key, into an English paragraph intended for longterm human memory. It also assists in decoding the story back into its original form.
+StoryKey is a [Brainwallet](https://en.bitcoin.it/wiki/Brainwallet) inspired by [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki) written in [Ruby](https://www.ruby-lang.org/en/). It converts an arbitrary string of data, such as a cryptocurrency private key, into an English paragraph intended for longterm human memory. It also assists in decoding the story back into its original form.
 
 Each story is provided in two formats:
 * Humanized
@@ -29,7 +29,7 @@ Each story is provided in two formats:
 
 ## Features
 
-* Encodes arbitrary length keys from 1 to 512 bits (default 256)
+* Encodes arbitrary length data from 1 to 512 bits (default 256)
 * Includes checksum for integrity
 * Includes version slug to ensure accurate decoding
 * Uses a repeating English grammar to aid in mnemonics
@@ -91,7 +91,7 @@ The lexicon was selected using the following criteria:
 
 ### Graphical Visualization
 
-When AI becomes more common, StoryKey stories may be converted to graphical panels similar to the [DALL-E Project](https://openai.com/blog/dall-e/). This will likely aid in the memorization process for many users.
+When AI becomes more common, StoryKey stories may be converted to graphical panels similar to the [DALL-E Project](https://openai.com/blog/dall-e/). This will likely aid in mnemonics process for many users.
 
 
 ## Installation
