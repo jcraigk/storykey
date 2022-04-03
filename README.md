@@ -1,7 +1,6 @@
 [![Gem Version](https://badge.fury.io/rb/story_key.svg)](https://badge.fury.io/rb/story_key)
 ![Gem Downloads](https://ruby-gem-downloads-badge.herokuapp.com/story_key?type=total)
 [![Build Status](https://travis-ci.org/jcraigk/story_key.svg?branch=main)](https://travis-ci.org/jcraigk/story_key)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/6046413814d7f6417ce9/test_coverage)](https://codeclimate.com/github/jcraigk/story_key/test_coverage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/6046413814d7f6417ce9/maintainability)](https://codeclimate.com/github/jcraigk/story_key/maintainability)
 
 

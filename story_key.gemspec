@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.version       = StoryKey::VERSION
   spec.authors       = ['Justin Craig-Kuhn (JCK)']
   spec.email         = ['jcraigk@gmail.com']
-  spec.summary       = 'StoryKey gives a memorable paragraph in place of your crypto private key'
+  spec.summary       = 'StoryKey turns your crypto private key into a memorable story'
   spec.license       = 'MIT'
   spec.required_ruby_version = '>= 3.1.0'
   spec.bindir        = 'exe'
@@ -27,6 +27,4 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop'
   spec.add_development_dependency 'rubocop-performance'
   spec.add_development_dependency 'rubocop-rspec'
-  spec.add_development_dependency 'simplecov'
-  spec.add_development_dependency 'simplecov-rcov'
 end

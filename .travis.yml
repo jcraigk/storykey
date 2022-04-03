@@ -11,5 +11,3 @@ before_install:
 script:
   - bundle exec rubocop
   - bundle exec rspec spec
-after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
