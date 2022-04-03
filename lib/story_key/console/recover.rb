@@ -30,7 +30,7 @@ class StoryKey::Console::Recover < StoryKey::Base
 
   private
 
-  def listen
+  def listen # rubocop:disable Metrics/MethodLength
     console.loop do |key|
       key = key.to_s.to_sym
       case key
@@ -93,14 +93,26 @@ class StoryKey::Console::Recover < StoryKey::Base
 
   def refresh_options
     chars = user_str.chars
-    lexicon = lex.entries[parts_of_speech[entry_idx].to_sym].map(&:text)
-    substr_matches = user_str.size > 2 ? lexicon.grep(/.*#{user_str}.*/i) : []
-    fuzzy_matches = lexicon.grep(/.*#{chars.join('.*')}.*/i)
+    lexicon = current_lexicon
+    substr_matches = current_substr_matches(lexicon)
+    fuzzy_matches = current_fuzzy_matches(lexicon, chars)
     @options = (substr_matches + fuzzy_matches - entries).uniq.take(NUM_OPTIONS)
     @options.map! do |opt|
       opt.gsub(/#{chars.join('|')}/) { |char| colorize(char, CYAN) }
     end
     @option_idx = 0
+  end
+
+  def current_lexicon
+    lex.entries[parts_of_speech[entry_idx].to_sym].map(&:text)
+  end
+
+  def current_fuzzy_matches(lexicon, chars)
+    lexicon.grep(/.*#{chars.join('.*')}.*/i)
+  end
+
+  def current_substr_matches(lexicon)
+    user_str.size > 2 ? lexicon.grep(/.*#{user_str}.*/i) : []
   end
 
   def interactive_phrase_recovery
@@ -163,11 +175,10 @@ class StoryKey::Console::Recover < StoryKey::Base
     @entries = ary
   end
 
-  # TODO: Grammarize
-  def board_rows
-    ["In #{StoryKey::VERSION_SLUG} I saw"].tap do |ary|
+  def board_rows # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+    [version_lead].tap do |ary|
       idx = 0
-      entries.each_slice(StoryKey::GRAMMAR.keys.max).to_a.each_with_index.map do |entry_group, row|
+      entry_slices.map do |entry_group, row|
         parts = []
         last_row = row == num_phrases - 1
         parts << "#{row + 1}." if num_phrases > 1
@@ -181,6 +192,14 @@ class StoryKey::Console::Recover < StoryKey::Base
         ary << str
       end
     end
+  end
+
+  def version_lead
+    "In #{StoryKey::VERSION_SLUG} I saw"
+  end
+
+  def entry_slices
+    entries.each_slice(StoryKey::GRAMMAR.keys.max).to_a.each_with_index
   end
 
   def option_rows
