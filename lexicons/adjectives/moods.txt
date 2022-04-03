@@ -21,7 +21,6 @@ depressed
 despondent
 disdainful
 displeased
-doubtful
 ecstatic
 emotional
 entranced
@@ -93,6 +92,7 @@ serene
 smug
 snide
 somber
+sour
 spiteful
 squeamish
 stern

@@ -17,6 +17,6 @@ class StoryKey::Generator < StoryKey::Base
   end
 
   def random_bin
-    SecureRandom.random_bytes(32).unpack1('H*').hex.to_s(2).first(bitsize)
+    SecureRandom.hex(bitsize / 8).hex.to_s(2).rjust(bitsize, '0')
   end
 end

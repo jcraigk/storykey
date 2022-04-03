@@ -1,6 +1,7 @@
 Aragorn
 Arwen
 Bilbo Baggins
+Boromir
 Denethor
 Elrond
 Faramir
@@ -15,6 +16,9 @@ Merry Brandybuck
 Pippin Took
 Radagast
 Samwise Gamgee
+Saruman
 Sauron
+Shelob
+Smaug
 Tom Bombadil
 Treebeard

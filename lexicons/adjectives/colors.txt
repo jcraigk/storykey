@@ -1,10 +1,8 @@
-alizarin
 amber
 aqua
 auburn
 azure
 beige
-black
 blue
 bronze
 brown
@@ -13,7 +11,6 @@ cerise
 cerulean
 crimson
 cyan
-ebony
 fuchsia
 golden
 green
@@ -33,12 +30,9 @@ russet
 scarlet
 sepia
 silver
-tan
 teal
 turquoise
-ultraviolet
 umber
 vermilion
 violet
-white
 yellow

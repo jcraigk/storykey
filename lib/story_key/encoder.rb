@@ -145,7 +145,12 @@ class StoryKey::Encoder < StoryKey::Base
     entries = lex.entries[part_of_speech]
     entries[decimal].tap do
       # Shift entries to prevent repeats
-      lex.entries[part_of_speech] = entries[..(decimal - 1)] + entries[(decimal + 1)..]
+      lex.entries[part_of_speech] =
+        if decimal.zero?
+          entries[1..]
+        else
+          entries[..(decimal - 1)] + entries[(decimal + 1)..]
+        end
     end
   end
 

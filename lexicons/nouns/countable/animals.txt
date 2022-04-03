@@ -192,7 +192,6 @@ snail
 snake
 sparrow
 spider
-sponge
 squid
 squirrel
 stallion
@@ -201,7 +200,6 @@ starling
 stingray
 stoat
 stork
-swallow
 swan
 tamarin
 tanager

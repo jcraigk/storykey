@@ -26,8 +26,9 @@ RSpec.describe StoryKey::Lexicon do
   it 'returns expected entry counts' do # rubocop:disable RSpec/ExampleLength
     total_count = 0
     parts_of_speech.each do |part|
-      count = (2**StoryKey::BITS_PER_ENTRY) +
-              (min_pad_words * StoryKey::GRAMMAR.first[1].count { |p| p == part })
+      count =
+        (2**StoryKey::BITS_PER_ENTRY) +
+        (min_pad_words * StoryKey::GRAMMAR[StoryKey::GRAMMAR.keys.max].count { |p| p == part })
       total_count += count
 
       num = lex.entries[part].size

@@ -1,3 +1,5 @@
+
+
 abandon
 accompany
 accost
@@ -9,16 +11,15 @@ adore
 adulate
 advise
 aggravate
+agitate
 agree [with]
 aid
 aim [at]
-alarm
 alert
 align [with]
 amaze
 amble [to]
 amuse
-analyze
 annoy
 apologize [to]
 applaud
@@ -28,14 +29,12 @@ approve [of]
 argue [with]
 arm
 arrest
-ask
 asphyxiate
 assess
 assist
 assure
 astonish
 attack
-audit
 augment
 avail
 avoid
@@ -46,7 +45,6 @@ bag
 bake biscuits [with]
 bake bread [with]
 bake brownies [with]
-bake casseroles [with]
 bake cookies [with]
 bake cupcakes [with]
 bake muffins [with]
@@ -68,7 +66,6 @@ bellow [at]
 bemuse
 berate
 betray
-birdwatch [with]
 bisect
 bite
 blame
@@ -112,16 +109,16 @@ chase
 chastise
 chat [with]
 cheat
-check [on]
 cheer
 chew [on]
 chide
 choke
 choose
-chop
+chop [up]
 clamor [for]
 clamp
 clasp
+climb trees [with]
 cling [to]
 clip
 cloak
@@ -170,12 +167,17 @@ copy
 corner
 correct
 counsel
+count cards [with]
+count coins [with]
+count sheep [with]
 cover
 crash [into]
 crawl [to]
 credit
 criticize
 crochet [with]
+cruise [with]
+crusade [with]
 crush
 cry [for]
 cure
@@ -217,6 +219,7 @@ discover
 discuss
 disgust
 dismiss
+disown
 dispatch
 display
 dispose [of]
@@ -225,7 +228,7 @@ disturb
 ditch
 divert
 divide
-doubt
+document
 drag
 draw
 dream [of]
@@ -257,7 +260,6 @@ drown
 eat almonds [with]
 eat apples [with]
 eat apricots [with]
-eat asparagus [with]
 eat avocado [with]
 eat bacon [with]
 eat bagels [with]
@@ -276,7 +278,6 @@ eat carrots [with]
 eat cashews [with]
 eat casserole [with]
 eat cereal [with]
-eat cheese [with]
 eat cheesecake [with]
 eat cherries [with]
 eat chicken [with]
@@ -295,9 +296,11 @@ eat curry [with]
 eat custard [with]
 eat dinner [with]
 eat doughnuts [with]
+eat dumplings [with]
 eat eggplant [with]
 eat fajitas [with]
 eat figs [with]
+eat granola [with]
 eat grapes [with]
 eat guacamole [with]
 eat gumbo [with]
@@ -315,7 +318,6 @@ eat lunch [with]
 eat mangos [with]
 eat marzipan [with]
 eat meatloaf [with]
-eat minestrone [with]
 eat mollusks [with]
 eat mooncakes [with]
 eat muffins [with]
@@ -330,9 +332,9 @@ eat papaya [with]
 eat pasta [with]
 eat pastries [with]
 eat peaches [with]
-eat pears [with]
 eat peas [with]
 eat pecans [with]
+eat peppers [with]
 eat pie [with]
 eat pistachios [with]
 eat pizza [with]
@@ -380,9 +382,7 @@ eliminate
 embarrass
 embrace
 empathize [with]
-employ
 emulate
-enable
 enchant
 encourage
 endanger
@@ -414,6 +414,7 @@ exhaust
 exhibit
 exile
 explain [to]
+explore [with]
 face
 feast [with]
 feed
@@ -442,6 +443,7 @@ follow
 fool
 forbid
 force
+forgive
 frame
 freeze
 frisk
@@ -462,7 +464,7 @@ gorge [with]
 gossip [with]
 grade
 greet
-grieve
+grieve [for]
 grin [at]
 groan [at]
 growl [at]
@@ -510,7 +512,7 @@ ignore
 illuminate
 illustrate
 imagine
-imbibe
+imbibe [with]
 imitate
 immolate
 immunize
@@ -521,7 +523,6 @@ implore
 impress
 imprison
 inaugurate
-incorporate
 indoctrinate
 indulge
 infest
@@ -531,7 +532,6 @@ inherit [from]
 inhibit
 injure
 inquire [with]
-insist [on]
 inspect
 inspire
 instruct
@@ -544,7 +544,6 @@ interview
 intimidate
 introduce
 intrude [on]
-invalidate
 invest [in]
 invigorate
 invite
@@ -599,14 +598,12 @@ litter [with]
 lobotomize
 lock [up]
 lodge [with]
-look [at]
 loot
-lose
 lurch [at]
 lure
 lurk [with]
 magnify
-manage
+make peace [with]
 mangle
 manipulate
 march [with]
@@ -615,7 +612,6 @@ marry
 marvel [at]
 massage
 maul
-measure
 meet
 melt
 mimic
@@ -634,17 +630,16 @@ mutter [at]
 nag
 negotiate [with]
 neutralize
+nod [at]
 notify
 nourish
 nurture
-nuzzle
 obey
 object [to]
 obliterate
 observe
 obstruct
 offend
-overcharge
 overwhelm
 pacify
 page
@@ -665,40 +660,54 @@ perplex
 persuade
 perturb
 pester
-pet
 petrify
 pierce
 pinch
 plagiarize
-plaster
 play badminton [with]
 play baseball [with]
 play basketball [with]
+play Battlefield [with]
+play billiards [with]
 play blackjack [with]
 play bocce [with]
+play Borderlands [with]
 play checkers [with]
 play chess [with]
 play cribbage [with]
 play croquet [with]
+play Diablo [with]
+play Doom [with]
+play drums [with]
+play Fallout [with]
 play football [with]
+play Fortnite [with]
 play golf [with]
 play guitar [with]
+play Halo [with]
 play hockey [with]
-play music [with]
+play Minecraft [with]
+play Monopoly [with]
 play piano [with]
+play Pokemon [with]
 play poker [with]
-play pool [with]
+play Risk [with]
 play roulette [with]
 play rugby [with]
 play rummy [with]
+play Scrabble [with]
+play shuffleboard [with]
+play Skyrim [with]
+play Starcraft [with]
 play tennis [with]
+play Tetris [with]
+play Twister [with]
 play violin [with]
 play volleyball [with]
 pluck
 point [at]
 poison
 poll
-pollute
 practice [with]
 praise
 prance [with]
@@ -709,10 +718,9 @@ preserve
 press
 prick
 print
-produce
+prod
 profit [from]
 promise [to]
-promote
 propose [to]
 protect
 provoke
@@ -721,7 +729,6 @@ punch
 puncture
 punish
 pursue
-push
 quarrel [with]
 quell
 question
@@ -735,6 +742,7 @@ ratify
 rattle
 rave [with]
 read [with]
+read books [with]
 record
 recruit
 refuse
@@ -788,7 +796,6 @@ sass
 satirize
 saturate
 save
-savor
 scam
 scamper [to]
 scan
@@ -804,6 +811,7 @@ scratch
 scream [at]
 screech [at]
 scrub
+scrutinize
 scuffle [with]
 scurry [to]
 search
@@ -826,7 +834,7 @@ ship
 shirk
 shock
 shoot
-shop [for]
+shop [with]
 shout [at]
 shove
 shriek [at]
@@ -842,10 +850,10 @@ sigh [at]
 signal
 sing [for]
 singe
-single out
 sink
 sit [with]
 skate [with]
+sketch
 ski [with]
 skip
 skulk [with]
@@ -857,29 +865,26 @@ slice
 slink [to]
 smack
 smile [at]
-smoke [with]
-smoke cigars [with]
+smoke cannabis [with]
+smoke tobacco [with]
 smother
 snarl [at]
 sneer [at]
 snicker [at]
-sniff
 snorkel [with]
+snowboard [with]
 snub
-snuff
 soak
-sob [for]
-solarize
+sob [with]
 solicit
-solve [for]
-somersault [for]
+somersault [with]
 soothe
-spawn
-speak [to]
-spear
+speak French [with]
+speak German [with]
+speak Mandarin [with]
+speak Spanish [with]
 spin
 spit [on]
-spite
 spoil
 sponsor
 spot
@@ -889,12 +894,10 @@ spy [on]
 squeeze
 stab
 stabilize
-stain
 stalk
 stall
 stand [with]
 stare [at]
-stay [with]
 steal [from]
 steer
 sterilize
@@ -905,7 +908,6 @@ stop
 straighten [out]
 strangle
 strengthen
-stretch
 strike
 stroll [with]
 struggle [with]
@@ -916,13 +918,12 @@ subdue
 submerge
 submit [to]
 sue
-suffer [for]
+suffer
 suffocate
 summon
-supervise
+sunbathe [with]
 supplant
 supply
-support
 suppress
 surpass
 surprise
@@ -937,11 +938,8 @@ swerve [at]
 swim [with]
 swindle
 swing [at]
-synthesize
-tabulate
-talk [to]
-tally
 target
+taste wine [with]
 taunt
 teach
 tease
@@ -955,7 +953,6 @@ tether
 thank
 thaw [out]
 threaten
-thrill
 throw
 thump
 thwart
@@ -964,8 +961,6 @@ tilt
 time
 tip
 tiptoe [to]
-tire [out]
-toggle
 tolerate
 torment
 toss
@@ -979,7 +974,10 @@ train
 transact [with]
 translate [for]
 transport
-travel [to]
+travel east [with]
+travel north [with]
+travel south [with]
+travel west [with]
 trick
 trigger
 trim
@@ -1012,21 +1010,25 @@ ventilate
 veto
 visit
 vomit [on]
+vote [for]
 vouch [for]
 wade [with]
+wage war [with]
 wager [on]
 wake [up]
 wall [in]
 wander [with]
 warn
 wash
+watch clouds [with]
+watch movies [with]
+watch sports [with]
 wave [at]
 weep [for]
-weigh
 welcome
 whack
 whimper [at]
-whine [at]
+whine [to]
 whisper [to]
 wink [at]
 wound
