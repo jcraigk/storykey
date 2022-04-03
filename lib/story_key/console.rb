@@ -10,6 +10,8 @@ class StoryKey::Console < Thor
   def new(bitsize = StoryKey::DEFAULT_BITSIZE)
     key, story = StoryKey.generate(bitsize: bitsize.to_i)
     puts story_str(key, story)
+  rescue StoryKey::KeyTooLarge
+    quit 'Key too large'
   end
 
   desc 'encode [KEY]',

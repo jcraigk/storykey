@@ -1,20 +1,17 @@
 Ace Ventura
-Achilles
-Aphrodite
-Apollo
-Ares
-Athena
+Atticus Finch
 Austin Powers
 Batman
 Beowulf
-Boromir
+Bob Cratchet
 Catwoman
-Donnie Darko
+Don Quixote
+Ebenezer Scrooge
 Ellen Ripley
 Fenrir
 Ferris Bueller
 Forrest Gump
-Huckleberry Finn
+Frankenstein
 Freddy Krueger
 Godzilla
 Groot
@@ -22,18 +19,21 @@ Hamlet
 Hannibal Lecter
 Harry Potter
 Hercules
-Hermes
+Huckleberry Finn
+Humpty Dumpty
 Indiana Jones
 Iron Man
 Jack Sparrow
 James Bond
 James Kirk
-Jason Voorhees
+Jay Gatsby
+King Lear
 Macbeth
 Marty McFly
 Medusa
 Moby-Dick
 Mothra
+Nancy Drew
 Neo
 Odysseus
 Ophelia
@@ -41,23 +41,21 @@ Optimus Prime
 Othello
 Pikachu
 Poseiden
-Prospero
 Queequeg
 Rambo
 Rocky Balboa
 Sarah Connor
-Scrooge
+Sherlock Holmes
 Shrek
 Spider-Man
 Spock
 Star-Lord
 Superman
 Tarzan
-The Dude
-The Joker
 Thor
 Tom Sawyer
 Tony Montana
+Tony Soprano
 Tyler Durden
 Zeus
 Zorro

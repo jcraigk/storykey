@@ -50,7 +50,6 @@ ringleader
 robot
 rogue
 ruffian
-scammer
 scoundrel
 shoplifter
 sister

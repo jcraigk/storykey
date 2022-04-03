@@ -11,7 +11,7 @@ RSpec.shared_context 'with mocked lexicon' do
         (2**StoryKey::BITS_PER_ENTRY) +
         (
           min_pad_words *
-          StoryKey::GRAMMAR.first[1].count { |p| p == part_of_speech }
+          StoryKey::GRAMMAR[StoryKey::GRAMMAR.keys.max].count { |p| p == part_of_speech }
         )
       (0..(count - 1)).map do |num|
         text = "#{part_of_speech}-#{num}"

@@ -11,6 +11,7 @@ filthy
 flimsy
 fluffy
 foamy
+frothy
 furry
 fuzzy
 gleaming
@@ -49,6 +50,7 @@ sooty
 spiky
 steamy
 striped
+sudsy
 transparent
 waxy
 wooden

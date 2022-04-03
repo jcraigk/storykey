@@ -1,5 +1,5 @@
 android
-angel
+Balrog
 banshee
 basilisk
 centaur
@@ -9,8 +9,6 @@ cyborg
 cyclops
 demon
 devil
-Balrog
-Nazgul
 dragon
 drake
 druid
@@ -30,12 +28,14 @@ griffin
 harpy
 hydra
 imp
+Jabberwock
 kraken
 leprechaun
 leviathan
 manticore
 mermaid
 minotaur
+Nazgul
 ogre
 orc
 Pegasus

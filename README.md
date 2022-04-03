@@ -9,7 +9,7 @@
 
 | Gem Version | Locale | Lexicon SHA |
 |-------------|--------|-------------|
-| 0.1.0       | Miami  | 401e37e     |
+| 0.1.0       | Miami  | 4eea29f     |
 
 
 # StoryKey

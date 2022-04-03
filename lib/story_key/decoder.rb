@@ -84,7 +84,12 @@ class StoryKey::Decoder < StoryKey::Base
   def token_to_decimal(token)
     lex.entries.each do |part, entries|
       next unless (idx = entries.index { |w| w.token == token })
-      lex.entries[part] = entries[..(idx - 1)] + entries[(idx + 1)..]
+      lex.entries[part] =
+        if idx.zero?
+          entries[1..]
+        else
+          entries[..(idx - 1)] + entries[(idx + 1)..]
+        end
       return idx
     end
   end
