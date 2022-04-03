@@ -19,6 +19,7 @@ Layout/LineLength:
 Metrics/BlockLength:
   Exclude:
     - spec/**/*
+    - '*.gemspec'
 Metrics/ClassLength:
   Max: 250
 Metrics/ModuleLength:

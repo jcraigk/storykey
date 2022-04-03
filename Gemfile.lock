@@ -2,13 +2,15 @@ PATH
   remote: .
   specs:
     story_key (0.1.0)
-      activesupport
-      base58
-      dry-initializer
-      indefinite_article
-      remedy
-      thor
-      zeitwerk
+      activesupport (~> 7.0.2)
+      awesome_print (~> 1.9.2)
+      base58 (~> 0.2.3)
+      dry-initializer (~> 3.1.1)
+      indefinite_article (~> 0.2.4)
+      pry (~> 0.14.1)
+      remedy (~> 0.3.0)
+      thor (~> 1.2.1)
+      zeitwerk (~> 2.5.4)
 
 GEM
   remote: https://rubygems.org/
@@ -19,6 +21,7 @@ GEM
       minitest (>= 5.1)
       tzinfo (~> 2.0)
     ast (2.4.2)
+    awesome_print (1.9.2)
     base58 (0.2.3)
     coderay (1.1.3)
     concurrent-ruby (1.1.10)
@@ -81,12 +84,11 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  bundler
-  pry
-  rspec
-  rubocop
-  rubocop-performance
-  rubocop-rspec
+  bundler (~> 2.3.7)
+  rspec (~> 3.11.0)
+  rubocop (~> 1.26.1)
+  rubocop-performance (~> 1.13.3)
+  rubocop-rspec (~> 2.9.0)
   story_key!
 
 BUNDLED WITH
