@@ -6,6 +6,7 @@ AllCops:
   Exclude:
     - bin/*
     - vendor/**/*
+    - lib/story_key/data.rb
   NewCops: enable
   TargetRubyVersion: 3.1.1
 Gemspec/RequireMFA:
@@ -20,6 +21,7 @@ Metrics/BlockLength:
   Exclude:
     - spec/**/*
     - '*.gemspec'
+    - rakelib/*
 Metrics/ClassLength:
   Max: 250
 Metrics/ModuleLength:

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    story_key (0.1.0)
+    story_key (0.2.0)
       activesupport (~> 7.0.2)
       awesome_print (~> 1.9.2)
       base58 (~> 0.2.3)
@@ -40,6 +40,7 @@ GEM
       coderay (~> 1.1)
       method_source (~> 1.0)
     rainbow (3.1.1)
+    rake (13.0.6)
     regexp_parser (2.2.1)
     remedy (0.3.0)
     rexml (3.2.5)
@@ -70,6 +71,8 @@ GEM
     rubocop-performance (1.13.3)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
+    rubocop-rake (0.6.0)
+      rubocop (~> 1.0)
     rubocop-rspec (2.9.0)
       rubocop (~> 1.19)
     ruby-progressbar (1.11.0)
@@ -85,9 +88,11 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 2.3.7)
+  rake (~> 13.0.6)
   rspec (~> 3.11.0)
   rubocop (~> 1.26.1)
   rubocop-performance (~> 1.13.3)
+  rubocop-rake (~> 0.6.0)
   rubocop-rspec (~> 2.9.0)
   story_key!
 

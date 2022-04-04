@@ -28,8 +28,10 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'zeitwerk', '~> 2.5.4'
 
   spec.add_development_dependency 'bundler', '~> 2.3.7'
+  spec.add_development_dependency 'rake', '~> 13.0.6'
   spec.add_development_dependency 'rspec', '~> 3.11.0'
   spec.add_development_dependency 'rubocop', '~> 1.26.1'
   spec.add_development_dependency 'rubocop-performance', '~> 1.13.3'
+  spec.add_development_dependency 'rubocop-rake', '~> 0.6.0'
   spec.add_development_dependency 'rubocop-rspec', '~> 2.9.0'
 end
