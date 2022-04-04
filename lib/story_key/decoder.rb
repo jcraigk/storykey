@@ -5,7 +5,7 @@ class StoryKey::Decoder < StoryKey::Base
 
   def call
     @story = story.strip
-    @format ||= StoryKey::DEFAULT_FORMAT
+    @format ||= StoryKey::FORMATS.first
 
     validate_version!
     validate_checksum!

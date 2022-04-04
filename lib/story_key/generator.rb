@@ -5,7 +5,7 @@ class StoryKey::Generator < StoryKey::Base
 
   def call
     @bitsize ||= StoryKey::DEFAULT_BITSIZE
-    @format ||= StoryKey::DEFAULT_FORMAT
+    @format ||= StoryKey::FORMATS.first
 
     formatted_str
   end

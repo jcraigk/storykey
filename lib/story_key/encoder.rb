@@ -18,7 +18,7 @@ class StoryKey::Encoder < StoryKey::Base
 
   def call
     @key = key.strip
-    @format ||= StoryKey::DEFAULT_FORMAT
+    @format ||= StoryKey::FORMATS.first
 
     validate_format!
     validate_length!

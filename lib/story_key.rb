@@ -19,8 +19,8 @@ loader.setup
 module StoryKey
   BITS_PER_ENTRY = 10
   DEFAULT_BITSIZE = 256
-  DEFAULT_FORMAT = :base58
   FOOTER_BITSIZE = 4 # StoryKey::BITS_PER_ENTRY <= 2^StoryKey::FOOTER_BITSIZE
+  FORMATS = %i[base58 hex bin dec].freeze
   GRAMMAR = {
     4 => %i[adjective noun verb noun],
     3 => %i[noun verb noun],

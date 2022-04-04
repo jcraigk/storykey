@@ -8,7 +8,7 @@
 
 | Gem Version | Locale | Lexicon SHA |
 |-------------|--------|-------------|
-| 0.2.0       | Miami  | 4eea29f     |
+| 0.3.0       | Miami  | 4eea29f     |
 
 
 # StoryKey
@@ -195,7 +195,7 @@ When editing the lexicon, be sure to:
 2. Copy the lexicon SHA into `version.rb` as well as this README (if publishing)
 3. Increment the semantic version of the gem (if publishing)
 
-When incrementing the semantic version, be sure to:
+When incrementing the semantic version post-1.0, be sure to:
 1. Create a new `VERSION_SLUG`, adhering to the locale convention
 2. Append a row to the version reference at the top of this README
 
