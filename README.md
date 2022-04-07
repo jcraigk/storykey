@@ -90,7 +90,7 @@ The lexicon was selected using the following criteria:
 
 ### Graphical Visualization
 
-When AI becomes more common, StoryKey stories may be converted to graphical panels similar to the [DALL-E Project](https://openai.com/blog/dall-e/). This will likely aid in mnemonics process for many users.
+When AI becomes more common, StoryKey stories may be converted to graphical panels similar to the [DALL-E Project](https://openai.com/dall-e-2/). This will likely aid in mnemonics process for many users.
 
 
 ## Installation
