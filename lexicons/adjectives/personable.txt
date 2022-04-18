@@ -1,8 +1,7 @@
 adamant
-adroit
 affable
 affluent
-ageless
+aging
 albino
 alcoholic
 alluring
@@ -358,6 +357,7 @@ purring
 pushy
 queasy
 quirky
+quivering
 rambling
 rash
 reckless
@@ -465,6 +465,7 @@ trashy
 trembling
 trendy
 truthful
+twitching
 unconscious
 undead
 unkempt
