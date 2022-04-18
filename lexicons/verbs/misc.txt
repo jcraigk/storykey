@@ -1,5 +1,3 @@
-
-
 abandon
 accompany
 accost
@@ -11,6 +9,7 @@ adore
 adulate
 advise
 aggravate
+eviscerate
 agitate
 agree [with]
 aid
@@ -25,7 +24,6 @@ apologize [to]
 applaud
 appraise
 approach
-approve [of]
 argue [with]
 arm
 arrest

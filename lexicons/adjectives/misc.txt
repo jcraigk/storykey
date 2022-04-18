@@ -46,7 +46,6 @@ clear
 cold
 colorful
 comical
-complex
 cosmic
 coy
 cynical
@@ -307,11 +306,11 @@ volatile
 wasteful
 wholesome
 wide
+wide-eyed
 wild
 winged
 wintery
 wobbly
-wonderful
 woozy
 worried
 wrinkled

@@ -8,7 +8,9 @@
 
 | Gem Version | Locale | Lexicon SHA |
 |-------------|--------|-------------|
-| 0.3.0       | Miami  | 4eea29f     |
+| 0.3.0       | Miami  | 0a10b51     |
+
+Locale will not change until v1.0 release
 
 
 # StoryKey
@@ -51,22 +53,22 @@ Each token of the story, which may be a single word or short compound phrase, en
 
 An example key and its associated story and seed phrase are shown below.
 
-![Key/Story Example](https://user-images.githubusercontent.com/104095/161372021-1edb5999-453d-453a-a7bb-d2fc2bcc3120.png)
+![Key/Story Example](https://user-images.githubusercontent.com/104095/163740192-5b780777-c584-4018-916c-3e2281dd7ccb.png)
 
 ```
 Key:
-CH8krjSZpGFmxnKo9QPqQEd9oMUkXnLcUhhEQFLrGCtg
+HsnRqQmJaSUGJqVQWZNnTnrNGcR4QL74VT7PGMbR74Ep
 Story:
 In Miami I saw
-1. a pensive Ellen Ripley surpass a musician,
-2. an unhappy pug drink vodka with a dove,
-3. an opulent Dante Alighieri diagnose Huckleberry Finn,
-4. a frantic sister eat pretzels with Mozart,
-5. a cunning meerkat trim a balloonist,
-6. a rich ocelot step to John Wayne,
-7. and a civilian convict a locust.
+1. a whistling unicorn eat strawberries with a skydiver,
+2. a sturdy Jack Nicholson drink coffee with a scribe,
+3. a shivering botanist play Diablo with Dante Alighieri,
+4. a miserable husband visit a turtle,
+5. a drowsy researcher stab a proctor,
+6. a flirty centipede urge a jeweler,
+7. and an eagle unwrap a promoter.
 Seed Phrase:
-pensive ellen-ripley surpass musician unhappy pug drink-vodka dove opulent dante-alighieri diagnose huckleberry-finn frantic sister eat-pretzels mozart cunning meerkat trim balloonist rich ocelot step john-wayne civilian convict locust
+whistling unicorn eat-strawberries skydiver sturdy jack-nicholson drink-coffee scribe shivering botanist play-diablo dante-alighieri miserable husband visit turtle drowsy researcher stab proctor flirty centipede urge jeweler eagle unwrap promoter
 ````
 
 This paragraph or seed phrase can be deterministically decoded back into its original form using the same version of StoryKey. The locale of the story (e.g. `Miami`) identifies that version. During key recovery, an exception will be raised if:
@@ -146,7 +148,7 @@ After installing the gem, you may run `bin/console` or `require` the gem in your
 Generate a new random key/story pair.
 
 ```
-3.1.1# StoryKey.generate
+# StoryKey.generate
  =>
 ["4eqfoXzMDyqQW6p8zAQj7c8KkynK5K2BW6D5Vfp7xCaQ",
  #<struct StoryKey::Story
@@ -164,7 +166,7 @@ Generate a new random key/story pair.
 Produce an English paragraph given input data (e.g. a cryptocurrency private key):
 
 ```
-3.1.1# StoryKey.encode(key: '4eqfoXzMDyqQW6p8zAQj7c8KkynK5K2BW6D5Vfp7xCaQ')
+# StoryKey.encode(key: '4eqfoXzMDyqQW6p8zAQj7c8KkynK5K2BW6D5Vfp7xCaQ')
  =>
  #<struct StoryKey::Story
  text=
@@ -183,7 +185,7 @@ Produce an English paragraph given input data (e.g. a cryptocurrency private key
 Recover source data (e.g. a cryptocurrency private key) based on the English paragraph:
 
 ```
-3.1.1# StoryKey.decode(story: 'In Miami I saw an official Benjamin Franklin transport Matt Damon')
+# StoryKey.decode(story: 'In Miami I saw an official Benjamin Franklin transport Matt Damon')
  => "4NTM"
 ```
 
