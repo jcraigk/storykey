@@ -6,6 +6,7 @@ require 'active_support/core_ext/string/inflections'
 require 'awesome_print'
 require 'base58'
 require 'digest'
+require 'dotenv/load'
 require 'dry-initializer'
 require 'indefinite_article'
 require 'pry'
@@ -32,7 +33,7 @@ module StoryKey
   PREPOSITIONS = %w[in i saw and a an].freeze
 
   Entry = Struct.new(:raw, :token, :text, :countable, :preposition, :part_of_speech)
-  Story = Struct.new(:text, :humanized, :tokenized)
+  Story = Struct.new(:phrases, :text, :humanized, :tokenized)
 
   class Error < StandardError; end
   class InvalidFormat < Error; end

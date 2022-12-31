@@ -7,9 +7,15 @@ class StoryKey::Console < Thor
        <<~TEXT
          Create a new key/story (default #{StoryKey::DEFAULT_BITSIZE} bits, max #{StoryKey::MAX_BITSIZE})
        TEXT
+  option :images,
+         desc: 'Whether to generate images (requires OpenAI key)',
+         enum: %w[false true],
+         default: :false,
+         aliases: '-i'
   def new(bitsize = StoryKey::DEFAULT_BITSIZE)
     key, story = StoryKey.generate(bitsize: bitsize.to_i)
     puts story_str(key, story)
+    print_image_urls(story.phrases) if options[:images] == 'true'
   rescue StoryKey::KeyTooLarge
     quit 'Key too large'
   end
@@ -28,10 +34,16 @@ class StoryKey::Console < Thor
          enum: %w[humanized text],
          default: :humanized,
          aliases: '-s'
+  option :images,
+         desc: 'Whether to generate images (requires OpenAI key)',
+         enum: %w[false true],
+         default: :false,
+         aliases: '-i'
   def encode(key = nil)
     key ||= File.read(options[:file])
     story = StoryKey.encode(key:, format: options[:format])
     puts story.send(options[:style] == 'text' ? :text : :humanized)
+    print_image_urls(story.phrases) if options[:images] == 'true'
   rescue StoryKey::InvalidFormat
     quit 'Invalid format'
   rescue StoryKey::KeyTooLarge
@@ -67,6 +79,15 @@ class StoryKey::Console < Thor
   end
 
   private
+
+  def print_image_urls(phrases)
+    puts 'Generating images...'
+    image_urls = StoryKey::ImageGenerator.call(phrases:)
+    puts 'No images generated - check your OpenAI key' if image_urls.empty?
+    image_urls.each_with_index do |url, idx|
+      puts "#{idx + 1}. #{url}"
+    end
+  end
 
   def quit(msg)
     puts msg

@@ -15,20 +15,23 @@ Locale will not change until v1.0 release
 
 # StoryKey
 
-StoryKey is a proof of concept [Brainwallet](https://en.bitcoin.it/wiki/Brainwallet) inspired by [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki) written in [Ruby](https://www.ruby-lang.org/en/). It converts an arbitrary string of data, such as a [cryptocurrency private key](https://en.bitcoin.it/wiki/Private_key), into an English paragraph intended for longterm human memory. It also assists in decoding the story back into its original form.
+StoryKey is a proof of concept [Brainwallet](https://en.bitcoin.it/wiki/Brainwallet) inspired by [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki) written in [Ruby](https://www.ruby-lang.org/en/). It converts an arbitrary string of data, such as a [cryptocurrency private key](https://en.bitcoin.it/wiki/Private_key), into an English paragraph intended for longterm human memory. It also assists in decoding the story back into its original form. Optionally, a visual representation of the paragraph is also provided using [OpenAI DALL-E](https://openai.com/dall-e-2).
 
 **[Try the online demo](https://storykey-demo.com/)**
 
-Each story is provided in two formats:
-* Humanized
+Each story is provided in multiple formats:
+* Humanized Text
   * Version locale header ("In Miami I saw...")
   * Enumerated phrases
   * Colorized parts of speech (adjectives, verbs, nouns)
   * Grammatical filler (articles, prepositions, conjunctions, punctuation)
-* Tokenized
+* Tokenized Text
   * Ordered list of unique tokens
   * Space-delimited lowercase alphanumeric/dash
   * Useful as a seed phrase for generating derivative keys
+* Graphical
+  * AI-generated images via [DALL-E](https://openai.com/dall-e-2)
+  * Requires OpenAI key
 
 ## Features
 
@@ -37,7 +40,7 @@ Each story is provided in two formats:
 * Includes version slug to ensure accurate decoding
 * Uses a repeating English grammar to aid in mnemonics
 * Uses a lexicon curated for mental visualization
-* Avoids token repetition
+* Avoids word repetition
 * Provides interactive command-line recovery
 
 Each token of the story, which may be a single word or short compound phrase, encodes 10 bits. The checksum length is variable based on the input size and space available in the last two tokens after accounting for a 4-bit footer. Here are a few example key sizes along with their respective story and checksum sizes.
@@ -119,6 +122,13 @@ $ gem install story_key
 
 This library may be used by calling Ruby methods or directly from the command line.
 
+If you want to generate images of the story along with the text, create a file called `.env` in the project directory and add your [OpenAI key](https://beta.openai.com/account/api-keys) as an environment variable:
+
+```
+# .env
+OPENAI_KEY=<your-api-key>
+```
+
 
 ### Command Line Usage
 
@@ -161,7 +171,7 @@ Generate a new random key/story pair.
 ```
 
 
-### Encode key => story
+### Encode an existing key
 
 Produce an English paragraph given input data (e.g. a cryptocurrency private key):
 
@@ -180,7 +190,7 @@ Produce an English paragraph given input data (e.g. a cryptocurrency private key
 `key` may be in the form of a hexidecimal (`ab29f3`), a binary string (`1001101`), a decimal (`230938`), or a base58 string (`uMBca`). If not in the default base58, `format` must be provided.
 
 
-### Decode story => key
+### Decode an existing story
 
 Recover source data (e.g. a cryptocurrency private key) based on the English paragraph:
 

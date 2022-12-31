@@ -1,4 +1,6 @@
+.env
 .rspec_status
+*.gem
 /_yardoc/
 /.bundle/
 /.yardoc
@@ -6,4 +8,3 @@
 /pkg/
 /spec/reports/
 /tmp/
-*.gem

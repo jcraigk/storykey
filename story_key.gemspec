@@ -20,6 +20,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'activesupport', '~> 7.0.4'
   spec.add_dependency 'awesome_print', '~> 1.9.2'
   spec.add_dependency 'base58', '~> 0.2.3'
+  spec.add_dependency 'dotenv', '~> 2.8.1'
   spec.add_dependency 'dry-initializer', '~> 3.1.1'
   spec.add_dependency 'indefinite_article', '~> 0.2.5'
   spec.add_dependency 'pry', '~> 0.14.1'
