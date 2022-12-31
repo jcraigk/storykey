@@ -98,7 +98,7 @@ class StoryKey::Decoder < StoryKey::Base
     @words ||=
       story.split(/\s+/)
            .grep_v(/\A\d+\.\Z/)
-           .map { |w| w.downcase.gsub(/[^a-z\d\-]/, '') }
+           .map { |w| w.downcase.gsub(/[^a-z\d-]/, '') }
            .reject { |w| w.blank? || w.in?(prepositions) }
   end
 

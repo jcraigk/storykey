@@ -19,7 +19,7 @@ loader.setup
 module StoryKey
   BITS_PER_ENTRY = 10
   DEFAULT_BITSIZE = 256
-  FOOTER_BITSIZE = 4 # StoryKey::BITS_PER_ENTRY <= 2^StoryKey::FOOTER_BITSIZE
+  FOOTER_BITSIZE = 4 # StoryKey::BITS_PER_ENTRY must be lte 2^StoryKey::FOOTER_BITSIZE
   FORMATS = %i[base58 hex bin dec].freeze
   GRAMMAR = {
     4 => %i[adjective noun verb noun],
@@ -31,9 +31,8 @@ module StoryKey
   MAX_BITSIZE = 512
   PREPOSITIONS = %w[in i saw and a an].freeze
 
-  Entry = Struct.new \
-    :raw, :token, :text, :countable, :preposition, :part_of_speech, keyword_init: true
-  Story = Struct.new(:text, :humanized, :tokenized, keyword_init: true)
+  Entry = Struct.new(:raw, :token, :text, :countable, :preposition, :part_of_speech)
+  Story = Struct.new(:text, :humanized, :tokenized)
 
   class Error < StandardError; end
   class InvalidFormat < Error; end

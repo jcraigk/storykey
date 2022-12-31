@@ -1,6 +1,22 @@
 # frozen_string_literal: true
 require_relative '../lib/story_key'
 
+def entries_for(part_of_speech)
+  { countable: [], uncountable: [] }.tap do |data|
+    Dir.glob("lexicons/#{part_of_speech}s/**/*.txt") do |path|
+      group = path.split('/')[-2] == 'countable' ? :countable : :uncountable
+      data[group] += txtfile_lines(path)
+    end
+    data.each { |group, entries| data[group] = entries.sort }
+  end
+end
+
+def txtfile_lines(path)
+  File.readlines(path)
+      .map(&:strip)
+      .reject { |l| l.start_with?('#') || l.blank? }
+end
+
 namespace :lexicon do
   desc 'Build lib/story_key/data.rb from text files'
   task :build do
@@ -36,21 +52,5 @@ namespace :lexicon do
       TEXT
     File.write(output_file, str)
     puts "#{output_file} written"
-  end
-
-  def entries_for(part_of_speech)
-    { countable: [], uncountable: [] }.tap do |data|
-      Dir.glob("lexicons/#{part_of_speech}s/**/*.txt") do |path|
-        group = path.split('/')[-2] == 'countable' ? :countable : :uncountable
-        data[group] += txtfile_lines(path)
-      end
-      data.each { |group, entries| data[group] = entries.sort }
-    end
-  end
-
-  def txtfile_lines(path)
-    File.readlines(path)
-        .map(&:strip)
-        .reject { |l| l.start_with?('#') || l.blank? }
   end
 end
