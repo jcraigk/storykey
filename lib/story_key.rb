@@ -31,6 +31,7 @@ module StoryKey
   LEXICON_SHA_SIZE = 7
   MAX_BITSIZE = 512
   PREPOSITIONS = %w[in i saw and a an].freeze
+  GITHUB_URL = 'https://github.com/jcraigk/storykey'
 
   Entry = Struct.new(:part_of_speech, :raw, :token, :text, :countable, :preposition)
   Story = Struct.new(:phrases, :text, :humanized, :tokenized)

@@ -8,7 +8,7 @@ class StoryKey::Console < Thor
          Create a new key/story (default #{StoryKey::DEFAULT_BITSIZE} bits, max #{StoryKey::MAX_BITSIZE})
        TEXT
   option :images,
-         desc: 'Whether to generate images (requires OpenAI key)',
+         desc: 'Whether to generate an image (requires OpenAI key and ImageMagick)',
          enum: %w[false true],
          default: 'false',
          aliases: '-i'
@@ -35,7 +35,7 @@ class StoryKey::Console < Thor
          default: 'humanized',
          aliases: '-s'
   option :images,
-         desc: 'Whether to generate images (requires OpenAI key)',
+         desc: 'Whether to generate an image (requires OpenAI key and ImageMagick)',
          enum: %w[false true],
          default: 'false',
          aliases: '-i'
@@ -81,12 +81,10 @@ class StoryKey::Console < Thor
   private
 
   def print_image_urls(phrases)
-    puts 'Generating images...'
-    image_urls = StoryKey::ImageGenerator.call(phrases:)
-    puts 'No images generated - check your OpenAI key' if image_urls.empty?
-    image_urls.each_with_index do |url, idx|
-      puts "#{idx + 1}. #{url}"
-    end
+    puts 'Generating image...'
+    image_path = StoryKey::ImageGenerator.call(phrases:)
+    puts 'No images generated - check your OpenAI key' if image_path.empty?
+    puts image_path
   end
 
   def quit(msg)

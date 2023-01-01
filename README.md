@@ -1,5 +1,4 @@
 [![Gem Version](https://badge.fury.io/rb/story_key.svg)](https://badge.fury.io/rb/story_key)
-![Gem Downloads](https://ruby-gem-downloads-badge.herokuapp.com/story_key?type=total)
 [![Build Status](https://travis-ci.org/jcraigk/story_key.svg?branch=main)](https://travis-ci.org/jcraigk/story_key)
 [![Maintainability](https://api.codeclimate.com/v1/badges/6046413814d7f6417ce9/maintainability)](https://codeclimate.com/github/jcraigk/story_key/maintainability)
 
@@ -120,14 +119,16 @@ $ gem install story_key
 
 ## Usage
 
-This library may be used by calling Ruby methods or directly from the command line.
+This library may be used directly from the command line or by calling Ruby methods.
 
-If you want to generate images of the story along with the text, create a file called `.env` in the project directory and add your [OpenAI key](https://beta.openai.com/account/api-keys) as an environment variable:
+If you want to generate images of the story along with the text, create a file named `.env` in the project directory and add your [OpenAI key](https://beta.openai.com/account/api-keys) as an environment variable:
 
 ```
 # .env
 OPENAI_KEY=<your-api-key>
 ```
+
+You must have [ImageMagick](https://imagemagick.org/index.php) installed locally.
 
 
 ### Command Line Usage
@@ -143,6 +144,8 @@ StoryKey commands:
   storykey recover         # Decode a story interactively
 ```
 
+To see help on a specific command, run `bin/storyke --help [command]`.
+
 The command line also features an interactive recovery tool to aid in converting a story back into its source key. Run `bin/storykey recover` to initiate the process:
 
 ![Key/Story Example](https://user-images.githubusercontent.com/104095/161376334-4a591100-e3fc-41ce-b931-4773bebc23fd.png)
@@ -155,7 +158,7 @@ After installing the gem, you may run `bin/console` or `require` the gem in your
 
 ### Generate new key/story
 
-Generate a new random key/story pair.
+Generate a new random key and associated story.
 
 ```
 # StoryKey.generate

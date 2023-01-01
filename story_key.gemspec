@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Justin Craig-Kuhn (JCK)']
   spec.email         = ['jcraigk@gmail.com']
   spec.summary       = 'StoryKey turns your crypto private key into a memorable story'
-  spec.homepage      = 'https://github.com/jcraigk/story_key'
+  spec.homepage      = 'https://github.com/jcraigk/storykey'
   spec.license       = 'MIT'
   spec.required_ruby_version = '>= 3.2.0'
   spec.bindir        = 'bin'
