@@ -28,9 +28,9 @@ class StoryKey::Lexicon < StoryKey::Base
 
   def new_entry(part_of_speech, text, countable)
     StoryKey::Entry.new \
+      part_of_speech:,
       raw: text,
       text: text.gsub(/\[|\]/, ''),
-      part_of_speech:,
       token: StoryKey::Tokenizer.call(text),
       countable:,
       preposition: text.match(/\[(.+)\]/).to_a[1]

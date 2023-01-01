@@ -10,7 +10,7 @@ class StoryKey::Console < Thor
   option :images,
          desc: 'Whether to generate images (requires OpenAI key)',
          enum: %w[false true],
-         default: :false,
+         default: 'false',
          aliases: '-i'
   def new(bitsize = StoryKey::DEFAULT_BITSIZE)
     key, story = StoryKey.generate(bitsize: bitsize.to_i)
@@ -28,18 +28,18 @@ class StoryKey::Console < Thor
   option :format,
          desc: 'Format of key',
          enum: %w[base58 hex bin dec],
-         default: :base58
+         default: 'base58'
   option :style,
          desc: 'Style of story',
          enum: %w[humanized text],
-         default: :humanized,
+         default: 'humanized',
          aliases: '-s'
   option :images,
          desc: 'Whether to generate images (requires OpenAI key)',
          enum: %w[false true],
-         default: :false,
+         default: 'false',
          aliases: '-i'
-  def encode(key = nil)
+  def encode(key = nil) # rubocop:disable Metrics/AbcSize
     key ||= File.read(options[:file])
     story = StoryKey.encode(key:, format: options[:format])
     puts story.send(options[:style] == 'text' ? :text : :humanized)
@@ -60,7 +60,7 @@ class StoryKey::Console < Thor
   option :format,
          desc: 'Format of key',
          enum: %w[base58 hex bin dec],
-         default: :base58
+         default: 'base58'
   def decode(story = nil)
     story ||= File.read(options[:file])
     format ||= options[:format]

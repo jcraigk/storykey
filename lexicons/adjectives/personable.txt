@@ -1,4 +1,5 @@
 adamant
+adament
 affable
 affluent
 aging
@@ -49,8 +50,8 @@ chaste
 cheap
 childish
 childlike
-choking
 chubby
+churlish
 civilized
 clairvoyant
 clammy
@@ -90,6 +91,7 @@ dapper
 dashing
 dastardly
 dazed
+dead
 deaf
 decadent
 decisive
@@ -106,6 +108,7 @@ difficult
 dignified
 diligent
 dim
+disabled
 discreet
 diseased
 disguised
@@ -125,7 +128,6 @@ drunk
 dull
 dumb
 dutiful
-dying
 eager
 earnest
 elderly

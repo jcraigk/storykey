@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    story_key (0.3.0)
+    story_key (0.4.0)
       activesupport (~> 7.0.4)
       awesome_print (~> 1.9.2)
       base58 (~> 0.2.3)

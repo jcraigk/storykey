@@ -8,7 +8,7 @@
 
 | Gem Version | Locale | Lexicon SHA |
 |-------------|--------|-------------|
-| 0.3.0       | Miami  | 0a10b51     |
+| 0.4.0       | Miami  | 3bfbbf9     |
 
 Locale will not change until v1.0 release
 

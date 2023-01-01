@@ -51,7 +51,6 @@ coy
 cynical
 dangerous
 dark
-dead
 decayed
 deficient
 delicate
@@ -151,7 +150,6 @@ late
 lewd
 liberal
 limpid
-limping
 little
 lively
 lofty

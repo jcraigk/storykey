@@ -32,7 +32,7 @@ module StoryKey
   MAX_BITSIZE = 512
   PREPOSITIONS = %w[in i saw and a an].freeze
 
-  Entry = Struct.new(:raw, :token, :text, :countable, :preposition, :part_of_speech)
+  Entry = Struct.new(:part_of_speech, :raw, :token, :text, :countable, :preposition)
   Story = Struct.new(:phrases, :text, :humanized, :tokenized)
 
   class Error < StandardError; end

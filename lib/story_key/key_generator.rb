@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class StoryKey::Generator < StoryKey::Base
+class StoryKey::KeyGenerator < StoryKey::Base
   option :bitsize, default: -> {}
   option :format, default: -> {}
 
