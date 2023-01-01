@@ -1,3 +1,4 @@
+**/.DS_Store
 .env
 .rspec_status
 *.gem
@@ -7,4 +8,5 @@
 /doc/
 /pkg/
 /spec/reports/
-/tmp/
+/tmp/*
+!/tmp/.keep

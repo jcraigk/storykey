@@ -25,6 +25,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'indefinite_article', '~> 0.2.5'
   spec.add_dependency 'pry', '~> 0.14.1'
   spec.add_dependency 'remedy', '~> 0.3.0'
+  spec.add_dependency 'rmagick', '~> 5.1.0'
   spec.add_dependency 'ruby-openai', '~> 3.0.2'
   spec.add_dependency 'thor', '~> 1.2.1'
   spec.add_dependency 'zeitwerk', '~> 2.6.6'
