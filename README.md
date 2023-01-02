@@ -93,11 +93,6 @@ The lexicon was selected using the following criteria:
 * Balance brevity with clarity.
 
 
-### Graphical Visualization
-
-When AI becomes more common, StoryKey stories may be converted to graphical panels similar to the [DALL-E Project](https://openai.com/dall-e-2/). This will likely aid in mnemonics process for many users.
-
-
 ## Installation
 
 Add this line to your application's Gemfile:
