@@ -23,17 +23,25 @@ class StoryKey::Encoder < StoryKey::Base
     validate_format!
     validate_length!
 
-    StoryKey::Story.new(text:, humanized:, tokenized:)
+    StoryKey::Story.new(phrases: text_phrases, text:, humanized:, tokenized:)
   end
 
   private
 
+  def text_phrases
+    raw_phrases.map { |str| remove_markup(str) }
+  end
+
   def tokenized
-    @tokenized ||= entry_groups.flatten.map(&:token).join(' ')
+    @tokenized ||= "#{StoryKey::VERSION_SLUG.downcase} #{token_str}"
+  end
+
+  def token_str
+    entry_groups.flatten.map(&:token).join(' ')
   end
 
   def text
-    @text ||= humanized.gsub(/\e\[\d+m/, '').gsub(/\n\d+\./, '').delete("\n").squish
+    @text ||= remove_markup(humanized).squish
   end
 
   def humanized
@@ -212,7 +220,10 @@ class StoryKey::Encoder < StoryKey::Base
   end
 
   def raise_invalid_format
-    raise StoryKey::InvalidFormat,
-          "Invalid format '#{format}'"
+    raise StoryKey::InvalidFormat, "Invalid format '#{format}'"
+  end
+
+  def remove_markup(str)
+    str.gsub(/\e\[\d+m/, '').gsub(/\n\d+\./, '').delete("\n")
   end
 end

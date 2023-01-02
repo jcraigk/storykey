@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class StoryKey::Generator < StoryKey::Base
+class StoryKey::KeyGenerator < StoryKey::Base
   option :bitsize, default: -> {}
   option :format, default: -> {}
 
@@ -13,7 +13,11 @@ class StoryKey::Generator < StoryKey::Base
   private
 
   def formatted_str
-    StoryKey::Coercer.call(str: random_bin, bitsize:, from: :bin, to: format)
+    StoryKey::Coercer.call(str:, bitsize:, from: :bin, to: format)
+  end
+
+  def str
+    "1#{random_bin}"[0, bitsize]
   end
 
   def random_bin

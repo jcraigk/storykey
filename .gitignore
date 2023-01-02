@@ -1,9 +1,12 @@
+**/.DS_Store
+.env
 .rspec_status
+*.gem
 /_yardoc/
 /.bundle/
 /.yardoc
 /doc/
 /pkg/
 /spec/reports/
-/tmp/
-*.gem
+/tmp/*
+!/tmp/.keep

@@ -1,5 +1,4 @@
 [![Gem Version](https://badge.fury.io/rb/story_key.svg)](https://badge.fury.io/rb/story_key)
-![Gem Downloads](https://ruby-gem-downloads-badge.herokuapp.com/story_key?type=total)
 [![Build Status](https://travis-ci.org/jcraigk/story_key.svg?branch=main)](https://travis-ci.org/jcraigk/story_key)
 [![Maintainability](https://api.codeclimate.com/v1/badges/6046413814d7f6417ce9/maintainability)](https://codeclimate.com/github/jcraigk/story_key/maintainability)
 
@@ -8,27 +7,30 @@
 
 | Gem Version | Locale | Lexicon SHA |
 |-------------|--------|-------------|
-| 0.3.0       | Miami  | 0a10b51     |
+| 0.4.0       | Miami  | 3bfbbf9     |
 
 Locale will not change until v1.0 release
 
 
 # StoryKey
 
-StoryKey is a proof of concept [Brainwallet](https://en.bitcoin.it/wiki/Brainwallet) inspired by [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki) written in [Ruby](https://www.ruby-lang.org/en/). It converts an arbitrary string of data, such as a [cryptocurrency private key](https://en.bitcoin.it/wiki/Private_key), into an English paragraph intended for longterm human memory. It also assists in decoding the story back into its original form.
+StoryKey is a proof of concept [Brainwallet](https://en.bitcoin.it/wiki/Brainwallet) inspired by [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki) written in [Ruby](https://www.ruby-lang.org/en/). It converts an arbitrary string of data, such as a [cryptocurrency private key](https://en.bitcoin.it/wiki/Private_key), into an English paragraph intended for longterm human memory. It also assists in decoding the story back into its original form. Optionally, a visual representation of the paragraph is also provided using [OpenAI DALL-E](https://openai.com/dall-e-2).
 
 **[Try the online demo](https://storykey-demo.com/)**
 
-Each story is provided in two formats:
-* Humanized
+Each story is provided in multiple formats:
+* Humanized Text
   * Version locale header ("In Miami I saw...")
   * Enumerated phrases
   * Colorized parts of speech (adjectives, verbs, nouns)
   * Grammatical filler (articles, prepositions, conjunctions, punctuation)
-* Tokenized
+* Tokenized Text
   * Ordered list of unique tokens
   * Space-delimited lowercase alphanumeric/dash
   * Useful as a seed phrase for generating derivative keys
+* Graphical
+  * AI-generated images via [DALL-E](https://openai.com/dall-e-2)
+  * Requires OpenAI key
 
 ## Features
 
@@ -37,7 +39,7 @@ Each story is provided in two formats:
 * Includes version slug to ensure accurate decoding
 * Uses a repeating English grammar to aid in mnemonics
 * Uses a lexicon curated for mental visualization
-* Avoids token repetition
+* Avoids word repetition
 * Provides interactive command-line recovery
 
 Each token of the story, which may be a single word or short compound phrase, encodes 10 bits. The checksum length is variable based on the input size and space available in the last two tokens after accounting for a 4-bit footer. Here are a few example key sizes along with their respective story and checksum sizes.
@@ -51,24 +53,25 @@ Each token of the story, which may be a single word or short compound phrase, en
 | 384      | 40           | 12            |
 | 512      | 53           | 14            |
 
-An example key and its associated story and seed phrase are shown below.
+An example key with its associated story, seed phrase, and image are shown below.
 
-![Key/Story Example](https://user-images.githubusercontent.com/104095/163740192-5b780777-c584-4018-916c-3e2281dd7ccb.png)
+![KeyStory Example Text](https://user-images.githubusercontent.com/104095/210197560-45494c50-6382-465b-8163-a61b3783ac76.png)
+![KeyStory Example Image](https://user-images.githubusercontent.com/104095/210197577-11e1d6ac-a32f-4438-b7eb-f766bf62f0f2.png)
 
 ```
 Key:
-HsnRqQmJaSUGJqVQWZNnTnrNGcR4QL74VT7PGMbR74Ep
+CgCLLXvoch7sLaQWe5Y3Evtzety2Vr9XJGRmAq9YZUXY
 Story:
 In Miami I saw
-1. a whistling unicorn eat strawberries with a skydiver,
-2. a sturdy Jack Nicholson drink coffee with a scribe,
-3. a shivering botanist play Diablo with Dante Alighieri,
-4. a miserable husband visit a turtle,
-5. a drowsy researcher stab a proctor,
-6. a flirty centipede urge a jeweler,
-7. and an eagle unwrap a promoter.
+1. a practical theorist eating toast with a shopkeeper,
+2. a jobless macaw disowning a scientist,
+3. a toothsome brother eating dumplings with Paul Cezanne,
+4. a rabid outsider leveling a vulture,
+5. a hysterical Marge Simpson threatening Moe Szyslak,
+6. a rancid cyborg demanding a jeweler,
+7. and a wife paging Jimi Hendrix.
 Seed Phrase:
-whistling unicorn eat-strawberries skydiver sturdy jack-nicholson drink-coffee scribe shivering botanist play-diablo dante-alighieri miserable husband visit turtle drowsy researcher stab proctor flirty centipede urge jeweler eagle unwrap promoter
+miami practical theorist eating-toast shopkeeper jobless macaw disowning scientist toothsome brother eating-dumplings paul-cezanne rabid outsider leveling vulture hysterical marge-simpson threatening moe-szyslak rancid cyborg demanding jeweler wife paging jimi-hendrix
 ````
 
 This paragraph or seed phrase can be deterministically decoded back into its original form using the same version of StoryKey. The locale of the story (e.g. `Miami`) identifies that version. During key recovery, an exception will be raised if:
@@ -117,7 +120,16 @@ $ gem install story_key
 
 ## Usage
 
-This library may be used by calling Ruby methods or directly from the command line.
+This library may be used directly from the command line or by calling Ruby methods.
+
+If you want to generate images of the story along with the text, create a file named `.env` in the project directory and add your [OpenAI key](https://beta.openai.com/account/api-keys) as an environment variable:
+
+```
+# .env
+OPENAI_KEY=<your-api-key>
+```
+
+You must have [ImageMagick](https://imagemagick.org/index.php) installed locally.
 
 
 ### Command Line Usage
@@ -133,6 +145,8 @@ StoryKey commands:
   storykey recover         # Decode a story interactively
 ```
 
+To see help on a specific command, run `bin/storyke --help [command]`.
+
 The command line also features an interactive recovery tool to aid in converting a story back into its source key. Run `bin/storykey recover` to initiate the process:
 
 ![Key/Story Example](https://user-images.githubusercontent.com/104095/161376334-4a591100-e3fc-41ce-b931-4773bebc23fd.png)
@@ -145,7 +159,7 @@ After installing the gem, you may run `bin/console` or `require` the gem in your
 
 ### Generate new key/story
 
-Generate a new random key/story pair.
+Generate a new random key and associated story.
 
 ```
 # StoryKey.generate
@@ -161,7 +175,7 @@ Generate a new random key/story pair.
 ```
 
 
-### Encode key => story
+### Encode an existing key
 
 Produce an English paragraph given input data (e.g. a cryptocurrency private key):
 
@@ -180,7 +194,7 @@ Produce an English paragraph given input data (e.g. a cryptocurrency private key
 `key` may be in the form of a hexidecimal (`ab29f3`), a binary string (`1001101`), a decimal (`230938`), or a base58 string (`uMBca`). If not in the default base58, `format` must be provided.
 
 
-### Decode story => key
+### Decode an existing story
 
 Recover source data (e.g. a cryptocurrency private key) based on the English paragraph:
 

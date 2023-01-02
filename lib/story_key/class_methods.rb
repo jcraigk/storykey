@@ -13,7 +13,7 @@ module StoryKey::ClassMethods
   end
 
   def generate(bitsize: StoryKey::DEFAULT_BITSIZE)
-    key = StoryKey::Generator.call(bitsize:)
+    key = StoryKey::KeyGenerator.call(bitsize:)
     encoded = encode(key:, bitsize:)
     raise 'An error occurred!' if key != decode(story: encoded.text)
     [key, encoded]

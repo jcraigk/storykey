@@ -1,5 +1,6 @@
 require:
   - rubocop-performance
+  - rubocop-rake
   - rubocop-rspec
 
 AllCops:
@@ -8,7 +9,7 @@ AllCops:
     - vendor/**/*
     - lib/story_key/data.rb
   NewCops: enable
-  TargetRubyVersion: 3.1.2
+  TargetRubyVersion: 3.2.0
 Gemspec/RequireMFA:
   Enabled: false
 Layout/EmptyLineAfterGuardClause:

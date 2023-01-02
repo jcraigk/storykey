@@ -1,6 +1,34 @@
 # frozen_string_literal: true
 require_relative '../lib/story_key'
 
+def noun_entries
+  { countable: [], uncountable: [] }.tap do |data|
+    Dir.glob('lexicons/nouns/**/*.txt') do |path|
+      group = path.split('/')[-2] == 'countable' ? :countable : :uncountable
+      data[group] += txtfile_lines(path)
+    end
+    data.each { |group, entries| data[group] = entries.sort }
+  end
+end
+
+def verb_entries
+  { entries: txtfile_lines('lexicons/verbs/entries.txt') }
+end
+
+def adjective_entries
+  entries = []
+  Dir.glob('lexicons/adjectives/*.txt') do |path|
+    entries += txtfile_lines(path)
+  end
+  { entries: entries.sort }
+end
+
+def txtfile_lines(path)
+  File.readlines(path)
+      .map(&:strip)
+      .reject { |l| l.start_with?('#') || l.blank? }
+end
+
 namespace :lexicon do
   desc 'Build lib/story_key/data.rb from text files'
   task :build do
@@ -17,15 +45,15 @@ namespace :lexicon do
       TEXT
     str += [].tap do |ary|
       StoryKey::GRAMMAR.values.flatten.uniq.each do |part_of_speech|
-        substr = "  #{part_of_speech}: {\n"
+        substr = "    #{part_of_speech}: {\n"
         substr +=
           [].tap do |ary2|
-            entries_for(part_of_speech).each do |group, entries|
+            send("#{part_of_speech}_entries").each do |group, entries|
               elements = entries.map { |e| "'#{e}'" }.join(', ')
-              ary2 << "   #{group}: [#{elements}]"
+              ary2 << "      #{group}: [#{elements}]"
             end
           end.join(",\n")
-        ary << "#{substr}\n  }"
+        ary << "#{substr}\n    }"
       end
     end.join(",\n")
     str +=
@@ -36,21 +64,5 @@ namespace :lexicon do
       TEXT
     File.write(output_file, str)
     puts "#{output_file} written"
-  end
-
-  def entries_for(part_of_speech)
-    { countable: [], uncountable: [] }.tap do |data|
-      Dir.glob("lexicons/#{part_of_speech}s/**/*.txt") do |path|
-        group = path.split('/')[-2] == 'countable' ? :countable : :uncountable
-        data[group] += txtfile_lines(path)
-      end
-      data.each { |group, entries| data[group] = entries.sort }
-    end
-  end
-
-  def txtfile_lines(path)
-    File.readlines(path)
-        .map(&:strip)
-        .reject { |l| l.start_with?('#') || l.blank? }
   end
 end

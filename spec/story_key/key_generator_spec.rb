@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-RSpec.describe StoryKey::Generator do
+RSpec.describe StoryKey::KeyGenerator do
   subject(:call) { described_class.new(bitsize:, format:).call }
 
   let(:bitsize) { StoryKey::DEFAULT_BITSIZE }

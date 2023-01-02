@@ -11,7 +11,7 @@ class StoryKey::Tokenizer < StoryKey::Base
   def token_from_text
     text.downcase
         .gsub(/\[.+\]/, '')
-        .gsub(/[^a-z0-9\s\-]/, '')
+        .gsub(/[^a-z0-9\s-]/, '')
         .strip
         .gsub(/\s+/, '-')
   end

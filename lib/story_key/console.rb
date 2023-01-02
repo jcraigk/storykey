@@ -1,15 +1,19 @@
 # frozen_string_literal: true
 class StoryKey::Console < Thor
   package_name 'StoryKey'
-  map '-i' => :recover
 
   desc 'new [BITSIZE]',
        <<~TEXT
          Create a new key/story (default #{StoryKey::DEFAULT_BITSIZE} bits, max #{StoryKey::MAX_BITSIZE})
        TEXT
+  option :image,
+         desc: 'Whether to generate an image (requires OpenAI key and ImageMagick)',
+         type: :boolean,
+         aliases: '-i'
   def new(bitsize = StoryKey::DEFAULT_BITSIZE)
     key, story = StoryKey.generate(bitsize: bitsize.to_i)
     puts story_str(key, story)
+    print_image_path(story.tokenized, story.phrases) if options[:image]
   rescue StoryKey::KeyTooLarge
     quit 'Key too large'
   end
@@ -22,16 +26,16 @@ class StoryKey::Console < Thor
   option :format,
          desc: 'Format of key',
          enum: %w[base58 hex bin dec],
-         default: :base58
-  option :style,
-         desc: 'Style of story',
-         enum: %w[humanized text],
-         default: :humanized,
-         aliases: '-s'
+         default: 'base58'
+  option :image,
+         desc: 'Whether to generate an image (requires OpenAI key and ImageMagick)',
+         type: :boolean,
+         aliases: '-i'
   def encode(key = nil)
     key ||= File.read(options[:file])
     story = StoryKey.encode(key:, format: options[:format])
-    puts story.send(options[:style] == 'text' ? :text : :humanized)
+    puts story_str(key, story)
+    print_image_path(story.tokenized, story.phrases) if options[:image]
   rescue StoryKey::InvalidFormat
     quit 'Invalid format'
   rescue StoryKey::KeyTooLarge
@@ -48,7 +52,7 @@ class StoryKey::Console < Thor
   option :format,
          desc: 'Format of key',
          enum: %w[base58 hex bin dec],
-         default: :base58
+         default: 'base58'
   def decode(story = nil)
     story ||= File.read(options[:file])
     format ||= options[:format]
@@ -67,6 +71,13 @@ class StoryKey::Console < Thor
   end
 
   private
+
+  def print_image_path(seed, phrases)
+    puts 'Generating image...'
+    image_path = StoryKey::ImageGenerator.call(seed:, phrases:)
+    puts 'No panels generated - check your OpenAI key' if image_path.empty?
+    puts "#{titleize('Image')} #{image_path}"
+  end
 
   def quit(msg)
     puts msg
