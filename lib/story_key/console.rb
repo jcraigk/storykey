@@ -7,15 +7,14 @@ class StoryKey::Console < Thor
        <<~TEXT
          Create a new key/story (default #{StoryKey::DEFAULT_BITSIZE} bits, max #{StoryKey::MAX_BITSIZE})
        TEXT
-  option :images,
+  option :image,
          desc: 'Whether to generate an image (requires OpenAI key and ImageMagick)',
-         enum: %w[false true],
-         default: 'false',
+         type: :boolean,
          aliases: '-i'
   def new(bitsize = StoryKey::DEFAULT_BITSIZE)
     key, story = StoryKey.generate(bitsize: bitsize.to_i)
     puts story_str(key, story)
-    print_image_path(story.tokenized, story.phrases) if options[:images] == 'true'
+    print_image_path(story.tokenized, story.phrases) if options[:image]
   rescue StoryKey::KeyTooLarge
     quit 'Key too large'
   end
@@ -29,21 +28,15 @@ class StoryKey::Console < Thor
          desc: 'Format of key',
          enum: %w[base58 hex bin dec],
          default: 'base58'
-  option :style,
-         desc: 'Style of story',
-         enum: %w[humanized text],
-         default: 'humanized',
-         aliases: '-s'
-  option :images,
+  option :image,
          desc: 'Whether to generate an image (requires OpenAI key and ImageMagick)',
-         enum: %w[false true],
-         default: 'false',
+         type: :boolean,
          aliases: '-i'
-  def encode(key = nil) # rubocop:disable Metrics/AbcSize
+  def encode(key = nil)
     key ||= File.read(options[:file])
     story = StoryKey.encode(key:, format: options[:format])
-    puts story.send(options[:style] == 'text' ? :text : :humanized)
-    print_image_path(story.phrases) if options[:images] == 'true'
+    puts story_str(key, story)
+    print_image_path(story.tokenized, story.phrases) if options[:image]
   rescue StoryKey::InvalidFormat
     quit 'Invalid format'
   rescue StoryKey::KeyTooLarge
