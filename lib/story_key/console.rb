@@ -15,7 +15,7 @@ class StoryKey::Console < Thor
   def new(bitsize = StoryKey::DEFAULT_BITSIZE)
     key, story = StoryKey.generate(bitsize: bitsize.to_i)
     puts story_str(key, story)
-    print_image_urls(story.phrases) if options[:images] == 'true'
+    print_image_path(story.tokenized, story.phrases) if options[:images] == 'true'
   rescue StoryKey::KeyTooLarge
     quit 'Key too large'
   end
@@ -43,7 +43,7 @@ class StoryKey::Console < Thor
     key ||= File.read(options[:file])
     story = StoryKey.encode(key:, format: options[:format])
     puts story.send(options[:style] == 'text' ? :text : :humanized)
-    print_image_urls(story.phrases) if options[:images] == 'true'
+    print_image_path(story.phrases) if options[:images] == 'true'
   rescue StoryKey::InvalidFormat
     quit 'Invalid format'
   rescue StoryKey::KeyTooLarge
@@ -80,9 +80,9 @@ class StoryKey::Console < Thor
 
   private
 
-  def print_image_urls(phrases)
+  def print_image_path(seed, phrases)
     puts 'Generating image...'
-    image_path = StoryKey::ImageGenerator.call(phrases:)
+    image_path = StoryKey::ImageGenerator.call(seed:, phrases:)
     puts 'No images generated - check your OpenAI key' if image_path.empty?
     puts image_path
   end
