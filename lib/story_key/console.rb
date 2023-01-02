@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 class StoryKey::Console < Thor
   package_name 'StoryKey'
-  map '-i' => :recover
 
   desc 'new [BITSIZE]',
        <<~TEXT
@@ -76,8 +75,8 @@ class StoryKey::Console < Thor
   def print_image_path(seed, phrases)
     puts 'Generating image...'
     image_path = StoryKey::ImageGenerator.call(seed:, phrases:)
-    puts 'No images generated - check your OpenAI key' if image_path.empty?
-    puts image_path
+    puts 'No panels generated - check your OpenAI key' if image_path.empty?
+    puts "#{titleize('Image')} #{image_path}"
   end
 
   def quit(msg)

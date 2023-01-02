@@ -39,15 +39,15 @@ class StoryKey::ImageGenerator < StoryKey::Base
   end
 
   def header_height
-    ((multiline_seed.split("\n").size + 1) * (HEADER_FONT_SIZE * 1.2)).ceil
+    (multiline_seed.split("\n").size * HEADER_FONT_SIZE).ceil
   end
 
   def multiline_seed
-    ary = seed.split
-    ary.each_slice(8)
-       .to_a
-       .map { |a| a.join(' ') }
-       .join("\n")
+    seed.split
+        .each_slice(8)
+        .to_a
+        .map { |a| a.join(' ') }
+        .join("\n")
   end
 
   def composite_image
@@ -125,35 +125,23 @@ class StoryKey::ImageGenerator < StoryKey::Base
   end
 
   def add_header(comp)
-    draw = Magick::Draw.new
-    comp.annotate(draw, 0, 0, 0, 5, multiline_seed) do
-      draw.gravity = Magick::NorthGravity
-      draw.pointsize = HEADER_FONT_SIZE
-      draw.fill = '#000000'
-      draw.font = FONT_PATH
-      comp.format = 'png'
-    end
-    comp
+    add_annotation(comp, multiline_seed, Magick::NorthGravity, 5)
+  end
+
+  def add_caption(comp, text)
+    offset = ((CAPTION_HEIGHT - CAPTION_FONT_SIZE).to_f / 2).ceil
+    add_annotation(comp, text, Magick::SouthGravity, offset)
   end
 
   def add_footer(comp)
     text = "Made with StoryKey - #{StoryKey::GITHUB_URL}"
-    draw = Magick::Draw.new
-    comp.annotate(draw, 0, 0, 0, 10, text) do
-      draw.gravity = Magick::SouthGravity
-      draw.pointsize = FOOTER_FONT_SIZE
-      draw.fill = '#000000'
-      draw.font = FONT_PATH
-      comp.format = 'png'
-    end
-    comp
+    add_annotation(comp, text, Magick::SouthGravity, 10)
   end
 
-  def add_caption(comp, text)
+  def add_annotation(comp, text, gravity, offset)
     draw = Magick::Draw.new
-    offset = ((CAPTION_HEIGHT - CAPTION_FONT_SIZE).to_f / 2).ceil
     comp.annotate(draw, 0, 0, 0, offset, text) do
-      draw.gravity = Magick::SouthGravity
+      draw.gravity = gravity
       draw.pointsize = CAPTION_FONT_SIZE
       draw.fill = '#000000'
       draw.font = FONT_PATH

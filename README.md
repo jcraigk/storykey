@@ -53,24 +53,25 @@ Each token of the story, which may be a single word or short compound phrase, en
 | 384      | 40           | 12            |
 | 512      | 53           | 14            |
 
-An example key and its associated story and seed phrase are shown below.
+An example key with its associated story, seed phrase, and image are shown below.
 
-![Key/Story Example](https://user-images.githubusercontent.com/104095/163740192-5b780777-c584-4018-916c-3e2281dd7ccb.png)
+![KeyStory Example Text](https://user-images.githubusercontent.com/104095/210197560-45494c50-6382-465b-8163-a61b3783ac76.png)
+![KeyStory Example Image](https://user-images.githubusercontent.com/104095/210197577-11e1d6ac-a32f-4438-b7eb-f766bf62f0f2.png)
 
 ```
 Key:
-HsnRqQmJaSUGJqVQWZNnTnrNGcR4QL74VT7PGMbR74Ep
+CgCLLXvoch7sLaQWe5Y3Evtzety2Vr9XJGRmAq9YZUXY
 Story:
 In Miami I saw
-1. a whistling unicorn eat strawberries with a skydiver,
-2. a sturdy Jack Nicholson drink coffee with a scribe,
-3. a shivering botanist play Diablo with Dante Alighieri,
-4. a miserable husband visit a turtle,
-5. a drowsy researcher stab a proctor,
-6. a flirty centipede urge a jeweler,
-7. and an eagle unwrap a promoter.
+1. a practical theorist eating toast with a shopkeeper,
+2. a jobless macaw disowning a scientist,
+3. a toothsome brother eating dumplings with Paul Cezanne,
+4. a rabid outsider leveling a vulture,
+5. a hysterical Marge Simpson threatening Moe Szyslak,
+6. a rancid cyborg demanding a jeweler,
+7. and a wife paging Jimi Hendrix.
 Seed Phrase:
-whistling unicorn eat-strawberries skydiver sturdy jack-nicholson drink-coffee scribe shivering botanist play-diablo dante-alighieri miserable husband visit turtle drowsy researcher stab proctor flirty centipede urge jeweler eagle unwrap promoter
+miami practical theorist eating-toast shopkeeper jobless macaw disowning scientist toothsome brother eating-dumplings paul-cezanne rabid outsider leveling vulture hysterical marge-simpson threatening moe-szyslak rancid cyborg demanding jeweler wife paging jimi-hendrix
 ````
 
 This paragraph or seed phrase can be deterministically decoded back into its original form using the same version of StoryKey. The locale of the story (e.g. `Miami`) identifies that version. During key recovery, an exception will be raised if:
