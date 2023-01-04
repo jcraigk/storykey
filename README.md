@@ -16,8 +16,6 @@ Locale will not change until v1.0 release
 
 StoryKey is a proof of concept [Brainwallet](https://en.bitcoin.it/wiki/Brainwallet) inspired by [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki) written in [Ruby](https://www.ruby-lang.org/en/). It converts an arbitrary string of data, such as a [cryptocurrency private key](https://en.bitcoin.it/wiki/Private_key), into an English paragraph intended for longterm human memory. It also assists in decoding the story back into its original form. Optionally, a visual representation of the paragraph is also provided using [OpenAI DALL-E](https://openai.com/dall-e-2).
 
-**[Try the online demo](https://storykey-demo.com/)**
-
 Each story is provided in multiple formats:
 * Humanized Text
   * Version locale header ("In Miami I saw...")
