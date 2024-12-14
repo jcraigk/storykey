@@ -1,13 +1,9 @@
 [![Gem Version](https://badge.fury.io/rb/story_key.svg)](https://badge.fury.io/rb/story_key)
-[![Build Status](https://travis-ci.org/jcraigk/story_key.svg?branch=main)](https://travis-ci.org/jcraigk/story_key)
-[![Maintainability](https://api.codeclimate.com/v1/badges/6046413814d7f6417ce9/maintainability)](https://codeclimate.com/github/jcraigk/story_key/maintainability)
 
-
-![Story Key Logo](https://user-images.githubusercontent.com/104095/160752597-45ab3b7b-a3a3-43ef-b546-9c163f389927.png)
 
 | Gem Version | Locale | Lexicon SHA |
 |-------------|--------|-------------|
-| 0.4.0       | Miami  | 3bfbbf9     |
+| 0.5.0       | Miami  | 3bfbbf9     |
 
 Locale will not change until v1.0 release
 
