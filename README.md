@@ -55,6 +55,7 @@ Each token of the story, which may be a single word or short compound phrase, en
 An example key with its associated story, seed phrase, and image are shown below.
 
 ![KeyStory Example Text](examples/cli.png)
+
 ![KeyStory Example Image Card](examples/card.png)
 
 ```
