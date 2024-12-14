@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 module StoryKey::ClassMethods
   def encode(...)
     StoryKey::Encoder.call(...)
@@ -15,8 +14,8 @@ module StoryKey::ClassMethods
   def generate(bitsize: StoryKey::DEFAULT_BITSIZE)
     key = StoryKey::KeyGenerator.call(bitsize:)
     encoded = encode(key:, bitsize:)
-    raise 'An error occurred!' if key != decode(story: encoded.text)
-    [key, encoded]
+    raise "An error occurred!" if key != decode(story: encoded.text)
+    [ key, encoded ]
   end
 end
 

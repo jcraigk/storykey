@@ -1,7 +1,6 @@
-# frozen_string_literal: true
 class StoryKey::KeyGenerator < StoryKey::Base
-  option :bitsize, default: -> {}
-  option :format, default: -> {}
+  option :bitsize, default: -> { }
+  option :format, default: -> { }
 
   def call
     @bitsize ||= StoryKey::DEFAULT_BITSIZE
@@ -21,6 +20,6 @@ class StoryKey::KeyGenerator < StoryKey::Base
   end
 
   def random_bin
-    SecureRandom.hex(bitsize / 8).hex.to_s(2).rjust(bitsize, '0')
+    SecureRandom.hex(bitsize / 8).hex.to_s(2).rjust(bitsize, "0")
   end
 end

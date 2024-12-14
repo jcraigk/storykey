@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 class StoryKey::Lexicon < StoryKey::Base
   def entries
     @entries ||= StoryKey::GRAMMAR.values.flatten.uniq.index_with do |part_of_speech|
@@ -30,7 +29,7 @@ class StoryKey::Lexicon < StoryKey::Base
     StoryKey::Entry.new \
       part_of_speech:,
       raw: text,
-      text: text.gsub(/\[|\]/, ''),
+      text: text.gsub(/\[|\]/, ""),
       token: StoryKey::Tokenizer.call(text),
       countable:,
       preposition: text.match(/\[(.+)\]/).to_a[1]

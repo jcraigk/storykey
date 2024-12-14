@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 RSpec.shared_context 'with mocked lexicon' do
   let(:min_pad_words) do
     ((StoryKey::MAX_BITSIZE / StoryKey::BITS_PER_ENTRY.to_f) / StoryKey::GRAMMAR.keys.max).ceil

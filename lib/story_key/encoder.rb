@@ -1,7 +1,8 @@
-# frozen_string_literal: true
+require "active_support/core_ext/object/blank"
+
 class StoryKey::Encoder < StoryKey::Base
-  option :bitsize, default: -> {}
-  option :format, default: -> {}
+  option :bitsize, default: -> { }
+  option :format, default: -> { }
   option :key
 
   BASE58_REGEX = /\A[1-9A-Za-z]+\Z/
@@ -37,7 +38,7 @@ class StoryKey::Encoder < StoryKey::Base
   end
 
   def token_str
-    entry_groups.flatten.map(&:token).join(' ')
+    entry_groups.flatten.map(&:token).join(" ")
   end
 
   def text
@@ -54,7 +55,7 @@ class StoryKey::Encoder < StoryKey::Base
   end
 
   def newline
-    num_phrases == 1 ? ' ' : "\n"
+    num_phrases == 1 ? " " : "\n"
   end
 
   def version_str
@@ -85,19 +86,19 @@ class StoryKey::Encoder < StoryKey::Base
       [].tap do |ary|
         if num_phrases > 1
           ary << "#{idx + 1}."
-          ary << 'and' if idx == num_phrases - 1
+          ary << "and" if idx == num_phrases - 1
         end
         ary << phrase
-      end.join(' ')
+      end.join(" ")
     end
   end
 
   def highlight(entry)
     ary =
       if entry.preposition
-        [entry.text.gsub(/\s#{entry.preposition}\Z/, ''), entry.preposition]
+        [ entry.text.gsub(/\s#{entry.preposition}\Z/, ""), entry.preposition ]
       else
-        [entry.text]
+        [ entry.text ]
       end
     main = colorize(ary[0], COLORS[entry.part_of_speech])
     prep = colorize(ary[1], COLORS[:preposition])
@@ -114,7 +115,7 @@ class StoryKey::Encoder < StoryKey::Base
   end
 
   def grammatical_phrase(entries)
-    str = ''
+    str = ""
     grammar = StoryKey::GRAMMAR[entries.size]
     grammar.each_with_index do |part_of_speech, idx|
       next if (entry = entries[idx]).blank?
@@ -127,14 +128,14 @@ class StoryKey::Encoder < StoryKey::Base
   end
 
   # Always prefix modified noun with article
-  # 'an envious Einstein kill Vader' vs
-  # 'envious Einstein kill Vader'
+  # "an envious Einstein kill Vader" vs
+  # "envious Einstein kill Vader"
   def add_article?(grammar, part_of_speech, idx, entries)
     noun_idx, force_countable =
       if part_of_speech == :adjective
-        [idx + 1, true]
+        [ idx + 1, true ]
       elsif part_of_speech == :noun && grammar[idx - 1] != :adjective
-        [idx, false]
+        [ idx, false ]
       end
     force_countable || (noun_idx && entries[noun_idx].countable)
   end
@@ -201,7 +202,7 @@ class StoryKey::Encoder < StoryKey::Base
   end
 
   def footer
-    tail_bitsize.to_s(2).rjust(StoryKey::FOOTER_BITSIZE, '0')
+    tail_bitsize.to_s(2).rjust(StoryKey::FOOTER_BITSIZE, "0")
   end
 
   def bin_str
@@ -216,14 +217,14 @@ class StoryKey::Encoder < StoryKey::Base
   end
 
   def raise_invalid_key
-    raise StoryKey::InvalidFormat, "Invalid input for format '#{format}'"
+    raise StoryKey::InvalidFormat, "Invalid input for format "# {format}""
   end
 
   def raise_invalid_format
-    raise StoryKey::InvalidFormat, "Invalid format '#{format}'"
+    raise StoryKey::InvalidFormat, "Invalid format "# {format}""
   end
 
   def remove_markup(str)
-    str.gsub(/\e\[\d+m/, '').gsub(/\n\d+\./, '').delete("\n")
+    str.gsub(/\e\[\d+m/, "").gsub(/\n\d+\./, "").delete("\n")
   end
 end

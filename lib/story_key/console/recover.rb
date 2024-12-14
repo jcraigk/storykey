@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 class StoryKey::Console::Recover < StoryKey::Base
   include Remedy
 
@@ -7,7 +6,7 @@ class StoryKey::Console::Recover < StoryKey::Base
   CYAN = 36
   BG_RED = 41
   EXIT_WORD = :control_x
-  FRAME_HORIZONTAL = '─'
+  FRAME_HORIZONTAL = "─"
   GREEN = 32
   NUM_OPTIONS = 5
   RED = 31
@@ -17,7 +16,7 @@ class StoryKey::Console::Recover < StoryKey::Base
     @option_idx = 0
     clear_options
     clear_user_str
-    @prompt = 'Enter word(s): '
+    @prompt = "Enter word(s): "
 
     ask_version_slug
     ask_num_phrases
@@ -60,7 +59,7 @@ class StoryKey::Console::Recover < StoryKey::Base
   end
 
   def clear_user_str
-    @user_str = ''
+    @user_str = ""
   end
 
   def input_backspace
@@ -78,7 +77,7 @@ class StoryKey::Console::Recover < StoryKey::Base
     clear_options
     @entry_idx = -1
     @instructions = decode_story
-    @prompt = colorize('(press any key to exit)', RED)
+    @prompt = colorize("(press any key to exit)", RED)
     draw
     console.get_key
     quit_console
@@ -88,7 +87,7 @@ class StoryKey::Console::Recover < StoryKey::Base
     key = StoryKey.decode(story: "#{StoryKey::VERSION_SLUG} #{entries.join(' ')}")
     "#{colorize('Key:', BG_BLUE)} #{colorize(key, GREEN)}"
   rescue StoryKey::InvalidChecksum
-    colorize('Checksum failed! Invalid story.', BG_RED)
+    colorize("Checksum failed! Invalid story.", BG_RED)
   end
 
   def refresh_options
@@ -125,7 +124,7 @@ class StoryKey::Console::Recover < StoryKey::Base
     key = console.get_key
     puts
     return if confirm?(key)
-    quit('Sorry, this version of StoryKey can\'t decode your story')
+    quit("Sorry, this version of StoryKey can't decode your story")
   end
 
   def num_parts
@@ -146,7 +145,7 @@ class StoryKey::Console::Recover < StoryKey::Base
     input = gets
     input = default_num_phrases if input.blank?
     @num_phrases = input.to_i.tap do |i|
-      quit('Invalid number') unless i.in?(1..max_num_phrases)
+      quit("Invalid number") unless i.in?(1..max_num_phrases)
     end
   end
 
@@ -156,7 +155,7 @@ class StoryKey::Console::Recover < StoryKey::Base
     input = gets
     input = default if input.blank?
     @num_tail_entries = input.to_i.tap do |i|
-      quit('Invalid number') unless i.in?(1..max_parts_in_phrase)
+      quit("Invalid number") unless i.in?(1..max_parts_in_phrase)
     end
   end
 
@@ -176,7 +175,7 @@ class StoryKey::Console::Recover < StoryKey::Base
   end
 
   def board_rows # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-    [version_lead].tap do |ary|
+    [ version_lead ].tap do |ary|
       idx = 0
       entry_slices.map do |entry_group, row|
         parts = []
@@ -187,8 +186,8 @@ class StoryKey::Console::Recover < StoryKey::Base
           idx += 1
         end
 
-        str = parts.join(' ')
-        str += (last_row ? '.' : ',')
+        str = parts.join(" ")
+        str += (last_row ? "." : ",")
         ary << str
       end
     end
@@ -209,7 +208,7 @@ class StoryKey::Console::Recover < StoryKey::Base
   end
 
   def move_entry_cursor(key)
-    @entry_idx = entry_idx.send((key == :left ? '-' : '+'), 1) % entries.size
+    @entry_idx = entry_idx.send((key == :left ? "-" : "+"), 1) % entries.size
     clear_user_str
     clear_options
   end
@@ -217,7 +216,7 @@ class StoryKey::Console::Recover < StoryKey::Base
   def move_option_cursor(key)
     @option_idx =
       if options.any?
-        option_idx.send((key == :up ? '-' : '+'), 1) % options.size
+        option_idx.send((key == :up ? "-" : "+"), 1) % options.size
       else
         0
       end
@@ -250,16 +249,16 @@ class StoryKey::Console::Recover < StoryKey::Base
   end
 
   def decolorize(text)
-    text.gsub(/\e\[\d+m/, '')
+    text.gsub(/\e\[\d+m/, "")
   end
 
   def draw
-    viewport.draw(user_prompt, Size([0, 0]), board_view, options_view)
+    viewport.draw(user_prompt, Size([ 0, 0 ]), board_view, options_view)
   end
 
   def user_prompt
     hr = FRAME_HORIZONTAL * 36
-    Partial.new([hr, instructions, hr, "#{prompt}#{user_str}"])
+    Partial.new([ hr, instructions, hr, "#{prompt}#{user_str}" ])
   end
 
   def board_view
@@ -291,7 +290,7 @@ class StoryKey::Console::Recover < StoryKey::Base
   end
 
   def parts_of_speech
-    @parts_of_speech ||= entries.map { |w| w.tr('[]', '') }
+    @parts_of_speech ||= entries.map { |w| w.tr("[]", "") }
   end
 
   def lex

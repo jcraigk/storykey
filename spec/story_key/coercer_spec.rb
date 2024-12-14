@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 RSpec.describe StoryKey::Coercer do
   subject(:call) { described_class.call(str:, bitsize:, from:, to:) }
 

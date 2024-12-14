@@ -1,7 +1,6 @@
-# frozen_string_literal: true
 class StoryKey::Coercer < StoryKey::Base
   option :str
-  option :bitsize, default: -> {}
+  option :bitsize, default: -> { }
   option :from
   option :to
 
@@ -12,7 +11,7 @@ class StoryKey::Coercer < StoryKey::Base
   private
 
   def binary_str
-    bitsize ? bin.rjust(bitsize, '0') : bin
+    bitsize ? bin.rjust(bitsize, "0") : bin
   end
 
   def bin

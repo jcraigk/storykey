@@ -14,7 +14,7 @@ Locale will not change until v1.0 release
 
 # StoryKey
 
-StoryKey is a proof of concept [Brainwallet](https://en.bitcoin.it/wiki/Brainwallet) inspired by [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki) written in [Ruby](https://www.ruby-lang.org/en/). It converts an arbitrary string of data, such as a [cryptocurrency private key](https://en.bitcoin.it/wiki/Private_key), into an English paragraph intended for longterm human memory. It also assists in decoding the story back into its original form. Optionally, a visual representation of the paragraph is also provided using [OpenAI DALL-E](https://openai.com/dall-e-2).
+StoryKey is a proof of concept [Brainwallet](https://en.bitcoin.it/wiki/Brainwallet) inspired by [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki) written in Ruby. It converts an arbitrary string of data, such as a [cryptocurrency private key](https://en.bitcoin.it/wiki/Private_key), into an English paragraph intended for longterm human memory. It also assists in decoding the story back into its original form. Optionally, a visual representation of the paragraph is also provided using [OpenAI DALL-E](https://openai.com/dall-e-3).
 
 Each story is provided in multiple formats:
 * Humanized Text
@@ -27,8 +27,9 @@ Each story is provided in multiple formats:
   * Space-delimited lowercase alphanumeric/dash
   * Useful as a seed phrase for generating derivative keys
 * Graphical
-  * AI-generated images via [DALL-E](https://openai.com/dall-e-2)
+  * AI-generated images via [DALL-E](https://openai.com/dall-e-3)
   * Requires OpenAI key
+
 
 ## Features
 
@@ -53,8 +54,8 @@ Each token of the story, which may be a single word or short compound phrase, en
 
 An example key with its associated story, seed phrase, and image are shown below.
 
-![KeyStory Example Text](https://user-images.githubusercontent.com/104095/210197560-45494c50-6382-465b-8163-a61b3783ac76.png)
-![KeyStory Example Image](https://user-images.githubusercontent.com/104095/210197577-11e1d6ac-a32f-4438-b7eb-f766bf62f0f2.png)
+![KeyStory Example Text](examples/cli.png)
+![KeyStory Example Image Card](examples/card.png)
 
 ```
 Key:

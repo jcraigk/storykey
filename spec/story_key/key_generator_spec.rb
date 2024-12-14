@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 RSpec.describe StoryKey::KeyGenerator do
   subject(:call) { described_class.new(bitsize:, format:).call }
 

@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 RSpec.describe StoryKey::Lexicon do
   subject(:lex) { described_class.new }
 

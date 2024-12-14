@@ -1,7 +1,6 @@
-# frozen_string_literal: true
 class StoryKey::Decoder < StoryKey::Base
   option :story
-  option :format, default: -> {}
+  option :format, default: -> { }
 
   def call
     @story = story.strip
@@ -22,7 +21,7 @@ class StoryKey::Decoder < StoryKey::Base
   def binary_str
     @binary_str ||=
       decimals.map do |dec|
-        dec.to_s(2).rjust(StoryKey::BITS_PER_ENTRY, '0')
+        dec.to_s(2).rjust(StoryKey::BITS_PER_ENTRY, "0")
       end.join
   end
 
@@ -32,7 +31,7 @@ class StoryKey::Decoder < StoryKey::Base
 
   def validate_checksum!
     return if computed_checksum == embedded_checksum
-    raise StoryKey::InvalidChecksum, 'Checksum mismatch!'
+    raise StoryKey::InvalidChecksum, "Checksum mismatch!"
   end
 
   def validate_version!
@@ -98,7 +97,7 @@ class StoryKey::Decoder < StoryKey::Base
     @words ||=
       story.split(/\s+/)
            .grep_v(/\A\d+\.\Z/)
-           .map { |w| w.downcase.gsub(/[^a-z\d-]/, '') }
+           .map { |w| w.downcase.gsub(/[^a-z\d-]/, "") }
            .reject { |w| w.blank? || w.in?(prepositions) }
   end
 
@@ -130,7 +129,7 @@ class StoryKey::Decoder < StoryKey::Base
         raise StoryKey::InvalidWord, "Invalid word detected: '#{word}'"
       end
 
-    [token, idx + 1]
+    [ token, idx + 1 ]
   end
 
   def valid_tokens

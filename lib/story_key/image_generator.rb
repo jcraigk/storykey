@@ -1,22 +1,22 @@
-# frozen_string_literal: true
-require 'open-uri'
-require 'rmagick'
-require 'ruby/openai'
+require "json"
+require "open-uri"
+require "rmagick"
+require "typhoeus"
 
 class StoryKey::ImageGenerator < StoryKey::Base
-  BG_COLOR = '#ffffff'
+  BG_COLOR = "#ffffff"
   CAPTION_FONT_SIZE = 15
   CAPTION_HEIGHT = 30
-  DALLE_SIZE = 512
-  FONT_PATH = File.expand_path('assets/BarlowSemiCondensed-Regular.ttf')
-  ERROR_IMAGE = File.expand_path('assets/error.png')
-  OUTPUT_PATH = File.expand_path('tmp/story-key.png')
+  DALLE_SIZE = 1024
+  FONT_PATH = File.expand_path("assets/BarlowSemiCondensed-Regular.ttf")
+  ERROR_IMAGE = File.expand_path("assets/error.png")
+  OUTPUT_PATH = File.expand_path("tmp/story-key.png")
   FOOTER_FONT_SIZE = 17
   FOOTER_HEIGHT = 30
   HEADER_FONT_SIZE = 17
   PANEL_SIZE = 350
   PADDING = 10
-  STYLE = 'isometric art with white background'
+  STYLE = "isometric art with white background"
 
   option :seed
   option :phrases
@@ -46,7 +46,7 @@ class StoryKey::ImageGenerator < StoryKey::Base
     seed.split
         .each_slice(8)
         .to_a
-        .map { |a| a.join(' ') }
+        .map { |a| a.join(" ") }
         .join("\n")
   end
 
@@ -94,9 +94,24 @@ class StoryKey::ImageGenerator < StoryKey::Base
 
   def image_paths
     @image_paths ||= phrases.each_with_index.map do |phrase, idx|
-      response = dalle_client.images.generate(parameters: parameters(phrase))
-      error = response.dig('error', 'message')
-      image_url = response.dig('data', 0, 'url')
+      response = Typhoeus.post(
+        "https://api.openai.com/v1/images/generations",
+        headers: {
+          "Authorization" => "Bearer #{openai_key}",
+          "Content-Type" => "application/json"
+        },
+        body: parameters(phrase).to_json
+      )
+
+
+      if response.success?
+        result = JSON.parse(response.body)
+        image_url = result.dig("data", 0, "url")
+        error = nil
+      else
+        error = response.body
+      end
+
       text = "#{idx + 1}. #{phrase}"
       local_image_path(image_url, text, error.present?)
     end
@@ -117,7 +132,7 @@ class StoryKey::ImageGenerator < StoryKey::Base
 
   def panel_paths(error, image_url)
     if error
-      [ERROR_IMAGE, "#{SecureRandom.hex(10)}.png"]
+      [ ERROR_IMAGE, "#{SecureRandom.hex(10)}.png" ]
     else
       local = local_image(image_url)
       Array.new(2) { local }
@@ -143,32 +158,34 @@ class StoryKey::ImageGenerator < StoryKey::Base
     comp.annotate(draw, 0, 0, 0, offset, text) do
       draw.gravity = gravity
       draw.pointsize = CAPTION_FONT_SIZE
-      draw.fill = '#000000'
+      draw.fill = "#000000"
       draw.font = FONT_PATH
-      comp.format = 'png'
+      comp.format = "png"
     end
     comp
   end
 
   def local_image(image_url)
-    filename = image_url.split('?').first.split('/').last
+    filename = image_url.split("?").first.split("/").last
     path = File.expand_path("tmp/#{filename}")
-    File.open(path, 'wb') do |file|
+    File.open(path, "wb") do |file|
       file << URI.parse(image_url).open.read
     end
     path
   end
 
   def parameters(phrase)
-    prompt = "#{phrase}, #{STYLE}"
-    { prompt:, size: "#{DALLE_SIZE}x#{DALLE_SIZE}" }
+    {
+      model: "dall-e-3",
+      style: "vivid",
+      prompt: "#{phrase}, #{STYLE}",
+      n: 1,
+      size: "#{DALLE_SIZE}x#{DALLE_SIZE}",
+      quality: "hd"
+    }
   end
 
   def openai_key
-    @openai_key ||= ENV.fetch('OPENAI_KEY', nil)
-  end
-
-  def dalle_client
-    @dalle_client ||= OpenAI::Client.new(access_token: openai_key)
+    @openai_key ||= ENV.fetch("OPENAI_API_TOKEN", nil)
   end
 end

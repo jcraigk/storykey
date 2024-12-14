@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 require 'story_key'
 require_relative 'support/shared_contexts/with_mocked_lexicon'
 

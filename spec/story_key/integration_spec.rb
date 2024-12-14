@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 RSpec.describe 'integration' do # rubocop:disable RSpec/DescribeClass
   let(:bitsize) { nil }
   let(:format) { nil }
