@@ -56,18 +56,18 @@ An example key with its associated story, seed phrase, and image are shown below
 
 ```
 Key:
-CgCLLXvoch7sLaQWe5Y3Evtzety2Vr9XJGRmAq9YZUXY
+J1FzKczQ4XjqJzrnAQxWYWpfmKhmGATo2SRDkQ82iFp6
 Story:
 In Miami I saw
-1. a practical theorist eating toast with a shopkeeper,
-2. a jobless macaw disowning a scientist,
-3. a toothsome brother eating dumplings with Paul Cezanne,
-4. a rabid outsider leveling a vulture,
-5. a hysterical Marge Simpson threatening Moe Szyslak,
-6. a rancid cyborg demanding a jeweler,
-7. and a wife paging Jimi Hendrix.
+1. a winded Mothra accompanying BB-8,
+2. a dingy Beowulf grieving for a Pegasus,
+3. a nutty Madonna swimming with Richard Feynman,
+4. a psychotic Mondrian twirling an optician,
+5. a woeful Nietzsche eviscerating Optimus Prime,
+6. a faded George Orwell eating brownies with a mercenary,
+7. and a barrister tilting an umpire.
 Seed Phrase:
-miami practical theorist eating-toast shopkeeper jobless macaw disowning scientist toothsome brother eating-dumplings paul-cezanne rabid outsider leveling vulture hysterical marge-simpson threatening moe-szyslak rancid cyborg demanding jeweler wife paging jimi-hendrix
+miami winded mothra accompanying bb-8 dingy beowulf grieving pegasus nutty madonna swimming richard-feynman psychotic mondrian twirling optician woeful nietzsche eviscerating optimus-prime faded george-orwell eating-brownies mercenary barrister tilting umpire
 ````
 
 This paragraph or seed phrase can be deterministically decoded back into its original form using the same version of StoryKey. The locale of the story (e.g. `Miami`) identifies that version. During key recovery, an exception will be raised if:
